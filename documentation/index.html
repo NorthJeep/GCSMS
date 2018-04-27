@@ -1,0 +1,807 @@
+<!doctype html>  
+<!--[if IE 6 ]><html lang="en-us" class="ie6"> <![endif]-->
+<!--[if IE 7 ]><html lang="en-us" class="ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="en-us" class="ie8"> <![endif]-->
+<!--[if (gt IE 7)|!(IE)]><!-->
+<html lang="en-us"><!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	
+	<title> BucketAdmin - Bootstrap 3 Responsive Admin Template </title>
+	
+	<meta name="description" content="this description">
+	<meta name="author" content="ThemeBucket">
+	<meta name="copyright" content="ThemeBucket">
+	<meta name="generator" content="Documenter v2.0 http://rxa.li/documenter">
+	<meta name="date" content="2013-08-24T00:00:00+02:00">
+	
+	<link rel="stylesheet" href="assets/css/documenter_style.css" media="all">
+	<link rel="stylesheet" href="assets/js/google-code-prettify/prettify.css" media="screen">
+	<script src="assets/js/google-code-prettify/prettify.js"></script>
+
+	
+	
+	<script src="assets/js/jquery.js"></script>
+	
+	<script src="assets/js/jquery.scrollTo.js"></script>
+	<script src="assets/js/jquery.easing.js"></script>
+	
+	<script>document.createElement('section');var duration='500',easing='swing';</script>
+	<script src="assets/js/script.js"></script>
+	
+	<style>
+		html{background-color:#fff;color:#383838;}
+		::-moz-selection{background:#1FB5AD;color:#fff;}
+		::selection{background:#1FB5AD;color:#fff;}
+		#documenter_sidebar #documenter_logo{background-image:url();}
+		a{color: #1FB5AD;}
+		.btn {
+			border-radius:3px;
+		}
+		.btn-primary {
+			  background-image: -moz-linear-gradient(top, #FFFFFF, #1FB5AD);
+			  background-image: -ms-linear-gradient(top, #FFFFFF, #1FB5AD);
+			  background-image: -webkit-gradient(linear, 0 0, 0 FFFFFF%, from(#1FB5AD), to(#1FB5AD));
+			  background-image: -webkit-linear-gradient(top, #FFFFFF, #1FB5AD);
+			  background-image: -o-linear-gradient(top, #FFFFFF, #1FB5AD);
+			  background-image: linear-gradient(top, #FFFFFF, #1FB5AD);
+			  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#1FB5AD', GradientType=0);
+			  border-color: #1FB5AD #1FB5AD #1FB5AD;
+			  color:#FFFFFF;
+		}
+		.btn-primary:hover,
+		.btn-primary:active,
+		.btn-primary.active,
+		.btn-primary.disabled,
+		.btn-primary[disabled] {
+		  border-color: #FFFFFF #FFFFFF #bfbfbf;
+		  background-color: #1FB5AD;
+		}
+		hr{border-top:1px solid #fff;border-bottom:1px solid #ccc;}
+		#documenter_sidebar, #documenter_sidebar ul a{background-color:#32323a;color:#fff;}
+		#documenter_sidebar ul li{margin-bottom: 1px }
+		#documenter_sidebar ul a{color:#fff; font-weight: normal}
+		#documenter_sidebar ul a:hover{background:#1FB5AD;color:#fff;}
+		#documenter_sidebar ul a.current{background:#1FB5AD;color:#fff;}
+		#documenter_copyright{display:block !important;visibility:visible !important;}
+
+        code.code-format {
+            background-color: #F7F7F9;
+            border: 1px solid #E1E1E8;
+            color: #DD1144;
+            padding: 2px 4px;
+            white-space: nowrap;
+        }
+	</style>
+	
+</head>
+<body class="documenter-project-frame2frame">
+	<div id="documenter_sidebar">
+		<a href="#documenter_cover" id="documenter_logo">
+            <img src="assets/css/img/logo.png" alt="">
+		</a>
+		<ul id="documenter_nav">
+			<li><a class="current" href="#documenter_cover">Start</a></li>
+				
+			<li><a href="#overview" title="Overview">Overview</a></li>
+			<li><a href="#template" title="Template">Template</a></li>
+			<li><a href="#features" title="features">Features</a></li>
+			<li><a href="#folder_structure" title="folder_structure">Folder Structure</a></li>
+			<li><a href="#html_structure" title="html_structure">Html Structure</a></li>
+			<li><a href="#top_menu" title="top_menu">Top Menu</a></li>
+			<li><a href="#main_menu" title="main_menu">Main Menu</a></li>
+			<li><a href="#font" title="font">Font</a></li>
+			<li><a href="#new_page" title="new page">New Page</a></li>
+			<li><a href="#js_initial" title="Javascript Initialization">Javascript Initialization</a></li>
+			<li><a href="#reference" title="reference">Reference</a></li>
+			<!--<li><a href="#upgrade" title="upgrade">Upgrade</a></li>-->
+			<li><a href="#end_documentation" title="end_documentation">End of Documentation</a></li>
+
+		</ul>
+		<div id="documenter_copyright">Copyright ThemeBucket 2014<br>
+		made with the <a href="http://rxa.li/documenter">Documenter v2.0</a> 
+		</div>
+	</div>
+	<div id="documenter_content">
+        <section id="documenter_cover">
+            <h1> BucketAdmin - Bootstrap 3 Responsive Admin Template </h1>
+            <h2> Documentation v1.4</h2>
+            <hr>
+            <ul>
+                <li>By:  ThemeBucket </li>
+                <li>Contact: <a href="mailto:dkmosa@gmail.com">themebucket@gmail.com</a></li>
+                <li>Demo: <a target="_blank" href="http://bucketadmin.themebucket.net/">http://bucketadmin.themebucket.net/</a>  </li>
+            </ul>
+            <p></p>
+        </section>
+	
+        <section id="overview">
+            <div class="page-header"><h3>Overview</h3><hr class="notop"></div>
+            <p>
+                Bucket Admin is a premium admin dashboard template with flat design concept. Flat color, Customized Chart, Easy to customize and developer friendly code. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query, touch friendly and very much adaptive with any size viewport including iPhone, iPad, android phone and tablet. It has a huge collection of reusable UI components and integrated with latest jQuery plugins. It can be used for all type of web applications like custom admin panel, project management system, admin dashboard, application backend, CMS, CRM. A large number of widget are included here to make you
+            </p>
+            <p>
+                Powered by jQuery and Bootstrap, Bucket Admin includes many plugins implemented in 41 separate HTML files and also has a large selection of Iconic fonts in different Styles along with a wide array of Widgets, Charts, Notifications, Tooltips. It is a complete admin panel for any kind of web presence.
+            </p>
+        </section>
+        <section id="template">
+            <div class="page-header"><h3>Template</h3><hr class="notop"></div>
+
+            <p>
+                <img src="assets/css/img/dashboard_home.jpg" width="98%"/>
+            </p>
+
+        </section>
+        <section id="features">
+            <div class="page-header"><h3>Features</h3><hr class="notop"></div>
+
+            <ul>
+                <li>Built with Bootstrap 3.1.0</li>
+                <li>Latest jQuery v1.10.2 </li>
+                <li>Html5 Markup & CSS3</li>
+                <li>Fully Responsive & Interactive</li>
+                <li>Flat UI with clean style</li>
+                <li>Huge Components</li>
+                <li>Interactive widgets</li>
+                <li>jQuery NiceScroll</li>
+                <li>Full functional chat</li>
+                <li>slim Scroll</li>
+                <li>jQuery Sparklines</li>
+                <li>Morris Chart</li>
+                <li>Chartjs</li>
+                <li>C3Chart</li>
+                <li>Gauge</li>
+                <li>Flot Charts</li>
+                <li>jQuery Sortable</li>
+                <li>jQuery Easy Pie Chart</li>
+                <li>jquery-validation-1.11.1</li>
+                <li>Date, date range & color Picker(Bootstrap Date, range & color Picker)</li>
+                <li>Integrated Full Calendar(jQuery Full Calendar)</li>
+                <li>Notifications(jQuery Gritter)</li>
+                <li>Form Component</li>
+                <li>Multi Select </li>
+                <li>Timepicker</li>
+                <li>Spinner</li>
+                <li>WYSIWYG Editors </li>
+                <li>Form wizard (jquery steps master)</li>
+                <li>Form Validation</li>
+                <li>jQuery File Upload</li>
+                <li>Dropzone file upload</li>
+                <li>Google maps</li>
+                <li>Vector maps</li>
+                <li>Nestable</li>
+                <li>Bootstrap FuelUX Tree</li>
+                <li>jQuery ScrollTo</li>
+                <li>jQuery Knob</li>
+                <li>Range Slider</li>
+                <li>css3 Clock</li>
+                <li>iCheck Master</li>
+                <li>jplayer</li>
+                <li>jQuery Tagsinput</li>
+                <li>Bootstrap Switch</li>
+                <li>Dynamic Table</li>
+                <li>Responsive Table</li>
+                <li>Advanced Table</li>
+                <li>Editable Table</li>
+                <li>Font Icons(Font Awesome 4.0.3) & Glyphicons</li>
+                <li>Ico-moon icon font</li>
+                <li>Custom Radiobutton, Checkbox</li>
+                <li>Google font - OpenSans, Lato</li>
+                <li>Well structured code</li>
+                <li>Detailed Documentation</li>
+            </ul>
+        </section>
+
+        <section id="folder_structure">
+            <div class="page-header"><h3>Folder Structure</h3><hr class="notop"></div>
+            <p class="plain">
+                <strong>BucketAdmin/<br>
+                    |-- css/<br>
+                    |-- js/<br>
+                    |-- images/<br>
+                    |-- bs3/<br>
+                    |-- bucket-ico-fonts/
+                </strong>
+            </p>
+        </section>
+
+        <section id="html_structure">
+            <div class="page-header"><h3>HTML Structure</h3><hr class="notop"></div>
+            <h4> Page Head</h4>
+            <pre class="prettyprint lang-html linenums">
+<pre class="html" id="line1">
+<span>&lt;<span class="start-tag">head</span>&gt;</span><span>
+    </span><span>&lt;<span class="start-tag">meta</span> <span class="attribute-name">charset</span>=&quot;<a class="attribute-value">utf-8</a>&quot;&gt;</span><span>
+    </span><span>&lt;<span class="start-tag">meta</span> <span class="attribute-name">name</span>=&quot;<a class="attribute-value">viewport</a>&quot; <span class="attribute-name">content</span>=&quot;<a class="attribute-value">width=device-width, initial-scale=1.0</a>&quot;&gt;</span><span>
+    </span><span>&lt;<span class="start-tag">meta</span> <span class="attribute-name">name</span>=&quot;<a class="attribute-value">description</a>&quot; <span class="attribute-name">content</span>=&quot;&quot;&gt;</span><span>
+    </span><span>&lt;<span class="start-tag">meta</span> <span class="attribute-name">name</span>=&quot;<a class="attribute-value">author</a>&quot; <span class="attribute-name">content</span>=&quot;<a class="attribute-value">ThemeBucket</a>&quot;&gt;</span><span>
+    </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">rel</span>=&quot;<a class="attribute-value">shortcut icon</a>&quot; <span class="attribute-name">href</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/images/favicon.png">images/favicon.png</a>&quot;&gt;</span><span>
+    </span><span>&lt;<span class="start-tag">title</span>&gt;</span><span>BucketAdmin</span><span>&lt;/<span class="end-tag">title</span>&gt;</span><span>
+    </span><span class="comment">&lt;!--Core CSS --&gt;</span><span>
+    </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">href</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/bs3/css/bootstrap.min.css">bs3/css/bootstrap.min.css</a>&quot; <span class="attribute-name">rel</span>=&quot;<a class="attribute-value">stylesheet</a>&quot;&gt;</span><span>
+    </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">href</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/jquery-ui/jquery-ui-1.10.1.custom.min.css">js/jquery-ui/jquery-ui-1.10.1.custom.min.css</a>&quot; <span class="attribute-name">rel</span>=&quot;<a class="attribute-value">stylesheet</a>&quot;&gt;</span><span>
+    </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">href</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/css/bootstrap-reset.css">css/bootstrap-reset.css</a>&quot; <span class="attribute-name">rel</span>=&quot;<a class="attribute-value">stylesheet</a>&quot;&gt;</span><span>
+    </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">href</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/font-awesome/css/font-awesome.css">font-awesome/css/font-awesome.css</a>&quot; <span class="attribute-name">rel</span>=&quot;<a class="attribute-value">stylesheet</a>&quot;&gt;</span><span>
+    </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">href</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/jvector-map/jquery-jvectormap-1.2.2.css">js/jvector-map/jquery-jvectormap-1.2.2.css</a>&quot; <span class="attribute-name">rel</span>=&quot;<a class="attribute-value">stylesheet</a>&quot;&gt;</span><span>
+    </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">href</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/css/clndr.css">css/clndr.css</a>&quot; <span class="attribute-name">rel</span>=&quot;<a class="attribute-value">stylesheet</a>&quot;&gt;</span><span>
+    </span><span class="comment">&lt;!--clock css--&gt;</span><span>
+    </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">href</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/css3clock/css/style.css">js/css3clock/css/style.css</a>&quot; <span class="attribute-name">rel</span>=&quot;<a class="attribute-value">stylesheet</a>&quot;&gt;</span><span>
+    </span><span class="comment">&lt;!--Morris Chart CSS --&gt;</span><span>
+    </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">rel</span>=&quot;<a class="attribute-value">stylesheet</a>&quot; <span class="attribute-name">href</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/morris-chart/morris.css">js/morris-chart/morris.css</a>&quot;&gt;</span><span>
+    </span><span class="comment">&lt;!-- Custom styles for this template --&gt;</span><span>
+    </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">href</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/css/style.css">css/style.css</a>&quot; <span class="attribute-name">rel</span>=&quot;<a class="attribute-value">stylesheet</a>&quot;&gt;</span><span>
+    </span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">href</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/css/style-responsive.css">css/style-responsive.css</a>&quot; <span class="attribute-name">rel</span>=&quot;<a class="attribute-value">stylesheet</a>&quot;<span>/</span>&gt;</span><span>
+    </span><span class="comment">&lt;!-- Just for debugging purposes. Don&#39;t actually copy this line! --&gt;</span><span>
+    </span><span class="comment">&lt;!--[if lt IE 9]&gt;
+    &lt;script src=&quot;js/ie8-responsive-file-warning.js&quot;&gt;&lt;/script&gt;&lt;![endif]--&gt;</span><span>
+    </span><span class="comment">&lt;!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries --&gt;</span><span>
+    </span><span class="comment">&lt;!--[if lt IE 9]&gt;
+    &lt;script src=&quot;https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js&quot;&gt;&lt;/script&gt;
+    &lt;![endif]--&gt;</span><span>
+</span><span>&lt;/<span class="end-tag">head</span>&gt;</span></pre>
+
+            </pre>
+
+            <h4> Header</h4>
+            <pre class="prettyprint lang-html linenums">
+<pre class="html">
+&lt;!--header start--&gt;
+  &lt;header class=&quot;header fixed-top clearfix&quot;&gt;
+&lt;!--logo start--&gt;
+        &lt;div class=&quot;brand&quot;&gt;
+            &lt;a href=&quot;index.html&quot; class=&quot;logo&quot;&gt;
+                &lt;img src=&quot;images/logo.png&quot; alt=&quot;&quot;&gt;
+            &lt;/a&gt;
+            &lt;div class=&quot;sidebar-toggle-box&quot;&gt;
+                &lt;div class=&quot;fa fa-bars&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;!--logo end--&gt;
+    &lt;div class=&quot;nav notify-row&quot; id=&quot;top_menu&quot;&gt;
+        &lt;!--  notification goes here --&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;top-nav clearfix&quot;&gt;
+        &lt;!--search &amp; user info goes here--&gt;
+    &lt;/div&gt;
+&lt;/header&gt;
+&lt;!--header end--&gt;</pre>
+
+            </pre>
+
+            <h4>Left Sidebar</h4>
+            <pre class="prettyprint lang-html linenums">
+<pre class="html">
+&lt;!--sidebar start--&gt;
+    &lt;aside&gt;
+        &lt;div id=&quot;sidebar&quot;  class=&quot;nav-collapse &quot;&gt;
+             &lt;!-- sidebar menu goes here--&gt;
+        &lt;/div&gt;
+    &lt;/aside&gt;
+&lt;!--sidebar end--&gt;</pre>
+            </pre>
+
+            <h4> Content</h4>
+            <pre class="prettyprint lang-html linenums">
+<pre class="html">
+&lt;!--main content start--&gt;
+  &lt;section id=&quot;main-content&quot;&gt;
+      &lt;section class=&quot;wrapper&quot;&gt;
+          &lt;!--main content goes here--&gt;
+      &lt;/section&gt;
+  &lt;/section&gt;
+&lt;!--main content end--&gt;</pre>
+            </pre>
+
+            <h4>Right Sidebar</h4>
+            <pre class="prettyprint lang-html linenums">
+<pre class="html">
+&lt;!--right sidebar start--&gt;
+&lt;div class=&quot;right-sidebar&quot;&gt;
+&lt;div class=&quot;search-row&quot;&gt;
+    &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot; class=&quot;form-control&quot;&gt;
+&lt;/div&gt;
+&lt;ul class=&quot;right-side-accordion&quot;&gt;
+&lt;!--sidebar list goes here--&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;!--right sidebar end--&gt;</pre>
+            </pre>
+
+            <h4> End of Page</h4>
+            <pre class="prettyprint lang-html linenums">
+<pre class="html" id="line1">
+<span class="comment">&lt;!-- Placed js at the end of the document so the pages load faster --&gt;</span><span>
+</span><span class="comment">&lt;!--Core js--&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/jquery.js">js/jquery.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/jquery-ui/jquery-ui-1.10.1.custom.min.js">js/jquery-ui/jquery-ui-1.10.1.custom.min.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/bs3/js/bootstrap.min.js">bs3/js/bootstrap.min.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/jquery.dcjqaccordion.2.7.js">js/jquery.dcjqaccordion.2.7.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/jquery.scrollTo.min.js">js/jquery.scrollTo.min.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js">js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/jquery.nicescroll.js">js/jquery.nicescroll.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span class="comment">&lt;!--[if lte IE 8]&gt;&lt;script language=&quot;javascript&quot; type=&quot;text/javascript&quot; src=&quot;js/flot-chart/excanvas.min.js&quot;&gt;&lt;/script&gt;&lt;![endif]--&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/skycons/skycons.js">js/skycons/skycons.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/jquery.scrollTo/jquery.scrollTo.js">js/jquery.scrollTo/jquery.scrollTo.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js">//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/calendar/clndr.js">js/calendar/clndr.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js">http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/calendar/moment-2.2.1.js">js/calendar/moment-2.2.1.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/evnt.calendar.init.js">js/evnt.calendar.init.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/jvector-map/jquery-jvectormap-1.2.2.min.js">js/jvector-map/jquery-jvectormap-1.2.2.min.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/jvector-map/jquery-jvectormap-us-lcc-en.js">js/jvector-map/jquery-jvectormap-us-lcc-en.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/gauge/gauge.js">js/gauge/gauge.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span class="comment">&lt;!--clock init--&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/css3clock/js/css3clock.js">js/css3clock/js/css3clock.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span class="comment">&lt;!--Easy Pie Chart--&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/easypiechart/jquery.easypiechart.js">js/easypiechart/jquery.easypiechart.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span class="comment">&lt;!--Sparkline Chart--&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/sparkline/jquery.sparkline.js">js/sparkline/jquery.sparkline.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span class="comment">&lt;!--Morris Chart--&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/morris-chart/morris.js">js/morris-chart/morris.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/morris-chart/raphael-min.js">js/morris-chart/raphael-min.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span class="comment">&lt;!--jQuery Flot Chart--&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/flot-chart/jquery.flot.js">js/flot-chart/jquery.flot.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/flot-chart/jquery.flot.tooltip.min.js">js/flot-chart/jquery.flot.tooltip.min.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/flot-chart/jquery.flot.resize.js">js/flot-chart/jquery.flot.resize.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/flot-chart/jquery.flot.pie.resize.js">js/flot-chart/jquery.flot.pie.resize.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/flot-chart/jquery.flot.animator.min.js">js/flot-chart/jquery.flot.animator.min.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/flot-chart/jquery.flot.growraf.js">js/flot-chart/jquery.flot.growraf.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/dashboard.js">js/dashboard.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/jquery.customSelect.min.js">js/jquery.customSelect.min.js</a>&quot; &gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span class="comment">&lt;!--common script init for all pages--&gt;</span><span>
+</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>=&quot;<a class="attribute-value" href="view-source:http://localhost/themebucket/bucketmin/js/scripts.js">js/scripts.js</a>&quot;&gt;</span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+</span><span class="comment">&lt;!--script for this page--&gt;</span><span>
+</span><span>&lt;/<span class="end-tag">body</span>&gt;</span><span>
+</span><span>&lt;/<span class="end-tag">html</span>&gt;</span></pre>
+
+
+            </pre>
+
+            <h4> CSS Code Comment Sample</h4>
+            <pre class="prettyprint lang-html linenums">
+<pre class="css">
+/*sidebar navigation*/
+
+#sidebar {
+    width: 240px;
+    height: 100%;
+    position: fixed;
+    background: #32323a;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+#sidebar ul li {
+    position: relative;
+}
+
+</pre>
+
+            </pre>
+
+            <h4> Javascript Code Comment Sample</h4>
+            <pre class="prettyprint lang-html linenums">
+<pre class="js">
+//left side accordion
+
+$(function() {
+    $(&#39;#nav-accordion&#39;).dcAccordion({
+        eventType: &#39;click&#39;,
+        autoClose: true,
+        saveState: true,
+        disableLink: true,
+        speed: &#39;slow&#39;,
+        showCount: false,
+        autoExpand: true,
+        classExpand: &#39;dcjq-current-parent&#39;
+    });
+
+});
+</pre>
+
+            </pre>
+
+
+        </section>
+
+        <section id="top_menu">
+            <div class="page-header"><h3> Top Menu</h3><hr class="notop"></div>
+            <p>
+                <img src="assets/css/img/top-menu.jpg" width="98%"/>
+            </p>
+        </section>
+
+        <section id="main_menu">
+            <div class="page-header"><h3> Main Menu</h3><hr class="notop"></div>
+            <p>
+                <img src="assets/css/img/main-menu.jpg" width="98%"/>
+            </p>
+            <h4> Main Menu HTML</h4>
+            <pre class="prettyprint lang-html linenums">
+<pre class="html">
+&lt;!-- sidebar menu start--&gt;
+            &lt;ul class=&quot;sidebar-menu&quot; id=&quot;nav-accordion&quot;&gt;
+                &lt;li&gt;
+                    &lt;a class=&quot;active&quot; href=&quot;index.html&quot;&gt;
+                        &lt;i class=&quot;fa fa-dashboard&quot;&gt;&lt;/i&gt;
+                        &lt;span&gt;Dashboard&lt;/span&gt;
+                    &lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li class=&quot;sub-menu&quot;&gt;
+                    &lt;a href=&quot;javascript:;&quot;&gt;
+                        &lt;i class=&quot;fa fa-laptop&quot;&gt;&lt;/i&gt;
+                        &lt;span&gt;Layouts&lt;/span&gt;
+                    &lt;/a&gt;
+                    &lt;ul class=&quot;sub&quot;&gt;
+                        &lt;li&gt;&lt;a href=&quot;boxed_page.html&quot;&gt;Boxed Page&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;horizontal_menu.html&quot;&gt;Horizontal Menu&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;language_switch.html&quot;&gt;Language Switch Bar&lt;/a&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/li&gt;
+                &lt;li class=&quot;sub-menu&quot;&gt;
+                    &lt;a href=&quot;javascript:;&quot;&gt;
+                        &lt;i class=&quot;fa fa-book&quot;&gt;&lt;/i&gt;
+                        &lt;span&gt;UI Elements&lt;/span&gt;
+                    &lt;/a&gt;
+                    &lt;ul class=&quot;sub&quot;&gt;
+                        &lt;li&gt;&lt;a href=&quot;general.html&quot;&gt;General&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;buttons.html&quot;&gt;Buttons&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;widget.html&quot;&gt;Widget&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;slider.html&quot;&gt;Slider&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;tree_view.html&quot;&gt;Tree View&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;nestable.html&quot;&gt;Nestable&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;grids.html&quot;&gt;Grids&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;calendar.html&quot;&gt;Calender&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;draggable_portlet.html&quot;&gt;Draggable Portlet&lt;/a&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;a href=&quot;fontawesome.html&quot;&gt;
+                        &lt;i class=&quot;fa fa-bullhorn&quot;&gt;&lt;/i&gt;
+                        &lt;span&gt;Fontawesome &lt;/span&gt;
+                    &lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li class=&quot;sub-menu&quot;&gt;
+                    &lt;a href=&quot;javascript:;&quot;&gt;
+                        &lt;i class=&quot;fa fa-th&quot;&gt;&lt;/i&gt;
+                        &lt;span&gt;Data Tables&lt;/span&gt;
+                    &lt;/a&gt;
+                    &lt;ul class=&quot;sub&quot;&gt;
+                        &lt;li&gt;&lt;a href=&quot;basic_table.html&quot;&gt;Basic Table&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;responsive_table.html&quot;&gt;Responsive Table&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;dynamic_table.html&quot;&gt;Dynamic Table&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;editable_table.html&quot;&gt;Editable Table&lt;/a&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/li&gt;
+                &lt;li class=&quot;sub-menu&quot;&gt;
+                    &lt;a href=&quot;javascript:;&quot;&gt;
+                        &lt;i class=&quot;fa fa-tasks&quot;&gt;&lt;/i&gt;
+                        &lt;span&gt;Form Components&lt;/span&gt;
+                    &lt;/a&gt;
+                    &lt;ul class=&quot;sub&quot;&gt;
+                        &lt;li&gt;&lt;a href=&quot;form_component.html&quot;&gt;Form Elements&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;advanced_form.html&quot;&gt;Advanced Components&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;form_wizard.html&quot;&gt;Form Wizard&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;form_validation.html&quot;&gt;Form Validation&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;file_upload.html&quot;&gt;Muliple File Upload&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;dropzone.html&quot;&gt;Dropzone&lt;/a&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;a href=&quot;mail.html&quot;&gt;
+                        &lt;i class=&quot;fa fa-envelope&quot;&gt;&lt;/i&gt;
+                        &lt;span&gt;Mail &lt;/span&gt;
+                    &lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li class=&quot;sub-menu&quot;&gt;
+                    &lt;a href=&quot;javascript:;&quot;&gt;
+                        &lt;i class=&quot; fa fa-bar-chart-o&quot;&gt;&lt;/i&gt;
+                        &lt;span&gt;Charts&lt;/span&gt;
+                    &lt;/a&gt;
+                    &lt;ul class=&quot;sub&quot;&gt;
+                        &lt;li&gt;&lt;a href=&quot;morris.html&quot;&gt;Morris&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;chartjs.html&quot;&gt;Chartjs&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;flot_chart.html&quot;&gt;Flot Charts&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;c3_chart.html&quot;&gt;C3 Chart&lt;/a&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/li&gt;
+                &lt;li class=&quot;sub-menu&quot;&gt;
+                    &lt;a href=&quot;javascript:;&quot;&gt;
+                        &lt;i class=&quot; fa fa-bar-chart-o&quot;&gt;&lt;/i&gt;
+                        &lt;span&gt;Maps&lt;/span&gt;
+                    &lt;/a&gt;
+                    &lt;ul class=&quot;sub&quot;&gt;
+                        &lt;li&gt;&lt;a href=&quot;google_map.html&quot;&gt;Google Map&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;vector_map.html&quot;&gt;Vector Map&lt;/a&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/li&gt;
+                &lt;li class=&quot;sub-menu&quot;&gt;
+                    &lt;a href=&quot;javascript:;&quot;&gt;
+                        &lt;i class=&quot;fa fa-glass&quot;&gt;&lt;/i&gt;
+                        &lt;span&gt;Extra&lt;/span&gt;
+                    &lt;/a&gt;
+                    &lt;ul class=&quot;sub&quot;&gt;
+                        &lt;li&gt;&lt;a href=&quot;blank.html&quot;&gt;Blank Page&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;lock_screen.html&quot;&gt;Lock Screen&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;profile.html&quot;&gt;Profile&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;invoice.html&quot;&gt;Invoice&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;pricing_table.html&quot;&gt;Pricing Table&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;timeline.html&quot;&gt;Timeline&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;404.html&quot;&gt;404 Error&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;500.html&quot;&gt;500 Error&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;registration.html&quot;&gt;Registration&lt;/a&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;a href=&quot;login.html&quot;&gt;
+                        &lt;i class=&quot;fa fa-user&quot;&gt;&lt;/i&gt;
+                        &lt;span&gt;Login Page&lt;/span&gt;
+                    &lt;/a&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;!-- sidebar menu end--&gt;</pre>
+
+            </pre>
+
+
+        </section>
+
+        <section id="font">
+            <div class="page-header"><h3> Font</h3><hr class="notop"></div>
+            <p>
+                BucketAdmin uses Open Sans and Lato font from google fonts. The font imported in main css file: <code class="code-format">css/style.css</code>
+            </p>
+            <pre class="prettyprint lang-html linenums">
+<pre class="css">
+
+/* Import fonts */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
+@import url(http://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic);
+</pre>
+
+            </pre>
+        </section>
+
+        <section id="new_page">
+            <div class="page-header"><h3> New Page</h3><hr class="notop"></div>
+            <p>
+                To create a new page, you can use <code class="code-format">blank.html</code>  which provides basic page layout which you can extend and modify further.
+            </p>
+
+        </section>
+        <section id="js_initial">
+            <div class="page-header"><h3> Javascript Initialization</h3><hr class="notop"></div>
+            <p>
+                Common javascript initialization implemented in  <code class="code-format">js/scripts.js</code>  which is need to include in all pages.
+            </p>
+
+            <pre class="prettyprint lang-html linenums">
+<pre class="js">
+var Script = function () {
+         //Common Script Goes Here
+    }();
+</pre>
+            </pre>
+
+        </section>
+
+        <section id="reference">
+            <div class="page-header"><h3> Reference</h3><hr class="notop"></div>
+            <p>
+                Below is the list of all plugins and external resources used to power this template.
+            </p>
+            <table width="100%" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>URL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td >jquery-1.10.2</td>
+                        <td><a href="http://www.jquery.com" target="_blank">http://www.jquery.com</a></td>
+                    </tr>
+                    <tr>
+                        <td>Twitter Bootstrap 3.1.0</td>
+                        <td><a href="http://getbootstrap.com/" target="_blank">http://getbootstrap.com/</a></td>
+                    </tr>
+                    <tr>
+                        <td >jquery NiceScroll</td>
+                        <td><a href="http://areaaperta.com/nicescroll/" target="_blank">http://areaaperta.com/nicescroll/</a></td>
+                    </tr>
+                    <tr>
+                        <td >jquery scrollTo  </td>
+                        <td><a href="https://github.com/flesler/jquery.scrollTo" target="_blank">https://github.com/flesler/jquery.scrollTo</a></td>
+                    </tr>
+                    <tr>
+                      <td >Datepicker for Bootstrap</td>
+                      <td><a href="http://www.eyecon.ro/bootstrap-datepicker/">http://www.eyecon.ro/bootstrap-datepicker/</a></td>
+                    </tr>
+                    <tr>
+                      <td >Colorpicker for Bootstrap</td>
+                      <td><a href="http://www.eyecon.ro/bootstrap-colorpicker/">http://www.eyecon.ro/bootstrap-colorpicker/</a></td>
+                    </tr>
+                    <tr>
+                      <td >Date Range Picker for Bootstrap</td>
+                      <td><a href="https://github.com/dangrossman/bootstrap-daterangepicker">https://github.com/dangrossman/bootstrap-daterangepicker</a></td>
+                    </tr>
+                    <tr>
+                        <td >jQuery Tags Input</td>
+                        <td><a href="http://xoxco.com/clickable/jquery-tags-input" target="_blank">http://xoxco.com/clickable/jquery-tags-input</a></td>
+                    </tr>
+
+                    <tr>
+                        <td >jQuery rangeSlider</td>
+                        <td><a href=" 	https://github.com/IonDen/ion.rangeSlider" target="_blank"> 	https://github.com/IonDen/ion.rangeSlider</a></td>
+                    </tr>
+
+                    <tr>
+                        <td >jQuery Easy Pie Chart</td>
+                        <td><a href="http://rendro.github.io/easy-pie-chart/" target="_blank">http://rendro.github.io/easy-pie-chart/</a></td>
+                    </tr>
+
+                    <tr>
+                        <td >jQuery Sparklines</td>
+                        <td><a href="http://omnipotent.net/jquery.sparkline " target="_blank">http://omnipotent.net/jquery.sparkline </a></td>
+                    </tr>
+
+                    <tr>
+                        <td >Chartjs</td>
+                        <td><a href=" 	http://www.chartjs.org/" target="_blank"> 	http://www.chartjs.org/</a></td>
+                    </tr>
+
+                    <tr>
+                        <td >Morris</td>
+                        <td><a href="http://www.oesmith.co.uk/morris.js/" target="_blank"> http://www.oesmith.co.uk/morris.js/</a></td>
+                    </tr>
+
+
+                    <tr>
+                        <td >DataTables</td>
+                        <td><a href=" http://www.datatables.net/blog/Twitter_Bootstrap_2" target="_blank"> 	http://www.datatables.net/blog/Twitter_Bootstrap_2</a></td>
+                    </tr>
+                    <tr>
+                        <td >Responsive Table</td>
+                        <td><a href=" http://elvery.net/demo/responsive-tables/" target="_blank"> 	http://elvery.net/demo/responsive-tables/</a></td>
+                    </tr>
+
+                    <tr>
+                        <td > jQuery Steps</td>
+                        <td><a href=" http://www.jquery-steps.com" target="_blank"> 	http://www.jquery-steps.com</a></td>
+                    </tr>
+
+                    <tr>
+                        <td > jQuery Knob</td>
+                        <td><a href=" http://anthonyterrien.com/knob/" target="_blank">http://anthonyterrien.com/knob/</a></td>
+                    </tr>
+
+                    <tr>
+                        <td >FullCalendar</td>
+                        <td><a href=" 	http://arshaw.com/fullcalendar/" target="_blank"> 	http://arshaw.com/fullcalendar/</a></td>
+                    </tr>
+
+                    <tr>
+                        <td >Gritter Notifications</td>
+                        <td><a href="http://boedesign.com/demos/gritter/" target="_blank">http://boedesign.com/demos/gritter/</a></td>
+                    </tr>
+
+                    <tr>
+                        <td >jQuery Validation Plugin</td>
+                        <td><a href="http://jqueryvalidation.org/" target="_blank">http://jqueryvalidation.org/</a></td>
+                    </tr>
+                    <tr>
+                        <td >Font Awesome 4.0.3</td>
+                        <td><a href="http://fontawesome.io/" target="_blank">http://fontawesome.io/</a></td>
+                    </tr>
+                    <tr>
+                        <td>Nestable</td>
+                        <td><a href="https://github.com/dbushell/Nestable" target="_blank">https://github.com/dbushell/Nestable</a></td>
+                    </tr>
+                    <tr>
+                        <td>Dropzone</td>
+                        <td><a href="http://demo.tutorialzine.com/2013/05/mini-ajax-file-upload-form/" target="_blank">http://demo.tutorialzine.com/2013/05/mini-ajax-file-upload-form/</a></td>
+                    </tr>
+                    <tr>
+                        <td>Input Mask</td>
+                        <td><a href="http://jasny.github.io/bootstrap/javascript.html#inputmask" target="_blank">http://jasny.github.io/bootstrap/javascript.html#inputmask</a></td>
+                    </tr>
+
+
+                    <tr>
+                        <td>Flot Charts</td>
+                        <td><a href="http://www.flotcharts.org/" target="_blank">http://www.flotcharts.org/</a></td>
+                    </tr>
+
+                    <tr>
+                        <td>jQuery Multi Select</td>
+                        <td><a href="http://loudev.com/" target="_blank">http://loudev.com/</a></td>
+                    </tr>
+
+                    <tr>
+                        <td>Bootstrap Timepicker</td>
+                        <td><a href="http://jdewit.github.com/bootstrap-timepicker/" target="_blank">http://jdewit.github.com/bootstrap-timepicker/</a></td>
+                    </tr>
+
+                    <tr>
+                        <td>Bootstrap WYSIWYG5</td>
+                        <td><a href="http://jhollingworth.github.com/bootstrap-wysihtml5/" target="_blank"> 	http://jhollingworth.github.com/bootstrap-wysihtml5/</a></td>
+                    </tr>
+
+                    <tr>
+                        <td>Bootstrap FuelUX Input Spinner</td>
+                        <td><a href="http://exacttarget.github.io/fuelux/#spinner" target="_blank">http://exacttarget.github.io/fuelux/#spinner</a></td>
+                    </tr>
+
+
+                    <tr>
+                        <td>Sortable</td>
+                        <td><a href="http://jqueryui.com/sortable/" target="_blank">http://jqueryui.com/sortable/</a></td>
+                    </tr>
+                    <tr>
+                        <td>Bootstrap FuelUX Tree</td>
+                        <td><a href="http://exacttarget.github.io/fuelux/#tree" target="_blank">http://exacttarget.github.io/fuelux/#tree </a></td>
+                    </tr>
+                    <tr>
+                        <td>jQuery File Upload</td>
+                        <td><a href="http://blueimp.github.io/jQuery-File-Upload/" target="_blank">http://blueimp.github.io/jQuery-File-Upload/</a></td>
+                    </tr>
+                    <tr>
+                        <td>Chartjs</td>
+                        <td><a href=" http://www.chartjs.org/" target="_blank"> http://www.chartjs.org/</a></td>
+                    </tr>
+                    <tr>
+                        <td>Morris</td>
+                        <td><a href=" http://www.oesmith.co.uk/morris.js" target="_blank"> http://www.oesmith.co.uk/morris.js</a></td>
+                    </tr>
+                    <tr>
+                        <td>Flot</td>
+                        <td><a href=" http://www.flotcharts.org" target="_blank">http://www.flotcharts.org </a></td>
+                    </tr>
+                    <tr>
+                        <td>C3js</td>
+                        <td><a href=" http://c3js.org/" target="_blank">http://c3js.org/ </a></td>
+                    </tr>
+                    <tr>
+                        <td>jQuery sparkline</td>
+                        <td><a href="http://omnipotent.net/jquery.sparkline/ " target="_blank"> http://omnipotent.net/jquery.sparkline/</a></td>
+                    </tr>
+                    <tr>
+                        <td>Google map</td>
+                        <td><a href="http://maplacejs.com/ " target="_blank"> http://maplacejs.com/</a></td>
+                    </tr>
+                    <tr>
+                        <td>Vector map</td>
+                        <td><a href="http://jvectormap.com " target="_blank">http://jvectormap.com  </a></td>
+                    </tr>
+                    <tr>
+                        <td>Gauge</td>
+                        <td><a href="http://bernii.github.io/gauge.js/ " target="_blank">http://bernii.github.io/gauge.js/ </a></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </section>
+
+        <!--<section id="upgrade">-->
+            <!--<h3>Upgrade</h3><hr class="notop">-->
+            <!--<p>-->
+
+                <!--To upgrade from v1.4 to v1.5 you may replace the img, css and js folder. All assets are now in js folder</p>-->
+
+            <!--<p> Please do not forget to backup your files before the upgrade. If you encountered any problem during the upgrade please contact our support at  <a href="mailto:themebucket@gmail.com">themebucket@gmail.com</a></p>-->
+        <!--</section>-->
+
+        <section id="end_documentation">
+            <div class="page-header"><h3> End of Documentation</h3><hr class="notop"></div>
+            <p>
+                Once again, thanks for purchasing BucketAdmin.
+            </p>
+        </section>
+
+    </div>
+</body>
+</html>

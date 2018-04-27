@@ -1,0 +1,83 @@
+.gray{
+	color:gray;
+}
+
+.input-error{
+	font-size:12px;
+	color:#f44336;
+}
+
+.myModal{
+	position:fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background: rgba(0, 0, 0, 0.4);
+	z-index:100;
+}
+
+.modalContainer{
+	width: 555px;
+	background: #FFFFFF;
+	margin:auto;
+	margin-top:10px;
+}
+
+.modalHeader{
+	padding:10px;
+	background: #008CBA;
+	color: #FFFFFF;
+	height:50px;
+	font-size:20px;
+	padding-left:15px;
+}
+
+.editHeader{
+	padding:10px;
+	background: #4CAF50;
+	color: #FFFFFF;
+	height:50px;
+	font-size:20px;
+	padding-left:15px;
+}
+
+.deleteHeader{
+	padding:10px;
+	background: #f44336;
+	color: #FFFFFF;
+	height:50px;
+	font-size:20px;
+	padding-left:15px;
+}
+
+.modalBody{
+	padding:30px;
+}
+
+.modalFooter{
+	height:36px;
+}
+
+.footerBtn{
+	margin-right:10px;
+	margin-top:-9px;
+}
+
+.closeBtn{
+	background: #008CBA;
+	color: #FFFFFF;
+	border:none;
+}
+
+.closeEditBtn{
+	background: #4CAF50;
+	color: #FFFFFF;
+	border:none;
+}
+
+.closeDelBtn{
+	background: #f44336;
+	color: #FFFFFF;
+	border:none;
+}

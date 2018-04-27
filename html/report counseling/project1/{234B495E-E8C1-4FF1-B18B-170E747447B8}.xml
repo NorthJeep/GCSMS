@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<configuration date="2018/02/28" author="e.World Technology Ltd.">
+  <project id="{234B495E-E8C1-4FF1-B18B-170E747447B8}" file="" name="project1" product="PHPReportMaker" version="11.0" datetime="2018/02/28 07:08:23" languagefolder="phprptlang" userlevel="-2,&quot;Anonymous&quot;,0;">
+    <table id="members" name="members" caption="members" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1" />
+    <table id="r_remarks_type" name="r_remarks_type" caption="r remarks type" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1" />
+    <table id="r_stud_educbg" name="r_stud_educbg" caption="r stud educbg" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1" />
+    <table id="r_stud_i_hab_acad" name="r_stud_i_hab_acad" caption="r stud i hab acad" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1" />
+    <table id="r_stud_physical_rec" name="r_stud_physical_rec" caption="r stud physical rec" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1" />
+    <table id="r_stud_profile" name="r_stud_profile" caption="r stud profile" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1" />
+    <table id="r_stud_psych_rec" name="r_stud_psych_rec" caption="r stud psych rec" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1" />
+    <table id="r_user" name="r_user" caption="r user" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1" />
+    <table id="t_counseling_service" name="t_counseling_service" caption="t counseling service" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1" />
+    <table id="view1" name="view1" caption="view 1" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1" />
+  </project>
+</configuration>

@@ -1,0 +1,661 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<ew-language date="2018/2/28" version="11.0.0" id="en" name="English" desc="English" author="e.World Technology Ltd.">
+  <!-- 
+	*** Important Notes:
+	1. Language ID should follow: https://developers.google.com/recaptcha/docs/language,
+	2. Locale settings are placed in a separate locale files under the "locales" folder,
+	3. Locale files must be named with language ID of language file (and converted to lowercase), e.g. en.json,
+	4. Locale files are ALWAYS used, regardless of whether the project is single language or multiple language.
+-->
+  <global>
+    <phrase id="aggregatecolon" value=": " />
+    <!-- v10 -->
+    <phrase id="aggregateequal" value="=" />
+    <!-- v10 -->
+    <phrase id="allrecords" value="All" />
+    <phrase id="alwaysask" value="Always ask for my user name and password" />
+    <!-- Deprecated since v11 -->
+    <phrase id="autologin" value="Auto login until I logout explicitly" />
+    <!-- Deprecated since v11 -->
+    <phrase id="backtologin" value="Back to Login Page" />
+    <phrase id="booleanno" value="No" />
+    <phrase id="booleanyes" value="Yes" />
+    <phrase id="breadcrumbdivider" value="/" />
+    <phrase id="browsernoflashsupport" value="Your browser does not support Flash player." client="1" />
+    <phrase id="buttonexport" value="Export" class="icon-export ewIcon" />
+    <!-- v8 -->
+    <phrase id="cancel" value="Cancel" client="1" />
+    <!-- v8 -->
+    <phrase id="cancelbtn" value="Cancel" client="1" />
+    <!-- v10 -->
+    <phrase id="chartorder" value="Order by" />
+    <phrase id="chartorderxasc" value="Labels Ascending" />
+    <phrase id="chartorderxdesc" value="Labels Descending" />
+    <phrase id="chartorderyasc" value="Values Ascending" />
+    <phrase id="chartorderydesc" value="Values Descending" />
+    <phrase id="clickrecaptcha" value="Please click reCAPTCHA" client="1" />
+    <!-- v9 -->
+    <phrase id="clicktodrilldown" value="Click to drill down" />
+    <phrase id="closebtn" value="Close" client="1" />
+    <!-- v10 -->
+    <phrase id="copytoclipboard" value="Copy to clipboard" />
+    <!-- v10 -->
+    <phrase id="countselected" value="%s selected" client="1" />
+    <!-- v9 -->
+    <phrase id="ctbsumhead" value="Summary" />
+    <!-- v10 -->
+    <phrase id="currentfilters" value="Current filters:" />
+    <phrase id="deletefilter" value="Delete filter" />
+    <!-- v8 -->
+    <phrase id="deletefilterconfirm" value="Delete filter %s?" client="1" />
+    <!-- v8 -->
+    <phrase id="drilldownallrecords" value="All records" />
+    <phrase id="drilldownfilters" value="Drill down filters:" />
+    <phrase id="enterfiltername" value="Enter filter name" client="1" />
+    <!-- v8 -->
+    <phrase id="entersenderemail" value="Please enter sender email" client="1" />
+    <phrase id="enterpropersenderemail" value="Exceed maximum sender email count or email address incorrect" client="1" />
+    <phrase id="enterrecipientemail" value="Please enter recipient email" client="1" />
+    <phrase id="enterproperrecipientemail" value="Exceed maximum recipient email count or email address incorrect" client="1" />
+    <phrase id="enterproperccemail" value="Exceed maximum cc email count or email address incorrect" client="1" />
+    <phrase id="enterproperbccemail" value="Exceed maximum bcc email count or email address incorrect" client="1" />
+    <phrase id="entersubject" value="Please enter subject" client="1" />
+    <phrase id="emailformsender" value="From" />
+    <phrase id="emailformrecipient" value="To" />
+    <phrase id="emailformcc" value="Cc" />
+    <phrase id="emailformbcc" value="Bcc" />
+    <phrase id="emailformsubject" value="Subject" />
+    <phrase id="emailformmessage" value="Message" />
+    <phrase id="emailformcontenttype" value="Send as" />
+    <phrase id="emailformcontenttypeurl" value="URL" />
+    <phrase id="emailformcontenttypehtml" value="HTML" />
+    <phrase id="emptylabel" value="(Empty)" />
+    <phrase id="enterpassword" value="Please enter password" client="1" />
+    <phrase id="enterpwd" value="Please enter password" client="1" />
+    <phrase id="entersearchcriteria" value="Please enter search criteria" />
+    <phrase id="enteruid" value="Please enter user ID" client="1" />
+    <phrase id="entervalidatecode" value="Please enter the validation code shown" client="1" />
+    <phrase id="exceedmaxemailexport" value="Exceed maximum export email count. Please try again later." />
+    <phrase id="exportchart" value="Exporting chart: " client="1" />
+    <phrase id="exportchartdata" value="Exporting chart data" client="1" />
+    <phrase id="exportcharterror" value="Failed to export chart: " client="1" />
+    <phrase id="exporting" value="Exporting, please wait..." client="1" />
+    <!-- v11 -->
+    <phrase id="exportingchart" value="Exporting chart (%c of %t), please wait..." client="1" />
+    <phrase id="exporttoemail" value="Email" class="icon-email ewIcon" client="1" />
+    <!-- v8 -->
+    <phrase id="exporttoexcel" value="Export to Excel" class="icon-excel ewIcon" />
+    <!-- v8 -->
+    <phrase id="exporttopdf" value="Export to PDF" class="icon-pdf ewIcon" />
+    <!-- v8 -->
+    <phrase id="exporttoword" value="Export to Word" class="icon-word ewIcon" />
+    <!-- v8 -->
+    <phrase id="failedtoexport" value="Failed to Export" client="1" />
+    <!-- v11 -->
+    <phrase id="fieldrequiredindicator" value="&lt;span class=&quot;ewRequired&quot;&gt;&amp;nbsp;*&lt;/span&gt;" />
+    <phrase id="filter" value="Filter" />
+    <!-- v8 -->
+    <phrase id="filtername" value="Filter name" client="1" />
+    <!-- v8 -->
+    <phrase id="filters" value="Filters" class="icon-filter ewIcon" />
+    <!-- v8 -->
+    <phrase id="generate" value="Generate" client="1" />
+    <!-- v10 -->
+    <phrase id="generatereporturl" value="Generate Report URL" client="1" />
+    <!-- v10 -->
+    <phrase id="generatesuccess" value="Success" />
+    <!-- v10 -->
+    <phrase id="homepage" value="Home" class="glyphicon glyphicon-home ewIcon" />
+    <!-- v8 -->
+    <phrase id="incorrectcreditcard" value="Incorrect credit card number" client="1" />
+    <phrase id="incorrectdate" value="Incorrect date (%s)" />
+    <!-- v10 -->
+    <phrase id="incorrectdateymd" value="Incorrect date, format = yyyy%smm%sdd" />
+    <phrase id="incorrectdatemdy" value="Incorrect date, format = mm%sdd%syyyy" />
+    <phrase id="incorrectdatedmy" value="Incorrect date, format = dd%smm%syyyy" />
+    <phrase id="incorrectshortdateymd" value="Incorrect date, format = yy%smm%sdd" />
+    <phrase id="incorrectshortdatemdy" value="Incorrect date, format = mm%sdd%syy" />
+    <phrase id="incorrectshortdatedmy" value="Incorrect date, format = dd%smm%syy" />
+    <phrase id="incorrectemail" value="Incorrect email" client="1" />
+    <phrase id="incorrectfield" value="Incorrect field" client="1" />
+    <phrase id="incorrectfloat" value="Incorrect floating point number" client="1" />
+    <phrase id="incorrectguid" value="Incorrect GUID" client="1" />
+    <phrase id="incorrectinteger" value="Incorrect integer" client="1" />
+    <phrase id="incorrectphone" value="Incorrect phone number" client="1" />
+    <phrase id="incorrectrange" value="Number must be between %1 and %2" client="1" />
+    <phrase id="incorrectregexp" value="Regular expression not matched" client="1" />
+    <phrase id="incorrectssn" value="Incorrect Social Security Number" client="1" />
+    <phrase id="incorrecttime" value="Incorrect time (hh:mm:ss)" client="1" />
+    <phrase id="incorrectzip" value="Incorrect ZIP code" client="1" />
+    <phrase id="invalidpostrequest" value="Invalid post request" />
+    <!-- v8 -->
+    <phrase id="invaliduidpwd" value="Incorrect user ID or password" />
+    <phrase id="language" value="Language" />
+    <phrase id="loading" value="Loading%s..." client="1" />
+    <phrase id="login" value="Login" />
+    <phrase id="loginfacebook" value="Login with Facebook" />
+    <!-- v11 -->
+    <phrase id="loginfailed" value="Login with %p failed" />
+    <!-- v11 -->
+    <phrase id="logingoogle" value="Login with Google" />
+    <!-- v11 -->
+    <phrase id="loginoptions" value="Options" />
+    <!-- v8 -->
+    <phrase id="loginor" value="- OR -" />
+    <!-- v11 -->
+    <phrase id="loginpage" value="Login Page" />
+    <phrase id="logout" value="Logout" />
+    <phrase id="lookuplink" value="Lookup - %s" class="glyphicon glyphicon-search ewIcon" />
+    <!-- v10 -->
+    <phrase id="messageok" value="OK" client="1" />
+    <!-- v9 -->
+    <phrase id="midnight" value="midnight" />
+    <!-- v10 -->
+    <phrase id="mobilemenu" value="Menu" />
+    <phrase id="monthjan" value="Jan" />
+    <phrase id="monthfeb" value="Feb" />
+    <phrase id="monthmar" value="Mar" />
+    <phrase id="monthapr" value="Apr" />
+    <phrase id="monthmay" value="May" />
+    <phrase id="monthjun" value="Jun" />
+    <phrase id="monthjul" value="Jul" />
+    <phrase id="monthaug" value="Aug" />
+    <phrase id="monthsep" value="Sep" />
+    <phrase id="monthoct" value="Oct" />
+    <phrase id="monthnov" value="Nov" />
+    <phrase id="monthdec" value="Dec" />
+    <phrase id="more" value="More" client="1" />
+    <!-- v11 -->
+    <phrase id="next" value="Next" />
+    <phrase id="noon" value="noon" />
+    <!-- v10 -->
+    <phrase id="nopermission" value="You do not have permission to access the page." />
+    <phrase id="norecord" value="No records found" client="1" />
+    <!-- v10 -->
+    <phrase id="noreportorcharts" value="No report or charts is selected for generation. Please check your report/charts settings." />
+    <phrase id="nodistinctcolvals" value="No distinct column values for SQL: " />
+    <phrase id="nulllabel" value="(Null)" />
+    <phrase id="of" value="of" client="1" />
+    <!-- v10 -->
+    <phrase id="page" value="Page" client="1" />
+    <!-- v10 -->
+    <phrase id="pagerfirst" value="First" />
+    <phrase id="pagerlast" value="Last" />
+    <phrase id="pagernext" value="Next" />
+    <phrase id="pagerprevious" value="Previous" />
+    <phrase id="password" value="Password" />
+    <phrase id="pleaseselect" value="Please select" client="1" />
+    <!-- v9 -->
+    <phrase id="popupall" value="(All)" client="1" />
+    <phrase id="popupfrom" value="From" client="1" />
+    <phrase id="popupnovalue" value="No value selected!" client="1" />
+    <phrase id="popupselect" value="Please Select" client="1" />
+    <phrase id="popupto" value="To" client="1" />
+    <phrase id="prev" value="Prev" />
+    <phrase id="primarykeyunspecified" value="Primary key unspecified" />
+    <phrase id="printerfriendly" value="Printer Friendly" class="icon-print ewIcon" />
+    <!-- v8 -->
+    <phrase id="group" value="Groups" />
+    <phrase id="groupsperpage" value="Groups per page" />
+    <phrase id="qtr1" value="1st Quarter" />
+    <phrase id="qtr2" value="2nd Quarter" />
+    <phrase id="qtr3" value="3rd Quarter" />
+    <phrase id="qtr4" value="4th Quarter" />
+    <phrase id="record" value="Records" client="1" />
+    <!-- v10 -->
+    <phrase id="recordsperpage" value="Page size" client="1" />
+    <!-- v10 -->
+    <phrase id="rememberme" value="Remember me" />
+    <phrase id="report" value="Reports" />
+    <phrase id="reportformtype" value="Report type" />
+    <!-- v10 -->
+    <phrase id="reportformprint" value="Print" />
+    <!-- v10 -->
+    <phrase id="reportformword" value="Word" />
+    <!-- v10 -->
+    <phrase id="reportformexcel" value="Excel" />
+    <!-- v10 -->
+    <phrase id="reportformpdf" value="PDF" />
+    <!-- v10 -->
+    <phrase id="reportformemail" value="Email" />
+    <!-- v10 -->
+    <phrase id="reportformusername" value="User name" />
+    <!-- v10 -->
+    <phrase id="reportformuserdefault" value="Administrator" />
+    <!-- v10 -->
+    <phrase id="reportformfiltername" value="Filter name" />
+    <!-- v10 -->
+    <phrase id="reportformfilternone" value="None" />
+    <!-- v10 -->
+    <phrase id="reportformfiltercurrent" value="Current" />
+    <!-- v10 -->
+    <phrase id="reportformpageoption" value="Pages" />
+    <!-- v10 -->
+    <phrase id="reportformallpages" value="All" />
+    <!-- v10 -->
+    <phrase id="reportformfirstpage" value="First" />
+    <!-- v10 -->
+    <phrase id="reportformsender" value="From" />
+    <!-- v10 -->
+    <phrase id="reportformrecipient" value="To" />
+    <!-- v10 -->
+    <phrase id="reportformcc" value="Cc" />
+    <!-- v10 -->
+    <phrase id="reportformbcc" value="Bcc" />
+    <!-- v10 -->
+    <phrase id="reportformsubject" value="Subject" />
+    <!-- v10 -->
+    <phrase id="reportformresponsetype" value="Response type" />
+    <!-- v10 -->
+    <phrase id="reportformresponsetypejson" value="JSON" />
+    <!-- v10 -->
+    <phrase id="reportformresponsetypefile" value="File" />
+    <!-- v10 -->
+    <phrase id="reportformshowcurrentfilter" value="Show filters" />
+    <!-- v10 -->
+    <phrase id="reportformurl" value="URL" />
+    <!-- v10 -->
+    <phrase id="reportgenerateddate" value="Report generated at " />
+    <!-- v10 -->
+    <phrase id="reset" value="Reset" />
+    <phrase id="resetallfilter" value="Reset all filters" class="icon-reset-search ewIcon" />
+    <!-- v8 -->
+    <phrase id="resetsearch" value="Reset search criteria" />
+    <phrase id="rptavg" value="AVG" />
+    <phrase id="rptcnt" value="COUNT" />
+    <phrase id="rptdtlrec" value=" detail records" />
+    <phrase id="rptgrandsummary" value="Grand Summary" />
+    <phrase id="rptmax" value="MAX" />
+    <phrase id="rptmin" value="MIN" />
+    <phrase id="rptpagesummary" value="Page Summary" />
+    <phrase id="rptsum" value="SUM" />
+    <phrase id="rptsumhead" value="Summary for %c: %v" />
+    <!-- v9 -->
+    <phrase id="savecurrentfilter" value="Save current filter" />
+    <phrase id="saveusername" value="Save my user name" />
+    <!-- Deprecated since v11 -->
+    <phrase id="search" value="Search" client="1" />
+    <!-- v10 -->
+    <phrase id="searchbtn" value="Filter Panel" class="glyphicon glyphicon-search ewIcon" />
+    <phrase id="selectall" value="(All)" />
+    <phrase id="selectbtn" value="Select" client="1" />
+    <!-- v10 -->
+    <phrase id="sendemailbtn" value="Send" client="1" />
+    <phrase id="sendemailsuccess" value="Email sent successfully" client="1" />
+    <phrase id="servercommunicationerror" value="An error occured while communicating to the server." />
+    <!-- v10 -->
+    <phrase id="sessionwillexpire" value="Your session will expire in %s seconds. Click OK to continue your session." client="1" />
+    <!-- v9 -->
+    <phrase id="sessionexpired" value="Your session has expired." client="1" />
+    <!-- v9 -->
+    <phrase id="showall" value="Show all" />
+    <phrase id="summary" value="Summary" />
+    <phrase id="summarycolon" value=": " />
+    <!-- v10 -->
+    <phrase id="tasks" value="Tasks" />
+    <phrase id="to" value="to" />
+    <phrase id="top" value="Top" />
+    <phrase id="total" value="Total" />
+    <phrase id="useradministrator" value="Administrator" client="1" />
+    <!-- v9 -->
+    <phrase id="useranonymous" value="Anonymous" client="1" />
+    <!-- v9 -->
+    <phrase id="userdefault" value="Default" client="1" />
+    <!-- v9 -->
+    <phrase id="username" value="User name" />
+    <phrase id="usernotfound" value="User '%u' not found" />
+    <!-- v11 -->
+    <phrase id="valuenotexist" value="Value does not exist" client="1" />
+    <!-- v8 -->
+    <phrase id="viewimage" value="Click to view image" />
+    <!-- v8 -->
+    <phrase id="week" value="Week" />
+    <phrase id="year" value="Year" />
+    <!-- Search Operators -->
+    <phrase id="=" value="&amp;nbsp;" />
+    <!-- v9 -->
+    <phrase id="equal" value="=" />
+    <!-- v9 -->
+    <phrase id="&lt;&gt;" value="&amp;lt;&amp;gt;" />
+    <phrase id="&lt;" value="&amp;lt;" />
+    <phrase id="&lt;=" value="&amp;lt;=" />
+    <phrase id="&gt;" value="&amp;gt;" />
+    <phrase id="&gt;=" value="&amp;gt;=" />
+    <phrase id="like" value="contains" />
+    <phrase id="not like" value="not contains" />
+    <phrase id="starts with" value="starts with" />
+    <phrase id="ends with" value="ends with" />
+    <phrase id="is null" value="is null" />
+    <phrase id="is not null" value="is not null" />
+    <phrase id="between" value="between" />
+    <phrase id="and" value="and" />
+    <phrase id="or" value="or" />
+    <phrase id="am" value="AM" />
+    <!-- v10 -->
+    <phrase id="pm" value="PM" />
+    <!-- v10 -->
+    <!-- Menu Prefix/Suffix -->
+    <phrase id="simplereportmenuitemprefix" value="" />
+    <phrase id="simplereportmenuitemsuffix" value="" />
+    <phrase id="detailsummaryreportmenuitemprefix" value="" />
+    <phrase id="detailsummaryreportmenuitemsuffix" value="" />
+    <phrase id="crosstabreportmenuitemprefix" value="" />
+    <phrase id="crosstabreportmenuitemsuffix" value="" />
+    <phrase id="chartreportmenuitemprefix" value="" />
+    <phrase id="chartreportmenuitemsuffix" value="" />
+    <!-- Advanced Filter -->
+    <phrase id="future" value="Future" />
+    <phrase id="past" value="Past" />
+    <phrase id="last14days" value="Last 14 days" />
+    <phrase id="last30days" value="Last 30 days" />
+    <phrase id="last7days" value="Last 7 days" />
+    <phrase id="next14days" value="Next 14 days" />
+    <phrase id="next30days" value="Next 30 days" />
+    <phrase id="next7days" value="Next 7 days" />
+    <phrase id="today" value="Today" />
+    <phrase id="tomorrow" value="Tomorrow" />
+    <phrase id="yesterday" value="Yesterday" />
+    <phrase id="lastmonth" value="Last month" />
+    <phrase id="nextmonth" value="Next month" />
+    <phrase id="thismonth" value="This month" />
+    <phrase id="lasttwoweeks" value="Last two weeks" />
+    <phrase id="lastweek" value="Last week" />
+    <phrase id="nexttwoweeks" value="Next two weeks" />
+    <phrase id="nextweek" value="Next week" />
+    <phrase id="thisweek" value="This week" />
+    <phrase id="lastyear" value="Last year" />
+    <phrase id="nextyear" value="Next year" />
+    <phrase id="thisyear" value="This year" />
+  </global>
+  <project>
+    <phrase id="footertext" value="&amp;copy;2018 e.World Technology Ltd. All rights reserved." />
+    <menu id="1">
+      <phrase id="menutext" value="members" />
+    </menu>
+    <menu id="2">
+      <phrase id="menutext" value="r remarks type" />
+    </menu>
+    <menu id="3">
+      <phrase id="menutext" value="r stud educbg" />
+    </menu>
+    <menu id="4">
+      <phrase id="menutext" value="r stud i hab acad" />
+    </menu>
+    <menu id="5">
+      <phrase id="menutext" value="r stud physical rec" />
+    </menu>
+    <menu id="6">
+      <phrase id="menutext" value="r stud profile" />
+    </menu>
+    <menu id="7">
+      <phrase id="menutext" value="r stud psych rec" />
+    </menu>
+    <menu id="8">
+      <phrase id="menutext" value="r user" />
+    </menu>
+    <menu id="9">
+      <phrase id="menutext" value="t counseling service" />
+    </menu>
+    <menu id="10">
+      <phrase id="menutext" value="view 1" />
+    </menu>
+    <table id="members">
+      <phrase id="tblcaption" value="members" />
+      <field id="memid">
+        <phrase id="fldcaption" value="memid" />
+      </field>
+      <field id="stud_no">
+        <phrase id="fldcaption" value="stud no" />
+      </field>
+      <field id="stud_firstname">
+        <phrase id="fldcaption" value="stud firstname" />
+      </field>
+      <field id="stud_lastname">
+        <phrase id="fldcaption" value="stud lastname" />
+      </field>
+      <field id="stud_course">
+        <phrase id="fldcaption" value="stud course" />
+      </field>
+      <field id="stud_yr_lvl">
+        <phrase id="fldcaption" value="stud yr lvl" />
+      </field>
+      <field id="stud_section">
+        <phrase id="fldcaption" value="stud section" />
+      </field>
+      <field id="stud_gender">
+        <phrase id="fldcaption" value="stud gender" />
+      </field>
+      <field id="stud_email">
+        <phrase id="fldcaption" value="stud email" />
+      </field>
+      <field id="stud_contact_no">
+        <phrase id="fldcaption" value="stud contact no" />
+      </field>
+      <field id="stud_birthplace">
+        <phrase id="fldcaption" value="stud birthplace" />
+      </field>
+      <field id="stud_birthdate">
+        <phrase id="fldcaption" value="stud birthdate" />
+      </field>
+      <field id="address">
+        <phrase id="fldcaption" value="address" />
+      </field>
+      <field id="stud_status">
+        <phrase id="fldcaption" value="stud status" />
+      </field>
+    </table>
+    <table id="r_remarks_type">
+      <phrase id="tblcaption" value="r remarks type" />
+      <field id="remarks_code">
+        <phrase id="fldcaption" value="REMARKS CODE" />
+      </field>
+      <field id="remarks_name">
+        <phrase id="fldcaption" value="REMARKS NAME" />
+      </field>
+      <field id="remarks_details">
+        <phrase id="fldcaption" value="REMARKS DETAILS" />
+      </field>
+    </table>
+    <table id="r_stud_educbg">
+      <phrase id="tblcaption" value="r stud educbg" />
+      <field id="stud_educbg_id">
+        <phrase id="fldcaption" value="STUD EDUCBG ID" />
+      </field>
+      <field id="stud_id">
+        <phrase id="fldcaption" value="STUD ID" />
+      </field>
+      <field id="stud_educ_primary">
+        <phrase id="fldcaption" value="STUD EDUC PRIMARY" />
+      </field>
+      <field id="stud_educ_secondary">
+        <phrase id="fldcaption" value="STUD EDUC SECONDARY" />
+      </field>
+      <field id="stud_educ_tertiary">
+        <phrase id="fldcaption" value="STUD EDUC TERTIARY" />
+      </field>
+    </table>
+    <table id="r_stud_i_hab_acad">
+      <phrase id="tblcaption" value="r stud i hab acad" />
+      <field id="stud_ih_acad_id">
+        <phrase id="fldcaption" value="STUD IH ACAD ID" />
+      </field>
+      <field id="stud_id">
+        <phrase id="fldcaption" value="STUD ID" />
+      </field>
+      <field id="stud_ih_academic">
+        <phrase id="fldcaption" value="STUD IH ACADEMIC" />
+      </field>
+    </table>
+    <table id="r_stud_physical_rec">
+      <phrase id="tblcaption" value="r stud physical rec" />
+      <field id="stud_phys_id">
+        <phrase id="fldcaption" value="STUD PHYS ID" />
+      </field>
+      <field id="stud_id">
+        <phrase id="fldcaption" value="STUD ID" />
+      </field>
+      <field id="stud_hearing_stats">
+        <phrase id="fldcaption" value="STUD HEARING STATS" />
+      </field>
+      <field id="stud_sight_stats">
+        <phrase id="fldcaption" value="STUD SIGHT STATS" />
+      </field>
+      <field id="studspeech_stats">
+        <phrase id="fldcaption" value="STUDSPEECH STATS" />
+      </field>
+      <field id="stud_gen_health">
+        <phrase id="fldcaption" value="STUD GEN HEALTH" />
+      </field>
+    </table>
+    <table id="r_stud_profile">
+      <phrase id="tblcaption" value="r stud profile" />
+      <field id="stud_id">
+        <phrase id="fldcaption" value="STUD ID" />
+      </field>
+      <field id="stud_no">
+        <phrase id="fldcaption" value="STUD NO" />
+      </field>
+      <field id="stud_fname">
+        <phrase id="fldcaption" value="STUD FNAME" />
+      </field>
+      <field id="stud_mname">
+        <phrase id="fldcaption" value="STUD MNAME" />
+      </field>
+      <field id="stud_lname">
+        <phrase id="fldcaption" value="STUD LNAME" />
+      </field>
+      <field id="stud_course">
+        <phrase id="fldcaption" value="STUD COURSE" />
+      </field>
+      <field id="stud_yr_lvl">
+        <phrase id="fldcaption" value="STUD YR LVL" />
+      </field>
+      <field id="stud_section">
+        <phrase id="fldcaption" value="STUD SECTION" />
+      </field>
+      <field id="stud_gender">
+        <phrase id="fldcaption" value="STUD GENDER" />
+      </field>
+      <field id="stud_email">
+        <phrase id="fldcaption" value="STUD EMAIL" />
+      </field>
+      <field id="stud_contact_no">
+        <phrase id="fldcaption" value="STUD CONTACT NO" />
+      </field>
+      <field id="stud_birthdate">
+        <phrase id="fldcaption" value="STUD BIRTHDATE" />
+      </field>
+      <field id="stud_birthplace">
+        <phrase id="fldcaption" value="STUD BIRTHPLACE" />
+      </field>
+      <field id="stud_address">
+        <phrase id="fldcaption" value="STUD ADDRESS" />
+      </field>
+      <field id="stud_status">
+        <phrase id="fldcaption" value="STUD STATUS" />
+      </field>
+      <field id="stud_display_stat">
+        <phrase id="fldcaption" value="STUD DISPLAY STAT" />
+      </field>
+      <field id="stud_date_add">
+        <phrase id="fldcaption" value="STUD DATE ADD" />
+      </field>
+      <field id="stud_date_mod">
+        <phrase id="fldcaption" value="STUD DATE MOD" />
+      </field>
+      <field id="stud_date_deact">
+        <phrase id="fldcaption" value="STUD DATE DEACT" />
+      </field>
+    </table>
+    <table id="r_stud_psych_rec">
+      <phrase id="tblcaption" value="r stud psych rec" />
+      <field id="stud_psych_id">
+        <phrase id="fldcaption" value="STUD PSYCH ID" />
+      </field>
+      <field id="stud_id">
+        <phrase id="fldcaption" value="STUD ID" />
+      </field>
+      <field id="stud_psyhciatrist">
+        <phrase id="fldcaption" value="STUD PSYHCIATRIST" />
+      </field>
+      <field id="stud_psychologist">
+        <phrase id="fldcaption" value="STUD PSYCHOLOGIST" />
+      </field>
+      <field id="stud_counselor">
+        <phrase id="fldcaption" value="STUD COUNSELOR" />
+      </field>
+      <field id="stud_date_counsult">
+        <phrase id="fldcaption" value="STUD DATE COUNSULT" />
+      </field>
+    </table>
+    <table id="r_user">
+      <phrase id="tblcaption" value="r user" />
+      <field id="user_id">
+        <phrase id="fldcaption" value="USER ID" />
+      </field>
+      <field id="user_fname">
+        <phrase id="fldcaption" value="USER FNAME" />
+      </field>
+      <field id="user_mname">
+        <phrase id="fldcaption" value="USER MNAME" />
+      </field>
+      <field id="user_lname">
+        <phrase id="fldcaption" value="USER LNAME" />
+      </field>
+      <field id="user_role">
+        <phrase id="fldcaption" value="USER ROLE" />
+      </field>
+      <field id="username">
+        <phrase id="fldcaption" value="USERNAME" />
+      </field>
+      <field id="user_password">
+        <phrase id="fldcaption" value="USER PASSWORD" />
+      </field>
+      <field id="user_picture">
+        <phrase id="fldcaption" value="USER PICTURE" />
+      </field>
+    </table>
+    <table id="t_counseling_service">
+      <phrase id="tblcaption" value="t counseling service" />
+      <field id="counseling_id">
+        <phrase id="fldcaption" value="COUNSELING ID" />
+      </field>
+      <field id="stud_id">
+        <phrase id="fldcaption" value="STUD ID" />
+      </field>
+      <field id="student_no">
+        <phrase id="fldcaption" value="STUDENT NO" />
+      </field>
+      <field id="student_name">
+        <phrase id="fldcaption" value="STUDENT NAME" />
+      </field>
+      <field id="counseling_type">
+        <phrase id="fldcaption" value="COUNSELING TYPE" />
+      </field>
+      <field id="counseling_details">
+        <phrase id="fldcaption" value="COUNSELING DETAILS" />
+      </field>
+      <field id="counseling_date">
+        <phrase id="fldcaption" value="COUNSELING DATE" />
+      </field>
+    </table>
+    <table id="view1">
+      <phrase id="tblcaption" value="view 1" />
+      <field id="student_no">
+        <phrase id="fldcaption" value="STUDENT NO" />
+      </field>
+      <field id="student_name">
+        <phrase id="fldcaption" value="STUDENT NAME" />
+      </field>
+      <field id="counseling_type">
+        <phrase id="fldcaption" value="COUNSELING TYPE" />
+      </field>
+      <field id="counseling_details">
+        <phrase id="fldcaption" value="COUNSELING DETAILS" />
+      </field>
+      <field id="counseling_date">
+        <phrase id="fldcaption" value="COUNSELING DATE" />
+      </field>
+    </table>
+  </project>
+</ew-language>

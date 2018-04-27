@@ -1,0 +1,37 @@
+#myTable{
+width:100%;
+border-collapse:collapse;
+}
+#HeadRow{
+background:#004C2E;
+color:white;
+font-weight:bold;
+}
+#myTable td{
+padding:5px;
+border:1px solid black;
+text-align:left;
+}
+.optionsDiv {
+padding-bottom:10px;
+font-weight:bold;
+}
+#selectField{
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+border: 1px solid #ccc;
+font-size: 16px;
+height: 30px;
+width: 200px;
+color:white;
+background-color: #004C2E;
+}
+.odd{
+background:#CCFFEB;
+}
+.even{
+background:#99FFD6;
+}
+
+

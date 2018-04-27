@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <title>Counseling Services</title>
+
+    <!--Core CSS -->
+    <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-reset.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
+   
+    <link rel="stylesheet" href="css/bootstrap-switch.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-fileupload/bootstrap-fileupload.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-wysihtml5/bootstrap-wysihtml5.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/compiled/timepicker.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker.css" />
+    <link rel="stylesheet" type="text/css" href="js/jquery-multi-select/css/multi-select.css" />
+    <link rel="stylesheet" type="text/css" href="js/jquery-tags-input/jquery.tagsinput.css" />
+
+    <link rel="stylesheet" type="text/css" href="js/select2/select2.css" />
+
+
+    <!--dynamic table-->
+    <link href="js/advanced-datatable/css/demo_page.css" rel="stylesheet" />
+    <link href="js/advanced-datatable/css/demo_table.css" rel="stylesheet" />
+    <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet" />
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]>
+    <script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<?php 
+$currentPage ='G&CSMS-Counseling Services';
+include('header.php');
+include('sidebarnav.php');
+?>
+<!--sidebar end-->
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+        <!-- page start-->
+        <style>
+            .twt-feeds {
+    border-radius:4px 4px 0 0;
+    -webkit-border-radius:4px 4px 0 0;
+    color:#FFFFFF;
+    padding:40px 10px 10px;
+    position:relative;
+    min-height:115px;
+    height: 60px;
+}
+        </style>
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Counseling
+                        <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            <a href="javascript:;" class="fa fa-cog"></a>
+                            <a href="javascript:;" class="fa fa-times"></a>
+                         </span>
+                    </header>
+                    <!--<form action="add_counseling.php" method="POST">-->
+                    
+                    <div class="panel-body">
+                    <div  style="padding:10px; padding-left:0px;">
+                    <div class="col-sm-12">
+                    <div class="twt-feeds" style="background-color:#07847d; padding:5px; height:20px; color:#FFF">
+                        <blockquote style="padding-left:10px">
+                            <?php
+                    include("config.php");
+                        $stud_no = $_POST["student_no"];
+
+                        $sql="SELECT `STUD_ID`, `STUD_NO`, CONCAT(`STUD_FNAME`,' ', `STUD_LNAME`) AS FULLNAME,`STUD_COURSE` FROM r_stud_profile where stud_no = '$stud_no'";
+
+                        $query=mysqli_query($db,$sql);
+
+                         if (!$query) {
+                            die ('SQL Error: ' . mysqli_error($db));
+                        }
+
+                        $row=mysqli_fetch_array($query,MYSQLI_ASSOC);
+
+                        echo '<strong><h3 id="stud_name" name="stud_name">'.$row['FULLNAME'].'</h3></strong>
+                            <h6 name="stud_no">'.$row['STUD_NO'].'</h6>
+                            <h6 name="stud_no">'.$row['STUD_COURSE'].'</h6>';
+
+                    ?>
+                            
+                        </blockquote>
+                    </div>
+                    <!--MULTISELECT-->
+                    <div class="form-group" style="padding-top:20px">
+                                <label class="col-lg-2 col-sm-2 control-label" style="font-size:15px">Counseling Case:</label>
+                                <div class="col-lg-6">
+                                    <select multiple name="e9" id="e9" style="width:400px" class="populate">
+                                        <option value="Educational Counseling">Educational Counseling</option>
+                                    <option value="Mental Health Counseling">Mental Health Counseling</option>
+                                    <option value="Behavior Theraphy">Behavior Theraphy</option>
+                                    <option value="Cognitive Theraphy">Cognitive Theraphy</option>
+                                    <option value="Humanistic Theraphy">Humanistic Theraphy</option>
+                                    <option value="Holistic Theraphy">Holistic Theraphy</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--END-->
+                    <div id="wysiwyg" name="wysiwyg" style=" padding-left:13px">
+                        <form class="form-horizontal ">
+                            <div class="form-group">
+                                <ul><h4 id="counseling" name="counseling"style=" padding-left:17px"></h4></ul>
+                                <br/><br/><br/> 
+                                <h5 style=" padding-left:17px"><strong>I.&nbsp&nbsp&nbsp&nbspBackground of the Case:</strong></h5>
+                                <div class="col-md-10">
+                                    <textarea name="details" class="wysihtml5 form-control" rows="9"></textarea>
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-primary">
+                        </form>
+                    </div>
+                    </div>
+                    </div>
+                    </form>
+                    </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- page end-->
+        </section>
+    </section>
+    <!--main content end-->
+<!--right sidebar start-->
+<!--right sidebar end-->
+
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+
+<!--Core js-->
+<script>
+    function ShowDiv() {
+    document.getElementById("optTypes").style.display = "";
+}
+    function Hide(){
+        document.getElementById("optTypes").style.display="none"
+        document.getElementById("btn_CT").style.display="none";
+        document.getElementById("wysiwyg").style.display="";
+    }
+    function multiSelect() {
+        var length=document.formCT.optCT.length;
+        var $result="";
+        for (var i = 0; i < length; i++) {
+            var selected = document.formCT.optCT[i].selected;
+            if(selected){
+                $result += document.formCT.optCT[i].value+"<br/>";
+            }
+          }
+          var display = $result;
+          document.getElementById('counseling').innerHTML = display;
+    }
+</script>
+
+<script src="js/jquery.js"></script>
+<script src="bs3/js/bootstrap.min.js"></script>
+<script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="js/jquery.scrollTo.min.js"></script>
+<script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="js/easypiechart/jquery.easypiechart.js"></script>
+
+<script src="js/bootstrap-switch.js"></script>
+
+<script type="text/javascript" src="js/fuelux/js/spinner.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+<script type="text/javascript" src="js/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
+<script type="text/javascript" src="js/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
+<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+<script type="text/javascript" src="js/jquery-multi-select/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="js/jquery-multi-select/js/jquery.quicksearch.js"></script>
+
+<script type="text/javascript" src="js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+
+<script src="js/jquery-tags-input/jquery.tagsinput.js"></script>
+
+<script src="js/select2/select2.js"></script>
+<script src="js/select-init.js"></script>
+<!--Easy Pie Chart-->
+<script src="js/easypiechart/jquery.easypiechart.js"></script>
+<!--Sparkline Chart-->
+<script src="js/sparkline/jquery.sparkline.js"></script>
+<!--jQuery Flot Chart-->
+<script src="js/flot-chart/jquery.flot.js"></script>
+<script src="js/flot-chart/jquery.flot.tooltip.min.js"></script>
+<script src="js/flot-chart/jquery.flot.resize.js"></script>
+<script src="js/flot-chart/jquery.flot.pie.resize.js"></script>
+
+<!--dynamic table-->
+<script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
+<!--common script init for all pages-->
+<script src="js/scripts.js"></script>
+
+<!--dynamic table initialization -->
+<script src="js/dynamic_table_init.js"></script>
+
+<script src="js/advanced-form.js"></script>
+<script src="js/toggle-init.js"></script>
+
+</body>
+</html>
