@@ -50,9 +50,11 @@
 </head>
 
 <body>
+
+
 <?php 
 $currentPage ='G&CSMS-Files';
-include('TypeAHeader.php');
+include('header.php');
 include('sidebarnav.php');
 ?>
 <!--sidebar end-->
@@ -65,11 +67,9 @@ include('sidebarnav.php');
             <div class="col-sm-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Files and Documents
+                        Records
                         <span class="tools pull-right">
                             <a href="javascript:;" class="fa fa-chevron-down"></a>
-                            <a href="javascript:;" class="fa fa-cog"></a>
-                            <a href="javascript:;" class="fa fa-times"></a>
                          </span>
                     </header>
                     <div class="panel-body">
@@ -87,7 +87,6 @@ include('sidebarnav.php');
                         <th class="hidden-phone">Download</th>
                     </tr>
                     </thead>
-                    <tbody>
                     <?php
 
 // Check connection
@@ -96,7 +95,8 @@ if (mysqli_connect_errno())
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-  $sql= "SELECT `T_UPLOAD_ID`, `T_UPLOAD_NAME`,  `T_UPLOAD_CATEGORY`, `T_UPLOAD_DATE`, `T_UPLOAD_LOCATION` FROM `T_UPLOAD`";
+  $sql= "SELECT `T_UPLOAD_ID`, `T_UPLOAD_NAME`,  `T_UPLOAD_CATEGORY`, `T_UPLOAD_DATE`, `T_UPLOAD_LOCATION` 
+  FROM `T_UPLOAD` WHERE T_UPLOAD_TYPE='Records' ";
 
 $query = mysqli_query($db, $sql);
     
@@ -115,8 +115,7 @@ if (!$query) {
                     <td>
                         <a href="'.$row['T_UPLOAD_LOCATION'].'" class="confirmation text-primary" >Download</a>
                     </td>
-                </tr>
-                </tbody>';
+                </tr>';
         }
 ?> 
 <script type="text/javascript">
@@ -128,7 +127,77 @@ if (!$query) {
         elems[i].addEventListener('click', confirmIt, false);
     }
 </script>
-                    </tbody>
+                </table>
+
+                    </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Printables
+                        <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                    <div  style="padding:10px; padding-left:0px;">
+                    </div>
+                    <div class="adv-table">
+                    <table  class="display table table-bordered table-striped" id="dynamic-table">
+                    <thead>
+                    <tr>
+                        <th>File Name</th>
+                        <th>Category</th>
+                        <th>Date Uploaded</th>
+                        <th class="hidden-phone">Download</th>
+                    </tr>
+                    </thead>
+                    <?php
+
+// Check connection
+if (mysqli_connect_errno())
+{
+    printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
+}
+  $sql= "SELECT `T_UPLOAD_ID`, `T_UPLOAD_NAME`,  `T_UPLOAD_CATEGORY`, `T_UPLOAD_DATE`, `T_UPLOAD_LOCATION` 
+  FROM `T_UPLOAD` WHERE T_UPLOAD_TYPE='Printables' ";
+
+$query = mysqli_query($db, $sql);
+    
+if (!$query) {
+    die ('SQL Error: ' . mysqli_error($db));
+}
+
+    /* fetch object array */
+    while ($row = mysqli_fetch_array($query)) 
+        {
+                   echo'
+                    <tr>
+                    <td>'.$row[1].'</td>
+                    <td>'.$row[2].'</td>
+                    <td>'.$row[3].'</td>
+                    <td>
+                        <a href="'.$row['T_UPLOAD_LOCATION'].'" class="confirmation text-primary" >Download</a>
+                    </td>
+                </tr>';
+        }
+?> 
+<script type="text/javascript">
+    var elems = document.getElementsByClassName('confirmation');
+    var confirmIt = function (e) {
+        if (!confirm('Are you sure?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
+</script>
+                </table>
 
                     </div>
                     </div>
@@ -138,6 +207,9 @@ if (!$query) {
         <!-- page end-->
         </section>
     </section>
+
+
+
     
     <!-- Modal -->
     
@@ -164,6 +236,13 @@ if (!$query) {
                                 <option value="Referral Form">Referral Form</option>
                             </select>
                         </div>
+                        <div class="col-md-4 form-group">
+                            *Type
+                            <select name="T_UPLOAD_TYPE" type="text" class="form-control" required>
+                                <option value="Records">Records</option>
+                                <option value="Printables">Printables</option>
+                            </select>
+                        </div>
                         <div class="col-md-12 form-group">
                             *File<input accept=".pdf, .doc, .docx, .xls, .xlsx" name="file" type="file" required>
                         </div>
@@ -180,6 +259,7 @@ if (!$query) {
     <!--MODAL-->
     <!-- modal -->
     <!--main content end-->
+
 <!--right sidebar start-->
 <div class="right-sidebar">
 <div class="search-row">

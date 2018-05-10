@@ -19,7 +19,8 @@
     }
     $filename = $_POST['T_UPLOAD_NAME'];
     $location = "Files/" . $files;
-    $sqli = "INSERT INTO T_UPLOAD (T_UPLOAD_NAME,T_UPLOAD_CATEGORY,T_UPLOAD_DATE,T_UPLOAD_LOCATION) VALUES ('{$filename}','".$_POST['T_UPLOAD_CATEGORY']."',CURDATE(),'{$location}')";
+    $sqli = "INSERT INTO T_UPLOAD (T_UPLOAD_NAME,T_UPLOAD_CATEGORY,T_UPLOAD_DATE,T_UPLOAD_LOCATION,T_UPLOAD_TYPE) 
+    VALUES ('{$filename}','".$_POST['T_UPLOAD_CATEGORY']."',CURDATE(),'{$location}','".$_POST['T_UPLOAD_TYPE']."')";
     $result = mysqli_query($con,$sqli);
     if ($result) {
         header('Location: TypeAFilesAndDocuments.php' . $redirect);
