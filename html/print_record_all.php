@@ -16,10 +16,10 @@ function Header()
     
     // Framed title
     
-    $this->Image('images\PUPLogo.png',110,10,20);
+    $this->Image('images\PUPLogo.png',98,10,20);
     $this->Ln(30);
-    $this->Cell(90);
-    $this->Cell(30,10,'Polytechnic University of the Philippines',0,0,'C');
+    $this->Cell(80);
+    $this->Cell(40,10,'Polytechnic University of the Philippines',0,0,'C');
     // Line break
     $this->Ln(20);
 }
@@ -33,7 +33,7 @@ function FancyTable($body)
     $this->SetLineWidth(.3);
     $this->SetFont('','B');
     // Header
-    $w = array(50, 50, 30, 50);
+    $w = array(50, 60, 30, 50);
     for($i=0;$i<count($body);$i++)
         $this->Cell($w[$i],7,$body[$i],1,0,'C',true);
     $this->Ln();
