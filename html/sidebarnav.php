@@ -4,8 +4,7 @@
         <div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
                 <li>
-                    <a <?php if($currentPage=='G&CSMS-Dasboard') { echo 'class="active"';} ?>
-                     href="index.php">
+                    <a <?php if($currentPage=='G&CSMS-Dasboard') { echo 'class="active"';} ?> href="index.php">
                         <i class="fa fa-dashboard"></i>
                         <span>Dashboard</span>
                     </a>
