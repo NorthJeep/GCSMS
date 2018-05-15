@@ -33,10 +33,10 @@
 				$_SESSION['USER_LNAME'] = $userlname;*/
 				$_SESSION['USER_ROLE'] = $userrole;
 				if ($userrole == 'System Admin') {
-					$redirect = 'typesmanagement.php?user='.$loginname.'';
+					$redirect = 'TypeSManagement.php?user='.$loginname.'';
 				} else if ($userrole == 'Student Assistant') {
-					$redirect = 'index.php?user='.$loginname.'';
-				} else if ($userrole == 'a') {
+					$redirect = 'TypeBIndex.php?user='.$loginname.'';
+				} else if ($userrole == 'Guidance Counselor') {
 					$redirect = 'index.php?user='.$loginname.'';
 				}
 				

@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<?php
+    session_start();
+    if(!$_SESSION['Logged_In'])
+    {
+        header('Location:LogIn.php');
+        exit;
+    }
+    include('config.php')
+?>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -8,7 +17,7 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="images/favicon.png">
 
-    <title>User Management</title>
+    <title>Files and Documents</title>
 
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -19,13 +28,18 @@
     <link href="js/advanced-datatable/css/demo_page.css" rel="stylesheet" />
     <link href="js/advanced-datatable/css/demo_table.css" rel="stylesheet" />
     <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
+    <link rel="stylesheet" href="css/jquery.steps.css?1">
 
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
+           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+           <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]>
+
     <script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -35,11 +49,13 @@
     <![endif]-->
 </head>
 
-<body>	
+<body>
+
+
 <?php 
-$currentPage ='G&CSMS-User Management';
-include('TypeSHeader.php');
-include('TypeSNavBar.php');
+$currentPage ='G&CSMS-Files';
+include('TypeBHeader.php');
+include('TypeBSideBar.php');
 ?>
 <!--sidebar end-->
     <!--main content start-->
@@ -51,29 +67,27 @@ include('TypeSNavBar.php');
             <div class="col-sm-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        User Accounts
+                        Records
                         <span class="tools pull-right">
                             <a href="javascript:;" class="fa fa-chevron-down"></a>
                          </span>
                     </header>
-                    <div class="panel-body">
+                    <div class="panel-body"><!-- 
                     <div  style="padding:10px; padding-left:0px;">
-                    <button data-toggle="modal" href="#Add" class="btn btn-primary" onClick="this.form.reset()">
-                                <i class="fa fa-plus"></i>   Add</button>
-                    </div>
+                    <button data-toggle="modal" href="#Add" class="btn btn-primary">
+                                <i class="fa fa-plus"></i> Add File</button>
+                    </div> -->
                     <div class="adv-table">
                     <table  class="display table table-bordered table-striped" id="dynamic-table">
                     <thead>
                     <tr>
-                        <th>Full Name</th>
-                        <th>Role</th>
-                        <th>Username</th>
-                        <th class="hidden-phone">Action</th>
+                        <th>File Name</th>
+                        <th>Category</th>
+                        <th>Date Uploaded</th>
+                        <th class="hidden-phone">Download</th>
                     </tr>
                     </thead>
-                    <tbody>
                     <?php
-include("config.php");
 
 // Check connection
 if (mysqli_connect_errno())
@@ -81,7 +95,8 @@ if (mysqli_connect_errno())
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-  $sql= "SELECT `USER_ID`, CONCAT(`USER_FNAME`,' ',`USER_MNAME`,' ',`USER_LNAME`) AS FULLNAME,`USER_ROLE`,`USERNAME`FROM `R_USER`";
+  $sql= "SELECT `T_UPLOAD_ID`, `T_UPLOAD_NAME`,  `T_UPLOAD_CATEGORY`, `T_UPLOAD_DATE`, `T_UPLOAD_LOCATION` 
+  FROM `T_UPLOAD` WHERE T_UPLOAD_TYPE='Records' ";
 
 $query = mysqli_query($db, $sql);
     
@@ -90,33 +105,99 @@ if (!$query) {
 }
 
     /* fetch object array */
-    while ($row = mysqli_fetch_row($query)) {
-
+    while ($row = mysqli_fetch_array($query)) 
+        {
                    echo'
                     <tr>
                     <td>'.$row[1].'</td>
                     <td>'.$row[2].'</td>
                     <td>'.$row[3].'</td>
                     <td>
-                        <div class="btn-group" >
-                            <button data-toggle="modal" href="#Update" class="btn btn-primary">
-                                <i class="fa fa-plus"></i>   Update</button>
-                        </div>
+                        <a href="'.$row['T_UPLOAD_LOCATION'].'" class="confirmation text-primary" >Download</a>
                     </td>
-                </tr>
-               ';
+                </tr>';
         }
-
-
-    /* free result set */
-
-
-/* close connection */
-
-
 ?> 
-                    </tbody>
-                    </table>
+<script type="text/javascript">
+    var elems = document.getElementsByClassName('confirmation');
+    var confirmIt = function (e) {
+        if (!confirm('Are you sure?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
+</script>
+                </table>
+
+                    </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Printables
+                        <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                    <div  style="padding:10px; padding-left:0px;">
+                    </div>
+                    <div class="adv-table">
+                    <table  class="display table table-bordered table-striped" id="dynamic-table">
+                    <thead>
+                    <tr>
+                        <th>File Name</th>
+                        <th>Category</th>
+                        <th>Date Uploaded</th>
+                        <th class="hidden-phone">Download</th>
+                    </tr>
+                    </thead>
+                    <?php
+
+// Check connection
+if (mysqli_connect_errno())
+{
+    printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
+}
+  $sql= "SELECT `T_UPLOAD_ID`, `T_UPLOAD_NAME`,  `T_UPLOAD_CATEGORY`, `T_UPLOAD_DATE`, `T_UPLOAD_LOCATION` 
+  FROM `T_UPLOAD` WHERE T_UPLOAD_TYPE='Printables' ";
+
+$query = mysqli_query($db, $sql);
+    
+if (!$query) {
+    die ('SQL Error: ' . mysqli_error($db));
+}
+
+    /* fetch object array */
+    while ($row = mysqli_fetch_array($query)) 
+        {
+                   echo'
+                    <tr>
+                    <td>'.$row[1].'</td>
+                    <td>'.$row[2].'</td>
+                    <td>'.$row[3].'</td>
+                    <td>
+                        <a href="'.$row['T_UPLOAD_LOCATION'].'" class="confirmation text-primary" >Download</a>
+                    </td>
+                </tr>';
+        }
+?> 
+<script type="text/javascript">
+    var elems = document.getElementsByClassName('confirmation');
+    var confirmIt = function (e) {
+        if (!confirm('Are you sure?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
+</script>
+                </table>
 
                     </div>
                     </div>
@@ -126,86 +207,60 @@ if (!$query) {
         <!-- page end-->
         </section>
     </section>
-    <!-- VIEW MODAL -->
-   
+
+
+
+    
     <!-- Modal -->
-    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="Add" class="modal fade">
+    
+    <!-- <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="Add" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add User</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Upload a File</h4>
                 </div>
                 <div class="modal-body">
                     <br>
-                    <p>You are now adding a user account</p><br>
-                    <form action="TypeSSignUpSession.php" method="POST" >
+                    <p>You are now uploading a file</p><br>
+                    <form action="TypeAUploadSession.php" method="POST" enctype="multipart/form-data">
                     <div class="row">
+                        <div class="col-md-4 form-group">
+                            *File Name <input name="T_UPLOAD_NAME" type="text" class="form-control" placeholder="ex. Request Form" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            *First Name <input name="USER_FNAME" type="text" class="form-control" placeholder="First Name" required/>
-                        </div>
-                        <div class="col-md-4 form-group">
-                            Middle Name<input name="USER_MNAME" type="text" class="form-control" placeholder="Middle Name">
-                        </div>
-                        <div class="col-md-4 form-group">
-                            *Last Name<input name="USER_LNAME" type="text" class="form-control" placeholder="Last Name" required/>
-                        </div>
-                        <div class="col-md-4 form-group">
-                            *Role
-                            <select name="USER_ROLE" type="text" class="form-control m-bot15" required>
-                                <option value="Student Assistant">Student Assistant</option>
-                                <option value="Guidance Counselor">Guidance Counselor</option>
-                                <option value="System Admin">System Admin</option>
+                            *Category
+                            <select name="T_UPLOAD_CATEGORY" type="text" class="form-control" required>
+                                <option value="Excuse Letter">Excuse Letter</option>
+                                <option value="Request Form">Request Form</option>
+                                <option value="Referral Form">Referral Form</option>
                             </select>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Username<input name="USERNAME" type="text" class="form-control" placeholder="Username" required/>
+                            *Type
+                            <select name="T_UPLOAD_TYPE" type="text" class="form-control" required>
+                                <option value="Records">Records</option>
+                                <option value="Printables">Printables</option>
+                            </select>
                         </div>
-                        <div class="col-md-4 form-group">
-                            *Password<input name="USER_PASSWORD" type="text" class="form-control" placeholder="Password" required/>
+                        <div class="col-md-12 form-group">
+                            *File<input accept=".pdf, .doc, .docx, .xls, .xlsx" name="file" type="file" required>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-success" type="submit">Submit</button>
+                        <button type="submit" name="save" value="Upload" class="btn btn-success">Upload</button>
                         <button data-dismiss="modal" class="btn btn-cancel" type="button">Cancel</button>
                     </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Update Modal -->
+    </div> -->
+    
+    <!--MODAL-->
+    <!-- modal -->
+    <!--main content end-->
 
-    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="Update" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Edit User</h4>
-                </div>
-                <div class="modal-body">
-                    <br>
-                    <p>You are now editing a user account</p><br>
-                    
-                    <form action="TypeSUpdateSession.php?<?php echo 'ID='.$_SESSION['User_ID'].'&user='.$_SESSION['Logged_In'].''?>" method="POST" name="UpdateInfo">
-                    <div class="row">
-                        </div>
-                        <div class="col-md-4 form-group">
-                            *Username<input name="USERNAME" type="text" class="form-control" placeholder="<?php echo $username;?>" required="required"/>
-                        </div>
-                        <div class="col-md-4 form-group">
-                            *Password<input name="USER_PASSWORD" type="text" class="form-control" placeholder="<?php echo $password;?>" required="required"/>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="hidden" name="USER_ID" value="<?php echo $id;?>">
-                        <button class="btn btn-success" name="submit" value="update" type="submit" onclick="return update();">Submit</button>
-                        <button data-dismiss="modal" class="btn btn-cancel" type="button">Cancel</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 <!--right sidebar start-->
 <div class="right-sidebar">
 <div class="search-row">
