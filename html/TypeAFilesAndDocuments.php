@@ -65,6 +65,10 @@ include('sidebarnav.php');
 
         <div class="row">
             <div class="col-sm-12">
+                <div  style="padding:10px; padding-left:0px;">
+                    <button data-toggle="modal" href="#Add" class="btn btn-primary">
+                                <i class="fa fa-plus"></i> Add File</button>
+                    </div>
                 <section class="panel">
                     <header class="panel-heading">
                         Records
@@ -73,10 +77,7 @@ include('sidebarnav.php');
                          </span>
                     </header>
                     <div class="panel-body">
-                    <div  style="padding:10px; padding-left:0px;">
-                    <button data-toggle="modal" href="#Add" class="btn btn-primary">
-                                <i class="fa fa-plus"></i> Add File</button>
-                    </div>
+                    
                     <div class="adv-table">
                     <table  class="display table table-bordered table-striped" id="dynamic-table">
                     <thead>
