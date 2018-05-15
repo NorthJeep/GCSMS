@@ -1,6 +1,6 @@
 <script type="text/javascript">
 
-            // Create the chart
+            // Create the chart 
             Highcharts.chart('branches', {
                 chart: {
                     type: 'pie',
