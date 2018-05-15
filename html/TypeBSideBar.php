@@ -27,12 +27,6 @@
                         <span>Files and Documents </span>
                     </a>
                 </li>
-                <li class="sub-menu">
-                    <a <?php if($currentPage=='G&CSMS-Reports') { echo 'class="active"';} ?> href="TypeBReports.php">
-                        <i class="fa fa-bar-chart-o"></i>
-                        <span>Reports</span>
-                    </a>
-                </li>
                 
             </ul>            </div>
         <!-- sidebar menu end-->
