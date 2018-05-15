@@ -42,9 +42,9 @@
     <![endif]-->
 </head>
 <body>
-<script src="http://localhost/g&csmsfinal/html/Highcharts-6.0.7/highcharts.js"></script>
-<script src="http://localhost/g&csmsfinal/html/Highcharts-6.0.7/data.js"></script>
-<script src="http://localhost/g&csmsfinal/html/Highcharts-6.0.7/drilldown.js"></script>
+<script src="/GCSMS/html/Highcharts-6.0.7/highcharts.js"></script>
+<script src="/GCSMS/html/Highcharts-6.0.7/data.js"></script>
+<script src="/GCSMS/html/Highcharts-6.0.7/drilldown.js"></script>
 
 
 <?php 
