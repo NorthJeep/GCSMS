@@ -82,7 +82,7 @@ include('sidebarnav.php');
                             <span class='mini-stat-icon orange'><i class='fa fa-gavel'></i></span>
                             <div class='mini-stat-info'>
                                 <span>%d</span>
-                                Couseling Cases
+                                Counseling Cases
                             </div>
                         </div>
                     </section>
