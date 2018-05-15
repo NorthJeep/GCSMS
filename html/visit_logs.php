@@ -151,15 +151,7 @@ if (mysqli_connect_errno())
     <?php }
     ?>
                     </tbody>
-                    <tfoot>
-                     <tr>
-                                    <th><strong>Visit Purpose</th>
-                                    <th>Student Number</th>
-                                    <th>Student Name</th>
-                                    <th>Course/Year/Section</th>
-                                    <th>Date and Time</th>
-                                </tr>
-                    </tfoot>
+                  
                     </table>
                     </div>
                     </div>
