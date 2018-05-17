@@ -93,8 +93,8 @@ if (mysqli_connect_errno())
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-  $sql= "SELECT `T_UPLOAD_ID`, `T_UPLOAD_NAME`,  `T_UPLOAD_CATEGORY`, `T_UPLOAD_DATE`, `T_UPLOAD_LOCATION` 
-  FROM `T_UPLOAD` WHERE T_UPLOAD_TYPE='Printables' ";
+  $sql= "SELECT `UPLOAD_FILE_ID`, `UPLOAD_FILENAME`,  `UPLOAD_CATEGORY`, `UPLOAD_DATE`, `UPLOAD_FILEPATH` 
+  FROM `T_UPLOAD` WHERE UPLOAD_FILETYPE='Printables' ";
 
 $query = mysqli_query($db, $sql);
     
@@ -111,7 +111,7 @@ if (!$query) {
                     <td>'.$row[2].'</td>
                     <td>'.$row[3].'</td>
                     <td>
-                        <a href="'.$row['T_UPLOAD_LOCATION'].'" class="confirmation text-primary" >Download</a>
+                        <a href="'.$row['UPLOAD_FILEPATH'].'" class="confirmation text-primary" >Download</a>
                     </td>
                 </tr>';
         }

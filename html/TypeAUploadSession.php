@@ -17,10 +17,10 @@
     echo "File Not Supported";
     exit;
     }
-    $filename = $_POST['T_UPLOAD_NAME'];
+    $filename = $_POST['UPLOAD_FILENAME'];
     $location = "Files/" . $files;
-    $sqli = "INSERT INTO T_UPLOAD (T_UPLOAD_NAME,T_UPLOAD_CATEGORY,T_UPLOAD_DATE,T_UPLOAD_LOCATION,T_UPLOAD_TYPE) 
-    VALUES ('{$filename}','".$_POST['T_UPLOAD_CATEGORY']."',CURDATE(),'{$location}','".$_POST['T_UPLOAD_TYPE']."')";
+    $sqli = "INSERT INTO T_UPLOAD (UPLOAD_FILENAME,UPLOAD_CATEGORY,UPLOAD_DATE,UPLOAD_FILEPATH,UPLOAD_FILETYPE) 
+    VALUES ('{$filename}','".$_POST['UPLOAD_CATEGORY']."',CURDATE(),'{$location}','".$_POST['UPLOAD_FILETYPE']."')";
     $result = mysqli_query($con,$sqli);
     if ($result) {
         header('Location: TypeAFilesAndDocuments.php' . $redirect);

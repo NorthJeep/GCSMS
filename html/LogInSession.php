@@ -27,10 +27,10 @@
 				session_start();
 				$_SESSION['Logged_In'] = $username;
 				$_SESSION['User_ID'] = $userid;
-				/*$user = $_SESSION['User_ID'];
+				$user = $_SESSION['User_ID'];
 				$loginname = $_SESSION['Logged_In'];
-				$_SESSION['USER_FNAME'] = $userfname;
-				$_SESSION['USER_LNAME'] = $userlname;*/
+				// $_SESSION['USER_FNAME'] = $userfname;
+				// $_SESSION['USER_LNAME'] = $userlname;
 				$_SESSION['USER_ROLE'] = $userrole;
 				if ($userrole == 'System Admin') {
 					$redirect = 'TypeSManagement.php?user='.$loginname.'';
