@@ -52,7 +52,7 @@ if(isset($_POST['search']))
 `STUD_NO`,
 `STUD_NAME`,
 `STUD_COURSE`,
-`VISIT_DATE` FROM `t_visits`
+`VISIT_DATE` FROM `t_stud_visit`
     WHERE `VISIT_CODE`='$valueToSearch'
      ORDER BY `VISIT_DATE` DESC";
     $search_result = filterTable($query);
@@ -63,7 +63,7 @@ if(isset($_POST['search']))
 `STUD_NO`,
 `STUD_NAME`,
 `STUD_COURSE`,
-`VISIT_DATE`  FROM `t_visits` ORDER BY `VISIT_DATE` DESC";
+`VISIT_DATE`  FROM `t_stud_visit` ORDER BY `VISIT_DATE` DESC";
     $search_result = filterTable($query);
 } 
 function filterTable($query)
@@ -133,7 +133,7 @@ if (mysqli_connect_errno())
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-  $sql =  mysqli_query ($conn," SELECT * FROM `t_visits` ORDER BY VISIT_DATE DESC");
+  $sql =  mysqli_query ($conn," SELECT * FROM `t_stud_visit` ORDER BY VISIT_DATE DESC");
 
  while ($row = mysqli_fetch_assoc($search_result)) { 
         $code=$row['VISIT_CODE'];
