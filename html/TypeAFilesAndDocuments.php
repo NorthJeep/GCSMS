@@ -96,8 +96,8 @@ if (mysqli_connect_errno())
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-  $sql= "SELECT `T_UPLOAD_ID`, `T_UPLOAD_NAME`,  `T_UPLOAD_CATEGORY`, `T_UPLOAD_DATE`, `T_UPLOAD_LOCATION` 
-  FROM `T_UPLOAD` WHERE T_UPLOAD_TYPE='Records' ";
+  $sql= "SELECT `UPLOAD_FILE_ID`, `UPLOAD_FILENAME`,  `UPLOAD_CATEGORY`, `UPLOAD_DATE`, `UPLOAD_FILEPATH` 
+  FROM `T_UPLOAD` WHERE UPLOAD_FILETYPE   TYPE='Records' ";
 
 $query = mysqli_query($db, $sql);
     
@@ -114,7 +114,7 @@ if (!$query) {
                     <td>'.$row[2].'</td>
                     <td>'.$row[3].'</td>
                     <td>
-                        <a href="'.$row['T_UPLOAD_LOCATION'].'" class="confirmation text-primary" >Download</a>
+                        <a href="'.$row['UPLOAD_FILEPATH'].'" class="confirmation text-primary" >Download</a>
                     </td>
                 </tr>';
         }
@@ -166,8 +166,8 @@ if (mysqli_connect_errno())
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-  $sql= "SELECT `T_UPLOAD_ID`, `T_UPLOAD_NAME`,  `T_UPLOAD_CATEGORY`, `T_UPLOAD_DATE`, `T_UPLOAD_LOCATION` 
-  FROM `T_UPLOAD` WHERE T_UPLOAD_TYPE='Printables' ";
+  $sql= "SELECT `UPLOAD_FILE_ID`, `UPLOAD_FILENAME`,  `UPLOAD_CATEGORY`, `UPLOAD_DATE`, `UPLOAD_FILEPATH` 
+  FROM `T_UPLOAD` WHERE UPLOAD_FILETYPE='Printables' ";
 
 $query = mysqli_query($db, $sql);
     
@@ -184,7 +184,7 @@ if (!$query) {
                     <td>'.$row[2].'</td>
                     <td>'.$row[3].'</td>
                     <td>
-                        <a href="'.$row['T_UPLOAD_LOCATION'].'" class="confirmation text-primary" >Download</a>
+                        <a href="'.$row['UPLOAD_FILEPATH'].'" class="confirmation text-primary" >Download</a>
                     </td>
                 </tr>';
         }
@@ -227,11 +227,11 @@ if (!$query) {
                     <form action="TypeAUploadSession.php" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-4 form-group">
-                            *File Name <input name="T_UPLOAD_NAME" type="text" class="form-control" placeholder="ex. Request Form" required/>
+                            *File Name <input name="UPLOAD_FILENAME" type="text" class="form-control" placeholder="ex. Request Form" required/>
                         </div>
                         <div class="col-md-4 form-group">
                             *Category
-                            <select name="T_UPLOAD_CATEGORY" type="text" class="form-control" required>
+                            <select name="UPLOAD_CATEGORY" type="text" class="form-control" required>
                                 <option value="Excuse Letter">Excuse Letter</option>
                                 <option value="Request Form">Request Form</option>
                                 <option value="Referral Form">Referral Form</option>
@@ -239,7 +239,7 @@ if (!$query) {
                         </div>
                         <div class="col-md-4 form-group">
                             *Type
-                            <select name="T_UPLOAD_TYPE" type="text" class="form-control" required>
+                            <select name="UPLOAD_FILETYPE" type="text" class="form-control" required>
                                 <option value="Records">Records</option>
                                 <option value="Printables">Printables</option>
                             </select>
