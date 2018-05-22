@@ -6,6 +6,9 @@
 		header('Location:index.php');
 		exit;
 	}
+  if (isset($_GET['trial']) && $_GET['trial']='failed') {
+        echo '<script>alert("That username/password is incorrect");</script>';
+  }
 ?>
 <html lang="en">
 <head>

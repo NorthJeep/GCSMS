@@ -41,8 +41,8 @@
 
     <!--Intellisence-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
-           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
+           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
            
 
 </head>
@@ -97,9 +97,7 @@ include('sidebarnav.php');
                     <?php
 include('config.php');
 
-  $sql= "SELECT `STUD_ID` as ID, `STUD_NO`, CONCAT(`STUD_FNAME`,' ', `STUD_LNAME`) AS FULLNAME,
-        CONCAT(`STUD_COURSE`,' ',`STUD_YR_LVL`,'-',`STUD_SECTION`) AS COURSE,`STUD_STATUS`
-        FROM `r_stud_profile`WHERE STUD_STATUS='REGULAR' OR STUD_STATUS='Irregular'";
+  $sql= "SELECT * FROM student_profiling";
 
 $query = mysqli_query($db, $sql);
 
@@ -110,7 +108,7 @@ if (!$query) {
     /* fetch object array */
     while ($row = mysqli_fetch_assoc($query)) 
     {
-                $ID =$row['ID'];
+                // $ID =$row['ID'];
                 $NO =$row['STUD_NO'];
                 $FULLNAME=$row['FULLNAME'];
                 $COURSE=$row['COURSE'];
@@ -123,7 +121,7 @@ if (!$query) {
                     <td><?php echo $FULLNAME; ?></td>
                     <td><?php echo $COURSE; ?></td>
                     <td><?php echo $STATUS; ?></td>
-                    <td><button class="btn btn-primary" name="view" value="View" id="" data-toggle="modal" href="#myModal<?php echo $ID; ?>" />
+                    <td><button class="btn btn-primary action-button stud_id" name="view" value="View" data-toggle="modal" href="#myModal<?php echo $NO; ?>" />
                     <i class="fa fa-eye"> View</i></button></td>  
                </tr>
                     </tfoot>
@@ -136,7 +134,7 @@ if (!$query) {
         </section>
     </section>
                 <!-- Modal -->
-                            <div class="modal fade" id="myModal<?php echo $ID; ?>" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+                            <div class="modal fade" id="myModal<?php echo $NO; ?>" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header" style="background-color:#07847d; color:#fff">
@@ -146,15 +144,35 @@ if (!$query) {
                                         <div class="modal-body">
                                         <div class='twt-feed' style="background-color:#07847d; padding:15px;">
                                         <div class="row">
-                                            <div class="col-md-4">
-                                                <img src="images\user.ico" style=" height:140px;padding-left:10px; padding-top:10px;"></img>
+                                            <div class="col-md-4 modal-con">
+
+                                                <input type="text" class="imgText" id="stud-img-id<?php echo $NO; ?>" name="stud_img_id" style="display:none" value="<?php echo $NO;?>">
+                                                <input type="file" class="imgupload" style="display:none" accept="image/*" onchange="showMyImage(this)" name="stud_img"/> 
+                                                <?php 
+                                                    if(file_exists("images/".$NO.".png"))
+                                                    {
+                                                        echo ' <img src="images/'.$NO.'.png" alt="images\user.ico" id="img'.$NO.'" style=" height:140px;padding-left:10px; padding-top:10px;" class="OpenImg"></img>';
+                                                    }
+                                                    elseif(file_exists("images/".$NO.".jpg"))
+                                                    {
+                                                        echo ' <img src="images/'.$NO.'.jpg" alt="images\user.ico" id="img'.$NO.'" style=" height:140px;padding-left:10px; padding-top:10px;" class="OpenImg"></img>';
+                                                    }
+                                                    else
+                                                    {
+                                                        echo ' <img src="images\user.ico" alt="images\user.ico" id="img'.$NO.'" style=" height:140px;padding-left:10px; padding-top:10px;" class="OpenImg"></img>';
+                                                    }
+                                                ?>
+
+                                               
+
+
                                                 <h3><span id="FULLNAME">  <?php echo $FULLNAME?></span></h3>
                                                 <h5> <?php echo $NO; ?> </h5>
                                                 <h5> <?php echo $COURSE; ?> </h5>
                                                 Status: 
                                                 <form class="form-inline" method="POST" action="update_status.php">
                                                 <div>
-                                                <input type="text" id="status_id" name="status_id" style="display:none" value="<?php echo $ID;?>">
+                                                <input type="text" id="status_id" name="status_id" style="display:none" value="<?php echo $NO;?>">
                                                 <input type="text" id="stud_status" name="stud_status" 
                                                 class="form-control" style="width:80px" placeholder="<?php echo $STATUS; ?>" disabled> 
                                                 <button type="submit" class="btn btn-success" name="ok_status" id="ok_status" style="display:none"><i class="fa fa-check"></i>
@@ -447,22 +465,31 @@ if (!$query) {
 <script src="js/dynamic_table_init.js"></script>
 
 <script>
-    $(document).on('click', '.view_data', function(){  
-           var stud_id = $(this).attr("STUD_ID");  
-           if(stud_id != '')  
-           {  
-                $.ajax({  
-                     url:"viewprofile.php",  
-                     method:"POST",  
-                     data:{stud_id:stud_id},  
-                     success:function(data){  
-                          $('#employee_detail').html(data);  
-                          $('#dataModal').modal('show');  
-                     }  
-                });  
-           }            
+    var global_href = '';
+    var global_img_id = '';
+    var global_txt = '';
+
+    $(".stud_id").on('click', function(){  
+          
+           console.log($(this).attr("href"));
+           var modalhref = $(this).attr("href");
+           global_href = $(this).attr("href");
+           $(modalhref).find('.OpenImg').click(function(){ $(modalhref).find('.imgupload').trigger('click'); });
+           global_img_id =  $(modalhref).find('.OpenImg').attr('id');
+           global_txt =  $(modalhref).find('.imgText').attr('id');
+           // if(stud_id != '')  
+           // {  
+           //      $.ajax({  
+           //           url:"viewprofile.php",  
+           //           method:"POST",  
+           //           data:{stud_id:stud_id},  
+           //           success:function(data){  
+           //                $('#employee_detail').html(data);  
+           //                $('#dataModal').modal('show');  
+           //           }  
+           //      });  
+           // }            
       });  
- });  
 </script>
 <script>
     function EditStatus(){
@@ -472,19 +499,19 @@ if (!$query) {
     }
 </script>
 <script>
-    function showDetails(button){
-        var stud_id = button.id;
-        $.ajax ({
-            url:"viewprofile.php",
-            method:"GET",
-            data: ("stud_id":stud_id),
-            success:function(response){
-                var student = JSON.parse(response);
-                $("#FULLNAME").text(student.STUD_FNAME);
-                $("#title").text(student.STUD_FNAME);
-            }
-        });
-    }
+    // function showDetails(button){
+    //     var stud_id = button.id;
+    //     $.ajax ({
+    //         url:"viewprofile.php",
+    //         method:"GET",
+    //         data: ("stud_id":stud_id),
+    //         success:function(response){
+    //             var student = JSON.parse(response);
+    //             $("#FULLNAME").text(student.STUD_FNAME);
+    //             $("#title").text(student.STUD_FNAME);
+    //         }
+    //     });
+    // }
 </script>
 <script>
     var btn = document.getElementById('viewVisit');
@@ -499,5 +526,77 @@ btn.addEventListener('click', function() {
 });
 </script>
 
+<script>
+    // 
+    // $('.OpenImg').click(function(){ $('.imgupload').trigger('click'); });
+</script>
+
+<script>
+$(document).ready(function()
+    {
+        $(".action-button").click(function()
+        {
+            // $("#editOrdID").val($(this).closest("tbody tr").find("td:eq(0)").html());
+            // $("#editOrdTitle").val($(this).closest("tbody tr").find("td:eq(1)").html());
+
+        });
+    });
+
+
+
+function showMyImage(fileInput)
+{
+    var files = fileInput.files;
+
+    var FileName = document.getElementById(global_txt).value;
+
+    var file = fileInput.files[0];
+    var fd = new FormData();
+    fd.append('imageFile', file);
+    fd.append('filename', FileName);
+
+    $.ajax({
+            type: 'POST',
+            url: 'stud_img.php',
+            data: fd,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(data) 
+            {
+                
+            }
+        });
+
+    for (var i = 0; i < files.length; i++) 
+    { 
+        var file = files[i];
+        var imageType = /image.*/; 
+        if (!file.type.match(imageType)) 
+        {
+            continue;
+        }
+        
+        
+        // var img = document.getElementsByClassName('OpenImg'); 
+        var img = document.getElementById(global_img_id);
+        img.file = file; 
+        var reader = new FileReader();
+        reader.onload = (function(aImg) 
+        { 
+            return function(e) 
+                { 
+                
+                    aImg.src = e.target.result; 
+
+
+                }; 
+        })(img);
+        reader.readAsDataURL(file);
+    } 
+}
+</script>
+            
+</script>
 </body>
 </html>
