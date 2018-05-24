@@ -1,5 +1,5 @@
 <?php
-    $con = mysqli_connect("localhost","root","","g&csms_db");
+    include 'config.php';
     if (isset($_POST['save'])) {
     $target_dir = "Files/";
     $target_file = $target_dir . basename($_FILES["file"]["name"]);
@@ -21,7 +21,7 @@
     $location = "Files/" . $files;
     $sqli = "INSERT INTO T_UPLOAD (UPLOAD_FILENAME,UPLOAD_CATEGORY,UPLOAD_DATE,UPLOAD_FILEPATH,UPLOAD_FILETYPE) 
     VALUES ('{$filename}','".$_POST['UPLOAD_CATEGORY']."',CURDATE(),'{$location}','".$_POST['UPLOAD_FILETYPE']."')";
-    $result = mysqli_query($con,$sqli);
+    $result = mysqli_query($db,$sqli);
     if ($result) {
         header('Location: TypeAFilesAndDocuments.php' . $redirect);
     };
