@@ -73,7 +73,7 @@ include('sidebarnav.php');
         <!-- page start-->
 <?php
 
-$conn = mysqli_connect("localhost","root","","g&csms_db");
+$conn = mysqli_connect("localhost","root","","pupqcdb");
 
 // Check connection
 if (mysqli_connect_errno())
