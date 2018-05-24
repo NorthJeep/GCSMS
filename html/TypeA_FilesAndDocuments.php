@@ -68,7 +68,7 @@ include('sidebarnav.php');
                             <a href="#"><i class="fa fa-home"></i> Home</a>
                         </li>
                         <li>
-                            <a class="current" href="#"><i class="fa fa-user"></i> Files and Documents</a>
+                            <a class="current" href="#"><i class="fa fa-book"></i> Files and Documents</a>
                         </li>
                     </ul>
                 </div>

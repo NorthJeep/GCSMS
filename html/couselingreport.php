@@ -58,7 +58,7 @@ include('sidebarnav.php');
                             <a href="#"><i class="fa fa-home"></i> Home</a>
                         </li>
                         <li>
-                            <a class="current" href="#"><i class="fa fa-user"></i> Reports</a>
+                            <a class="current" href="#"><i class="fa fa-bar-chart-o"></i> Reports</a>
                         </li>
                     </ul>
                 </div>
