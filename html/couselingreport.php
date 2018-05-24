@@ -20,7 +20,7 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="images/favicon.png">
 
-    <title>G&CSMS-Counseling Service</title>
+    <title>G&CSMS-Reports</title>
 
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
