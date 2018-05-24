@@ -63,10 +63,17 @@ include('sidebarnav.php');
                                 <thead>
                                 <tr>
                                     <th hidden>Couseling ID</th>
-                                    <th>Student number</th>
-                                    <th>Student name</th>
-                                    <th>Type</th>
                                     <th>Date</th>
+                                    <th>Counseling Type</th>
+                                    <th>Appointment Type</th>
+                                    <th>Student Number</th>
+                                    <th>Student Name</th>
+                                    <th>Course</th>
+                                    <th>Approach</th>
+                                    <th>Background</th>
+                                    <th>Goals</th>
+                                    <th>Comments</th>
+                                    <th>Recommendations</th>
                                     <th id="thview">View</th>
                                 </tr>
                                 </thead>
@@ -81,18 +88,66 @@ if (mysqli_connect_errno())
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-  $sql =  mysqli_query ($conn," SELECT `COUNSELING_ID`,`STUD_NO`,`STUD_NAME`,`COUNSELING_TYPE_CODE`,`COUNS_DATE` 
-            FROM `t_counseling`");?>
+  $sql =  mysqli_query ($conn," SELECT
+  `c`.`Couns_CODE` AS `COUNSELING_CODE`,
+  DATE_FORMAT(`c`.`Couns_DATE`, '%W %M %d %Y') AS `COUNSELING_DATE`,
+  `c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
+  `c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,
+  `s`.`Stud_NO` AS `STUD_NO`,
+  CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
+  CONCAT(
+      `s`.`Stud_COURSE`,
+      ' ',
+      `s`.`Stud_YEAR_LEVEL`,
+      ' - ',
+      `s`.`Stud_SECTION`
+  ) AS `COURSE`,
+  (
+  SELECT
+      GROUP_CONCAT(`a`.`Couns_APPROACH` SEPARATOR ', ')
+  FROM
+      `t_couns_approach` `a`
+  WHERE
+      (
+          `a`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`
+      )
+) AS `COUNSELING_APPROACH`,
+`c`.`Couns_BACKGROUND` AS `COUNSELING_BG`,
+`c`.`Couns_GOALS` AS `GOALS`,
+`c`.`Couns_COMMENT` AS `COUNS_COMMENT`,
+`c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION`
+FROM
+  (
+      (
+          `t_counseling` `c`
+      JOIN `t_couns_details` `cd` ON
+          (
+              (
+                  `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
+              )
+          )
+      )
+  JOIN `r_stud_profile` `s` ON
+      ((`s`.`Stud_NO` = `cd`.`Stud_NO`))
+  ) WHERE DATE(`c`.`Couns_DATE`) = MONTH(NOW()) ");?>
 
 <?php while ($row = mysqli_fetch_array($sql)) { ?>
         <tbody>
         <tr>
-            <td hidden><?php echo $row['COUNSELING_ID']; ?></td>
+            <td hidden><?php echo $row['COUNSELING_CODE']; ?></td>
+            <td><?php echo $row['COUNSELING_DATE']; ?></td>
+            <td><?php echo $row['COUNSELING_TYPE']; ?></td>
+            <td><?php echo $row['APPOINTMENT_TYPE']; ?></td>
             <td><?php echo $row['STUD_NO']; ?></td>
             <td><?php echo $row['STUD_NAME']; ?></td>
-            <td><?php echo $row['COUNSELING_TYPE_CODE']; ?></td>
-            <td><?php echo $row['COUNS_DATE']; ?></td>
-            <td><a href="counseling_report_review.php?view=<?php echo $row['COUNSELING_ID']; ?>"  id="viewbutton" type="button" class ="btn btn-success" >view</a></td>
+            <td><?php echo $row['COURSE']; ?></td>
+            <td><?php echo $row['COUNSELING_APPROACH']; ?></td>
+            <td><?php echo $row['COUNSELING_BG']; ?></td>
+            <td><?php echo $row['GOALS']; ?></td>
+            <td><?php echo $row['COUNS_COMMENT']; ?></td>
+            <td><?php echo $row['RECOMMENDATION']; ?></td>
+            
+            <td><a href="counseling_report_review.php?view=<?php echo $row['COUNSELING_CODE']; ?>"  id="viewbutton" type="button" class ="btn btn-success" >view</a></td>
         </tr>
     <?php }?>
     </tbody>
