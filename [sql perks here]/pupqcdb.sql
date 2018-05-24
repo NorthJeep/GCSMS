@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2018 at 11:12 AM
+-- Generation Time: May 24, 2018 at 12:10 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.6
 
@@ -84,7 +84,7 @@ values (
     bdate,
 	cityAddress,
 	provAddress,
-	tellNo,
+	telNo,
 	mobNo,
 	email,
 	birthplace,
@@ -478,7 +478,79 @@ CREATE TABLE `r_stud_profile` (
 --
 
 INSERT INTO `r_stud_profile` (`Stud_ID`, `Stud_NO`, `Stud_FNAME`, `Stud_MNAME`, `Stud_LNAME`, `Stud_GENDER`, `Stud_COURSE`, `Stud_YEAR_LEVEL`, `Stud_SECTION`, `Stud_BIRTH_DATE`, `Stud_CITY_ADDRESS`, `Stud_PROVINCIAL_ADDRESS`, `Stud_TELEPHONE_NO`, `Stud_MOBILE_NO`, `Stud_EMAIL`, `Stud_BIRTH_PLACE`, `Stud_STATUS`, `Stud_DATE_MOD`, `Stud_DATE_ADD`, `Stud_DATE_DEACTIVATE`, `Stud_DISPLAY_STATUS`) VALUES
-(1, '2015-00138-CM-0', 'Oliver', NULL, 'Gabriel', 'Male', 'BSIT', 3, '1', '1998-11-16', '24-D4 Oliveros Drive Apolonio Samson Quezon City', 'Not Specify', 'Not Specify', 'Not Specify', 'Not Specify', 'Not Specify', 'Regular', '2018-05-21 14:11:00', '2018-05-21 14:11:00', NULL, 'Active');
+(1, '2015-00138-CM-0', 'Oliver', NULL, 'Gabriel', 'Male', 'BSIT', 3, '1', '1998-11-16', '24-D4 Oliveros Drive Apolonio Samson Quezon City', 'Not Specify', 'Not Specify', 'Not Specify', 'Not Specify', 'Not Specify', 'Regular', '2018-05-21 14:11:00', '2018-05-21 14:11:00', NULL, 'Active'),
+(2, '2017-00056', 'jennifer', '', 'sanchez', 'Female', 'BSIT', 3, '1', '2015-11-11', 'Quezon City', 'Ilocos', '12479837', '98765432187', 'jen@gmail.com', 'Ilocos', 'Regular', '2018-05-24 18:03:12', '2018-05-24 18:03:12', NULL, 'Active'),
+(3, '2017-00057', 'Bryan ', '', 'Cortesiano', 'Female', 'BSIT', 3, '1', '2015-11-12', 'Commonwealth', 'Agusan', '12479837', '90453567245', 'bry@gmail.com', 'Agusan', 'Regular', '2018-05-24 18:03:12', '2018-05-24 18:03:12', NULL, 'Active'),
+(4, '2017-00058', 'Francheska', 'Nillo', 'Ronquillo', 'Female', 'BSIT', 3, '1', '2015-11-13', 'Caloocan', 'Zambales', '12479837', '98765423465', 'ches@gmail.com', 'Zambales', 'Regular', '2018-05-24 18:03:12', '2018-05-24 18:03:12', NULL, 'Active'),
+(5, '2017-00059', 'Lkier', '', 'FFT', 'Female', 'BSIT', 3, '1', '2015-11-14', 'Fairview', 'Nueva Ecija', '12479837', '92929292923', 'fft@gmail.com', 'Nueva Ecija', 'Regular', '2018-05-24 18:03:13', '2018-05-24 18:03:13', NULL, 'Active'),
+(6, '2017-00060', 'Gfoor', '', 'CSSS', 'Female', 'BSIT', 3, '1', '2015-11-15', 'Novaliches', 'Bataan', '12479837', '98765432187', 'csss@gmail.com', 'Bataan', 'Regular', '2018-05-24 18:03:13', '2018-05-24 18:03:13', NULL, 'Active'),
+(7, '2017-00061', 'BFeg', '', 'POPOP', 'Female', 'BSIT', 3, '1', '2015-11-16', 'Bulacan', 'Tarlac', '12479837', '90453567245', 'popop@gmail.com', 'Tarlac', 'Regular', '2018-05-24 18:03:13', '2018-05-24 18:03:13', NULL, 'Active'),
+(8, '2017-00062', 'Rhea', '', 'Rios', 'Female', 'BSIT', 3, '1', '2015-11-17', 'Navotas', 'Cabanatuan', '12479837', '98765423465', 'rhe@gmail.com', 'Cabanatuan', 'Regular', '2018-05-24 18:03:13', '2018-05-24 18:03:13', NULL, 'Active'),
+(9, '2017-00063', 'Jean', '', 'Ramos', 'Female', 'BSIT', 3, '1', '2015-11-18', 'Valenzuela', 'Baguio', '12479837', '92929292923', 'jea@gmail.com', 'Baguio', 'Regular', '2018-05-24 18:03:13', '2018-05-24 18:03:13', NULL, 'Active'),
+(10, '2017-00064', 'Melissa', '', 'Delos', 'Female', 'BSIT', 3, '1', '2015-11-19', 'Quezon City', 'Cebu', '12479837', '98765432187', 'mel@gmail.com', 'Cebu', 'Regular', '2018-05-24 18:03:14', '2018-05-24 18:03:14', NULL, 'Active'),
+(11, '2017-00065', 'Nikki', '', 'Castilo', 'Female', 'BSIT', 3, '1', '2015-11-20', 'Commonwealth', 'Samar', '12479837', '90453567245', 'nik@gmail.com', 'Samar', 'Regular', '2018-05-24 18:03:14', '2018-05-24 18:03:14', NULL, 'Active'),
+(12, '2017-00066', 'Mami', '', 'Alejandria', 'Female', 'BSIT', 3, '1', '2015-11-21', 'Caloocan', 'Leyte', '12479837', '98765423465', 'mam@gmail.com', 'Leyte', 'Regular', '2018-05-24 18:03:14', '2018-05-24 18:03:14', NULL, 'Active'),
+(13, '2017-0067', 'Jade', '', 'Ago', 'Female', 'BSIT', 3, '1', '2015-11-22', 'Fairview', 'Palawan', '12479837', '92929292923', 'jad@gmail.com', 'Palawan', 'Regular', '2018-05-24 18:03:14', '2018-05-24 18:03:14', NULL, 'Active'),
+(14, '2017-0068', 'Kate', '', 'De Jesus', 'Female', 'BSIT', 3, '1', '2015-10-01', 'Novaliches', 'Aklan', '12479837', '98765432187', 'de jesus@gfail.cof', 'Aklan', 'Regular', '2018-05-24 18:03:14', '2018-05-24 18:03:14', NULL, 'Active'),
+(15, '2017-0069', 'Andrea', '', 'Villajuan', 'Female', 'BSIT', 3, '1', '2015-10-02', 'Bulacan', 'Marinduque', '12479837', '90453567245', 'and@gmail.com', 'Marinduque', 'Regular', '2018-05-24 18:03:14', '2018-05-24 18:03:14', NULL, 'Active'),
+(16, '2017-0070', 'Teri', '', 'De Castro', 'Female', 'BSIT', 3, '1', '2015-10-03', 'Navotas', 'Ilocos', '12479837', '98765423465', 'de castro@gfail.cof', 'Navotas', 'Regular', '2018-05-24 18:03:14', '2018-05-24 18:03:14', NULL, 'Active'),
+(17, '2017-0071', 'Adrian', '', 'Geronilla', 'Female', 'BSIT', 3, '1', '2015-10-04', 'Valenzuela', 'Agusan', '12479837', '92929292923', 'adr@gmail.com', 'Valenzuela', 'Regular', '2018-05-24 18:03:14', '2018-05-24 18:03:14', NULL, 'Active'),
+(18, '2017-0072', 'Sharlyn', '', 'Lee', 'Female', 'BSIT', 3, '1', '2015-10-05', 'Quezon City', 'Zambales', '12479837', '98765432187', 'sha@gmail.com', 'Quezon City', 'Regular', '2018-05-24 18:03:14', '2018-05-24 18:03:14', NULL, 'Active'),
+(19, '2017-0073', 'Dave', '', 'Dogayo', 'Female', 'BSIT', 3, '1', '2015-10-06', 'Commonwealth', 'Nueva Ecija', '12479837', '90453567245', 'dav@gmail.com', 'Commonwealth', 'Regular', '2018-05-24 18:03:14', '2018-05-24 18:03:14', NULL, 'Active'),
+(20, '2017-0074', 'Edward', 'Rito', 'Alfante', 'Female', 'BSIT', 3, '1', '2015-10-07', 'Caloocan', 'Bataan', '12479837', '98765423465', 'edward@gmail.com', 'Caloocan', 'Regular', '2018-05-24 18:03:14', '2018-05-24 18:03:14', NULL, 'Active'),
+(21, '2017-0075', 'Christan', 'ocampo', 'Tan', 'Female', 'BSIT', 3, '1', '2015-10-08', 'Fairview', 'Tarlac', '12479837', '92929292923', 'stan@gmail.com', 'Fairview', 'Regular', '2018-05-24 18:03:14', '2018-05-24 18:03:14', NULL, 'Active'),
+(22, '2017-0076', 'John', 'Duran', 'Albis', 'Female', 'BSIT', 3, '1', '2015-10-09', 'Novaliches', 'Cabanatuan', '12479837', '98765432187', 'john@gmail.com', 'Novaliches', 'Regular', '2018-05-24 18:03:14', '2018-05-24 18:03:14', NULL, 'Active'),
+(23, '2017-0077', 'Luis', '', 'Lantape', 'Female', 'BSIT', 3, '1', '2015-10-10', 'Bulacan', 'Baguio', '12479837', '90453567245', 'lui@gmail.com', 'Bulacan', 'Regular', '2018-05-24 18:03:14', '2018-05-24 18:03:14', NULL, 'Active'),
+(24, '2017-0078', 'Romeo', '', 'Gonzales', 'Female', 'BSIT', 3, '1', '2015-10-11', 'Navotas', 'Cebu', '12479837', '98765423465', 'rom@gmail.com', 'Navotas', 'Regular', '2018-05-24 18:03:15', '2018-05-24 18:03:15', NULL, 'Active'),
+(25, '2017-0079', 'Vin', '', 'Dacuag', 'Female', 'BSIT', 3, '1', '2015-10-12', 'Valenzuela', 'Samar', '12479837', '92929292923', 'vin@gmail.com', 'Valenzuela', 'Regular', '2018-05-24 18:03:15', '2018-05-24 18:03:15', NULL, 'Active'),
+(26, '2017-0080', 'Lynne', '', 'Roque', 'Female', 'BSIT', 3, '1', '2015-10-13', 'Quezon City', 'Leyte', '12479837', '98765432187', 'lyn@gmail.com', 'Quezon City', 'Regular', '2018-05-24 18:03:15', '2018-05-24 18:03:15', NULL, 'Active'),
+(27, '2017-0081', 'Sam', '', 'Foley', 'Female', 'BSIT', 3, '1', '2015-10-14', 'Commonwealth', 'Palawan', '12479837', '90453567245', 'sam@gmail.com', 'Commonwealth', 'Regular', '2018-05-24 18:03:15', '2018-05-24 18:03:15', NULL, 'Active'),
+(28, '2017-0082', 'Hannah', '', 'Panaderya', 'Female', 'BSIT', 3, '1', '2015-10-15', 'Caloocan', 'Aklan', '12479837', '98765423465', 'han@gmail.com', 'Caloocan', 'Regular', '2018-05-24 18:03:15', '2018-05-24 18:03:15', NULL, 'Active'),
+(29, '2017-0083', 'Jessica', '', 'Jones', 'Female', 'BSIT', 3, '1', '2015-10-16', 'Fairview', 'Marinduque', '12479837', '92929292923', 'jes@gmail.com', 'Fairview', 'Regular', '2018-05-24 18:03:15', '2018-05-24 18:03:15', NULL, 'Active'),
+(30, '2017-0084', 'Ryan', '', 'Talledo', 'Female', 'BSIT', 3, '1', '2015-10-17', 'Novaliches', 'Ilocos', '12479837', '98765432187', 'rya@gmail.com', 'Novaliches', 'Regular', '2018-05-24 18:03:15', '2018-05-24 18:03:15', NULL, 'Active'),
+(31, '2017-0085', 'Jasmine', '', 'Flores', 'Female', 'BSIT', 3, '1', '2015-10-18', 'Bulacan', 'Agusan', '12479837', '90453567245', 'jas@gmail.com', 'Bulacan', 'Regular', '2018-05-24 18:03:15', '2018-05-24 18:03:15', NULL, 'Active'),
+(32, '2017-0086', 'Nikki', '', 'Arias', 'Female', 'BSIT', 3, '1', '2015-10-19', 'Navotas', 'Zambales', '12479837', '98765423465', 'nik@gmail.com', 'Navotas', 'Regular', '2018-05-24 18:03:15', '2018-05-24 18:03:15', NULL, 'Active'),
+(33, '2017-0087', 'Remmuel', 'Baniqued', 'Yapit', 'Female', 'BSIT', 3, '1', '2015-10-20', 'Valenzuela', 'Nueva Ecija', '12479837', '92929292923', 'u@gmail.com', 'Valenzuela', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(34, '2017-0088', 'Rina', 'Villanueva', 'Ong', 'Female', 'BSIT', 3, '1', '2015-10-21', 'Quezon City', 'Bataan', '12479837', '98765432187', 'rina@gmail.com', 'Quezon City', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(35, '2017-0089', 'Vallery', 'Santos', 'Melchor', 'Female', 'BSIT', 3, '1', '2015-10-22', 'Commonwealth', 'Tarlac', '12479837', '90453567245', 'e@gmail.com', 'Commonwealth', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(36, '2017-0090', 'Patrick', 'Moon', 'Bituin', 'Female', 'BSIT', 3, '1', '2015-10-23', 'Caloocan', 'Cabanatuan', '12479837', '98765423465', 'i@gmail.com', 'Caloocan', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(37, '2017-0091', 'Ina', 'Yan', 'Chan', 'Female', 'BSIT', 3, '1', '2015-10-24', 'Fairview', 'Baguio', '12479837', '92929292923', 'pat@gmail.com', 'Zambales', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(38, '2017-0092', 'Princess', 'Galicia', 'Kane', 'Female', 'BSIT', 3, '1', '2015-10-25', 'Novaliches', 'Cebu', '12479837', '98765432187', 'cess@gmail.com', 'Nueva Ecija', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(39, '2017-0093', 'Jasey', 'Flores', 'Rae', 'Female', 'BSIT', 3, '1', '2015-09-01', 'Bulacan', 'Samar', '12479837', '90453567245', 'jasey@gmail.com', 'Bataan', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(40, '2017-0094', 'Nadine ', 'Marquez', 'Fabray', 'Female', 'BSIT', 3, '1', '2015-09-02', 'Navotas', 'Leyte', '12479837', '98765423465', 'nadz@gmail.com', 'Tarlac', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(41, '2017-0095', 'Estella ', 'Dela Cruz', 'Baltimore', 'Female', 'BSIT', 3, '1', '2015-09-03', 'Valenzuela', 'Palawan', '12479837', '92929292923', 'estella@gmail.com', 'Cabanatuan', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(42, '2017-0096', 'Jim', 'Oracion', 'Santos', 'Female', 'BSIT', 3, '1', '2015-09-04', 'Dela Costa', 'Aklan', '12479837', '98765432187', 'jiim@gmail.com', 'Baguio', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(43, '2017-0097', 'Celine', 'Mallari', 'Balboa', 'Female', 'BSIT', 3, '1', '2015-09-05', 'Fairview', 'Marinduque', '12479837', '90453567245', 'celine@gmail.com', 'Cebu', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(44, '2017-00156', 'Mayhem', '', 'Lim', 'Female', 'BSIT', 2, '1', '2015-09-06', 'Fairview', 'Marinduque', '12479837', '90453567245', 'mayhem@gmail.com', 'Samar', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(45, '2017-00157', 'Teresita', '', 'Cortez', 'Female', 'BSIT', 2, '1', '2015-09-07', 'Novaliches', 'Ilocos', '12479837', '98765423465', 'teresita@gmail.com', 'Leyte', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(46, '2017-00158', 'Melba', '', 'Venga', 'Female', 'BSIT', 2, '1', '2015-09-08', 'Bulacan', 'Agusan', '12479837', '92929292923', 'melba@gmail.com', 'Valenzuela', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(47, '2017-00159', 'Cynthia', '', 'Bolzinco', 'Female', 'BSIT', 2, '1', '2015-09-09', 'Navotas', 'Zambales', '12479837', '98765432187', 'cynthia@gmail.com', 'Quezon City', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(48, '2017-00160', 'Celia', '', 'Perez', 'Female', 'BSIT', 2, '1', '2015-09-10', 'Valenzuela', 'Nueva Ecija', '12479837', '90453567245', 'celia@gmail.com', 'Commonwealth', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(49, '2017-00161', 'Francisco', '', 'Mendez', 'Female', 'BSIT', 2, '1', '2015-09-11', 'Quezon City', 'Bataan', '12479837', '98765423465', 'francisco@gmail.com', 'Caloocan', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(50, '2017-00162', 'Jeremiah', '', 'Rollo', 'Female', 'BSIT', 2, '1', '2015-09-12', 'Commonwealth', 'Tarlac', '12479837', '92929292923', 'jeremiah@gmail.com', 'Fairview', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(51, '2017-00163', 'John Michael', '', 'Roque', 'Female', 'BSIT', 2, '1', '2015-09-13', 'Caloocan', 'Cabanatuan', '12479837', '98765432187', 'john michael@gmail.com', 'Novaliches', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(52, '2017-00164', 'Michael', '', 'Delima', 'Female', 'BSIT', 2, '1', '2015-09-14', 'Fairview', 'Baguio', '12479837', '90453567245', 'michael@gmail.com', 'Bulacan', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(53, '2017-00165', 'Francis', '', 'Makalintal', 'Female', 'BSIT', 2, '1', '2015-09-15', 'Novaliches', 'Cebu', '12479837', '98765423465', 'francis@gmail.com', 'Navotas', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(54, '2017-00166', 'Joanne', '', 'Dimagiba', 'Female', 'BSIT', 2, '1', '2015-09-16', 'Bulacan', 'Samar', '12479837', '92929292923', 'joanne@gmail.com', 'Cebu', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(55, '2017-00145', 'Noel', '', 'Bulos', 'Female', 'BSIT', 2, '1', '2015-09-17', 'Navotas', 'Leyte', '12479837', '98765432187', 'noel@gmail.com', 'Samar', 'Regular', '2018-05-24 18:03:16', '2018-05-24 18:03:16', NULL, 'Active'),
+(56, '2017-00169', 'Joselito', '', 'Dimal', 'Female', 'BSIT', 2, '1', '2015-09-18', 'Valenzuela', 'Palawan', '12479837', '90453567245', 'joselito@gmail.com', 'Leyte', 'Regular', '2018-05-24 18:03:17', '2018-05-24 18:03:17', NULL, 'Active'),
+(57, '2017-00171', 'Robert', '', 'Zorco', 'Female', 'BSIT', 2, '1', '2015-09-19', 'Dela Costa', 'Aklan', '12234567', '98765432187', 'robert@gmail.com', 'Palawan', 'Regular', '2018-05-24 18:03:17', '2018-05-24 18:03:17', NULL, 'Active'),
+(58, '2017-00140', 'Bianca', '', 'Ezra', 'Female', 'BSIT', 2, '1', '2015-09-20', 'Fairview', 'Marinduque', '12345678', '90453567245', 'bianca@gmail.com', 'Aklan', 'Regular', '2018-05-24 18:03:17', '2018-05-24 18:03:17', NULL, 'Active'),
+(59, '2017-00256', 'Donna', '', 'Pelo', 'Female', 'BSIT', 1, '1', '2015-09-21', 'Quezon City', 'Ilocos', '12479837', '98765432187', 'donna@gmail.com', 'Ilocos', 'Regular', '2018-05-24 18:03:17', '2018-05-24 18:03:17', NULL, 'Active'),
+(60, '2017-00257', 'Brian', '', 'Ortiz', 'Female', 'BSIT', 1, '1', '2015-09-22', 'Commonwealth', 'Agusan', '12479837', '90453567245', 'brian@gmail.com', 'Agusan', 'Regular', '2018-05-24 18:03:17', '2018-05-24 18:03:17', NULL, 'Active'),
+(61, '2017-00258', 'Bianca', '', 'Yeti', 'Female', 'BSIT', 1, '1', '2015-09-23', 'Caloocan', 'Zambales', '12479837', '98765423465', 'bianca@gmail.com', 'Zambales', 'Regular', '2018-05-24 18:03:17', '2018-05-24 18:03:17', NULL, 'Active'),
+(62, '2017-00259', 'Gino', '', 'Heusaff', 'Female', 'BSIT', 1, '1', '2015-09-24', 'Fairview', 'Nueva Ecija', '12479837', '92929292923', 'gino@gmail.com', 'Nueva Ecija', 'Regular', '2018-05-24 18:03:17', '2018-05-24 18:03:17', NULL, 'Active'),
+(63, '2017-00260', 'Selena', '', 'Ayres', 'Female', 'BSIT', 1, '1', '2015-09-25', 'Novaliches', 'Bataan', '12479837', '98765432187', 'selena@gmail.com', 'Bataan', 'Regular', '2018-05-24 18:03:17', '2018-05-24 18:03:17', NULL, 'Active'),
+(64, '2017-00261', 'Joroz', '', 'Abott', 'Female', 'BSIT', 1, '1', '2015-09-26', 'Bulacan', 'Tarlac', '12479837', '90453567245', 'joroz@gmail.com', 'Tarlac', 'Regular', '2018-05-24 18:03:17', '2018-05-24 18:03:17', NULL, 'Active'),
+(65, '2017-00262', 'Alexandra', '', 'Myers', 'Female', 'BSIT', 1, '1', '2015-07-12', 'Navotas', 'Cabanatuan', '12479837', '98765423465', 'alexandra@gmail.com', 'Cabanatuan', 'Regular', '2018-05-24 18:03:17', '2018-05-24 18:03:17', NULL, 'Active'),
+(66, '2017-00263', 'Christian', '', 'Dimatulac', 'Female', 'BSIT', 1, '1', '2015-07-13', 'Valenzuela', 'Baguio', '12479837', '92929292923', 'christian@gmail.com', 'Baguio', 'Regular', '2018-05-24 18:03:17', '2018-05-24 18:03:17', NULL, 'Active'),
+(67, '2017-00264', 'Christene', '', 'Maykapa', 'Female', 'BSIT', 1, '1', '2015-07-14', 'Quezon City', 'Cebu', '12479837', '98765432187', 'christene@gmail.com', 'Cebu', 'Regular', '2018-05-24 18:03:17', '2018-05-24 18:03:17', NULL, 'Active'),
+(68, '2017-00265', 'Polo', '', 'Woods', 'Female', 'BSIT', 1, '1', '2015-07-15', 'Commonwealth', 'Samar', '12479837', '90453567245', 'polo@gmail.com', 'Samar', 'Regular', '2018-05-24 18:03:17', '2018-05-24 18:03:17', NULL, 'Active'),
+(69, '2017-00266', 'Lara', '', 'Agbayani', 'Female', 'BSIT', 1, '1', '2015-07-16', 'Caloocan', 'Leyte', '12479837', '98765423465', 'lara@gmail.com', 'Leyte', 'Regular', '2018-05-24 18:03:17', '2018-05-24 18:03:17', NULL, 'Active'),
+(70, '2017-00245', 'Cholo', '', 'Abuang', 'Female', 'BSIT', 1, '1', '2015-07-17', 'Fairview', 'Palawan', '12479837', '92929292923', 'cholo@gmail.com', 'Palawan', 'Regular', '2018-05-24 18:03:17', '2018-05-24 18:03:17', NULL, 'Active'),
+(71, '2017-00269', 'Venice', '', 'Bocasan', 'Female', 'BSIT', 1, '1', '2015-07-18', 'Novaliches', 'Aklan', '12479837', '98765432187', 'venice@gmail.com', 'Aklan', 'Regular', '2018-05-24 18:03:17', '2018-05-24 18:03:17', NULL, 'Active'),
+(72, '2017-00271', 'Xavier', '', 'Guipit', 'Female', 'BSIT', 1, '1', '2015-07-19', 'Bulacan', 'Marinduque', '12479837', '90453567245', 'xavier@gmail.com', 'Marinduque', 'Regular', '2018-05-24 18:03:17', '2018-05-24 18:03:17', NULL, 'Active'),
+(73, '2017-00240', 'Zara', '', 'Sawit', 'Female', 'BSIT', 1, '1', '2015-07-20', 'Navotas', 'Ilocos', '12479837', '98765423465', 'zara@gmail.com', 'Navotas', 'Regular', '2018-05-24 18:03:17', '2018-05-24 18:03:17', NULL, 'Active');
 
 -- --------------------------------------------------------
 
@@ -1034,7 +1106,7 @@ ALTER TABLE `r_stud_educ_background`
 -- AUTO_INCREMENT for table `r_stud_profile`
 --
 ALTER TABLE `r_stud_profile`
-  MODIFY `Stud_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Stud_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 --
 -- AUTO_INCREMENT for table `r_upload_category`
 --
