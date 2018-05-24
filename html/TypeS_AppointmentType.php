@@ -1,14 +1,13 @@
 <?php
-    
+
     include ('config.php');
 
     if(isset($_POST['insert']))
     {
         
-        $name = $_POST['approachName'];
-        $desc = $_POST['approachDesc'];
+        $type = $_POST['appointment'];
 
-        $query = "INSERT INTO `r_couns_approach`(`Couns_APPROACH`, `Couns_APPROACH_DESC`) VALUES ('$name','$desc')";
+        $query = "INSERT INTO `r_couns_appointment_type`(`Appmnt_TYPE`) VALUES ('$type')";
 
         $result = mysqli_query($db, $query);
 
@@ -24,31 +23,27 @@
         mysqli_close($db);
     }
 
-    if (isset($_POST['edit'])) 
-    {
-        $id = $_POST['Id'];
-        $nature = $_POST['nature'];
-        $desc = $_POST['desc'];
-
-        $updatequery = "UPDATE r_couns_approach SET Couns_APPROACH = '$nature', Couns_APPROACH_DESC = '$desc' WHERE Couns_APPROACH_ID = $id";
-                                        
-        mysqli_query($db, $updatequery);
-    }
-
     if (isset($_POST['deactivate'])) 
     {
-        $id = $_POST['caId'];
+        $id = $_POST['apId'];
         $updatequery = "";
 
         if ($_POST['stat'] == 'Active') {
-            $updatequery = "UPDATE r_couns_approach SET Couns_APPROACH_STAT = 'Inactive' WHERE Couns_APPROACH_ID = $id";
+            $updatequery = "UPDATE r_couns_appointment_type SET Appmnt_STAT = 'Inactive' WHERE Appmnt_ID = $id";
         } else {
-            $updatequery = "UPDATE r_couns_approach SET Couns_APPROACH_STAT = 'Active' WHERE Couns_APPROACH_ID = $id";
+            $updatequery = "UPDATE r_couns_appointment_type SET Appmnt_STAT = 'Active' WHERE Appmnt_ID = $id";
         }
                                         
         mysqli_query($db, $updatequery);
     }
 
+    if (isset($_POST['edit'])) {
+
+        $id = $_POST['apId'];
+        $type = $_POST['apType'];
+        $updatequery = "UPDATE r_couns_appointment_type SET Appmnt_TYPE = '$type' WHERE Appmnt_ID = $id";
+        mysqli_query($db,$updatequery);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +56,7 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="images/favicon.png">
 
-    <title>Nature of the Case</title>
+    <title>G&CSMS-Appointment Type</title>
 
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -87,67 +82,12 @@
 </head>
 
 <body>
+<?php 
+$currentPage ='G&CSMS-System Configurations';
+include('TypeS_Header.php');
+include('TypeS_Sidebar.php');
+?>
 
-<section id="container" >
-<!--header start-->
-<header class="header fixed-top clearfix">
-<!--logo start-->
-<div class="brand">
-
-    <a href="index.html" class="logo">
-        <img src="images/logogcsms.png" alt="">
-    </a>
-</div>
-<!--logo end-->
-
-
-<div class="top-nav clearfix">
-    <!--search & user info start-->
-    <ul class="nav pull-right top-menu">
-        <li>
-            <input type="text" class="form-control search" placeholder=" Search">
-        </li>
-        <!-- user login dropdown start-->
-        <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <img alt="" src="images/avatar1_small.jpg">
-                <span class="username">John Doe</span>
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu extended logout">
-                <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                <li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
-            </ul>
-        </li>
-        <!-- user login dropdown end -->
-    </ul>
-    <!--search & user info end-->
-</div>
-</header>
-<!--header end-->
-<aside>
-    <div id="sidebar" class="nav-collapse">
-        <!-- sidebar menu start-->            <div class="leftside-navigation">
-            <ul class="sidebar-menu" id="nav-accordion">
-            <li class="sub-menu">
-                <a href="javascript:;">
-                    <i class="fa fa-laptop"></i>
-                    <span>System Configurations</span>
-                </a>
-                <ul class="sub">
-                    <li><a href="GCSMS_VisitType.php">Visit Type</a></li>
-                    <li><a href="GCSMS_AppointmentType.php">Appointment Type</a></li>
-                    <li><a href="GCSMS_CounselingType.php">Counseling Type</a></li>
-                    <li><a href="GCSMS_CounselingApproach.php">Nature of the Case</a></li>
-                    <li><a href="GCSMS_Remarks.php">Remarks</a></li>
-                    <li><a href="GCSMS_CivilStatus.php">Civil Status</a></li>
-                </ul>
-            </li>
-        </ul></div>        
-<!-- sidebar menu end-->
-    </div>
-</aside>
 <!--sidebar end-->
     <!--main content start-->
     <section id="main-content">
@@ -158,17 +98,15 @@
             <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Nature of the Case
+                            Appointment Type
                         </header>
                         <div class="panel-body">
                             <div class="position-center">
-                                <form action="GCSMS_CounselingApproach.php" method="POST">
+                                <form action="GCSMS_AppointmentType.php" method="POST">
                                     <div class="form-group">
                                         <br>
-                                        <label for="approachName">Approach Name</label>
-                                        <input type="text" class="form-control" name="approachName" required>
-                                        <label for="approachDesc">Description</label>
-                                        <input type="text" class="form-control" name="approachDesc" required>
+                                        <label for="appointment">Appointment Type</label>
+                                        <input type="text" class="form-control" name="appointment" required>
                                     </div>
                                     <button type="submit" class="btn btn-info" name="insert">Save</button>
                                 </form>
@@ -190,40 +128,37 @@
                         <thead>
                             <tr>
                                 <th class="hidden">ID</th>
-                                <th>Nature of the Case</th>
-                                <th>Description</th>
-                                <th>Status</th>
+                                <th>Appointment Type</th>
+                                <th>Appointment Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="appmnt">
                             <?php
                                 include ('config.php');
 
-                                $sql = "SELECT * FROM `r_couns_approach`";
+                                $sql = "SELECT * FROM `r_couns_appointment_type`";
                                 $records = mysqli_query($db,$sql);
 
-                                while ($approach = mysqli_fetch_assoc($records)) 
+                                while ($appmnt = mysqli_fetch_assoc($records)) 
                                 {
-                                    $Id = $approach['Couns_APPROACH_ID'];
-                                    $Capproach = $approach['Couns_APPROACH'];
-                                    $apDesc = $approach['Couns_APPROACH_DESC'];
-                                    $apStat = $approach['Couns_APPROACH_STAT'];
+                                    $apId = $appmnt['Appmnt_ID'];
+                                    $apType = $appmnt['Appmnt_TYPE'];
+                                    $status = $appmnt['Appmnt_STAT']; 
                             ?>
 
                             <tr>
-                                <td class="hidden"> <?php echo $Id; ?> </td>
-                                <td> <?php echo $Capproach; ?> </td>
-                                <td> <?php echo $apDesc; ?> </td>
-                                <td> <?php echo $apStat; ?> </td>
+                                <td class="hidden"> <?php echo $apId; ?> </td>
+                                <td> <?php echo $apType; ?> </td>
+                                <td> <?php echo $status; ?> </td>
                                 <td class="center">
-                                    <a data-toggle="modal" class="btn btn-info" href="#UpdateModal<?php echo $Id; ?>"><i class="fa fa-pencil-square-o" name="edit"></i></a>
-                                    <a data-toggle="modal" class="btn btn-danger delete" href="#deactivateModal<?php echo $Id; ?>"><i class="fa fa-check"></i></a>
+                                    <a data-toggle="modal" class="btn btn-info" href="#UpdateModal<?php echo $apId; ?>"><i class="fa fa-pencil-square-o" name="edit"></i></a>
+                                    <a data-toggle="modal" class="btn btn-danger delete" href="#deactivateModal<?php echo $apId; ?>"><i class="fa fa-check"></i></a>
                                 </td>
                             </tr>
 
                             <!--Update Modal-->
-                            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="UpdateModal<?php echo $Id; ?>" class="modal fade">
+                            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="UpdateModal<?php echo $apId; ?>" class="modal fade">
                                 <div class="modal-dialog" style="width: 40%;">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -234,15 +169,11 @@
                                             <form role="form" method="POST">
                                                 <div class="hidden">
                                                     <label>ID</label>
-                                                    <input class="form-control" name="Id" value="<?php echo $Id ?>">                           
+                                                    <input class="form-control" name="apId" value="<?php echo $apId ?>">                           
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Nature of the Case</label>
-                                                    <input class="form-control" name="nature" value="<?php echo $Capproach ?>">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Description</label>
-                                                    <input class="form-control" name="desc" value="<?php echo $apDesc ?>">
+                                                    <label>Appointment Type</label>
+                                                    <input class="form-control" name="apType" value="<?php echo $apType ?>">
                                                 </div>
                                                 <br><br>
                                                 <div style="margin-left: 70%">
@@ -257,7 +188,7 @@
                             <!--end of update-->
 
                             <!--deactivate/activate modal-->
-                            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="deactivateModal<?php echo $Id; ?>" class="modal fade">
+                            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="deactivateModal<?php echo $apId; ?>" class="modal fade">
                                 <div class="modal-dialog" style="width: 30%;">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -267,8 +198,8 @@
                                         <div class="modal-body">
                                             <form role="form" method="POST">
                                                 <div class="hidden">
-                                                    <input name="caId" value="<?php echo $Id ?>">
-                                                    <input name="stat" value="<?php echo $apStat ?>">
+                                                    <input name="apId" value="<?php echo $apId ?>">
+                                                    <input name="stat" value="<?php echo $status ?>">
                                                 </div>
                                                 <br>  
                                                 <label style="margin-left: 15%;">You are about to deactivate / activate</label><br>
@@ -287,7 +218,6 @@
                             <?php
                                 }
                             ?>
-
                         </tbody>
                     </table>
                     </div>
@@ -363,8 +293,6 @@
 
 <!--dynamic table initialization -->
 <script src="js/dynamic_table_init.js"></script>
-
-
 
 </body>
 </html>

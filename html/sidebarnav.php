@@ -32,7 +32,7 @@
                     </a>
                 </li>
                 <li>
-                    <a <?php if($currentPage=='G&CSMS-Files') { echo 'class="active"';} ?> href="TypeAFilesAndDocuments.php">
+                    <a <?php if($currentPage=='G&CSMS-Files') { echo 'class="active"';} ?> href="TypeA_FilesAndDocuments.php">
                         <i class="fa fa-book"></i>
                         <span>Files and Documents </span>
                     </a>

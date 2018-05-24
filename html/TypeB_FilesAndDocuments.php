@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<?php
+    session_start();
+    if(!$_SESSION['Logged_In'])
+    {
+        header('Location:LogIn.php');
+        exit;
+    }
+    include('config.php')
+?>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -8,7 +17,7 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="images/favicon.png">
 
-    <title>G&CSMS-Visit Logs</title>
+    <title>Files and Documents</title>
 
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -19,13 +28,18 @@
     <link href="js/advanced-datatable/css/demo_page.css" rel="stylesheet" />
     <link href="js/advanced-datatable/css/demo_table.css" rel="stylesheet" />
     <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
+    <link rel="stylesheet" href="css/jquery.steps.css?1">
 
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
+           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+           <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]>
+
     <script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -36,48 +50,17 @@
 </head>
 
 <body>
-<body>
+
+
 <?php 
-$currentPage ='G&CSMS-Visits';
-include('TypeBHeader.php');
-include('TypeBSideBar.php');
-
-
-if(isset($_POST['search']))
-{
-    $valueToSearch = $_POST['filter'];
-    // search in all table columns
-    // using concat mysql function
-    $query = "SELECT `VISIT_CODE`,
-`STUD_NO`,
-`STUD_NAME`,
-`STUD_COURSE`,
-`VISIT_DATE` FROM `t_stud_visits`
-    WHERE `VISIT_CODE`='$valueToSearch'
-     ORDER BY `VISIT_DATE` DESC";
-    $search_result = filterTable($query);
-    
-}
- else {
-    $query = "SELECT `VISIT_CODE`,
-`STUD_NO`,
-`STUD_NAME`,
-`STUD_COURSE`,
-`VISIT_DATE`  FROM `t_stud_visits` ORDER BY `VISIT_DATE` DESC";
-    $search_result = filterTable($query);
-} 
-function filterTable($query)
-{
-    $db = mysqli_connect('localhost','root','','g&csms_db');
-    $filter_Result = mysqli_query($db, $query);
-    return $filter_Result;
-}
+$currentPage ='G&CSMS-Files';
+include('TypeB_Header.php');
+include('TypeB_SideBar.php');
 ?>
 <!--sidebar end-->
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
-        <!-- page start-->
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumbs-alt">
@@ -85,47 +68,36 @@ function filterTable($query)
                             <a href="#"><i class="fa fa-home"></i> Home</a>
                         </li>
                         <li>
-                            <a class="current" href="#"><i class="fa fa-sign-in"></i> Visit-Logs</a>
+                            <a class="current" href="#"><i class="fa fa-sign-in"></i> Files and Documents</a>
                         </li>
                     </ul>
                 </div>
             </div>
+        <!-- page start-->
+
         <div class="row">
             <div class="col-sm-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Visit Logs
+                        Printables
+                        <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                         </span>
                     </header>
                     <div class="panel-body">
-                    <div class="col-md-6" style="padding-left:0px">
-                    <form action="TypeBVisitLogs.php" method="POST">
-                        <div class="row">
-                        <div class="col-md-6">
-                        <select name="filter" class="form-control input-sm m-bot4">
-                            <option value="Excuse">Excuse Letter</option>
-                                        <option value="Clearance">Clearance</option>
-                                        <option value="CoC">Certificate of Candidancy</option>
-                        </select>
-                        </div>
-                        <button class="btn btn-info btn-sm" name="search"><i class="fa fa-mail-forward"></i></button>
-                        </div>
-                    </form></div>
-                    <br><br><br>
+                    <div  style="padding:10px; padding-left:0px;">
+                    </div>
                     <div class="adv-table">
                     <table  class="display table table-bordered table-striped" id="dynamic-table">
                     <thead>
-                                <tr>
-                                    <th><strong>Visit Purpose</th>
-                                    <th>Student Number</th>
-                                    <th>Student Name</th>
-                                    <th>Course/Year/Section</th>
-                                    <th>Date and Time</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                        <?php
-
-$conn = mysqli_connect("localhost","root","","g&csms_db");
+                    <tr>
+                        <th>File Name</th>
+                        <th>Category</th>
+                        <th>Date Uploaded</th>
+                        <th class="hidden-phone">Download</th>
+                    </tr>
+                    </thead>
+                    <?php
 
 // Check connection
 if (mysqli_connect_errno())
@@ -133,35 +105,102 @@ if (mysqli_connect_errno())
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-  $sql =  mysqli_query ($conn," SELECT * FROM `t_stud_visits` ORDER BY VISIT_DATE DESC");
+  $sql= "SELECT `UPLOAD_FILE_ID`, `UPLOAD_FILENAME`,  `UPLOAD_CATEGORY`, `UPLOAD_DATE`, `UPLOAD_FILEPATH` 
+  FROM `T_UPLOAD` WHERE UPLOAD_FILETYPE='Printables' ";
 
- while ($row = mysqli_fetch_assoc($search_result)) { 
-        $code=$row['VISIT_CODE'];
-        $no=$row['STUD_NO'];
-        $name=$row['STUD_NAME'];
-        $course=$row['STUD_COURSE'];
-        $date=$row['VISIT_DATE']; ?>
-        <tr>
-            <td><strong><?php echo $code; ?></td>
-            <td><?php echo $no; ?></td>
-            <td><?php echo $name; ?></td>
-            <td><?php echo $course; ?></td>
-            <td><?php echo $date; ?></td>
-            </tr>
-    <?php }
-    ?>
-                    </tbody>
-                    </table>
+$query = mysqli_query($db, $sql);
+    
+if (!$query) {
+    die ('SQL Error: ' . mysqli_error($db));
+}
+
+    /* fetch object array */
+    while ($row = mysqli_fetch_array($query)) 
+        {
+                   echo'
+                    <tr>
+                    <td>'.$row[1].'</td>
+                    <td>'.$row[2].'</td>
+                    <td>'.$row[3].'</td>
+                    <td>
+                        <a href="'.$row['UPLOAD_FILEPATH'].'" class="confirmation text-primary" >Download</a>
+                    </td>
+                </tr>';
+        }
+?> 
+<script type="text/javascript">
+    var elems = document.getElementsByClassName('confirmation');
+    var confirmIt = function (e) {
+        if (!confirm('Are you sure?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
+</script>
+                </table>
+
                     </div>
                     </div>
                 </section>
             </div>
         </div>
-        
         <!-- page end-->
         </section>
     </section>
+
+
+
+    
+    <!-- Modal -->
+    
+    <!-- <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="Add" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Upload a File</h4>
+                </div>
+                <div class="modal-body">
+                    <br>
+                    <p>You are now uploading a file</p><br>
+                    <form action="TypeAUploadSession.php" method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            *File Name <input name="T_UPLOAD_NAME" type="text" class="form-control" placeholder="ex. Request Form" required/>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            *Category
+                            <select name="T_UPLOAD_CATEGORY" type="text" class="form-control" required>
+                                <option value="Excuse Letter">Excuse Letter</option>
+                                <option value="Request Form">Request Form</option>
+                                <option value="Referral Form">Referral Form</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            *Type
+                            <select name="T_UPLOAD_TYPE" type="text" class="form-control" required>
+                                <option value="Records">Records</option>
+                                <option value="Printables">Printables</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            *File<input accept=".pdf, .doc, .docx, .xls, .xlsx" name="file" type="file" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" name="save" value="Upload" class="btn btn-success">Upload</button>
+                        <button data-dismiss="modal" class="btn btn-cancel" type="button">Cancel</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    
+    <!--MODAL-->
+    <!-- modal -->
     <!--main content end-->
+
 <!--right sidebar start-->
 <div class="right-sidebar">
 <div class="search-row">
@@ -211,9 +250,9 @@ if (mysqli_connect_errno())
                 </div>
                 <div class="side-mini-graph">
                     <div class="p-collection">
-                        <span class="pc-epie-chart" data-percent="45">
-                        <span class="percent"></span>
-                        </span>
+						<span class="pc-epie-chart" data-percent="45">
+						<span class="percent"></span>
+						</span>
                     </div>
                 </div>
             </div>

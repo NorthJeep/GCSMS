@@ -5,10 +5,10 @@
     if(isset($_POST['insert']))
     {
         
-        $type = $_POST['remarksType'];
-        $details = $_POST['remarksDetails'];
+        $name = $_POST['approachName'];
+        $desc = $_POST['approachDesc'];
 
-        $query = "INSERT INTO `r_remarks`(`Remarks_TYPE`, `Remarks_DESC`) VALUES ('$type','$details')";
+        $query = "INSERT INTO `r_couns_approach`(`Couns_APPROACH`, `Couns_APPROACH_DESC`) VALUES ('$name','$desc')";
 
         $result = mysqli_query($db, $query);
 
@@ -24,30 +24,31 @@
         mysqli_close($db);
     }
 
-    if (isset($_POST['edit'])) {
+    if (isset($_POST['edit'])) 
+    {
+        $id = $_POST['Id'];
+        $nature = $_POST['nature'];
+        $desc = $_POST['desc'];
 
-        $rid = $_POST['rId'];
-        $rType = $_POST['rType'];
-        $rDesc = $_POST['rDesc'];
-
-        $updatequery = "UPDATE r_remarks SET Remarks_TYPE = '$rType', Remarks_DESC = '$rDesc' WHERE Remarks_ID = $rid";
-
-        mysqli_query($db,$updatequery);
+        $updatequery = "UPDATE r_couns_approach SET Couns_APPROACH = '$nature', Couns_APPROACH_DESC = '$desc' WHERE Couns_APPROACH_ID = $id";
+                                        
+        mysqli_query($db, $updatequery);
     }
 
     if (isset($_POST['deactivate'])) 
     {
-        $id = $_POST['rId'];
+        $id = $_POST['caId'];
         $updatequery = "";
 
         if ($_POST['stat'] == 'Active') {
-            $updatequery = "UPDATE r_remarks SET Remarks_STAT = 'Inactive' WHERE Remarks_ID = $id";
+            $updatequery = "UPDATE r_couns_approach SET Couns_APPROACH_STAT = 'Inactive' WHERE Couns_APPROACH_ID = $id";
         } else {
-            $updatequery = "UPDATE r_remarks SET Remarks_STAT = 'Active' WHERE Remarks_ID = $id";
+            $updatequery = "UPDATE r_couns_approach SET Couns_APPROACH_STAT = 'Active' WHERE Couns_APPROACH_ID = $id";
         }
                                         
         mysqli_query($db, $updatequery);
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +61,7 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="images/favicon.png">
 
-    <title>Remarks</title>
+    <title>G&CSMS-Nature of the Case</title>
 
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -86,67 +87,12 @@
 </head>
 
 <body>
+<?php 
+$currentPage ='G&CSMS-System Configurations';
+include('TypeS_Header.php');
+include('TypeS_Sidebar.php');
+?>
 
-<section id="container" >
-<!--header start-->
-<header class="header fixed-top clearfix">
-<!--logo start-->
-<div class="brand">
-
-    <a href="index.html" class="logo">
-        <img src="images/logogcsms.png" alt="">
-    </a>
-</div>
-<!--logo end-->
-
-
-<div class="top-nav clearfix">
-    <!--search & user info start-->
-    <ul class="nav pull-right top-menu">
-        <li>
-            <input type="text" class="form-control search" placeholder=" Search">
-        </li>
-        <!-- user login dropdown start-->
-        <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <img alt="" src="images/avatar1_small.jpg">
-                <span class="username">John Doe</span>
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu extended logout">
-                <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                <li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
-            </ul>
-        </li>
-        <!-- user login dropdown end -->
-    </ul>
-    <!--search & user info end-->
-</div>
-</header>
-<!--header end-->
-<aside>
-    <div id="sidebar" class="nav-collapse">
-        <!-- sidebar menu start-->            <div class="leftside-navigation">
-            <ul class="sidebar-menu" id="nav-accordion">
-            <li class="sub-menu">
-                <a href="javascript:;">
-                    <i class="fa fa-laptop"></i>
-                    <span>System Configurations</span>
-                </a>
-                <ul class="sub">
-                    <li><a href="GCSMS_VisitType.php">Visit Type</a></li>
-                    <li><a href="GCSMS_AppointmentType.php">Appointment Type</a></li>
-                    <li><a href="GCSMS_CounselingType.php">Counseling Type</a></li>
-                    <li><a href="GCSMS_CounselingApproach.php">Nature of the Case</a></li>
-                    <li><a href="GCSMS_Remarks.php">Remarks</a></li>
-                    <li><a href="GCSMS_CivilStatus.php">Civil Status</a></li>
-                </ul>
-            </li>
-        </ul></div>        
-<!-- sidebar menu end-->
-    </div>
-</aside>
 <!--sidebar end-->
     <!--main content start-->
     <section id="main-content">
@@ -157,17 +103,17 @@
             <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Remarks
+                            Nature of the Case
                         </header>
                         <div class="panel-body">
                             <div class="position-center">
-                                <form action="GCSMS_Remarks.php" method="POST">
+                                <form action="GCSMS_CounselingApproach.php" method="POST">
                                     <div class="form-group">
                                         <br>
-                                        <label for="remarksType">Remarks Type</label>
-                                        <input type="text" class="form-control" name="remarksType" required>
-                                        <label for="remarksDetails">Remarks Details</label>
-                                        <input type="text" class="form-control" name="remarksDetails" required>
+                                        <label for="approachName">Approach Name</label>
+                                        <input type="text" class="form-control" name="approachName" required>
+                                        <label for="approachDesc">Description</label>
+                                        <input type="text" class="form-control" name="approachDesc" required>
                                     </div>
                                     <button type="submit" class="btn btn-info" name="insert">Save</button>
                                 </form>
@@ -185,43 +131,44 @@
                     <div class="panel-body">
                     <div class="adv-table">                    
                     <table  class="display table table-bordered table-striped" id="dynamic-table">
-                       
+                        
                         <thead>
                             <tr>
                                 <th class="hidden">ID</th>
-                                <th>Remarks Type</th>
-                                <th>Remarks Description</th>
+                                <th>Nature of the Case</th>
+                                <th>Description</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
+                            <?php
                                 include ('config.php');
-                                
-                                $sql = "SELECT * FROM `r_remarks`";
+
+                                $sql = "SELECT * FROM `r_couns_approach`";
                                 $records = mysqli_query($db,$sql);
 
-                                while ($remarks = mysqli_fetch_assoc($records)) 
+                                while ($approach = mysqli_fetch_assoc($records)) 
                                 {
-                                    $rId = $remarks['Remarks_ID'];
-                                    $rType = $remarks['Remarks_TYPE'];
-                                    $rDesc = $remarks['Remarks_DESC'];
-                                    $rStatus = $remarks['Remarks_STAT'];
+                                    $Id = $approach['Couns_APPROACH_ID'];
+                                    $Capproach = $approach['Couns_APPROACH'];
+                                    $apDesc = $approach['Couns_APPROACH_DESC'];
+                                    $apStat = $approach['Couns_APPROACH_STAT'];
                             ?>
+
                             <tr>
-                                <td class="hidden"> <?php echo $rId; ?> </td>
-                                <td> <?php echo $rType?> </td>
-                                <td> <?php echo $rDesc; ?> </td>
-                                <td> <?php echo $rStatus; ?> </td>
+                                <td class="hidden"> <?php echo $Id; ?> </td>
+                                <td> <?php echo $Capproach; ?> </td>
+                                <td> <?php echo $apDesc; ?> </td>
+                                <td> <?php echo $apStat; ?> </td>
                                 <td class="center">
-                                    <a data-toggle="modal" class="btn btn-info" href="#UpdateModal<?php echo $rId; ?>"><i class="fa fa-pencil-square-o" name="edit"></i></a>
-                                    <a data-toggle="modal" class="btn btn-danger delete" href="#deactivateModal<?php echo $rId; ?>"><i class="fa fa-check"></i></a>
+                                    <a data-toggle="modal" class="btn btn-info" href="#UpdateModal<?php echo $Id; ?>"><i class="fa fa-pencil-square-o" name="edit"></i></a>
+                                    <a data-toggle="modal" class="btn btn-danger delete" href="#deactivateModal<?php echo $Id; ?>"><i class="fa fa-check"></i></a>
                                 </td>
                             </tr>
 
                             <!--Update Modal-->
-                            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="UpdateModal<?php echo $rId; ?>" class="modal fade">
+                            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="UpdateModal<?php echo $Id; ?>" class="modal fade">
                                 <div class="modal-dialog" style="width: 40%;">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -231,16 +178,16 @@
                                         <div class="modal-body">
                                             <form role="form" method="POST">
                                                 <div class="hidden">
-                                                    <label>Remarks ID</label>
-                                                    <input class="form-control" name="rId" value="<?php echo $rId ?>">                           
+                                                    <label>ID</label>
+                                                    <input class="form-control" name="Id" value="<?php echo $Id ?>">                           
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Remarks Type</label>
-                                                    <input class="form-control" name="rType" value="<?php echo $rType ?>">
-                                                </div>                                                
+                                                    <label>Nature of the Case</label>
+                                                    <input class="form-control" name="nature" value="<?php echo $Capproach ?>">
+                                                </div>
                                                 <div class="form-group">
-                                                    <label>Remarks Description</label>
-                                                    <input class="form-control" name="rDesc" value="<?php echo $rDesc ?>">
+                                                    <label>Description</label>
+                                                    <input class="form-control" name="desc" value="<?php echo $apDesc ?>">
                                                 </div>
                                                 <br><br>
                                                 <div style="margin-left: 70%">
@@ -255,7 +202,7 @@
                             <!--end of update-->
 
                             <!--deactivate/activate modal-->
-                            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="deactivateModal<?php echo $rId; ?>" class="modal fade">
+                            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="deactivateModal<?php echo $Id; ?>" class="modal fade">
                                 <div class="modal-dialog" style="width: 30%;">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -265,8 +212,8 @@
                                         <div class="modal-body">
                                             <form role="form" method="POST">
                                                 <div class="hidden">
-                                                    <input name="rId" value="<?php echo $rId ?>">
-                                                    <input name="stat" value="<?php echo $rStatus ?>">
+                                                    <input name="caId" value="<?php echo $Id ?>">
+                                                    <input name="stat" value="<?php echo $apStat ?>">
                                                 </div>
                                                 <br>  
                                                 <label style="margin-left: 15%;">You are about to deactivate / activate</label><br>
@@ -294,6 +241,7 @@
             </div>
         </div>
         <!-- page end-->
+
         </section>
     </section>
     <!--main content end-->

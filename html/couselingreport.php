@@ -51,6 +51,18 @@ include('sidebarnav.php');
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
+          <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumbs-alt">
+                        <li>
+                            <a href="#"><i class="fa fa-home"></i> Home</a>
+                        </li>
+                        <li>
+                            <a class="current" href="#"><i class="fa fa-user"></i> Reports</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
                 <div class="row">
             <div class="col-sm-12">
                 <section class="panel">

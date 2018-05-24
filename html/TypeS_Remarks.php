@@ -1,13 +1,14 @@
 <?php
-
+    
     include ('config.php');
 
     if(isset($_POST['insert']))
     {
         
-        $type = $_POST['appointment'];
+        $type = $_POST['remarksType'];
+        $details = $_POST['remarksDetails'];
 
-        $query = "INSERT INTO `r_couns_appointment_type`(`Appmnt_TYPE`) VALUES ('$type')";
+        $query = "INSERT INTO `r_remarks`(`Remarks_TYPE`, `Remarks_DESC`) VALUES ('$type','$details')";
 
         $result = mysqli_query($db, $query);
 
@@ -23,26 +24,29 @@
         mysqli_close($db);
     }
 
+    if (isset($_POST['edit'])) {
+
+        $rid = $_POST['rId'];
+        $rType = $_POST['rType'];
+        $rDesc = $_POST['rDesc'];
+
+        $updatequery = "UPDATE r_remarks SET Remarks_TYPE = '$rType', Remarks_DESC = '$rDesc' WHERE Remarks_ID = $rid";
+
+        mysqli_query($db,$updatequery);
+    }
+
     if (isset($_POST['deactivate'])) 
     {
-        $id = $_POST['apId'];
+        $id = $_POST['rId'];
         $updatequery = "";
 
         if ($_POST['stat'] == 'Active') {
-            $updatequery = "UPDATE r_couns_appointment_type SET Appmnt_STAT = 'Inactive' WHERE Appmnt_ID = $id";
+            $updatequery = "UPDATE r_remarks SET Remarks_STAT = 'Inactive' WHERE Remarks_ID = $id";
         } else {
-            $updatequery = "UPDATE r_couns_appointment_type SET Appmnt_STAT = 'Active' WHERE Appmnt_ID = $id";
+            $updatequery = "UPDATE r_remarks SET Remarks_STAT = 'Active' WHERE Remarks_ID = $id";
         }
                                         
         mysqli_query($db, $updatequery);
-    }
-
-    if (isset($_POST['edit'])) {
-
-        $id = $_POST['apId'];
-        $type = $_POST['apType'];
-        $updatequery = "UPDATE r_couns_appointment_type SET Appmnt_TYPE = '$type' WHERE Appmnt_ID = $id";
-        mysqli_query($db,$updatequery);
     }
 ?>
 
@@ -56,7 +60,7 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="images/favicon.png">
 
-    <title>Appointment Type</title>
+    <title>G&CSMS-Remarks</title>
 
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -82,67 +86,12 @@
 </head>
 
 <body>
+<?php 
+$currentPage ='G&CSMS-System Configurations';
+include('TypeS_Header.php');
+include('TypeS_Sidebar.php');
+?>
 
-<section id="container" >
-<!--header start-->
-<header class="header fixed-top clearfix">
-<!--logo start-->
-<div class="brand">
-
-    <a href="index.html" class="logo">
-        <img src="images/logogcsms.png" alt="">
-    </a>
-</div>
-<!--logo end-->
-
-
-<div class="top-nav clearfix">
-    <!--search & user info start-->
-    <ul class="nav pull-right top-menu">
-        <li>
-            <input type="text" class="form-control search" placeholder=" Search">
-        </li>
-        <!-- user login dropdown start-->
-        <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <img alt="" src="images/avatar1_small.jpg">
-                <span class="username">John Doe</span>
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu extended logout">
-                <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                <li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
-            </ul>
-        </li>
-        <!-- user login dropdown end -->
-    </ul>
-    <!--search & user info end-->
-</div>
-</header>
-<!--header end-->
-<aside>
-    <div id="sidebar" class="nav-collapse">
-        <!-- sidebar menu start-->            <div class="leftside-navigation">
-            <ul class="sidebar-menu" id="nav-accordion">
-            <li class="sub-menu">
-                <a href="javascript:;">
-                    <i class="fa fa-laptop"></i>
-                    <span>System Configurations</span>
-                </a>
-                <ul class="sub">
-                    <li><a href="GCSMS_VisitType.php">Visit Type</a></li>
-                    <li><a href="GCSMS_AppointmentType.php">Appointment Type</a></li>
-                    <li><a href="GCSMS_CounselingType.php">Counseling Type</a></li>
-                    <li><a href="GCSMS_CounselingApproach.php">Nature of the Case</a></li>
-                    <li><a href="GCSMS_Remarks.php">Remarks</a></li>
-                    <li><a href="GCSMS_CivilStatus.php">Civil Status</a></li>
-                </ul>
-            </li>
-        </ul></div>        
-<!-- sidebar menu end-->
-    </div>
-</aside>
 <!--sidebar end-->
     <!--main content start-->
     <section id="main-content">
@@ -153,15 +102,17 @@
             <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Appointment Type
+                            Remarks
                         </header>
                         <div class="panel-body">
                             <div class="position-center">
-                                <form action="GCSMS_AppointmentType.php" method="POST">
+                                <form action="GCSMS_Remarks.php" method="POST">
                                     <div class="form-group">
                                         <br>
-                                        <label for="appointment">Appointment Type</label>
-                                        <input type="text" class="form-control" name="appointment" required>
+                                        <label for="remarksType">Remarks Type</label>
+                                        <input type="text" class="form-control" name="remarksType" required>
+                                        <label for="remarksDetails">Remarks Details</label>
+                                        <input type="text" class="form-control" name="remarksDetails" required>
                                     </div>
                                     <button type="submit" class="btn btn-info" name="insert">Save</button>
                                 </form>
@@ -179,41 +130,43 @@
                     <div class="panel-body">
                     <div class="adv-table">                    
                     <table  class="display table table-bordered table-striped" id="dynamic-table">
-                        
+                       
                         <thead>
                             <tr>
                                 <th class="hidden">ID</th>
-                                <th>Appointment Type</th>
-                                <th>Appointment Status</th>
+                                <th>Remarks Type</th>
+                                <th>Remarks Description</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody id="appmnt">
-                            <?php
+                        <tbody>
+                            <?php 
                                 include ('config.php');
-
-                                $sql = "SELECT * FROM `r_couns_appointment_type`";
+                                
+                                $sql = "SELECT * FROM `r_remarks`";
                                 $records = mysqli_query($db,$sql);
 
-                                while ($appmnt = mysqli_fetch_assoc($records)) 
+                                while ($remarks = mysqli_fetch_assoc($records)) 
                                 {
-                                    $apId = $appmnt['Appmnt_ID'];
-                                    $apType = $appmnt['Appmnt_TYPE'];
-                                    $status = $appmnt['Appmnt_STAT']; 
+                                    $rId = $remarks['Remarks_ID'];
+                                    $rType = $remarks['Remarks_TYPE'];
+                                    $rDesc = $remarks['Remarks_DESC'];
+                                    $rStatus = $remarks['Remarks_STAT'];
                             ?>
-
                             <tr>
-                                <td class="hidden"> <?php echo $apId; ?> </td>
-                                <td> <?php echo $apType; ?> </td>
-                                <td> <?php echo $status; ?> </td>
+                                <td class="hidden"> <?php echo $rId; ?> </td>
+                                <td> <?php echo $rType?> </td>
+                                <td> <?php echo $rDesc; ?> </td>
+                                <td> <?php echo $rStatus; ?> </td>
                                 <td class="center">
-                                    <a data-toggle="modal" class="btn btn-info" href="#UpdateModal<?php echo $apId; ?>"><i class="fa fa-pencil-square-o" name="edit"></i></a>
-                                    <a data-toggle="modal" class="btn btn-danger delete" href="#deactivateModal<?php echo $apId; ?>"><i class="fa fa-check"></i></a>
+                                    <a data-toggle="modal" class="btn btn-info" href="#UpdateModal<?php echo $rId; ?>"><i class="fa fa-pencil-square-o" name="edit"></i></a>
+                                    <a data-toggle="modal" class="btn btn-danger delete" href="#deactivateModal<?php echo $rId; ?>"><i class="fa fa-check"></i></a>
                                 </td>
                             </tr>
 
                             <!--Update Modal-->
-                            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="UpdateModal<?php echo $apId; ?>" class="modal fade">
+                            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="UpdateModal<?php echo $rId; ?>" class="modal fade">
                                 <div class="modal-dialog" style="width: 40%;">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -223,12 +176,16 @@
                                         <div class="modal-body">
                                             <form role="form" method="POST">
                                                 <div class="hidden">
-                                                    <label>ID</label>
-                                                    <input class="form-control" name="apId" value="<?php echo $apId ?>">                           
+                                                    <label>Remarks ID</label>
+                                                    <input class="form-control" name="rId" value="<?php echo $rId ?>">                           
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Appointment Type</label>
-                                                    <input class="form-control" name="apType" value="<?php echo $apType ?>">
+                                                    <label>Remarks Type</label>
+                                                    <input class="form-control" name="rType" value="<?php echo $rType ?>">
+                                                </div>                                                
+                                                <div class="form-group">
+                                                    <label>Remarks Description</label>
+                                                    <input class="form-control" name="rDesc" value="<?php echo $rDesc ?>">
                                                 </div>
                                                 <br><br>
                                                 <div style="margin-left: 70%">
@@ -243,7 +200,7 @@
                             <!--end of update-->
 
                             <!--deactivate/activate modal-->
-                            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="deactivateModal<?php echo $apId; ?>" class="modal fade">
+                            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="deactivateModal<?php echo $rId; ?>" class="modal fade">
                                 <div class="modal-dialog" style="width: 30%;">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -253,8 +210,8 @@
                                         <div class="modal-body">
                                             <form role="form" method="POST">
                                                 <div class="hidden">
-                                                    <input name="apId" value="<?php echo $apId ?>">
-                                                    <input name="stat" value="<?php echo $status ?>">
+                                                    <input name="rId" value="<?php echo $rId ?>">
+                                                    <input name="stat" value="<?php echo $rStatus ?>">
                                                 </div>
                                                 <br>  
                                                 <label style="margin-left: 15%;">You are about to deactivate / activate</label><br>
@@ -273,6 +230,7 @@
                             <?php
                                 }
                             ?>
+
                         </tbody>
                     </table>
                     </div>
@@ -281,7 +239,6 @@
             </div>
         </div>
         <!-- page end-->
-
         </section>
     </section>
     <!--main content end-->
@@ -348,6 +305,8 @@
 
 <!--dynamic table initialization -->
 <script src="js/dynamic_table_init.js"></script>
+
+
 
 </body>
 </html>

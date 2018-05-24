@@ -54,7 +54,7 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="images/favicon.png">
 
-    <title>Civil Status</title>
+    <title>G&CSMS-Civil Status</title>
 
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -80,68 +80,12 @@
 </head>
 
 <body>
-<!-- <?php include 'GCSMS_modals.php'?> -->
+<?php 
+$currentPage ='G&CSMS-System Configurations';
+include('TypeS_Header.php');
+include('TypeS_Sidebar.php');
+?>
 
-<section id="container" >
-<!--header start-->
-<header class="header fixed-top clearfix">
-<!--logo start-->
-<div class="brand">
-
-    <a href="index.html" class="logo">
-        <img src="images/logogcsms.png" alt="">
-    </a>
-</div>
-<!--logo end-->
-
-
-<div class="top-nav clearfix">
-    <!--search & user info start-->
-    <ul class="nav pull-right top-menu">
-        <li>
-            <input type="text" class="form-control search" placeholder=" Search">
-        </li>
-        <!-- user login dropdown start-->
-        <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <img alt="" src="images/avatar1_small.jpg">
-                <span class="username">John Doe</span>
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu extended logout">
-                <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                <li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
-            </ul>
-        </li>
-        <!-- user login dropdown end -->
-    </ul>
-    <!--search & user info end-->
-</div>
-</header>
-<!--header end-->
-<aside>
-    <div id="sidebar" class="nav-collapse">
-        <!-- sidebar menu start-->            <div class="leftside-navigation">
-            <ul class="sidebar-menu" id="nav-accordion">
-            <li class="sub-menu">
-                <a href="javascript:;">
-                    <i class="fa fa-laptop"></i>
-                    <span>System Configurations</span>
-                </a>
-                <ul class="sub">
-                    <li><a href="GCSMS_VisitType.php">Visit Type</a></li>
-                    <li><a href="GCSMS_AppointmentType.php">Appointment Type</a></li>
-                    <li><a href="GCSMS_CounselingType.php">Counseling Type</a></li>
-                    <li><a href="GCSMS_CounselingApproach.php">Counseling Approach</a></li>
-                    <li><a href="GCSMS_Remarks.php">Remarks</a></li>
-                    <li><a href="GCSMS_CivilStatus.php">Civil Status</a></li>
-                </ul>
-            </li>
-        </ul></div>        
-<!-- sidebar menu end-->
-    </div>
-</aside>
 <!--sidebar end-->
     <!--main content start-->
     <section id="main-content">
