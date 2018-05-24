@@ -246,7 +246,7 @@ if (!$query) {
                 <div class="modal-body">
                     <br>
                     <p>You are now uploading a file</p><br>
-                    <form action="TypeAUploadSession.php" method="POST" enctype="multipart/form-data">
+                    <form action="TypeA_UploadSession.php" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-4 form-group">
                             *File Name <input name="UPLOAD_FILENAME" type="text" class="form-control" placeholder="ex. Request Form" required/>
