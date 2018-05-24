@@ -61,7 +61,7 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="images/favicon.png">
 
-    <title>G&CSMS-Nature of the Case</title>
+    <title>G&CSMS-Counseling Approach</title>
 
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -97,13 +97,28 @@ include('TypeS_Sidebar.php');
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumbs-alt">
+                        <li>
+                            <a href="index.php"><i class="fa fa-home"></i> Home</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-gears"></i> System Configurations</a>
+                        </li>
+                        <li>
+                            <a class="current" href="#"> Counseling Approach</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         <!-- page start-->
 
         <div class="row">
             <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Nature of the Case
+                            Counseling Approach
                         </header>
                         <div class="panel-body">
                             <div class="position-center">
@@ -135,7 +150,7 @@ include('TypeS_Sidebar.php');
                         <thead>
                             <tr>
                                 <th class="hidden">ID</th>
-                                <th>Nature of the Case</th>
+                                <th>Counseling Approach</th>
                                 <th>Description</th>
                                 <th>Status</th>
                                 <th>Action</th>

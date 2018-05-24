@@ -99,6 +99,21 @@ include('TypeS_Sidebar.php');
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
+        	<div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumbs-alt">
+                        <li>
+                            <a href="index.php"><i class="fa fa-home"></i> Home</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-gears"></i> System Configurations</a>
+                        </li>
+                        <li>
+                            <a class="current" href="#"> Visit Type</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         <!-- page start-->
 
         <div class="row">

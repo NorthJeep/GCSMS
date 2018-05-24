@@ -18,7 +18,7 @@
                     <li><a href="TypeS_VisitType.php">Visit Type</a></li>
                     <li><a href="TypeS_AppointmentType.php">Appointment Type</a></li>
                     <li><a href="TypeS_CounselingType.php">Counseling Type</a></li>
-                    <li><a href="TypeS_CounselingApproach.php">Nature of the Case</a></li>
+                    <li><a href="TypeS_CounselingApproach.php">Counseling Approach</a></li>
                     <li><a href="TypeS_Remarks.php">Remarks</a></li>
                     <li><a href="TypeS_CivilStatus.php">Civil Status</a></li>
                     </ul>
