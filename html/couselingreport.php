@@ -165,7 +165,7 @@ FROM
     </tbody>
 </table>
 
-<a href="print_record_all.php"  type="button" class ="btn btn-success">print</a>
+<a href="print_record_all.php"  type="button" class ="btn btn-success">Print</a>
 
 
         <!-- page end-->

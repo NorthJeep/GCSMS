@@ -33,7 +33,7 @@ function FancyTable($body)
     $this->SetLineWidth(.3);
     $this->SetFont('','B');
     // Header
-    $w = array(50, 60, 30, 50);
+    $w = array(50, 50, 50, 40);
     for($i=0;$i<count($body);$i++)
         $this->Cell($w[$i],7,$body[$i],1,0,'C',true);
     $this->Ln();
@@ -44,7 +44,7 @@ function FancyTable($body)
     // Data
 
    $fill = false;
-   $conn = mysqli_connect("localhost","root","","g&csms_db");
+   $conn = mysqli_connect("localhost","root","","pupqcdb");
 
 // Check connection
 if (mysqli_connect_errno())
@@ -52,7 +52,42 @@ if (mysqli_connect_errno())
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-  $sql =  mysqli_query ($conn," SELECT `STUD_NO`,`STUD_NAME`,`COUNSELING_TYPE_CODE`,`COUNS_DATE` FROM `t_counseling`");
+  $sql =  mysqli_query ($conn," SELECT
+ `s`.`Stud_NO` AS `STUD_NO`,
+ CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
+ `c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
+  DATE_FORMAT(`c`.`Couns_DATE`, '%M %d %Y') AS `COUNSELING_DATE`,
+  
+ 
+  
+  (
+  SELECT
+      GROUP_CONCAT(`a`.`Couns_APPROACH` SEPARATOR ', ')
+  FROM
+      `t_couns_approach` `a`
+  WHERE
+      (
+          `a`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`
+      )
+) AS `COUNSELING_APPROACH`,
+`c`.`Couns_BACKGROUND` AS `COUNSELING_BG`,
+`c`.`Couns_GOALS` AS `GOALS`,
+`c`.`Couns_COMMENT` AS `COUNS_COMMENT`,
+`c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION`
+FROM
+  (
+      (
+          `t_counseling` `c`
+      JOIN `t_couns_details` `cd` ON
+          (
+              (
+                  `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
+              )
+          )
+      )
+  JOIN `r_stud_profile` `s` ON
+      ((`s`.`Stud_NO` = `cd`.`Stud_NO`))
+  )  ");
 while ($row = mysqli_fetch_array($sql)){
     {
         $this->Cell($w[0],7,$row[0],'LR',0,'L',$fill);
