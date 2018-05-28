@@ -28,14 +28,10 @@
     <link href="js/advanced-datatable/css/demo_page.css" rel="stylesheet" />
     <link href="js/advanced-datatable/css/demo_table.css" rel="stylesheet" />
     <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
-    <link rel="stylesheet" href="css/jquery.steps.css?1">
 
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
-           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
-           <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]>
@@ -81,18 +77,6 @@ include('sidebarnav.php');
                     <button data-toggle="modal" href="#AddModal" class="btn btn-primary">
                                 <i class="fa fa-plus"></i> Add File</button>
                     </div>
-                    <!-- <button class="btn btn-primary" name="view" value="View" id="" data-toggle="modal" href="#View"><i class="fa fa-eye"></i></button>
-                    <div class="modal fade" id="View" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" style="width:1000px">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    <div class="modal-footer">
-                                        <button data-dismiss="modal" class="btn btn-primary" type="button">OK</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                 <section class="panel">
                     <header class="panel-heading">
                         Records
@@ -120,7 +104,7 @@ if (mysqli_connect_errno())
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-  $sql= "SELECT Upload_DATE,Upload_FILENAME,Upload_CATEGORY,Upload_TYPE,Upload_FILETYPE,Upload_FILEPATH from t_upload WHERE Upload_CATEGORY = 'Records'";
+  $sql= "SELECT Upload_FILE_ID,Upload_FILENAME,Upload_CATEGORY,Upload_DATE,Upload_FILEPATH from t_upload WHERE Upload_FILETYPE = 'Records'";
 
 $query = mysqli_query($db, $sql);
     
@@ -137,7 +121,7 @@ if (!$query) {
                     <td>'.$row[2].'</td>
                     <td>'.$row[3].'</td>
                     <td>
-                        <a href="'.$row['UPLOAD_FILEPATH'].'" class="confirmation text-primary" >Download</a>
+                        <a href="'.$row['Upload_FILEPATH'].'" class="confirmation text-primary" >Download</a>
                     </td>
                 </tr>';
         }
@@ -189,7 +173,7 @@ if (mysqli_connect_errno())
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-  $sql= "SELECT Upload_DATE,Upload_FILENAME,Upload_CATEGORY,Upload_TYPE,Upload_FILETYPE,Upload_FILEPATH from t_upload WHERE Upload_CATEGORY = 'Printables'";
+  $sql= "SELECT Upload_FILE_ID,Upload_FILENAME,Upload_CATEGORY,Upload_DATE,Upload_FILEPATH from t_upload WHERE Upload_FILETYPE = 'Printables'";
 
 $query = mysqli_query($db, $sql);
     
@@ -206,7 +190,7 @@ if (!$query) {
                     <td>'.$row[2].'</td>
                     <td>'.$row[3].'</td>
                     <td>
-                        <a href="'.$row['UPLOAD_FILEPATH'].'" class="confirmation text-primary" >Download</a>
+                        <a href="'.$row['Upload_FILEPATH'].'" class="confirmation text-primary" >Download</a>
                     </td>
                 </tr>';
         }
@@ -288,7 +272,6 @@ if (!$query) {
     <!--main content end-->
 
 </section>
-
 <!-- Placed js at the end of the document so the pages load faster -->
 
 <!--Core js-->
@@ -298,16 +281,6 @@ if (!$query) {
 <script src="js/jquery.scrollTo.min.js"></script>
 <script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
 <script src="js/jquery.nicescroll.js"></script>
-<!--Easy Pie Chart-->
-<script src="js/easypiechart/jquery.easypiechart.js"></script>
-<!--Sparkline Chart-->
-<script src="js/sparkline/jquery.sparkline.js"></script>
-<!--jQuery Flot Chart-->
-<script src="js/flot-chart/jquery.flot.js"></script>
-<script src="js/flot-chart/jquery.flot.tooltip.min.js"></script>
-<script src="js/flot-chart/jquery.flot.resize.js"></script>
-<script src="js/flot-chart/jquery.flot.pie.resize.js"></script>
-
 <!--dynamic table-->
 <script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>

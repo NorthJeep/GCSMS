@@ -23,7 +23,7 @@
     VALUES ('{$filename}','".$_POST['UPLOAD_CATEGORY']."',CURDATE(),'{$location}','".$_POST['UPLOAD_FILETYPE']."')";
     $result = mysqli_query($db,$sqli);
     if ($result) {
-        header('Location: TypeAFilesAndDocuments.php' . $redirect);
+        header('Location: TypeA_FilesAndDocuments.php' . $redirect);
     };
 }
 ?>

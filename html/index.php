@@ -129,6 +129,8 @@ include('sidebarnav.php');
 
 
                 ?>
+            </div>
+            <div class="col-md-3">
 
                  <?php
 
@@ -198,6 +200,8 @@ include('sidebarnav.php');
 
 
                 ?>
+                </div>
+            <div class="col-md-3">
 
 
                  <?php
@@ -232,6 +236,17 @@ include('sidebarnav.php');
 
 
                 ?>
+            </div>
+                <div class="col-md-3">
+                    <section class='panel'> 
+                        <div class='panel-body' >
+                            <span class='mini-stat-icon orange'><i class='fa fa-calendar'></i></span>
+                            <div class='mini-stat-info'>
+                                <span>0</span>
+                                Semestral
+                        </div>
+                    </section>
+                       
 </div>
             <div class="col-md-9">
                 <section class="panel">
@@ -392,7 +407,7 @@ while($row = mysqli_fetch_array($result))
 
 }
 
-$qvisitExcuse  = "select count(Visit_PURPOSE) as Excuse from t_stud_visit where Visit_PURPOSE = 'Excuse'";
+$qvisitExcuse  = "select count(Visit_PURPOSE) as Excuse from t_stud_visit where Visit_PURPOSE = 'Excuse Letter'";
 $result = mysqli_query($db, $qvisitExcuse);
 while($row = mysqli_fetch_array($result))
 {
@@ -400,7 +415,7 @@ while($row = mysqli_fetch_array($result))
 
 }
 
-$qvisitClearance  = "select count(Visit_PURPOSE) as Clearance from t_stud_visit where Visit_PURPOSE = 'Clearance'";
+$qvisitClearance  = "select count(Visit_PURPOSE) as Clearance from t_stud_visit where Visit_PURPOSE = 'Signing of Clearance'";
 $result = mysqli_query($db, $qvisitClearance);
 while($row = mysqli_fetch_array($result))
 {
