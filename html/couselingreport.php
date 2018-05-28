@@ -141,7 +141,7 @@ FROM
       )
   JOIN `r_stud_profile` `s` ON
       ((`s`.`Stud_NO` = `cd`.`Stud_NO`))
-  ) WHERE DATE(`c`.`Couns_DATE`) = MONTH(NOW()) ");?>
+  ) ");?>
 
 <?php while ($row = mysqli_fetch_array($sql)) { ?>
         <tbody>

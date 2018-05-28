@@ -4,7 +4,6 @@ require('fpdf.php');
 class PDF extends FPDF
 {
 
-
 // Colored table
 function Header()
 {
@@ -16,7 +15,7 @@ function Header()
     
     // Framed title
     
-    $this->Image('images\PUPLogo.png',98,10,20);
+    $this->Image('images/PUPLogo.png',98,10,20);
     $this->Ln(30);
     $this->Cell(80);
     $this->Cell(40,10,'Polytechnic University of the Philippines',0,0,'C');

@@ -1,10 +1,8 @@
 <?php
 require('fpdf.php');
-// require("images/PUPLogo.png");
 
 class PDF extends FPDF
 {
-
 
 // Colored table
 function Header()
