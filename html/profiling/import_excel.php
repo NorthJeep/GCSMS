@@ -46,15 +46,24 @@ if(!empty($_FILES['excelfile']['name']))
                     // Data of excel sheet
                     $stud_no = $row[0];
                     $stud_firstname = $row[1];
-                    $stud_lastname = $row[2];
-                    $stud_course = $row[3];
-                    $stud_yr_lvl = $row[4];
-                    $stud_section = $row[5];
-                    $stud_status = $row[6];
+                    $stud_mname = $row[2];
+                    $stud_lname = $row[3];
+                    $stud_gender = $row[4];
+                    $stud_course = $row[5];
+                    $stud_yr_lvl = $row[6];
+                    $stud_section = $row[7];
+                    $stud_bday = $row[8];
+                    $stud_address = $row[9];
+                    $stud_prov_add = $row[10];
+                    $stud_tel_no = $row[11];
+                    $stud_cp_no = $row[12];
+                    $stud_email = $row[13];
+                    $stud_birthplace = $row[14];
+                    $stud_status = $row[15];
 
                     //Here, You can insert data into database.
-                    $qry = "INSERT INTO `r_stud_profile`(`stud_no`, `stud_fname`, `stud_lname`, `stud_course`, `stud_yr_lvl`, `stud_section`, `stud_status`) 
-                                    VALUES ('$stud_no','$stud_firstname','$stud_lastname','$stud_course','$stud_yr_lvl','$stud_section','$stud_status')";
+                    $qry = "call stud_profile_add('$stud_no','$stud_firstname','$stud_mname', '$stud_lname','$stud_gender','$stud_course','$stud_yr_lvl','$stud_section','$stud_bday', '$stud_address', '$stud_prov_add','$stud_tel_no', '$stud_cp_no', '$stud_email', '$stud_birthplace', 
+                        '$stud_status')";
                     $res = mysqli_query($db,$qry);
 
                 }

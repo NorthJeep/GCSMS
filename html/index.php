@@ -3,7 +3,7 @@
     session_start();
     if(!$_SESSION['Logged_In'])
     {
-        header('Location:LogIn.php');
+        header('Location:login.php');
         exit;
     }
     include ("config.php");

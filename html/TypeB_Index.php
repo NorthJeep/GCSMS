@@ -3,10 +3,11 @@
     session_start();
     if(!$_SESSION['Logged_In'])
     {
-        header('Location:LogIn.php');
+        header('Location:login.php');
         exit;
     }
     include ("config.php");
+    // session_destroy();
 ?>
 <html lang="en">
 <head>
@@ -40,6 +41,8 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+
+
 </head>
 <body>
 <script src="/GCSMS/html/Highcharts-6.0.7/highcharts.js"></script>
@@ -49,8 +52,8 @@
 
 <?php 
 $currentPage ='G&CSMS-Dasboard';
-include('TypeBHeader.php');
-include('TypeBSideBar.php');
+include('TypeB_Header.php');
+include('TypeB_SideBar.php');
 ?>
 
          
@@ -61,7 +64,6 @@ include('TypeBSideBar.php');
         <div class="row">
         <div class="col-md-3">
                             <?php
-                $link = mysqli_connect("localhost", "root", "", "g&csms_db");
 
                 /* check connection */
                 if (mysqli_connect_errno()) {
@@ -69,7 +71,7 @@ include('TypeBSideBar.php');
                     exit();
                 }
 
-                if ($result = mysqli_query($link, "SELECT * FROM `t_counseling`")) {
+                if ($result = mysqli_query($db, "SELECT * FROM `t_counseling`")) {
 
                     /* determine number of rows result set */
                     $row_cnt = mysqli_num_rows($result);
@@ -90,13 +92,12 @@ include('TypeBSideBar.php');
                 }
 
                 /* close connection */
-                mysqli_close($link);
+                // mysqli_close($db);
 
 
                 ?>
 
                  <?php
-                $link = mysqli_connect("localhost", "root", "", "g&csms_db");
 
                 /* check connection */
                 if (mysqli_connect_errno()) {
@@ -104,7 +105,7 @@ include('TypeBSideBar.php');
                     exit();
                 }
 
-                if ($result = mysqli_query($link, "SELECT * FROM `r_stud_profile` WHERE `STUD_STATUS` = 'Regular' OR `STUD_STATUS` = 'Irregular'")) {
+                if ($result = mysqli_query($db, "select * from r_stud_profile where Stud_STATUS = 'Regular' or Stud_STATUS = 'Irregular'")) {
 
                     /* determine number of rows result set */
                     $row_cnt = mysqli_num_rows($result);
@@ -124,13 +125,12 @@ include('TypeBSideBar.php');
                 }
 
                 /* close connection */
-                mysqli_close($link);
+                // mysqli_close($db);
 
 
                 ?>
 
                  <?php
-                $link = mysqli_connect("localhost", "root", "", "g&csms_db");
 
                 /* check connection */
                 if (mysqli_connect_errno()) {
@@ -138,7 +138,7 @@ include('TypeBSideBar.php');
                     exit();
                 }
 
-                if ($result = mysqli_query($link, "SELECT * FROM `t_visits`")) {
+                if ($result = mysqli_query($db, "select * from t_stud_visit")) {
 
                     /* determine number of rows result set */
                     $row_cnt = mysqli_num_rows($result);
@@ -159,14 +159,13 @@ include('TypeBSideBar.php');
                 }
 
                 /* close connection */
-                mysqli_close($link);
+                // mysqli_close($db);
 
 
                 ?>
 
 
                  <?php
-                $link = mysqli_connect("localhost", "root", "", "g&csms_db");
 
                 /* check connection */
                 if (mysqli_connect_errno()) {
@@ -174,7 +173,7 @@ include('TypeBSideBar.php');
                     exit();
                 }
 
-                if ($result = mysqli_query($link, "SELECT * FROM `t_visits` where VISIT_CODE='Clearance'")) {
+                if ($result = mysqli_query($db, "select * from t_stud_visit where Visit_PURPOSE = 'Clearance'")) {
 
                     /* determine number of rows result set */
                     $row_cnt = mysqli_num_rows($result);
@@ -195,14 +194,13 @@ include('TypeBSideBar.php');
                 }
 
                 /* close connection */
-                mysqli_close($link);
+                // mysqli_close($db);
 
 
                 ?>
 
 
                  <?php
-                $link = mysqli_connect("localhost", "root", "", "g&csms_db");
 
                 /* check connection */
                 if (mysqli_connect_errno()) {
@@ -210,7 +208,7 @@ include('TypeBSideBar.php');
                     exit();
                 }
 
-                if ($result = mysqli_query($link, "SELECT * FROM `t_visits` WHERE VISIT_CODE='Excuse'")) {
+                if ($result = mysqli_query($db, "select * from t_stud_visit where Visit_PURPOSE = 'Clearance'")) {
 
                     /* determine number of rows result set */
                     $row_cnt = mysqli_num_rows($result);
@@ -230,7 +228,7 @@ include('TypeBSideBar.php');
                 }
 
                 /* close connection */
-                mysqli_close($link);
+                // mysqli_close($db);
 
 
                 ?>
@@ -243,52 +241,49 @@ include('TypeBSideBar.php');
                             <div class="col-md-4">
 <div id="case-chart" class="col-md-4">
 <?php
-$connect = mysqli_connect("localhost", "root", "", "g&csms_db");
-$qcaseall = "SELECT COUNT(`COUNS_APPROACH`) as Case_all FROM `t_counseling`";
-$result = mysqli_query($connect, $qcaseall);
+$qcaseall = "select count(Couns_APPROACH) as Case_all from t_couns_approach;";
+$result = mysqli_query($db, $qcaseall);
 while($row = mysqli_fetch_array($result))
 {
    $Caseall = $row["Case_all"];
 
 }
-$qcaseBehavior = "SELECT COUNT(`COUNS_APPROACH`) as Behavior FROM `t_counseling` WHERE `COUNS_APPROACH` = 'Behavior Therapy'";
-$result = mysqli_query($connect, $qcaseBehavior);
+$qcaseBehavior = "select count(Couns_APPROACH) as Behavior from t_couns_approach where Couns_APPROACH = 'Behavior Theraphy'";
+$result = mysqli_query($db, $qcaseBehavior);
 while($row = mysqli_fetch_array($result))
 {
    $CaseBehavior = $row["Behavior"];
 
 }
 
-$qcaseCognitive = "SELECT COUNT(`COUNS_APPROACH`) as Cognitive FROM `t_counseling` WHERE `COUNS_APPROACH` = 'Cognitive Therapy'";
-$result = mysqli_query($connect, $qcaseCognitive);
+$qcaseCognitive = "select count(Couns_APPROACH) as Cognitive from t_couns_approach where Couns_APPROACH = 'Cognitive Theraphy'";
+$result = mysqli_query($db, $qcaseCognitive);
 while($row = mysqli_fetch_array($result))
 {
    $CaseCognitive = $row["Cognitive"];
 
 }
 
-$qcaseEducational = "SELECT COUNT(`COUNS_APPROACH`) as Educational FROM `t_counseling` WHERE `COUNS_APPROACH` = 'Educational Counseling'";
-$result = mysqli_query($connect, $qcaseEducational);
+$qcaseEducational = "select count(Couns_APPROACH) as Educational from t_couns_approach where Couns_APPROACH = 'Educational Theraphy'";
+$result = mysqli_query($db, $qcaseEducational);
 while($row = mysqli_fetch_array($result))
 {
    $CaseEducational = $row["Educational"];
-
 }
 
-$qcaseHolistic = "SELECT COUNT(`COUNS_APPROACH`) as Holistic FROM `t_counseling` WHERE `COUNS_APPROACH` = 'Holistic Therapy'";
-$result = mysqli_query($connect, $qcaseHolistic);
+$qcaseHolistic = "select count(Couns_APPROACH) as Holistic from t_couns_approach where Couns_APPROACH = 'Holistic Theraphy'";
+$result = mysqli_query($db, $qcaseHolistic);
 while($row = mysqli_fetch_array($result))
 {
    $CaseHolistic = $row["Holistic"];
 
 }
 
-$qcaseMentalHealth = "SELECT COUNT(`COUNS_APPROACH`)  as Mental_Health_Counseling FROM `t_counseling` WHERE `COUNS_APPROACH` = 'Mental Health Counseling'";
-$result = mysqli_query($connect, $qcaseMentalHealth);
+$qcaseMentalHealth = "select count(Couns_APPROACH) as Mental_Health_Counseling from t_couns_approach where Couns_APPROACH = 'Mental Health Counseling'";
+$result = mysqli_query($db, $qcaseMentalHealth);
 while($row = mysqli_fetch_array($result))
 {
    $CaseMentalHealth = $row["Mental_Health_Counseling"];
-
 }
 ?>
 </div>
@@ -382,32 +377,31 @@ Highcharts.chart('case-chart',{
 <div id="case-chart" class="col-md-4" style="padding:0px 70px">
 <?php
 
-$connect = mysqli_connect("localhost", "root", "", "g&csms_db");
-$qvisitall = "SELECT Count(`VISIT_CODE`) as visitall FROM `t_visits`";
-$result = mysqli_query($connect, $qvisitall);
+$qvisitall = "select count(Visit_PURPOSE) as visitall from t_stud_visit";
+$result = mysqli_query($db, $qvisitall);
 while($row = mysqli_fetch_array($result))
 {
    $visitall = $row["visitall"];
 }
 
-$qvisitCoC = "SELECT Count(`VISIT_CODE`) as CoC FROM `t_visits` WHERE `VISIT_CODE` = 'CoC'";
-$result = mysqli_query($connect, $qvisitCoC);
+$qvisitCoC = "select count(Visit_PURPOSE) as CoC from t_stud_visit where Visit_PURPOSE = 'CoC'";
+$result = mysqli_query($db, $qvisitCoC);
 while($row = mysqli_fetch_array($result))
 {
    $visitCoC = $row["CoC"];
 
 }
 
-$qvisitExcuse  = "SELECT Count(`VISIT_CODE`) as Excuse FROM `t_visits` WHERE `VISIT_CODE` = 'Excuse'";
-$result = mysqli_query($connect, $qvisitExcuse);
+$qvisitExcuse  = "select count(Visit_PURPOSE) as Excuse from t_stud_visit where Visit_PURPOSE = 'Excuse'";
+$result = mysqli_query($db, $qvisitExcuse);
 while($row = mysqli_fetch_array($result))
 {
    $visitExcuse = $row["Excuse"];
 
 }
 
-$qvisitClearance  = "SELECT Count(`VISIT_CODE`) as Clearance FROM `t_visits` WHERE `VISIT_CODE` = 'Clearance'";
-$result = mysqli_query($connect, $qvisitClearance);
+$qvisitClearance  = "select count(Visit_PURPOSE) as Clearance from t_stud_visit where Visit_PURPOSE = 'Clearance'";
+$result = mysqli_query($db, $qvisitClearance);
 while($row = mysqli_fetch_array($result))
 {
    $visitClearance = $row["Clearance"];
