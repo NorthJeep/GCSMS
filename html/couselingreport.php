@@ -75,17 +75,9 @@ include('sidebarnav.php');
                                 <thead>
                                 <tr>
                                     <th hidden>Couseling ID</th>
-                                    <th>Date</th>
-                                    <th>Counseling Type</th>
-                                    <th>Appointment Type</th>
-                                    <th>Student Number</th>
                                     <th>Student Name</th>
-                                    <th>Course</th>
-                                    <th>Approach</th>
-                                    <th>Background</th>
-                                    <th>Goals</th>
-                                    <th>Comments</th>
-                                    <th>Recommendations</th>
+                                    <th>Student Number</th>
+                                    <th>Date</th>
                                     <th id="thview">View</th>
                                 </tr>
                                 </thead>
@@ -102,11 +94,11 @@ if (mysqli_connect_errno())
 }
   $sql =  mysqli_query ($conn," SELECT
   `c`.`Couns_CODE` AS `COUNSELING_CODE`,
+  CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
+  `s`.`Stud_NO` AS `STUD_NO`,
   DATE_FORMAT(`c`.`Couns_DATE`, '%W %M %d %Y') AS `COUNSELING_DATE`,
   `c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
   `c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,
-  `s`.`Stud_NO` AS `STUD_NO`,
-  CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
   CONCAT(
       `s`.`Stud_COURSE`,
       ' ',
@@ -147,19 +139,11 @@ FROM
         <tbody>
         <tr>
             <td hidden><?php echo $row['COUNSELING_CODE']; ?></td>
-            <td><?php echo $row['COUNSELING_DATE']; ?></td>
-            <td><?php echo $row['COUNSELING_TYPE']; ?></td>
-            <td><?php echo $row['APPOINTMENT_TYPE']; ?></td>
-            <td><?php echo $row['STUD_NO']; ?></td>
             <td><?php echo $row['STUD_NAME']; ?></td>
-            <td><?php echo $row['COURSE']; ?></td>
-            <td><?php echo $row['COUNSELING_APPROACH']; ?></td>
-            <td><?php echo $row['COUNSELING_BG']; ?></td>
-            <td><?php echo $row['GOALS']; ?></td>
-            <td><?php echo $row['COUNS_COMMENT']; ?></td>
-            <td><?php echo $row['RECOMMENDATION']; ?></td>
+            <td><?php echo $row['STUD_NO']; ?></td>
+            <td><?php echo $row['COUNSELING_DATE']; ?></td>
             
-            <td><a href="counseling_report_review.php?view=<?php echo $row['COUNSELING_CODE']; ?>"  id="viewbutton" type="button" class ="btn btn-success" >view</a></td>
+            <td><a href="counseling_report_review.php?view=<?php echo $row['COUNSELING_CODE']; ?>"  id="viewbutton" type="button" class ="btn btn-success" >View</a></td>
         </tr>
     <?php }?>
     </tbody>
@@ -198,10 +182,10 @@ FROM
 <!--Sparkline Chart-->
 <script src="js/sparkline/jquery.sparkline.js"></script>
 <!--jQuery Flot Chart-->
-<script src="js/flot-chart/jquery.flot.js"></script>
+<!-- <script src="js/flot-chart/jquery.flot.js"></script>
 <script src="js/flot-chart/jquery.flot.tooltip.min.js"></script>
 <script src="js/flot-chart/jquery.flot.resize.js"></script>
-<script src="js/flot-chart/jquery.flot.pie.resize.js"></script>
+<script src="js/flot-chart/jquery.flot.pie.resize.js"></script> -->
 
 <script src="js/iCheck/jquery.icheck.js"></script>
 
