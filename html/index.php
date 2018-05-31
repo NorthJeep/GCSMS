@@ -277,14 +277,74 @@ include('sidebarnav.php');
 
             </div>
                 <div class="col-md-3">
+                    <div class="col-md-3">
+                    <?php
+
+                /* check connection */
+                if (mysqli_connect_errno()) {
+                    printf("Connect failed: %s\n", mysqli_connect_error());
+                    exit();
+                }
+
+                if ($result = mysqli_query($db, "select * from t_stud_visit where Visit_PURPOSE = 'Clearance'")) {
+
+                    /* determine number of rows result set */
+                    $row_cnt = mysqli_num_rows($result);
+
+                    printf("
                     <section class='panel'> 
-                        <div class='panel-body' >
+                    <div class='panel-body' >
                             <span class='mini-stat-icon orange'><i class='fa fa-calendar'></i></span>
                             <div class='mini-stat-info'>
-                                <span>0</span>
+                                <span>%d</span>
                                 Semestral
-                        </div>
-                    </section>
+                            </div>
+                        </section>
+                ", $row_cnt); 
+                    /* close result set */
+                    mysqli_free_result($result);
+                }
+
+                /* close connection */
+                // mysqli_close($db);
+
+
+                ?>
+
+                <?php
+
+                /* check connection */
+                if (mysqli_connect_errno()) {
+                    printf("Connect failed: %s\n", mysqli_connect_error());
+                    exit();
+                }
+
+                if ($result = mysqli_query($db, "select * from t_stud_visit where Visit_PURPOSE = 'Clearance'")) {
+
+                    /* determine number of rows result set */
+                    $row_cnt = mysqli_num_rows($result);
+
+                    printf("
+                    <section class='panel'> 
+                    <div class='panel-body' >
+                            <span class='mini-stat-icon orange'><i class='fa fa-calendar'></i></span>
+                            <div class='mini-stat-info'>
+                                <span>%d</span>
+                                School Year
+                            </div>
+                        </section>
+                ", $row_cnt); 
+                    /* close result set */
+                    mysqli_free_result($result);
+                }
+
+                /* close connection */
+                // mysqli_close($db);
+
+
+                ?>
+                       
+                </div>
                        
 </div>
 
