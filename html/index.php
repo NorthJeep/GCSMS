@@ -63,7 +63,8 @@ include('sidebarnav.php');
         <!--earning graph start-->
         <div class="row">
         <div class="col-md-3">
-                            <?php
+                
+                <?php
 
                 /* check connection */
                 if (mysqli_connect_errno()) {
@@ -82,7 +83,7 @@ include('sidebarnav.php');
                             <span class='mini-stat-icon orange'><i class='fa fa-gavel'></i></span>
                             <div class='mini-stat-info'>
                                 <span>%d</span>
-                                Counseling Cases
+                                Individual Counseling
                             </div>
                         </div>
                     </section>
@@ -94,8 +95,43 @@ include('sidebarnav.php');
                 /* close connection */
                 // mysqli_close($db);
 
+                ?>
+
+                <?php
+
+                /* check connection */
+                if (mysqli_connect_errno()) {
+                    printf("Connect failed: %s\n", mysqli_connect_error());
+                    exit();
+                }
+
+                if ($result = mysqli_query($db, "SELECT * FROM `t_counseling`")) {
+
+                    /* determine number of rows result set */
+                    $row_cnt = mysqli_num_rows($result);
+
+                    printf(" 
+                    <section class='panel'> 
+                    <div class='panel-body' >
+                            <span class='mini-stat-icon orange'><i class='fa fa-gavel'></i></span>
+                            <div class='mini-stat-info'>
+                                <span>%d</span>
+                                Group Counseling
+                            </div>
+                        </div>
+                    </section>
+                ", $row_cnt); 
+                    /* close result set */
+                    mysqli_free_result($result);
+                }
+
+                /* close connection */
+                // mysqli_close($db);
 
                 ?>
+
+                </div>
+            <div class="col-md-3">
 
                  <?php
 
@@ -129,8 +165,7 @@ include('sidebarnav.php');
 
 
                 ?>
-            </div>
-            <div class="col-md-3">
+            
 
                  <?php
 
@@ -166,6 +201,9 @@ include('sidebarnav.php');
 
                 ?>
 
+                </div>
+            <div class="col-md-3">
+
 
                  <?php
 
@@ -200,8 +238,7 @@ include('sidebarnav.php');
 
 
                 ?>
-                </div>
-            <div class="col-md-3">
+                
 
 
                  <?php
@@ -236,6 +273,8 @@ include('sidebarnav.php');
 
 
                 ?>
+
+
             </div>
                 <div class="col-md-3">
                     <section class='panel'> 
@@ -248,6 +287,7 @@ include('sidebarnav.php');
                     </section>
                        
 </div>
+
             <div class="col-md-9">
                 <section class="panel">
                     
