@@ -1,12 +1,17 @@
 <?php
     
-    include ('config.php');
+    include ('GCSMS_connection.php');
+    
     if(isset($_POST['insert']))
     {
         
-        $cat = $_POST['uploadCat'];
-        $query = "INSERT INTO `r_upload_category`(`Upload_FILE_CATEGORY`) VALUES ('$cat')";
-        $result = mysqli_query($db, $query);
+        $type = $_POST['visitType'];
+        $desc = $_POST['visitDesc'];
+
+        $query = "INSERT INTO `r_visit`(`VISIT_TYPE`, `VISIT_DESC`) VALUES ('$type','$desc')";
+
+        $result = mysqli_query($connect, $query);
+
         if ($result) 
         {
             echo ' <script>alert("Congratulations! Your data has been inserted successfully");</script> ';
@@ -15,26 +20,54 @@
         {
             echo ' <script>alert("Sorry! Your data was not inserted");</script> ';
         }
+
+        mysqli_close($connect);
     }
-    if (isset($_POST['deactivate'])) 
+
+    if(isset($_POST['edit']))
     {
-        $id = $_POST['upId'];
-        $updatequery = "";
-        if ($_POST['status'] == 'Active') {
-            $updatequery = "UPDATE r_upload_category SET Upload_CATEGORY_STAT = 'Inactive' WHERE Upload_CATEGORY_ID = $id";
-        } else {
-            $updatequery = "UPDATE r_upload_category SET Upload_CATEGORY_STAT = 'Active' WHERE Upload_CATEGORY_ID = $id";
+        $type = $_POST['vType'];
+        $desc = $_POST['vDesc'];
+        $vId = $_POST['vId'];
+
+        $query = "UPDATE r_visit SET Visit_TYPE = '$type', Visit_DESC = '$desc' WHERE Visit_ID = $vId";
+
+        $result = mysqli_query($connect, $query);
+
+        if ($result) 
+        {
+            echo ' <script>alert("Congratulations! Your data has been updated successfully");</script> ';
         }
-                                        
-        mysqli_query($db, $updatequery);
+        else 
+        {
+            echo ' <script>alert("Sorry! Your data was not updated");</script> ';
+        }
+
+        mysqli_close($connect);
     }
-    if (isset($_POST['edit'])) {
-        $id = $_POST['upId'];
-        $cat = $_POST['upCat'];
-        $updatequery = "UPDATE r_upload_category SET Upload_FILE_CATEGORY = '$cat' WHERE Upload_CATEGORY_ID = $id";
-        mysqli_query($db,$updatequery);
+
+    if(isset($_POST['deactivate']))
+    {
+        $type = $_POST['visitType'];
+
+        $updateQuery = "UPDATE r_visit SET Visit_STAT = 'Inactive' WHERE VISIT_TYPE = $type";
+
+        $result = mysqli_query($connect, $updateQuery);
+
+        if ($result) 
+        {
+            echo ' <script>alert("Congratulations! Your data has been successfully updated!");</script> ';
+        }
+        else 
+        {
+            echo ' <script>alert("Sorry! Your data was not updated!");</script> ';
+        }
+
+        mysqli_close($connect);
     }
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +79,7 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="images/favicon.png">
 
-    <title>G&CSMS-Upload Category</title>
+    <title>Visit Type</title>
 
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -67,50 +100,94 @@
         {
             text-align: center;
         }
+
     </style>
 </head>
 
 <body>
-<?php 
-$currentPage ='G&CSMS-System Configurations';
-include('TypeS_Header.php');
-include('TypeS_Sidebar.php');
-?>
 
+
+<section id="container" >
+<!--header start-->
+<header class="header fixed-top clearfix">
+<!--logo start-->
+<div class="brand">
+
+    <a href="index.html" class="logo">
+        <img src="images/logogcsms.png" alt="">
+    </a>
+</div>
+<!--logo end-->
+
+
+<div class="top-nav clearfix">
+    <!--search & user info start-->
+    <ul class="nav pull-right top-menu">
+        <li>
+            <input type="text" class="form-control search" placeholder=" Search">
+        </li>
+        <!-- user login dropdown start-->
+        <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <img alt="" src="images/avatar1_small.jpg">
+                <span class="username">John Doe</span>
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu extended logout">
+                <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                <li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
+            </ul>
+        </li>
+        <!-- user login dropdown end -->
+    </ul>
+    <!--search & user info end-->
+</div>
+</header>
+<!--header end-->
+<aside>
+    <div id="sidebar" class="nav-collapse">
+        <!-- sidebar menu start-->            <div class="leftside-navigation">
+            <ul class="sidebar-menu" id="nav-accordion">
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-laptop"></i>
+                    <span>System Configurations</span>
+                </a>
+                <ul class="sub">
+                    <li><a href="GCSMS_VisitType.php">Visit Type</a></li>
+                    <li><a href="GCSMS_AppointmentType.php">Appointment Type</a></li>
+                    <li><a href="GCSMS_CounselingType.php">Counseling Type</a></li>
+                    <li><a href="GCSMS_CounselingApproach.php">Counseling Approach</a></li>
+                    <li><a href="GCSMS_Remarks.php">Remarks</a></li>
+                    <li><a href="GCSMS_CivilStatus.php">Civil Status</a></li>
+                </ul>
+            </li>
+        </ul></div>        
+<!-- sidebar menu end-->
+    </div>
+</aside>
 <!--sidebar end-->
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="breadcrumbs-alt">
-                        <li>
-                            <a href="index.php"><i class="fa fa-home"></i> Home</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-gears"></i> System Configurations</a>
-                        </li>
-                        <li>
-                            <a class="current" href="#"> Upload Category</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
         <!-- page start-->
 
         <div class="row">
             <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Upload Category
+                            Visit Type
                         </header>
                         <div class="panel-body">
                             <div class="position-center">
-                                <form action="TypeS_UploadCategory.php" method="POST">
+                                <form action="GCSMS_VisitType.php" method="POST">
                                     <div class="form-group">
                                         <br>
-                                        <label for="uploadCat">Upload Category</label>
-                                        <input type="text" class="form-control" name="uploadCat" required>
+                                        <label for="visitType">Visit Type</label>
+                                        <input type="text" class="form-control" name="visitType" required>
+                                        <label for="visitDesc">Visit Description</label>
+                                        <input type="text" class="form-control" name="visitDesc" required>
                                     </div>
                                     <button type="submit" class="btn btn-info" name="insert">Save</button>
                                 </form>
@@ -128,54 +205,73 @@ include('TypeS_Sidebar.php');
                     <div class="panel-body">
                     <div class="adv-table">                    
                     <table  class="display table table-bordered table-striped" id="dynamic-table">
+                        
                         <thead>
                             <tr>
-                                <th class="hidden">ID</th>
-                                <th>Civil Status</th>
+                                <th class="hidden">Visit Id</th>
+                                <th>Visit Type</th>
+                                <th>Visit Description</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                             <?php
-                                // include ('config.php');
-                                $sql = "SELECT * FROM `r_upload_category`";
-                                $records = mysqli_query($db,$sql);
-                                while ($civil = mysqli_fetch_assoc($records)) 
-                                {
-                                    $upId = $civil['Upload_CATEGORY_ID'];
-                                    $upCat = $civil['Upload_FILE_CATEGORY'];
-                                    $status = $civil['Upload_CATEGORY_STAT']; 
-                               
-                            ?>
+                            <?php
+                                include ('GCSMS_connection.php');
 
+                                $sql = "SELECT * FROM `r_visit`";
+                                $records = mysqli_query($connect,$sql);
+
+                                while ($visits = mysqli_fetch_assoc($records)) 
+                                {
+                                    $vId = $visits['Visit_ID'];
+                                    $type = $visits['Visit_TYPE'];
+                                    $desc = $visits['Visit_DESC'];
+                                    $status = $visits['Visit_STAT']; 
+                                    // echo "<tr>";
+                                    //     echo "<td>".$visits['Visit_TYPE']."</td>";
+                                    //     echo "<td>".$visits['Visit_DESC']."</td>";
+                                    //     echo "<td>".$visits['Visit_STAT']."</td>";
+                                    //     echo "<td class='center hidden-phone'>".
+                                    //         "<button type='submit' class='btn btn-info' ><i class='fa fa-pencil-square-o' name='update'></i></button>
+                                    //         <a href='#deactivateModal' data-toggle=modal class='btn btn-danger delete'><i class='fa fa-trash-o'></i></a>"
+                                    //     ."</td>";
+                                    // echo "</tr>";
+                               
+
+                            ?>
                             <tr>
-                                <td class="hidden"> <?php echo $upId; ?> </td>
-                                <td> <?php echo $upCat; ?> </td>
+                                <td class="hidden"> <?php echo $vId; ?> </td>
+                                <td> <?php echo $type; ?> </td>
+                                <td> <?php echo $desc; ?> </td>
                                 <td> <?php echo $status; ?> </td>
                                 <td class="center">
-                                    <a data-toggle="modal" class="btn btn-info" href="#UpdateModal<?php echo $upId; ?>"><i class="fa fa-pencil-square-o" name="edit"></i></a>
-                                    <a data-toggle="modal" class="btn btn-danger delete" href="#deactivateModal<?php echo $upId; ?>"><i class="fa fa-check"></i></a>
+                                    <a data-toggle="modal" class="btn btn-info" href="#UpdateModal<?php echo $vId; ?>"><i class="fa fa-pencil-square-o"></i></button>
+                                    <a data-toggle="modal" class="btn btn-danger delete" href="#deactivateModal<?php echo $type; ?>"><i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
 
                             <!--Update Modal-->
-                            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="UpdateModal<?php echo $upId; ?>" class="modal fade">
+                                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="UpdateModal<?php echo $vId; ?>" class="modal fade">
                                 <div class="modal-dialog" style="width: 40%;">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                                            <h4 class="modal-title">Edit!</h4>
+                                            <h4 class="modal-title">Edit Data!</h4>
                                         </div>
                                         <div class="modal-body">
                                             <form role="form" method="POST">
                                                 <div class="hidden">
-                                                    <label>Upload Category ID</label>
-                                                    <input class="form-control" name="upId" value="<?php echo $upId ?>">                           
+                                                    <label>Visit ID</label>
+                                                    <input class="form-control" id="inputId<?php echo $vId ?>" name="vId" value="<?php echo $vId ?>">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Upload Category</label>
-                                                    <input class="form-control" name="upCat" value="<?php echo $upCat?>">
+                                                    <label>Visit Type</label>
+                                                    <input class="form-control" id="inputId<?php echo $type ?>" name="vType" value="<?php echo $type ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Description</label>
+                                                    <input type="text" class="form-control" id="inputId<?php echo $desc ?>" name="vDesc" value="<?php echo $desc ?>">
                                                 </div>
                                                 <br><br>
                                                 <div style="margin-left: 70%">
@@ -187,10 +283,11 @@ include('TypeS_Sidebar.php');
                                     </div>
                                 </div>
                             </div>
-                            <!--end of update-->
 
-                            <!--deactivate/activate modal-->
-                            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="deactivateModal<?php echo $upId; ?>" class="modal fade">
+                            <!--end of update modal-->
+
+                            <!--deactivate modal-->
+                            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="deactivateModal<?php echo $type; ?>" class="modal fade">
                                 <div class="modal-dialog" style="width: 30%;">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -199,13 +296,10 @@ include('TypeS_Sidebar.php');
                                         </div>
                                         <div class="modal-body">
                                             <form role="form" method="POST">
-                                                <div class="hidden">
-                                                    <input name="upId" value="<?php echo $upId ?>">
-                                                    <input name="status" value="<?php echo $status ?>">
-                                                </div>
+                                                <input type="hidden" value="<?php echo $type ?>" name="visitType">
                                                 <br>  
-                                                <label style="margin-left: 15%;">You are about to deactivate / activate</label><br>
-                                                <label style="margin-left: 15%;"> a data, continue?</label>
+                                                <label style="margin-left: 15%;">You are about to delete  a data,</label><br>
+                                                <label style="margin-left: 15%;">continue?</label>
                                                 <br><br>
                                                 <div style="margin-left: 60%">
                                                     <button type="submit" class="btn btn-cancel" data-dismiss="modal">CANCEL</button>
@@ -219,8 +313,8 @@ include('TypeS_Sidebar.php');
 
                             <?php
                                 }
-                            ?>
 
+                            ?>
                         </tbody>
                     </table>
                     </div>
@@ -296,6 +390,13 @@ include('TypeS_Sidebar.php');
 <!--dynamic table initialization -->
 <script src="js/dynamic_table_init.js"></script>
 
+<!-- <script type="text/javascript">
+        $("#visitlist").on("click","a[id='delete']",function(){
+            $key = $(this).parent().siblings("td[id='visit-type']").text();
+            alert($key);
+        });
+    </script>
+ -->
 
 </body>
 </html>
