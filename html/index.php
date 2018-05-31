@@ -63,7 +63,8 @@ include('sidebarnav.php');
         <!--earning graph start-->
         <div class="row">
         <div class="col-md-3">
-                            <?php
+                
+                <?php
 
                 /* check connection */
                 if (mysqli_connect_errno()) {
@@ -82,7 +83,7 @@ include('sidebarnav.php');
                             <span class='mini-stat-icon orange'><i class='fa fa-gavel'></i></span>
                             <div class='mini-stat-info'>
                                 <span>%d</span>
-                                Counseling Cases
+                                Individual Counseling
                             </div>
                         </div>
                     </section>
@@ -94,8 +95,43 @@ include('sidebarnav.php');
                 /* close connection */
                 // mysqli_close($db);
 
+                ?>
+
+                <?php
+
+                /* check connection */
+                if (mysqli_connect_errno()) {
+                    printf("Connect failed: %s\n", mysqli_connect_error());
+                    exit();
+                }
+
+                if ($result = mysqli_query($db, "SELECT * FROM `t_counseling`")) {
+
+                    /* determine number of rows result set */
+                    $row_cnt = mysqli_num_rows($result);
+
+                    printf(" 
+                    <section class='panel'> 
+                    <div class='panel-body' >
+                            <span class='mini-stat-icon orange'><i class='fa fa-gavel'></i></span>
+                            <div class='mini-stat-info'>
+                                <span>%d</span>
+                                Group Counseling
+                            </div>
+                        </div>
+                    </section>
+                ", $row_cnt); 
+                    /* close result set */
+                    mysqli_free_result($result);
+                }
+
+                /* close connection */
+                // mysqli_close($db);
 
                 ?>
+
+                </div>
+            <div class="col-md-3">
 
                  <?php
 
@@ -129,8 +165,7 @@ include('sidebarnav.php');
 
 
                 ?>
-            </div>
-            <div class="col-md-3">
+            
 
                  <?php
 
@@ -166,6 +201,9 @@ include('sidebarnav.php');
 
                 ?>
 
+                </div>
+            <div class="col-md-3">
+
 
                  <?php
 
@@ -200,8 +238,7 @@ include('sidebarnav.php');
 
 
                 ?>
-                </div>
-            <div class="col-md-3">
+                
 
 
                  <?php
@@ -236,18 +273,80 @@ include('sidebarnav.php');
 
 
                 ?>
+
+
             </div>
                 <div class="col-md-3">
+                    <?php
+
+                /* check connection */
+                if (mysqli_connect_errno()) {
+                    printf("Connect failed: %s\n", mysqli_connect_error());
+                    exit();
+                }
+
+                if ($result = mysqli_query($db, "select * from t_stud_visit where Visit_PURPOSE = 'Clearance'")) {
+
+                    /* determine number of rows result set */
+                    $row_cnt = mysqli_num_rows($result);
+
+                    printf("
                     <section class='panel'> 
-                        <div class='panel-body' >
+                    <div class='panel-body' >
                             <span class='mini-stat-icon orange'><i class='fa fa-calendar'></i></span>
                             <div class='mini-stat-info'>
-                                <span>0</span>
+                                <span>%d</span>
                                 Semestral
-                        </div>
-                    </section>
+                            </div>
+                        </section>
+                ", $row_cnt); 
+                    /* close result set */
+                    mysqli_free_result($result);
+                }
+
+                /* close connection */
+                // mysqli_close($db);
+
+
+                ?>
+
+                <?php
+
+                /* check connection */
+                if (mysqli_connect_errno()) {
+                    printf("Connect failed: %s\n", mysqli_connect_error());
+                    exit();
+                }
+
+                if ($result = mysqli_query($db, "select * from t_stud_visit where Visit_PURPOSE = 'Clearance'")) {
+
+                    /* determine number of rows result set */
+                    $row_cnt = mysqli_num_rows($result);
+
+                    printf("
+                    <section class='panel'> 
+                    <div class='panel-body' >
+                            <span class='mini-stat-icon orange'><i class='fa fa-calendar'></i></span>
+                            <div class='mini-stat-info'>
+                                <span>%d</span>
+                                School Year
+                            </div>
+                        </section>
+                ", $row_cnt); 
+                    /* close result set */
+                    mysqli_free_result($result);
+                }
+
+                /* close connection */
+                // mysqli_close($db);
+
+
+                ?>
+                       
+                </div>
                        
 </div>
+
             <div class="col-md-9">
                 <section class="panel">
                     
@@ -424,6 +523,9 @@ while($row = mysqli_fetch_array($result))
 }
 ?>
 <div id="visit-chart"></div>
+
+
+
 <script type="text/javascript">
 
 // Create the chart
@@ -500,10 +602,19 @@ Highcharts.chart('visit-chart',{
     }
     
 });
+
         </script>
-        
+
+       
+      
+</div>
 <!--right sidebar end-->
 </section>
+  <div class="col-lg-7 calendar-block">
+                <div class="cal1 ">
+                </div>
+ 
+
 
 <!-- Placed js at the end of the document so the pages load faster -->
 <!--Core js-->
@@ -528,6 +639,10 @@ Highcharts.chart('visit-chart',{
 <script src="js/flot-chart/jquery.flot.tooltip.min.js"></script>
 <script src="js/flot-chart/jquery.flot.resize.js"></script>
 <script src="js/flot-chart/jquery.flot.pie.resize.js"></script>
+<script src="js/calendar/clndr.js"></script>
+<script src="js/calendar/moment-2.2.1.js"></script>
+<script src="js/evnt.calendar.init.js"></script>
+
 
 <!--common script init for all pages-->
 <script src="js/scripts.js"></script>

@@ -38,7 +38,7 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a <?php if($currentPage=='G&CSMS-Reports') { echo 'class="active"';} ?> href="couselingreport.php">
+                    <a <?php if($currentPage=='G&CSMS-Reports') { echo 'class="active"';} ?> href="counselingreport.php">
                         <i class="fa fa-bar-chart-o"></i>
                         <span>Reports</span>
                     </a>
