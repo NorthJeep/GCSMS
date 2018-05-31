@@ -121,11 +121,8 @@ if (!$query) {
                     <td><?php echo $FULLNAME; ?></td>
                     <td><?php echo $COURSE; ?></td>
                     <td><?php echo $STATUS; ?></td>
-<<<<<<< HEAD
-                    <td><button class="btn btn-primary action-button stud_id" name="view" value="View" data-toggle="modal" href="#myModal<?php echo $ID; ?>" />
-=======
+
                     <td><button class="btn btn-primary action-button stud_id" name="view" value="View" data-toggle="modal" href="#myModal<?php echo $NO; ?>" />
->>>>>>> 6311994f814f775123913717c1f13ef878fd25f5
                     <i class="fa fa-eye"> View</i></button></td>  
                </tr>
                     </tfoot>
@@ -155,17 +152,7 @@ if (!$query) {
                                                 <?php 
                                                     if(file_exists("images/".$NO.".png"))
                                                     {
-<<<<<<< HEAD
-                                                        echo ' <img src="images/'.$NO.'.png" alt="images\user.ico" id="img'.$ID.'" style=" height:140px;padding-left:10px; padding-top:10px;" class="OpenImg"></img>';
-                                                    }
-                                                    elseif(file_exists("images/".$NO.".jpg"))
-                                                    {
-                                                        echo ' <img src="images/'.$NO.'.jpg" alt="images\user.ico" id="img'.$ID.'" style=" height:140px;padding-left:10px; padding-top:10px;" class="OpenImg"></img>';
-                                                    }
-                                                    else
-                                                    {
-                                                        echo ' <img src="images\user.ico" alt="images\user.ico" id="img'.$ID.'" style=" height:140px;padding-left:10px; padding-top:10px;" class="OpenImg"></img>';
-=======
+
                                                         echo ' <img src="images/'.$NO.'.png" alt="images\user.ico" id="img'.$NO.'" style=" height:140px;padding-left:10px; padding-top:10px;" class="OpenImg"></img>';
                                                     }
                                                     elseif(file_exists("images/".$NO.".jpg"))
@@ -175,7 +162,6 @@ if (!$query) {
                                                     else
                                                     {
                                                         echo ' <img src="images\user.ico" alt="images\user.ico" id="img'.$NO.'" style=" height:140px;padding-left:10px; padding-top:10px;" class="OpenImg"></img>';
->>>>>>> 6311994f814f775123913717c1f13ef878fd25f5
                                                     }
                                                 ?>
 
