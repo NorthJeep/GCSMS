@@ -73,6 +73,7 @@ include('sidebarnav.php');
                                 Guidance Record
                             </header>
                             <div class="panel-body">
+                            <a href="print_record_all.php" type="button" class="btn btn-success">Print</a>
                                 
                                 <section id="unseen">
                                     <table class=" display table table-bordered table-striped table-condensed" id="dynamic-table">
@@ -163,10 +164,6 @@ FROM
                                                 <?php }?>
                                             </tbody>
                                     </table>
-
-                                    <a href="print_record_all.php" type="button" class="btn btn-success">Print</a>
-
-
                                     <!-- page end-->
                                 </section>
                             </div>
