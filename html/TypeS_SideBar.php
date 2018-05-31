@@ -21,6 +21,7 @@
                     <li><a href="TypeS_CounselingApproach.php">Counseling Approach</a></li>
                     <li><a href="TypeS_Remarks.php">Remarks</a></li>
                     <li><a href="TypeS_CivilStatus.php">Civil Status</a></li>
+                    <li><a href="TypeS_UploadCategory.php">Upload Category</a></li>
                     </ul>
                 </li>
                 
