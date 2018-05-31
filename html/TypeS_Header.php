@@ -44,7 +44,7 @@
 <div class="top-nav clearfix">
     <!--search & user info start-->
     <ul class="nav pull-right top-menu">
-    <li><a href="Logout.php"><i class="fa fa-sign-out"></i> Log Out</a></li>
+    <a href="Logout.php"><i class="fa fa-sign-out"></i> Log Out</a>
     </ul>
     <!--search & user info end-->
 </div>

@@ -610,7 +610,7 @@ Highcharts.chart('visit-chart',{
 </div>
 <!--right sidebar end-->
 </section>
-  <div class="col-lg-7 calendar-block">
+            <div class="col-lg-7 calendar-block">
                 <div class="cal1 ">
                 </div>
  

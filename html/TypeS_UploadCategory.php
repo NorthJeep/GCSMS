@@ -131,7 +131,7 @@ include('TypeS_Sidebar.php');
                         <thead>
                             <tr>
                                 <th class="hidden">ID</th>
-                                <th>Civil Status</th>
+                                <th>Upload Category</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
