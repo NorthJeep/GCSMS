@@ -277,7 +277,6 @@ include('sidebarnav.php');
 
             </div>
                 <div class="col-md-3">
-                    <div class="col-md-3">
                     <?php
 
                 /* check connection */
