@@ -196,14 +196,14 @@ if (!$query) {
                                         <h4>Type of Counseling:</h4>
                                     </div>
                                     <div class="modal-body">
-                                    <div class="form-group" id="selectType" style="text-align:center; padding:20px 0px">
+                                    <!--<div class="form-group" id="selectType" style="text-align:center; padding:20px 0px">
                                             <button type="" class="btn btn-primary" onclick="ShowInput()">
                                             <i class="fa fa-user"></i> Individual Counseling</button>
                                             <button type="" class="btn btn-primary" onclick="document.location.href='counseling_services_group.php'">
                                             <i class="fa fa-users"></i> Group Counseling</button>
-                                    </div>
+                                    </div>-->
                                     <form method="POST" action="counseling_services.php">
-                                    <div id="input"style="display:none">
+                                    <div id="input"style="">
                                     <p>Input student's number and student's name before proceeding</p><br/>
                                         <form role="form" action="">
                                             <div class="form-group col-md-4">
@@ -325,7 +325,7 @@ if (!$query) {
 <!--dynamic table initialization -->
 <script src="js/dynamic_table_init1.js"></script>
 
-<script>
+<!--<script>
     function ShowInput(){
 
         document.getElementById("selectType").style.display="none";
@@ -338,7 +338,7 @@ if (!$query) {
         document.getElementById("selectType").style.display="";
         document.getElementById("input").style.display="none";
     }
-</script>
+</script>-->
     <script>  
      $(document).ready(function(){  
           $('#student_name').keyup(function(){  
