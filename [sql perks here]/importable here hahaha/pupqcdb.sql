@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2018 at 08:49 AM
+-- Generation Time: May 31, 2018 at 11:32 AM
 -- Server version: 10.1.8-MariaDB
 -- PHP Version: 5.6.14
 
@@ -105,6 +105,27 @@ insert into r_visit (Visit_TYPE,Visit_DESC)
 values (type,if (visitDesc = '',null,visitDesc))$$
 
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `active_academic_year`
+--
+
+CREATE TABLE `active_academic_year` (
+  `ActiveAcadYear_ID` int(11) NOT NULL,
+  `ActiveAcadYear_Batch_YEAR` varchar(50) NOT NULL,
+  `ActiveAcadYear_IS_ACTIVE` enum('1','0') NOT NULL DEFAULT '1',
+  `ActiveAcadYear_DATE_ADD` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ActiveAcadYear_DATE_MOD` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+--
+-- Dumping data for table `active_academic_year`
+--
+
+INSERT INTO `active_academic_year` (`ActiveAcadYear_ID`, `ActiveAcadYear_Batch_YEAR`, `ActiveAcadYear_IS_ACTIVE`, `ActiveAcadYear_DATE_ADD`, `ActiveAcadYear_DATE_MOD`) VALUES
+(5, '2017-2018', '1', '2018-05-21 00:38:41', NULL);
 
 -- --------------------------------------------------------
 
@@ -309,6 +330,33 @@ CREATE TABLE `r_sanction_details` (
   `SancDetails_DATE_ADD` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `SancDetails_DISPLAY_STAT` enum('Active','Inactive') DEFAULT 'Active'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `r_semester`
+--
+
+CREATE TABLE `r_semester` (
+  `Semestral_ID` int(11) NOT NULL,
+  `Semestral_CODE` varchar(15) NOT NULL,
+  `Semestral_NAME` varchar(50) NOT NULL,
+  `Semestral_DESC` varchar(100) DEFAULT 'Semester Description',
+  `Semestral_DATE_ADD` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Semestral_DATE_MOD` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Semestral_DISPLAY_STAT` enum('Active','Inactive') DEFAULT 'Active'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+--
+-- Dumping data for table `r_semester`
+--
+
+INSERT INTO `r_semester` (`Semestral_ID`, `Semestral_CODE`, `Semestral_NAME`, `Semestral_DESC`, `Semestral_DATE_ADD`, `Semestral_DATE_MOD`, `Semestral_DISPLAY_STAT`) VALUES
+(7, 'SEM00001', 'First Semester', 'First Semester', '2018-05-21 00:14:49', '2018-05-21 00:14:49', 'Active'),
+(8, 'SEM00002', 'Second Semester', 'Second Semester', '2018-05-21 00:14:57', '2018-05-21 00:14:57', 'Active'),
+(9, 'SEM00003', 'Third Semester', 'Third Semester', '2018-05-21 00:15:08', '2018-05-21 00:15:08', 'Active'),
+(10, 'SEM00004', 'Fourth Semester', 'Fourth Semester', '2018-05-21 00:15:16', '2018-05-21 00:15:16', 'Active'),
+(11, 'SEM00005', 'Summer Semester', 'Summer Semester', '2018-05-21 00:15:25', '2018-05-21 00:15:25', 'Active');
 
 -- --------------------------------------------------------
 
@@ -614,7 +662,7 @@ CREATE TABLE `student_counseling` (
 CREATE TABLE `student_profiling` (
 `STUD_NO` varchar(15)
 ,`FULLNAME` varchar(302)
-,`COURSE` varchar(39)
+,`COURSE` varchar(33)
 ,`BATCH YEAR` varchar(15)
 ,`GENDER` enum('Male','Female')
 ,`BIRTH DATE` varchar(73)
@@ -746,6 +794,13 @@ CREATE TABLE `t_upload` (
   `Upload_FILEPATH` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `t_upload`
+--
+
+INSERT INTO `t_upload` (`Upload_FILE_ID`, `Upload_DATE`, `Upload_USER`, `Upload_FILENAME`, `Upload_CATEGORY`, `Upload_TYPE`, `Upload_FILETYPE`, `Upload_FILEPATH`) VALUES
+(1, '2018-05-31 08:01:28', '', 'asd', 'Excuse Letter', '', 'Records', 'Files/Resume Pat.docx');
+
 -- --------------------------------------------------------
 
 --
@@ -777,7 +832,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `student_profiling`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_profiling`  AS  select `sp`.`Stud_NO` AS `STUD_NO`,if(isnull(`sp`.`Stud_MNAME`),concat(`sp`.`Stud_FNAME`,' ',`sp`.`Stud_LNAME`),concat(`sp`.`Stud_FNAME`,' ',`sp`.`Stud_MNAME`,' ',`sp`.`Stud_LNAME`)) AS `FULLNAME`,concat(`sp`.`Stud_COURSE`,' ',`sp`.`Stud_YEAR_LEVEL`,'-',`sp`.`Stud_YEAR_LEVEL`) AS `COURSE`,`sb`.`Batch_YEAR` AS `BATCH YEAR`,`sp`.`Stud_GENDER` AS `GENDER`,date_format(`sp`.`Stud_BIRTH_DATE`,'%M %d, %Y') AS `BIRTH DATE`,`sp`.`Stud_BIRTH_PLACE` AS `BIRTH PLACE`,`sp`.`Stud_CITY_ADDRESS` AS `CITY ADDRESS`,`sp`.`Stud_PROVINCIAL_ADDRESS` AS `PROVINCIAL ADDRESS`,`sp`.`Stud_TELEPHONE_NO` AS `TELEPHONE NO`,`sp`.`Stud_MOBILE_NO` AS `MOBILE NO`,`sp`.`Stud_EMAIL` AS `EMAIL`,`sb`.`Stud_STATUS` AS `STUD_STATUS` from (`r_stud_batch` `sb` join `r_stud_profile` `sp` on((`sp`.`Stud_NO` = `sb`.`Stud_NO`))) where (((`sb`.`Batch_YEAR` = (select `r_batch_details`.`Batch_YEAR` from `r_batch_details` order by `r_batch_details`.`Batch_ID` desc limit 1)) and (`sb`.`Stud_STATUS` = 'Regular')) or (`sb`.`Stud_STATUS` = 'Irregular')) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_profiling`  AS  select `sp`.`Stud_NO` AS `STUD_NO`,if(isnull(`sp`.`Stud_MNAME`),concat(`sp`.`Stud_FNAME`,' ',`sp`.`Stud_LNAME`),concat(`sp`.`Stud_FNAME`,' ',`sp`.`Stud_MNAME`,' ',`sp`.`Stud_LNAME`)) AS `FULLNAME`,concat(`sp`.`Stud_COURSE`,' ',`sp`.`Stud_YEAR_LEVEL`,'-',`sp`.`Stud_SECTION`) AS `COURSE`,`sb`.`Batch_YEAR` AS `BATCH YEAR`,`sp`.`Stud_GENDER` AS `GENDER`,date_format(`sp`.`Stud_BIRTH_DATE`,'%M %d, %Y') AS `BIRTH DATE`,`sp`.`Stud_BIRTH_PLACE` AS `BIRTH PLACE`,`sp`.`Stud_CITY_ADDRESS` AS `CITY ADDRESS`,`sp`.`Stud_PROVINCIAL_ADDRESS` AS `PROVINCIAL ADDRESS`,`sp`.`Stud_TELEPHONE_NO` AS `TELEPHONE NO`,`sp`.`Stud_MOBILE_NO` AS `MOBILE NO`,`sp`.`Stud_EMAIL` AS `EMAIL`,`sb`.`Stud_STATUS` AS `STUD_STATUS` from (`r_stud_batch` `sb` join `r_stud_profile` `sp` on((`sp`.`Stud_NO` = `sb`.`Stud_NO`))) where (((`sb`.`Batch_YEAR` = (select `r_batch_details`.`Batch_YEAR` from `r_batch_details` order by `r_batch_details`.`Batch_ID` desc limit 1)) and (`sb`.`Stud_STATUS` = 'Regular')) or (`sb`.`Stud_STATUS` = 'Irregular')) ;
 
 -- --------------------------------------------------------
 
@@ -791,6 +846,13 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `active_academic_year`
+--
+ALTER TABLE `active_academic_year`
+  ADD PRIMARY KEY (`ActiveAcadYear_ID`) USING BTREE,
+  ADD KEY `FK_ActiveAcadYear_Batch_YEAR` (`ActiveAcadYear_Batch_YEAR`) USING BTREE;
 
 --
 -- Indexes for table `r_batch_details`
@@ -867,6 +929,13 @@ ALTER TABLE `r_remarks`
 ALTER TABLE `r_sanction_details`
   ADD PRIMARY KEY (`SancDetails_ID`),
   ADD UNIQUE KEY `UNQ_SancDetails_CODE` (`SancDetails_CODE`);
+
+--
+-- Indexes for table `r_semester`
+--
+ALTER TABLE `r_semester`
+  ADD PRIMARY KEY (`Semestral_ID`) USING BTREE,
+  ADD UNIQUE KEY `UNQ_Semstral_NAME` (`Semestral_NAME`) USING BTREE;
 
 --
 -- Indexes for table `r_stud_batch`
@@ -1017,6 +1086,11 @@ ALTER TABLE `t_upload`
 --
 
 --
+-- AUTO_INCREMENT for table `active_academic_year`
+--
+ALTER TABLE `active_academic_year`
+  MODIFY `ActiveAcadYear_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT for table `r_batch_details`
 --
 ALTER TABLE `r_batch_details`
@@ -1067,6 +1141,11 @@ ALTER TABLE `r_remarks`
 ALTER TABLE `r_sanction_details`
   MODIFY `SancDetails_ID` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `r_semester`
+--
+ALTER TABLE `r_semester`
+  MODIFY `Semestral_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
 -- AUTO_INCREMENT for table `r_stud_batch`
 --
 ALTER TABLE `r_stud_batch`
@@ -1115,10 +1194,16 @@ ALTER TABLE `t_stud_visit`
 -- AUTO_INCREMENT for table `t_upload`
 --
 ALTER TABLE `t_upload`
-  MODIFY `Upload_FILE_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Upload_FILE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `active_academic_year`
+--
+ALTER TABLE `active_academic_year`
+  ADD CONSTRAINT `FK_ActiveAcadYear_Batch_YEAR` FOREIGN KEY (`ActiveAcadYear_Batch_YEAR`) REFERENCES `r_batch_details` (`Batch_YEAR`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `r_courses`
