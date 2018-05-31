@@ -1,12 +1,11 @@
 <?php  
  include("config.php");
-  $output = '';
  if(isset($_POST["query"]))  
  {  
-     
+      $output = '';
       if($_POST["query"] != '')
       {
-        $query = "SELECT * FROM r_stud_profile WHERE STUD_FNAME LIKE '%".$_POST["query"]."%'";  
+        $query = "SELECT * FROM r_stud_profile WHERE STUD_NO LIKE '%".$_POST["query"]."%'";  
         $result = mysqli_query($db, $query);  
         $output = '<ul class="list-unstyled">';  
         if(mysqli_num_rows($result) > 0)  
@@ -29,11 +28,8 @@
         $output .= '</ul>';
       }
         
-     
-  }
-  else
-  {
-    $output = "No Value";
-  }
-   echo $output;  
+      echo $output;  
+      }
+  
+
 ?>

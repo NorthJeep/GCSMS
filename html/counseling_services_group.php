@@ -19,7 +19,6 @@
     <link rel="stylesheet" type="text/css" href="js/bootstrap-fileupload/bootstrap-fileupload.css" />
     <link rel="stylesheet" type="text/css" href="js/bootstrap-wysihtml5/bootstrap-wysihtml5.css" />
     <link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker.css" />
-    <link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/compiled/timepicker.css" />
     <link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
     <link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
     <link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker.css" />
@@ -45,8 +44,7 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
 
-    <link href="js/plugins/sweetalert/sweetalert.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <link href="data-tables/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" media="screen,projection">  
+    <!-- <link href="data-tables/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" media="screen,projection">   -->
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]>
@@ -134,14 +132,18 @@ include('sidebarnav.php');
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label>Student Number</label>
-                                                            <input maxlength="150" type="text" name="stud_no[]" class="form-control" required="" style="color: black;" placeholder="Input student number..." />
+                                                            <input maxlength="150" type="text" name="stud_no[]" class="form-control student_no2" required="" style="color: black;" placeholder="Input student number..." />
+
+                                                            <div class="studnt_no_list1"></div>
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label>Student Name</label>
-                                                            <input style="color: black; padding-right: 2px;" type="text" name="stud_name[]" class="form-control" required="" max="150" placeholder="Input student name..."/>
+                                                            <input style="color: black; padding-right: 2px;" type="text" name="stud_name[]" class="form-control student_name2" required="" max="150" placeholder="Input student name..."/>
+                                                            
+                                                            <div class="studnt_no_list2"></div>
                                                         </div>
                                                     </div>
 
@@ -247,13 +249,14 @@ include('sidebarnav.php');
 <!-- Placed js at the end of the document so the pages load faster -->
 
 <!--Core js-->
-<script src="js/jquery.js"></script>
+<!-- <script src="js/jquery.js"></script> -->
+
+<script src="js/jquery-1.8.3.min.js"></script>
 <script src="bs3/js/bootstrap.min.js"></script>
 <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
 <script src="js/jquery.scrollTo.min.js"></script>
 <script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
 <script src="js/jquery.nicescroll.js"></script>
-<script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
 <script src="js/easypiechart/jquery.easypiechart.js"></script>
 
@@ -263,12 +266,10 @@ include('sidebarnav.php');
 <script type="text/javascript" src="js/bootstrap-fileupload/bootstrap-fileupload.js"></script>
 <script type="text/javascript" src="js/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
 <script type="text/javascript" src="js/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
-<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script><!-- 
 <script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
-<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
-<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script> -->
 <script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
-<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
 <script type="text/javascript" src="js/jquery-multi-select/js/jquery.multi-select.js"></script>
 <script type="text/javascript" src="js/jquery-multi-select/js/jquery.quicksearch.js"></script>
 
@@ -286,32 +287,149 @@ include('sidebarnav.php');
 <!--Sparkline Chart-->
 <script src="js/sparkline/jquery.sparkline.js"></script>
 <!--jQuery Flot Chart-->
-<script src="js/flot-chart/jquery.flot.js"></script>
+<!-- <script src="js/flot-chart/jquery.flot.js"></script>
 <script src="js/flot-chart/jquery.flot.tooltip.min.js"></script>
 <script src="js/flot-chart/jquery.flot.resize.js"></script>
-<script src="js/flot-chart/jquery.flot.pie.resize.js"></script>
+<script src="js/flot-chart/jquery.flot.pie.resize.js"></script> -->
 
 <!--dynamic table-->
 <script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
 <!--common script init for all pages-->
-<script src="js/scripts.js"></script>
+<!-- <script src="js/scripts.js"></script> -->
 
 <!--dynamic table initialization -->
 <script src="js/dynamic_table_init.js"></script>
 
-<script src="js/advanced-form.js"></script>
+<!-- <script src="js/advanced-form.js"></script> -->
 <script src="js/toggle-init.js"></script>
 <!--icheck init -->
 <script src="js/icheck-init.js"></script>
-<script src="js/advanced-form.js"></script>
+<!-- <script src="js/advanced-form.js"></script> -->
 
-    <script type="text/javascript" src="js/plugins/sweetalert/sweetalert.min.js"></script>   
+<script> 
+$(document).ready(function(){  
+            addButtonEvent();
+          $('.student_name2').on("keyup",function(){   
+                // console.log("WTF");
+               var query = $(this).val();
+               
+               if(query != '')  
+               {  
+                    $.ajax({  
+                         url:"search.php",  
+                         type: "POST",  
+                         data:{query:query},  
+                         success:function(data)  
+                         {  
+                            // console.log(data);
+                              $('.studnt_no_list2').fadeIn();  
+                              $('.studnt_no_list2').html(data);  
+                         }  
+                    });
+                    $.ajax({  
+                         url:"search2.php",  
+                         type:"POST",  
+                         data:{query:query},  
+                         success:function(data)  
+                         {  
+                              $('.studnt_no_list1').fadeIn();  
+                              $('.studnt_no_list1').html(data);  
+                         }  
+                    });
+               }
+               else
+               {
+                $(".studnt_no_list1").empty();
+                $(".studnt_no_list2").empty();
+               }
+          });  
 
-    <script src="js/jquery.multifield.min.js"></script>
+          $('.student_no2').on("keyup",function(){  
+            // console.log("WTF");
+               var query = $(this).val();
+               // console.log("QUERY: "+query);  
+               if(query != '')  
+               {  
+                    $.ajax({  
+                         url:"search3.php",  
+                         type:"POST",  
+                         data:{query:query},  
+                         success:function(data)  
+                         {  
+                              $('.studnt_no_list2').fadeIn();  
+                              $('.studnt_no_list2').html(data);  
+                         }  
+                    });
+                    $.ajax({  
+                         url:"search4.php",  
+                         type:"POST",  
+                         data:{query:query},  
+                         success:function(data)  
+                         {  
+                              $('.studnt_no_list1').fadeIn();  
+                              $('.studnt_no_list1').html(data);  
+                         }  
+                    });
+               }
+               else
+               {
+                $(".studnt_no_list1").empty();
+                $(".studnt_no_list2").empty();
+               }
+          });  
+          // $(document).on('click', 'li', function(){  
+          //       // $('.student_name').val($(this).text());
+          //       // $('.student_no').val($(this).text());
+          //       // $(".studnt_no_list1").empty();
+          //       // $(".studnt_no_list2").empty();
+          //      // $('.studnt_no_list').fadeOut();  
+              
 
-    <script type="text/javascript">
-    $(document).ready(function(){
+          // });
+
+        $("#btnAdd").on("click",function(){
+            addButtonEvent();
+        });
+       
+
+
+        function addButtonEvent(){
+             $(".form-content").on('click', '.search-item-name', function(){  
+                
+                // $(this).parent().find('.student_no2').val($(this).find(".student-no-hide").text());
+                $('.student_no2').val($(this).find(".student-no-hide").text());
+                 // $(this).parent().find(".student-no-hide").empty();
+                $(this).find(".student-no-hide").empty();
+                // $(this).parent().find('.student_name2').val($(this).text());
+                $('.student_name2').val($(this).text());
+                $(".studnt_no_list1").empty();
+                $(".studnt_no_list2").empty();
+               // $('.studnt_no_list').fadeOut();  
+              
+
+          });
+           $(".form-content").on('click', '.search-item-no', function(){  
+            console.log("reached");
+                // $(this).closest('div').find('.student_name2').val($(this).find(".student-name-hide").text());
+                $('.student_name2').val($(this).find(".student-name-hide").text());
+                $(this).find(".student-name-hide").empty();
+                $('.student_no2').val($(this).text());
+                $(".studnt_no_list1").empty();
+                $(".studnt_no_list2").empty();
+               // $('.studnt_no_list').fadeOut();  
+              
+
+          });
+        }
+         
+    });  
+</script>  
+
+<!-- <script type="text/javascript">
+$(document).ready(function(){ 
+
+
         "use strict";
         
         $('.btn-message').click(function(){
@@ -435,7 +553,7 @@ include('sidebarnav.php');
         });
         
     });
-    </script>
+    </script> -->
 
     <script src="jquery.multifield.min.js"></script>
     <script>
@@ -446,26 +564,27 @@ include('sidebarnav.php');
             btnRemove:'.btnRemove',
         });
 
-        $(function(){
-            $('select').on('change',function(){                        
-                $('input[name=place]').val($(this).val());            
-            });
-        });
 
-        $(function(){
-            $('select').on('change',function(){                        
-                $('input[name=reqperson]').val($(this).val());            
-            });
-        });
+        // $(function(){
+        //     $('select').on('change',function(){                        
+        //         $('input[name=place]').val($(this).val());            
+        //     });
+        // });
 
-        $(function(){
-            $('select').on('change',function(){                        
-                $('input[name=asttypesss]').val($(this).val());            
-            });
-        });
+        // $(function(){
+        //     $('select').on('change',function(){                        
+        //         $('input[name=reqperson]').val($(this).val());            
+        //     });
+        // });
+
+        // $(function(){
+        //     $('select').on('change',function(){                        
+        //         $('input[name=asttypesss]').val($(this).val());            
+        //     });
+        // });
 
     </script>
-    <script id="header_notification_bar">
+    <!-- <script id="header_notification_bar">
 $(document).ready(function(){
  
  function load_unseen_notification(view = '')
@@ -520,7 +639,8 @@ $(document).ready(function(){
  }, 2500);
  
 });
-</script>
+</script> -->
+
 
 </body>
 </html>
