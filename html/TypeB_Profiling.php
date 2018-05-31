@@ -49,8 +49,8 @@
 <body>
 <?php 
 $currentPage ='G&CSMS-Profiling';
-include('header.php');
-include('sidebarnav.php');
+include('TypeB_Header.php');
+include('TypeB_SideBar.php');
 ?>
 <!--sidebar end-->
     <!--main content start-->
@@ -77,12 +77,12 @@ include('sidebarnav.php');
                         Students Profile
                     </header>
                     <div class="panel-body">
-                    <div>
+                    <!-- <div>
                     <button data-toggle="modal" href="#Add" class="btn btn-primary">
                                 <i class="fa fa-plus"></i>   Add</button>
                     <button href="#ImportModal" data-toggle="modal" class="btn btn-warning">
                                 <i class="fa fa-plus"></i> Import</button>
-                    </div>
+                    </div> -->
                     <div class="adv-table">
                     <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="dynamic-table">
                     <thead>
@@ -121,11 +121,7 @@ if (!$query) {
                     <td><?php echo $FULLNAME; ?></td>
                     <td><?php echo $COURSE; ?></td>
                     <td><?php echo $STATUS; ?></td>
-<<<<<<< HEAD
-                    <td><button class="btn btn-primary action-button stud_id" name="view" value="View" data-toggle="modal" href="#myModal<?php echo $ID; ?>" />
-=======
                     <td><button class="btn btn-primary action-button stud_id" name="view" value="View" data-toggle="modal" href="#myModal<?php echo $NO; ?>" />
->>>>>>> 6311994f814f775123913717c1f13ef878fd25f5
                     <i class="fa fa-eye"> View</i></button></td>  
                </tr>
                     </tfoot>
@@ -155,17 +151,6 @@ if (!$query) {
                                                 <?php 
                                                     if(file_exists("images/".$NO.".png"))
                                                     {
-<<<<<<< HEAD
-                                                        echo ' <img src="images/'.$NO.'.png" alt="images\user.ico" id="img'.$ID.'" style=" height:140px;padding-left:10px; padding-top:10px;" class="OpenImg"></img>';
-                                                    }
-                                                    elseif(file_exists("images/".$NO.".jpg"))
-                                                    {
-                                                        echo ' <img src="images/'.$NO.'.jpg" alt="images\user.ico" id="img'.$ID.'" style=" height:140px;padding-left:10px; padding-top:10px;" class="OpenImg"></img>';
-                                                    }
-                                                    else
-                                                    {
-                                                        echo ' <img src="images\user.ico" alt="images\user.ico" id="img'.$ID.'" style=" height:140px;padding-left:10px; padding-top:10px;" class="OpenImg"></img>';
-=======
                                                         echo ' <img src="images/'.$NO.'.png" alt="images\user.ico" id="img'.$NO.'" style=" height:140px;padding-left:10px; padding-top:10px;" class="OpenImg"></img>';
                                                     }
                                                     elseif(file_exists("images/".$NO.".jpg"))
@@ -175,7 +160,6 @@ if (!$query) {
                                                     else
                                                     {
                                                         echo ' <img src="images\user.ico" alt="images\user.ico" id="img'.$NO.'" style=" height:140px;padding-left:10px; padding-top:10px;" class="OpenImg"></img>';
->>>>>>> 6311994f814f775123913717c1f13ef878fd25f5
                                                     }
                                                 ?>
 
@@ -193,7 +177,7 @@ if (!$query) {
                                                 class="form-control" style="width:80px" placeholder="<?php echo $STATUS; ?>" disabled> 
                                                 <button type="submit" class="btn btn-success" name="ok_status" id="ok_status" style="display:none"><i class="fa fa-check"></i>
                                                 </form>
-                                                <button class="btn btn-warning" id="edit_status"onclick="EditStatus()"><i class="fa fa-pencil"></i></button>
+                                                <!-- <button class="btn btn-warning" id="edit_status"onclick="EditStatus()"><i class="fa fa-pencil"></i></button> -->
                                                 </div>
                                             </div>
                                         <div class="col-md-8">
@@ -201,7 +185,7 @@ if (!$query) {
                                                 <h4>Sanction:</h4>
                                                 <span class="label label-warning"><i class="fa fa-exclamation"></i> Warning: 18hrs</span>
                                             </blockquote>
-                                            <blockquote style="background-color:#03605b; height:150px">
+                                            <!-- <blockquote style="background-color:#03605b; height:150px">
                                                 <h4>Counseling Remarks:</h4>
                                                 <h5 id="remarkstxt" name="remarkstxt">Follow Up</h5>
                                                 <br/>
@@ -211,7 +195,7 @@ if (!$query) {
                                             <button type="submit" class="btn btn-success" href="counseling_services.php"><i class="fa fa-edit"></i> Start Counseling</button>
                                             </form>
                                             <button class="btn btn-info" id="viewCouns" href="visit_logs.php"><i class="fa fa-eye"></i> View History</button>
-                                            </blockquote>
+                                            </blockquote> -->
                                             </div>
                                             </div>
                                         </div>

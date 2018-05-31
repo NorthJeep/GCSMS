@@ -77,7 +77,7 @@ ORDER BY t.COUNS_DATE DESC";
 } 
 function filterTable($query)
 {
-    $db = mysqli_connect('localhost','root','','g&csms_db');
+    $db = mysqli_connect('localhost','root','oliver','pupqcdb');
     $filter_Result = mysqli_query($db, $query);
     return $filter_Result;
 }
@@ -141,14 +141,15 @@ function filterTable($query)
                     <?php
 include('config.php');
 
-  $sql= "SELECT  t.COUNSELING_ID, t.COUNSELING_TYPE_CODE, t.STUD_ID, t.STUD_NO, t.STUD_NAME, t.STUD_COURSE, t.STUD_YR, t.STUD_SECTION, 
+ /* $sql= "SELECT  t.COUNSELING_ID, t.COUNSELING_TYPE_CODE, t.STUD_ID, t.STUD_NO, t.STUD_NAME, t.STUD_COURSE, t.STUD_YR, t.STUD_SECTION, 
               t.STUD_CONTACT, t.STUD_EMAIL, t.STUD_ADDRESS, t.COUNS_APPROACH, t.COUNS_BG, t.COUNS_GOALS, t.COUNS_PREV_TEST, t.COUNS_PREV_PERSON, 
               t.COUNS_COMMENTS, t.COUNS_RECOMM, t.COUNS_APPOINTMENT_TYPE, DATE_FORMAT(t.COUNS_DATE,'%W %M %e %Y'), r.COUNS_APPROACH_CODE, r.COUNS_APPROACH_NAME
 FROM `t_counseling` as t
 INNER JOIN `r_couns_approach` as r ON t.COUNS_APPROACH = r.COUNS_APPROACH_CODE
-ORDER BY t.COUNS_DATE DESC";
+ORDER BY t.COUNS_DATE DESC";*/
 
-$query = mysqli_query($db, $sql);
+$sql = "select * from student_counseling where COUNSELING_TYPE = 'Individual Counseling' order by COUNSELING_DATE desc";
+$search_result = mysqli_query($db, $sql);
 
 if (!$query) {
     die ('SQL Error: ' . mysqli_error($db));
@@ -156,22 +157,23 @@ if (!$query) {
 
     /* fetch object array */
     while ($row = mysqli_fetch_assoc($search_result)) 
-        {       $ID=$row['COUNSELING_ID']; 
+        {       //$ID=$row['COUNSELING_ID']; 
                 $no=$row['STUD_NO'];
                 $name=$row['STUD_NAME'];
-                $app=$row['COUNS_APPROACH_NAME'];
-                $bg=$row['COUNS_BG'];
-                $goals=$row['COUNS_GOALS'];
-                $comments=$row['COUNS_COMMENTS'];
-                $recomm=$row['COUNS_RECOMM'];
-                $apptype=$row['COUNS_APPOINTMENT_TYPE'];
-                $date=$row['COUNS_DATE'];
+                $app=$row['COUNSELING_APPROACH'];
+                $type=$row['COUNSELING_TYPE'];
+                $bg=$row['COUNSELING_BG'];
+                $goals=$row['GOALS'];
+                $comments=$row['COUNS_COMMENT'];
+                $recomm=$row['RECOMMENDATION'];
+                $apptype=$row['APPOINTMENT_TYPE'];
+                $date=$row['COUNSELING_DATE'];
     ?>
                     <tr>
                     <td><?php echo $no; ?></td>
                     <td><?php echo $name; ?></td>
-                    <td><?php echo $app; ?></td>
-                    <td><button class="btn btn-primary" name="view" value="View" id="" data-toggle="modal" href="#Viewmodal<?php echo $ID; ?>"
+                    <td><?php echo $type; ?></td>
+                    <td><button class="btn btn-primary" name="view" value="View" id="" data-toggle="modal" href="#Viewmodal<?php echo $no; ?>"
                     <i class="fa fa-eye"> View</i></button></td>
                </tr>
                     </tfoot>
@@ -224,7 +226,7 @@ if (!$query) {
                         </div>
                 
                 <!--MODALSSSS-->
-                            <div class="modal fade" id="Viewmodal<?php echo $ID; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="Viewmodal<?php echo $no; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" style="width:1000px">
                                     <div class="modal-content">
                                         <div class="modal-header" style="background-color:#07847d; color:white">
@@ -254,7 +256,7 @@ if (!$query) {
 
                                         </div>
                                         <div class="modal-footer">
-                                            <button class="btn btn-primary" type="button">OK</button>
+                                            <button data-dismiss="modal" class="btn btn-primary" type="button">OK</button>
                                         </div>
                                     </div>
                                 </div>
@@ -301,17 +303,6 @@ if (!$query) {
 <script src="js/jquery.scrollTo.min.js"></script>
 <script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
 <script src="js/jquery.nicescroll.js"></script>
-
-<script src="js/jquery-steps/jquery.steps.js"></script>
-<!--Easy Pie Chart-->
-<script src="js/easypiechart/jquery.easypiechart.js"></script>
-<!--Sparkline Chart-->
-<script src="js/sparkline/jquery.sparkline.js"></script>
-<!--jQuery Flot Chart-->
-<script src="js/flot-chart/jquery.flot.js"></script>
-<script src="js/flot-chart/jquery.flot.tooltip.min.js"></script>
-<script src="js/flot-chart/jquery.flot.resize.js"></script>
-<script src="js/flot-chart/jquery.flot.pie.resize.js"></script>
 
 <script src="js/iCheck/jquery.icheck.js"></script>
 

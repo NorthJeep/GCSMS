@@ -12,16 +12,16 @@
 		else
 		{
 				
-			$query = "SELECT * FROM R_USER WHERE USERNAME = '".$username."' and USER_PASSWORD = '".$userpassword."'";
+			$query = "CALL `login_check`('$username', '$userpassword')";
 			$result = mysqli_query($db,$query) or die(mysqli_error());
 			if (mysqli_num_rows($result) > 0)
 			{
 				while($row = mysqli_fetch_assoc($result))
 				{
-					$userid = $row['USER_ID'];
+					$userid = $row['Users_REFERENCED'];
 					/*$userfname = $_POST['USER_FNAME'];
 					$userlname = $_POST['USER_LNAME'];*/
-					$userrole = $row['USER_ROLE'];
+					$userrole = $row['Users_ROLES'];
 				}
 				echo 'OK!';
 				session_start();
@@ -32,10 +32,11 @@
 				// $_SESSION['USER_FNAME'] = $userfname;
 				// $_SESSION['USER_LNAME'] = $userlname;
 				$_SESSION['USER_ROLE'] = $userrole;
-				if ($userrole == 'System Admin') {
-					$redirect = 'TypeSManagement.php?user='.$loginname.'';
+				$redirect = '';
+				if ($userrole == 'System Administrator') {
+					$redirect = 'TypeS_VisitType.php?user='.$loginname.'';
 				} else if ($userrole == 'Student Assistant') {
-					$redirect = 'TypeBIndex.php?user='.$loginname.'';
+					$redirect = 'TypeB_Index.php?user='.$loginname.'';
 				} else if ($userrole == 'Guidance Counselor') {
 					$redirect = 'index.php?user='.$loginname.'';
 				}
@@ -44,9 +45,8 @@
 			}
 			else
 			{
-				echo 'That username/password is incorrect<br/><br/>';
-				header('Location:/Fail.php');
+				header('Location:login.php?trial=failed');
 			}
 		}
-		print_r($result);
+		// print_r($result);
 ?>

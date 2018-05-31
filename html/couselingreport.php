@@ -20,7 +20,7 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="images/favicon.png">
 
-    <title>G&CSMS-Counseling Service</title>
+    <title>G&CSMS-Reports</title>
 
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -51,6 +51,18 @@ include('sidebarnav.php');
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
+          <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumbs-alt">
+                        <li>
+                            <a href="#"><i class="fa fa-home"></i> Home</a>
+                        </li>
+                        <li>
+                            <a class="current" href="#"><i class="fa fa-bar-chart-o"></i> Reports</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
                 <div class="row">
             <div class="col-sm-12">
                 <section class="panel">
@@ -63,9 +75,8 @@ include('sidebarnav.php');
                                 <thead>
                                 <tr>
                                     <th hidden>Couseling ID</th>
-                                    <th>Student number</th>
-                                    <th>Student name</th>
-                                    <th>Type</th>
+                                    <th>Student Name</th>
+                                    <th>Student Number</th>
                                     <th>Date</th>
                                     <th id="thview">View</th>
                                 </tr>
@@ -73,7 +84,7 @@ include('sidebarnav.php');
         <!-- page start-->
 <?php
 
-$conn = mysqli_connect("localhost","root","","g&csms_db");
+$conn = mysqli_connect("localhost","root","","pupqcdb");
 
 // Check connection
 if (mysqli_connect_errno())
@@ -81,24 +92,64 @@ if (mysqli_connect_errno())
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-  $sql =  mysqli_query ($conn," SELECT `COUNSELING_ID`,`STUD_NO`,`STUD_NAME`,`COUNSELING_TYPE_CODE`,`COUNS_DATE` 
-            FROM `t_counseling`");?>
+  $sql =  mysqli_query ($conn," SELECT
+  `c`.`Couns_CODE` AS `COUNSELING_CODE`,
+  CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
+  `s`.`Stud_NO` AS `STUD_NO`,
+  DATE_FORMAT(`c`.`Couns_DATE`, '%W %M %d %Y') AS `COUNSELING_DATE`,
+  `c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
+  `c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,
+  CONCAT(
+      `s`.`Stud_COURSE`,
+      ' ',
+      `s`.`Stud_YEAR_LEVEL`,
+      ' - ',
+      `s`.`Stud_SECTION`
+  ) AS `COURSE`,
+  (
+  SELECT
+      GROUP_CONCAT(`a`.`Couns_APPROACH` SEPARATOR ', ')
+  FROM
+      `t_couns_approach` `a`
+  WHERE
+      (
+          `a`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`
+      )
+) AS `COUNSELING_APPROACH`,
+`c`.`Couns_BACKGROUND` AS `COUNSELING_BG`,
+`c`.`Couns_GOALS` AS `GOALS`,
+`c`.`Couns_COMMENT` AS `COUNS_COMMENT`,
+`c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION`
+FROM
+  (
+      (
+          `t_counseling` `c`
+      JOIN `t_couns_details` `cd` ON
+          (
+              (
+                  `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
+              )
+          )
+      )
+  JOIN `r_stud_profile` `s` ON
+      ((`s`.`Stud_NO` = `cd`.`Stud_NO`))
+  ) ");?>
 
 <?php while ($row = mysqli_fetch_array($sql)) { ?>
         <tbody>
         <tr>
-            <td hidden><?php echo $row['COUNSELING_ID']; ?></td>
-            <td><?php echo $row['STUD_NO']; ?></td>
+            <td hidden><?php echo $row['COUNSELING_CODE']; ?></td>
             <td><?php echo $row['STUD_NAME']; ?></td>
-            <td><?php echo $row['COUNSELING_TYPE_CODE']; ?></td>
-            <td><?php echo $row['COUNS_DATE']; ?></td>
-            <td><a href="counseling_report_review.php?view=<?php echo $row['COUNSELING_ID']; ?>"  id="viewbutton" type="button" class ="btn btn-success" >view</a></td>
+            <td><?php echo $row['STUD_NO']; ?></td>
+            <td><?php echo $row['COUNSELING_DATE']; ?></td>
+            
+            <td><a href="counseling_report_review.php?view=<?php echo $row['COUNSELING_CODE']; ?>"  id="viewbutton" type="button" class ="btn btn-success" >View</a></td>
         </tr>
     <?php }?>
     </tbody>
 </table>
 
-<a href="print_record_all.php"  type="button" class ="btn btn-success">print</a>
+<a href="print_record_all.php"  type="button" class ="btn btn-success">Print</a>
 
 
         <!-- page end-->
@@ -131,10 +182,10 @@ if (mysqli_connect_errno())
 <!--Sparkline Chart-->
 <script src="js/sparkline/jquery.sparkline.js"></script>
 <!--jQuery Flot Chart-->
-<script src="js/flot-chart/jquery.flot.js"></script>
+<!-- <script src="js/flot-chart/jquery.flot.js"></script>
 <script src="js/flot-chart/jquery.flot.tooltip.min.js"></script>
 <script src="js/flot-chart/jquery.flot.resize.js"></script>
-<script src="js/flot-chart/jquery.flot.pie.resize.js"></script>
+<script src="js/flot-chart/jquery.flot.pie.resize.js"></script> -->
 
 <script src="js/iCheck/jquery.icheck.js"></script>
 

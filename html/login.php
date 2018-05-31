@@ -6,6 +6,9 @@
 		header('Location:index.php');
 		exit;
 	}
+  if (isset($_GET['trial']) && $_GET['trial']='failed') {
+        echo '<script>alert("That username/password is incorrect");</script>';
+  }
 ?>
 <html lang="en">
 <head>
@@ -58,12 +61,12 @@
                 </label>
                 <button class="btn btn-lg btn-login btn-block" type="submit">Sign in</button>
 
-                <div class="registration">
+                <!-- <div class="registration">
                     Don't have an account yet?
                     <a class="" href="registration.php">
                         Create an account
                     </a>
-                </div>
+                </div> -->
             </form>
             </div>
         </div>

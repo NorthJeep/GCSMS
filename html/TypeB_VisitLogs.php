@@ -39,8 +39,8 @@
 <body>
 <?php 
 $currentPage ='G&CSMS-Visits';
-include('header.php');
-include('sidebarnav.php');
+include('TypeB_Header.php');
+include('TypeB_SideBar.php');
 include 'config.php';
         
     // Check connection
@@ -87,7 +87,7 @@ if(isset($_POST['search']) && $_POST['filter'] != 'All')
                     </header>
                     <div class="panel-body">
                     <div class="col-md-6" style="padding-left:0px">
-                        <form action="visit_logs.php" method="POST">
+                        <form action="TypeB_VisitLogs.php" method="POST">
                             <div class="row">
                                 <div class="col-md-6">
                                     <select name="filter" class="form-control input-sm m-bot4">
