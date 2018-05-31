@@ -20,7 +20,7 @@
     $filename = $_POST['UPLOAD_FILENAME'];
     $location = "Files/" . $files;
     $sqli = "INSERT INTO T_UPLOAD (UPLOAD_FILENAME,UPLOAD_CATEGORY,UPLOAD_DATE,UPLOAD_FILEPATH,UPLOAD_FILETYPE) 
-    VALUES ('{$filename}','".$_POST['UPLOAD_CATEGORY']."',CURDATE(),'{$location}','".$_POST['UPLOAD_FILETYPE']."')";
+    VALUES ('{$filename}','".$_POST['UPLOAD_CATEGORY']."',CURRENT_TIMESTAMP(),'{$location}','".$_POST['UPLOAD_FILETYPE']."')";
     $result = mysqli_query($db,$sqli);
     if ($result) {
         header('Location: TypeA_FilesAndDocuments.php' . $redirect);
