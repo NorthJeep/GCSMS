@@ -464,6 +464,9 @@ while($row = mysqli_fetch_array($result))
 }
 ?>
 <div id="visit-chart"></div>
+
+
+
 <script type="text/javascript">
 
 // Create the chart
@@ -540,10 +543,19 @@ Highcharts.chart('visit-chart',{
     }
     
 });
+
         </script>
-        
+
+       
+      
+</div>
 <!--right sidebar end-->
 </section>
+  <div class="col-lg-7 calendar-block">
+                <div class="cal1 ">
+                </div>
+ 
+
 
 <!-- Placed js at the end of the document so the pages load faster -->
 <!--Core js-->
@@ -568,6 +580,10 @@ Highcharts.chart('visit-chart',{
 <script src="js/flot-chart/jquery.flot.tooltip.min.js"></script>
 <script src="js/flot-chart/jquery.flot.resize.js"></script>
 <script src="js/flot-chart/jquery.flot.pie.resize.js"></script>
+<script src="js/calendar/clndr.js"></script>
+<script src="js/calendar/moment-2.2.1.js"></script>
+<script src="js/evnt.calendar.init.js"></script>
+
 
 <!--common script init for all pages-->
 <script src="js/scripts.js"></script>
