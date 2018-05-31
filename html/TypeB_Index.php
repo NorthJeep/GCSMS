@@ -105,7 +105,7 @@ include('TypeB_SideBar.php');
                     exit();
                 }
 
-                if ($result = mysqli_query($db, "select * from r_stud_profile where Stud_STATUS = 'Regular' or Stud_STATUS = 'Irregular'")) {
+                if ($result = mysqli_query($db, "select * from `student_profiling` where Stud_STATUS = 'Regular' or Stud_STATUS = 'Irregular'")) {
 
                     /* determine number of rows result set */
                     $row_cnt = mysqli_num_rows($result);
