@@ -204,15 +204,15 @@ if (!$query) {
                                     <div id="input"style="display:none">
                                     <p>Input student's number and student's name before proceeding</p><br/>
                                         <form role="form" action="">
-                                            <div class="form-group">
+                                            <div class="form-group col-md-4">
                                                 <label for="studentnumber">Student Number</label><br/><br/>
-                                                <input type="text" class="form-control" name="student_no" placeholder="20XX-XXXXX-CM-0">
-                                            <div id="studnt_no_list"></div>
+                                                <input id="student_no" type="text" class="form-control" name="student_no" placeholder="20XX-XXXXX-CM-0" required>
+                                            <div class="studnt_no_list1"></div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group col-md-8">
                                                 <label for="studentname">Name</label><br/><br/>
-                                                <input type="text" class="form-control" name="student_name" placeholder="Fullname">
-                                            <div id="studnt_no_list"></div>
+                                                <input id="student_name" type="text" class="form-control" name="student_name" placeholder="Fullname">
+                                            <div class="studnt_no_list2"></div>
                                             </div>
                                             <button type="submit" class="btn btn-success">Submit</button>
                                         </form>
@@ -348,30 +348,106 @@ if (!$query) {
         document.getElementById("input").style.display="none";
     }
 </script>
-<script>  
- $(document).ready(function(){  
-      $('#student_name').keyup(function(){  
-           var query = $(this).val();  
-           if(query != '')  
-           {  
-                $.ajax({  
-                     url:"search.php",  
-                     method:"POST",  
-                     data:{query:query},  
-                     success:function(data)  
-                     {  
-                          $('#studnt_no_list').fadeIn();  
-                          $('#studnt_no_list').html(data);  
-                     }  
-                });  
-           }  
-      });  
-      $(document).on('click', 'li', function(){  
-           $('#student_name').val($(this).text());  
-           $('#studnt_no_list').fadeOut();  
-      });  
- });  
- </script>  
+    <script>  
+     $(document).ready(function(){  
+          $('#student_name').keyup(function(){  
+               var query = $(this).val();  
+               if(query != '')  
+               {  
+                    $.ajax({  
+                         url:"search.php",  
+                         type:"POST",  
+                         data:{query:query},  
+                         success:function(data)  
+                         {  
+                              $('.studnt_no_list2').fadeIn();  
+                              $('.studnt_no_list2').html(data);  
+                         }  
+                    });
+                    $.ajax({  
+                         url:"search2.php",  
+                         type:"POST",  
+                         data:{query:query},  
+                         success:function(data)  
+                         {  
+                              $('.studnt_no_list1').fadeIn();  
+                              $('.studnt_no_list1').html(data);  
+                         }  
+                    });
+               }
+               else
+               {
+                $(".studnt_no_list1").empty();
+                $(".studnt_no_list2").empty();
+               }
+          });  
+
+          $('#student_no').keyup(function(){  
+               var query = $(this).val();  
+               if(query != '')  
+               {  
+                    $.ajax({  
+                         url:"search3.php",  
+                         type:"POST",  
+                         data:{query:query},  
+                         success:function(data)  
+                         {  
+                              $('.studnt_no_list2').fadeIn();  
+                              $('.studnt_no_list2').html(data);  
+                         }  
+                    });
+                    $.ajax({  
+                         url:"search4.php",  
+                         type:"POST",  
+                         data:{query:query},  
+                         success:function(data)  
+                         {  
+                              $('.studnt_no_list1').fadeIn();  
+                              $('.studnt_no_list1').html(data);  
+                         }  
+                    });
+               }
+               else
+               {
+                $(".studnt_no_list1").empty();
+                $(".studnt_no_list2").empty();
+               }
+          });  
+          $(document).on('click', 'li', function(){  
+                $('#student_name').val($(this).text());
+                $('#student_no').val($(this).text());
+                $(".studnt_no_list1").empty();
+                $(".studnt_no_list2").empty();
+               // $('.studnt_no_list').fadeOut();  
+              
+
+          });
+          $(document).on('click', '.search-item-name', function(){  
+                
+                $('#student_no').val($(this).find(".student-no-hide").text());
+                $(this).find(".student-no-hide").empty();
+                $('#student_name').val($(this).text());
+                $(".studnt_no_list1").empty();
+                $(".studnt_no_list2").empty();
+               // $('.studnt_no_list').fadeOut();  
+              
+
+          });
+          $(document).on('click', '.search-item-no', function(){  
+                
+                $('#student_name').val($(this).find(".student-name-hide").text());
+                $(this).find(".student-name-hide").empty();
+                $('#student_no').val($(this).text());
+                $(".studnt_no_list1").empty();
+                $(".studnt_no_list2").empty();
+               // $('.studnt_no_list').fadeOut();  
+              
+
+          });
+
+          
+     });  
+     </script>  
 
 </body>
 </html>
