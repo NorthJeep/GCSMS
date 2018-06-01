@@ -216,11 +216,14 @@ if (!$query) {
                                                   <input type="text" id="V_s_course" name="V_s_course" style="display:none;"value="<?php echo $COURSE; ?>"></p>
                                                     <div class="col-lg-5">
                                                     <select style="width:180px" name="txtcode" id="e9" class="populate" required="">
-                                    
-                                        <option value="Excuse">Excuse Letter</option>
-                                        <option value="CoC">Cert of Candidacy</option>
-                                        <option value="Clearance">Clearance</option>
-                                    </select>    
+                                                        <?php
+                                                            $query = "SELECT Visit_TYPE FROM r_visit WHERE Visit_TYPE_STAT = 'Active'";
+                                                            $category = mysqli_query($db,$query);
+                                                            while ($row = mysqli_fetch_assoc($category)) {
+                                                                echo '<option value="'.$row["Visit_TYPE"].'">'.$row["Visit_TYPE"].'</option>';
+                                                            }
+                                                        ?> 
+                                                    </select>    
                                                     </div>
                                                     <div class="col-lg-5">
                                                         <input type="text" id="txtdetails" name="txtdetails" class="form-control col-lg-2" placeholder="Other Details...">
