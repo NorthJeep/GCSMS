@@ -121,7 +121,6 @@ if (!$query) {
                     <td><?php echo $FULLNAME; ?></td>
                     <td><?php echo $COURSE; ?></td>
                     <td><?php echo $STATUS; ?></td>
-
                     <td><button class="btn btn-primary action-button stud_id" name="view" value="View" data-toggle="modal" href="#myModal<?php echo $NO; ?>" />
                     <i class="fa fa-eye"> View</i></button></td>  
                </tr>
@@ -152,7 +151,6 @@ if (!$query) {
                                                 <?php 
                                                     if(file_exists("images/".$NO.".png"))
                                                     {
-
                                                         echo ' <img src="images/'.$NO.'.png" alt="images\user.ico" id="img'.$NO.'" style=" height:140px;padding-left:10px; padding-top:10px;" class="OpenImg"></img>';
                                                     }
                                                     elseif(file_exists("images/".$NO.".jpg"))
@@ -237,56 +235,1648 @@ if (!$query) {
                                               </div>
                                             </div>
                                           </div>
+
+                                        <!----------B      R        E       A       K-------->
+
+                                    <!--START NG EDUCATIONAL BACKGROUND-->
                                         <div class="panel panel-default" style=" padding-top:5px;">
                                             <div class="panel-heading" style="background-color:#07847d">
                                               <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" style="color:#FFF">
+                                                <a style="color:#FFF">
                                                 Educational Background</a>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <!--Button-->
+                                                    <button type="submit" class="btn btn-success" value="" data-toggle="collapse" data-parent="#accordion" href="#collapse3" ><i class="fa fa-plus"></button></i>
+
+                                                    &nbsp;&nbsp;
+
+                                                    <button type="" class="btn btn-primary" data-toggle="collapse" data-parent="#accordion" href="#collapse4" ><i class="fa fa-eye"></button></i>
+                                                <!--Button-->
                                               </h4>
                                             </div>
-                                            <div id="collapse3" class="panel-collapse collapse">
-                                              <div class="panel-body">
-                                                <h4 class="text-info">Primary:</h4>
-                                                    <p>Peacemaker International Christian Academy Branch</p>
-                                                <h4 class="text-info">Secondary:</h4>
-                                                    <p>Peacemaker International Christian Academy Main</p>
-                                                <h4 class="text-info">Tertiary:</h4>
-                                                    <p>Polytechnic University of the Philippines Quezon City</p>
-                                                <h4 class="text-info">Others:</h4>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="panel panel-default" style=" padding-top:5px;">
+                                            <!--START NG LAMAN NG ADD/UPDATE-->
+                                                <div id="collapse3" class="panel-collapse collapse">
+                                                    <!--LAMAN  NG EDUCATIONAL BACKGROUND START-->
+                                                        <form name="educ_bg"  action="educational_background.php"  onsubmit="return  validateForm()"  method="post">
+                                                            <div class="panel-body">
+                                                                <!--START NG PRE-ELEMENTARY-->
+                                                                    <div class="panel panel-default" style=" padding-top:5px;">
+                                                                        <div class="panel-heading" style="background-color:#07847d">
+                                                                          <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" href="#pre-elementary" style="color:#FFF">
+                                                                            Pre-elementary</a>
+                                                                          </h4>
+                                                                        </div>
+                                                                        <div id="pre-elementary" class="panel-collapse collapse">
+                                                                            <!--LAMAN START-->
+                                                                                <div class="panel-body">
+                                                                                    
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">School Graduated:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="preelem_schoolgrad" id="preelem_schoolgrad">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">School Address:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="preelem_schooladd" id="preelem_schooladd">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <div class="col-lg-12">
+                                                                                            <select class="form-control m-bot15" name="preelem_schooltype" id="preelem_schooltype">
+                                                                                                <option value="Public">Public</option>
+                                                                                                <option value="Public">Private</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-3 control-label">Dates of Attendance:</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <textarea class="form-control" rows="2" name="preelem_datesofattendance" id="preelem_datesofattendance"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+                                                                                    &nbsp;
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-3 control-label">Honors Received/Special Awards:</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <textarea class="form-control" rows="3" name="preelem_awards" id="pre-elem_awards"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            <!--LAMAN END-->
+                                                                        </div>
+                                                                    </div>
+                                                                <!--END NG PRE-ELEMENTARY-->
+
+                                                                <!--START NG ELEMENTARY-->
+                                                                    <div class="panel panel-default" style=" padding-top:5px;">
+                                                                        <div class="panel-heading" style="background-color:#07847d">
+                                                                          <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" href="#elementary" style="color:#FFF">
+                                                                            Elementary</a>
+                                                                          </h4>
+                                                                        </div>
+                                                                        <div id="elementary" class="panel-collapse collapse">
+                                                                            <!--LAMAN START-->
+                                                                                <div class="panel-body">
+                                                                                    
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">School Graduated:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="elem_schoolgrad" id="elem_schoolgrad">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">School Address:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="elem_schooladd" id="elem_schooladd">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <div class="col-lg-12">
+                                                                                            <select class="form-control m-bot15" name="elem_schooltype" id="elem_schooltype">
+                                                                                                <option value="Public">Public</option>
+                                                                                                <option value="Private">Private</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-3 control-label">Dates of Attendance:</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <textarea class="form-control" rows="2" name="elem_datesofattendance" id="elem_datesofattendance"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+                                                                                    &nbsp;
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-3 control-label">Honors Received/Special Awards:</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <textarea class="form-control" rows="3" name="elem_awards" id="elem_awards"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            <!--LAMAN END-->
+                                                                        </div>
+                                                                    </div>
+                                                                <!--END NG ELEMENTARY-->
+
+                                                                <!--START NG HIGHSCHOOL-->
+                                                                    <div class="panel panel-default" style=" padding-top:5px;">
+                                                                        <div class="panel-heading" style="background-color:#07847d">
+                                                                          <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" href="#highschool" style="color:#FFF">
+                                                                            Highschool</a>
+                                                                          </h4>
+                                                                        </div>
+                                                                        <div id="highschool" class="panel-collapse collapse">
+                                                                            <!--LAMAN START-->
+                                                                                <div class="panel-body">
+                                                                                    
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">School Graduated:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="highschool_schoolgrad" id="highschool_schoolgrad">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">School Address:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="highschool_schooladd" id="highschool_schooladd">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <div class="col-lg-12">
+                                                                                            <select class="form-control m-bot15" name="highschool_schooltype" id="highschool_schooltype">
+                                                                                                <option value="Public">Public</option>
+                                                                                                <option value="Private">Private</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-3 control-label">Dates of Attendance:</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <textarea class="form-control" rows="2" name="highschool_datesofattendance" id="highschool_datesofattendance"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+                                                                                    &nbsp;
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-3 control-label">Honors Received/Special Awards:</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <textarea class="form-control" rows="3" name="highschool_awards" id="highschool_awards"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            <!--LAMAN END-->
+                                                                        </div>
+                                                                    </div>
+                                                                <!--END NG HIGHSCHOOL-->
+
+                                                                <!--START NG VOCATIONAL-->
+                                                                    <div class="panel panel-default" style=" padding-top:5px;">
+                                                                        <div class="panel-heading" style="background-color:#07847d">
+                                                                          <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" href="#vocational" style="color:#FFF">
+                                                                            Vocational</a>
+                                                                          </h4>
+                                                                        </div>
+                                                                        <div id="vocational" class="panel-collapse collapse">
+                                                                            <!--LAMAN START-->
+                                                                                <div class="panel-body">
+                                                                                    
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">School Graduated:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="voca_schoolgrad" id="voca_schoolgrad">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">School Address:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="voca_schooladd" id="voca_schooladd">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <div class="col-lg-12">
+                                                                                            <select class="form-control m-bot15" name="voca_schooltype" id="voca_schooltype">
+                                                                                                <option value="Public">Public</option>
+                                                                                                <option value="Private">Private</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-3 control-label">Dates of Attendance:</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <textarea class="form-control" rows="2" name="voca_schooltype" id="voca_schooltype"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+                                                                                    &nbsp;
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-3 control-label">Honors Received/Special Awards:</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <textarea class="form-control" rows="3" name="voca_awards" id="voca_awards"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            <!--LAMAN END-->
+                                                                        </div>
+                                                                    </div>
+                                                                <!--END NG VOCATIONAL-->
+
+                                                                <!--START NG COLLEGE-->
+                                                                    <div class="panel panel-default" style=" padding-top:5px;">
+                                                                        <div class="panel-heading" style="background-color:#07847d">
+                                                                          <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" href="#college" style="color:#FFF">
+                                                                            College (If any)</a>
+                                                                          </h4>
+                                                                        </div>
+                                                                        <div id="college" class="panel-collapse collapse">
+                                                                            <!--LAMAN START-->
+                                                                                <div class="panel-body">
+                                                                                    
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">School Graduated:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="coll_schoolgrad" id="coll_schoolgrad">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">School Address:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="coll_schooladd" id="coll_schooladd">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <div class="col-lg-12">
+                                                                                            <select class="form-control m-bot15" name="coll_schooltype">
+                                                                                                <option value="Public">Public</option>
+                                                                                                <option value="Private">Private</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-3 control-label">Dates of Attendance:</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <textarea class="form-control" rows="2" name="coll_datesofattendance" id="coll_datesofattendance"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+                                                                                    &nbsp;
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-3 control-label">Honors Received/Special Awards:</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <textarea class="form-control" rows="3" name="coll_awards" id="coll_awards"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            <!--LAMAN END-->
+                                                                        </div>
+                                                                    </div>
+                                                                <!--END NG COLLEGE-->
+
+                                                                <br></br>
+
+                                                                <!--nature of schooling-->
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label col-lg-5" for="inputSuccess">Nature of Schooling:</label>
+                                                                    <div class="col-lg-7">
+                                                                        <div class="radio">
+                                                                            <label>
+                                                                                <input type="radio" name="nature_schooling" id="continous" value="Continous" onclick="disablewhy()">Continous
+                                                                            </label>
+                                                                            &nbsp;&nbsp;
+                                                                            <label>
+                                                                                <input type="radio" name="nature_schooling" id="interrupted" value="Interrupted" onclick="enablewhy()">Interrupted
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <script language="javascript" type="text/javascript">
+                                                                    function disablewhy(){
+                                                                        document.getElementById('why').disabled = true;
+                                                                    }
+
+                                                                    function enablewhy(){
+                                                                        document.getElementById('why').disabled = false;
+                                                                    }
+                                                                </script>
+
+                                                                <br></br>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label">Why?:</label>
+                                                                    <div class="col-sm-10">
+                                                                        <textarea class="form-control" rows="3" disabled="" id="why" name="why"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <!--nature of schooling-->
+
+                                                                <br></br>
+                                                                <br></br>
+
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-success" type="submit" name="submit">Save</button>
+                                                                </div>
+
+                                                            </div>
+                                                        </form>
+                                                    <!--LAMAN NG EDUCATIONAL BACKGROUND END-->
+                                                </div>
+                                            <!--END NG LAMAN NG ADD/UPDATE-->
+
+                                        </div>
+                                    <!--END NG EDUCATIONAL BACKGROUND-->
+
+                                    <!----------B      R       E       A       K-------->
+
+                                    <!--START NG HOME AND FAMILY BACKGROUND-->
+                                        <div class="panel panel-default" style=" padding-top:5px;">
                                             <div class="panel-heading" style="background-color:#07847d">
                                               <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" style="color:#FFF">
+                                                <a style="color:#FFF">
                                                 Home and Family Background</a>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <!--Button-->
+                                                    <button type="submit" class="btn btn-success" value="" data-toggle="collapse" data-parent="#accordion" href="#collapse5" ><i class="fa fa-plus"></button></i>
+
+                                                    &nbsp;&nbsp;
+
+                                                    <button type="" class="btn btn-primary" data-toggle="collapse" data-parent="#accordion" href="#collapse6" ><i class="fa fa-eye"></button></i>
+                                                <!--Button-->
                                               </h4>
                                             </div>
-                                            <div id="collapse2" class="panel-collapse collapse">
-                                              <div class="panel-body">
-                                                  
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="panel panel-default" style=" padding-top:5px;">
+                                            <!--START NG LAMAN NG ADD/UPDATE-->
+                                                <div id="collapse5" class="panel-collapse collapse">
+                                                    <!--LAMAN NG HOME AND FAMILY BACKGROUND START-->
+                                                        <form name="homefam_bg"  action="homeandfamily_background.php"  onsubmit="return  validateForm()"  method="post">
+                                                            <div class="panel-body">
+
+                                                                <!--START NG FATHER-->
+                                                                    <div class="panel panel-default" style=" padding-top:5px;">
+                                                                        <div class="panel-heading" style="background-color:#07847d">
+                                                                          <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" href="#father" style="color:#FFF">
+                                                                            Father</a>
+                                                                          </h4>
+                                                                        </div>
+                                                                        <div id="father" class="panel-collapse collapse">
+                                                                            <!--LAMAN START-->
+                                                                                <div class="panel-body">
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Name of Father:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="father_name" id="father_name">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Age:</label>
+                                                                                        <div class="radio">
+                                                                                            <!--AGE TEXT INPUT-->
+                                                                                            <div class="col-sm-6">
+                                                                                                <input type="text" class="form-control" name="father_age" id="father_age">
+                                                                                            </div>
+                                                                                            <!--AGE TEXT INPUT-->
+                                                                                            &nbsp;&nbsp;
+                                                                                            <label>
+                                                                                                <input type="radio" name="father_lifestats" id="father_living" value="Living">Living
+                                                                                            </label>
+                                                                                            &nbsp;&nbsp;
+                                                                                            <label>
+                                                                                                <input type="radio" name="father_lifestats" id="father_deceased" value="Deceased">Deceased
+                                                                                            </label>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Educational Attainment:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="father_educattain" id="father_educattain">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Occupation:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="father_occu" id="father_occu">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Name of Employer:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="father_employname" id="father_employname">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Address of Employer:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <textarea class="form-control" rows="4" name="father_employadd" id="father_employadd"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            <!--LAMAN END-->
+                                                                        </div>
+                                                                    </div>
+                                                                <!--END NG FATHER-->
+
+                                                                <!--START NG MOTHER-->
+                                                                    <div class="panel panel-default" style=" padding-top:5px;">
+                                                                        <div class="panel-heading" style="background-color:#07847d">
+                                                                          <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" href="#mother" style="color:#FFF">
+                                                                            Mother</a>
+                                                                          </h4>
+                                                                        </div>
+                                                                        <div id="mother" class="panel-collapse collapse">
+                                                                            <!--LAMAN START-->
+                                                                                <div class="panel-body">
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Name of Mother:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="mother_name" id="mother_name">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Age:</label>
+                                                                                        <div class="radio">
+                                                                                            <!--AGE TEXT INPUT-->
+                                                                                            <div class="col-sm-6">
+                                                                                                <input type="text" class="form-control" name="mother_age" id="mother_age">
+                                                                                            </div>
+                                                                                            <!--AGE TEXT INPUT-->
+                                                                                            &nbsp;&nbsp;
+                                                                                            <label>
+                                                                                                <input type="radio" name="mother_lifestats" id="mother_living" value="Living">Living
+                                                                                            </label>
+                                                                                            &nbsp;&nbsp;
+                                                                                            <label>
+                                                                                                <input type="radio" name="mother_lifestats" id="mother_deceased" value="Deceased">Deceased
+                                                                                            </label>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Educational Attainment:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="mother_educattain" id="mother_educattain">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Occupation:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="mother_occu" id="mother_occu">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Name of Employer:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="mother_employname" id="mother_employname">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Address of Employer:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <textarea class="form-control" rows="4" name="mother_employadd" name="mother_employadd"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            <!--LAMAN END-->
+                                                                        </div>
+                                                                    </div>
+                                                                <!--END NG MOTHER-->
+
+                                                                <!--START NG GUARDIAN-->
+                                                                    <div class="panel panel-default" style=" padding-top:5px;">
+                                                                        <div class="panel-heading" style="background-color:#07847d">
+                                                                          <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" href="#guardian" style="color:#FFF">
+                                                                            Guardian</a>
+                                                                          </h4>
+                                                                        </div>
+                                                                        <div id="guardian" class="panel-collapse collapse">
+                                                                            <!--LAMAN START-->
+                                                                                <div class="panel-body">
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Name of Guardian:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="guard_name" id="guard_name">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Age:</label>
+                                                                                        <div class="radio">
+                                                                                            <!--AGE TEXT INPUT-->
+                                                                                            <div class="col-sm-6">
+                                                                                                <input type="text" class="form-control" name="guard_age" id="guard_age">
+                                                                                            </div>
+                                                                                            <!--AGE TEXT INPUT-->
+                                                                                            &nbsp;&nbsp;
+                                                                                            <label>
+                                                                                                <input type="radio" name="guard_lifestats" id="guard_living" value="Living">Living
+                                                                                            </label>
+                                                                                            &nbsp;&nbsp;
+                                                                                            <label>
+                                                                                                <input type="radio" name="optionsRadios" id="guard_deceased" value="Deceased">Deceased
+                                                                                            </label>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Educational Attainment:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="guard_educattain" id="guard_educattain">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Occupation:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="guard_occu" id="guard_occu">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Name of Employer:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" name="guard_employname" id="guard_employname">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Address of Employer:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <textarea class="form-control" rows="4" name="guard_employadd" id="guard_employadd"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            <!--LAMAN END-->
+                                                                        </div>
+                                                                    </div>
+                                                                <!--END NG GUARDIAN-->
+
+                                                                <br></br>
+
+                                                                <!--marital status-->
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label col-lg-5" for="inputSuccess">Parents' Marital Relationship</label>
+                                                                    <div class="col-lg-7">
+                                                                        <select class="form-control m-bot15" id="marital" name="marital" onchange="enableothers()">
+                                                                            <option value="Married and staying together">Married and staying together</option>
+                                                                            <option value="Not Married but Living Together">Not Married but Living Together</option>
+                                                                            <option value="Single Parent">Single Parent</option>
+                                                                            <option>Married but Separated</option>
+                                                                            <option value="others">Others</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
+                                                                <script language="javascript" type="text/javascript">
+                                                                    $(document).ready(function () {
+                                                                        $("#marital").change(function () {
+                                                                            if ($(this).find("option:selected").val() == "others") {
+                                                                                $("#other").removeAttr("disabled")
+                                                                            } else {
+                                                                                $("#other").attr("disabled","disabled")
+                                                                            }
+                                                                        });
+                                                                    });
+                                                                </script>
+
+                                                                <br></br>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label">Please Specify:</label>
+                                                                    <div class="col-sm-10">
+                                                                        <textarea class="form-control" rows="3" disabled="" id="other" name="marital_specify"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <!--marital status-->
+
+                                                                <br></br>
+                                                                &nbsp;
+
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-7 control-label">Number of children in the family including yourself:</label>
+                                                                    <div class="col-sm-5">
+                                                                        <input type="text" class="form-control" name="num_children" id="num_children">
+                                                                    </div>
+                                                                </div>
+
+                                                                <br></br>
+
+                                                                <div class="form-group">
+                                                                    <!--Number of brothers-->
+                                                                    <label class="col-sm-4 control-label">Number of Brother/s:</label>
+                                                                    <div class="col-sm-2">
+                                                                        <input type="text" class="form-control" name="num_brother" id="num_brother">
+                                                                    </div>
+                                                                    <!--Number of brothers-->
+
+                                                                    <!--Number of sisters-->
+                                                                    <label class="col-sm-4 control-label">Number of Sister/s:</label>
+                                                                    <div class="col-sm-2">
+                                                                        <input type="text" class="form-control" name="num_sister" id="num_sister">
+                                                                    </div>
+                                                                    <!--Number of sisters-->
+                                                                </div>
+
+                                                                <br></br>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-7 control-label">Number of brother/s or sister/s gainfully employed?:</label>
+                                                                    <div class="col-sm-5">
+                                                                        <input type="text" class="form-control" name="num_employbro" id="num_employbro">
+                                                                    </div>
+                                                                </div>
+
+                                                                <br></br>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label">Ordinal Position:</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" name="ord_pos" id="ord_pos">
+                                                                    </div>
+                                                                </div>
+
+                                                                <br></br>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label col-lg-7" for="inputSuccess">Is your bother/sister who is gainfully employed providing support to your:</label>
+                                                                    <div class="col-lg-5">
+                                                                        <div class="checkbox">
+                                                                            <label>
+                                                                                <input type="checkbox" name="supp_fam" id="supp_fam" value="Family">Family
+                                                                            </label>
+                                                                            &nbsp;
+                                                                            <label>
+                                                                                <input type="checkbox" name="supp_studs" id="supp_studs" value="Your Studies">Your Studies
+                                                                            </label>
+                                                                            &nbsp;
+                                                                            <label>
+                                                                                <input type="checkbox" name="supp_ownfam" id="supp_ownfam" value="his/her own family">his/her own family
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <br></br>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label col-lg-3" for="inputSuccess">Who finances your schooling?</label>
+                                                                    <div class="col-lg-5">
+                                                                        <div class="checkbox">
+                                                                            <label>
+                                                                                <input type="checkbox" name="fin_parents" id="fin_parents" value="">Parents
+                                                                            </label>
+                                                                            &nbsp;
+                                                                            <label>
+                                                                                <input type="checkbox" name="fin_sibling" id="fin_sibling" value="Brother/Sister">Brother/Sister
+                                                                            </label>
+                                                                            &nbsp;
+                                                                            <label>
+                                                                                <input type="checkbox" name="fin_spouse" id="fin_spouse" value="Spouse">Spouse
+                                                                            </label>
+                                                                            &nbsp;
+                                                                            <label>
+                                                                                <input type="checkbox" name="fin_scholar" id="fin_scholar" value="Scholarship">Scholarship
+                                                                            </label>
+                                                                            &nbsp;
+                                                                            <label>
+                                                                                <input type="checkbox" name="fin_relatives" id="fin_relatives" value="Relatives">Relatives
+                                                                            </label>
+                                                                            &nbsp;
+                                                                            <label>
+                                                                                <input type="checkbox" name="fin_workstud" id="fin_workstud" value="Self-supporting/working student">Self-supporting/working student
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <br></br>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-7 control-label">How much is  your weekly allowance? (Please specify the amount):</label>
+                                                                    <div class="col-sm-5">
+                                                                        <input type="text" class="form-control" name="weekly_allowance" id="weekly_allowance">
+                                                                    </div>
+                                                                </div>
+
+                                                                <br></br>
+                                                                &nbsp;
+
+                                                                <!--parent income-->
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label col-lg-5" for="inputSuccess">Parents' Total Monthly Income</label>
+                                                                    <div class="col-lg-7">
+                                                                        <select class="form-control m-bot15" id="amount" name="monthly_income" onchange="enableothers()">
+                                                                            <option value="Below Php 5,000">Below Php 5,000</option>
+                                                                            <option value="Php 5, 001 - Php 10, 000">Php 5, 001 - Php 10, 000</option>
+                                                                            <option value="Php 10, 001 - Php 15, 000">Php 10, 001 - Php 15, 000</option>
+                                                                            <option value="Php 15, 001 - Php 20, 000">Php 15, 001 - Php 20, 000</option>
+                                                                            <option value="Php 25, 001 - Php 30, 000">Php 25, 001 - Php 30, 000</option>
+                                                                            <option value="Php 35, 001 - Php 40, 000">Php 35, 001 - Php 40, 000</option>
+                                                                            <option value="Php 45, 001 - Php 50, 000">Php 45, 001 - Php 50, 000</option>
+                                                                            <option value="Above Php 50, 001">Above Php 50, 001</option>   
+                                                                            <option value="otheramount">Others</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
+                                                                <script language="javascript" type="text/javascript">
+                                                                    $(document).ready(function () {
+                                                                        $("#amount").change(function () {
+                                                                            if ($(this).find("option:selected").val() == "otheramount") {
+                                                                                $("#other2").removeAttr("disabled")
+                                                                            } else {
+                                                                                $("#other2").attr("disabled","disabled")
+                                                                            }
+                                                                        });
+                                                                    });
+                                                                </script>
+
+                                                                <br></br>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label">Please Specify:</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" disabled="" id="other2" name="income_specify">
+                                                                    </div>
+                                                                </div>
+                                                                <!--parent income-->
+
+                                                                <br></br>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label col-lg-5" for="inputSuccess">Do you share your room  with anyone?</label>
+                                                                    <div class="col-lg-7">
+                                                                        <select class="form-control m-bot15" name="share_room" id="share_room">
+                                                                            <option value="No">No</option>
+                                                                            <option value="Yes">Yes</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
+                                                                <br></br>
+                                                                &nbsp;
+
+                                                                <!--share-->
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label col-lg-5" for="inputSuccess">Do you have a quiet place to study?</label>
+                                                                    <div class="col-lg-7">
+                                                                        <select class="form-control m-bot15" name="shareroom" id="shareroom" onchange="enableothers()">
+                                                                            <option value="No">No</option>   
+                                                                            <option value="yes">Yes</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
+                                                                <script language="javascript" type="text/javascript">
+                                                                    $(document).ready(function () {
+                                                                        $("#shareroom").change(function () {
+                                                                            if ($(this).find("option:selected").val() == "yes") {
+                                                                                $("#yep").removeAttr("disabled")
+                                                                            } else {
+                                                                                $("#yep").attr("disabled","disabled")
+                                                                            }
+                                                                        });
+                                                                    });
+                                                                </script>
+
+                                                                <br></br>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label">Please Specify:</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" disabled="" id="yep" name="room_specify" id="room_specify">
+                                                                    </div>
+                                                                </div>
+                                                                <!--share-->
+
+                                                                <br></br>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label col-lg-5" for="inputSuccess">Nature of Residence while attending school:</label>
+                                                                    <div class="col-lg-7">
+                                                                        <div class="checkbox">
+                                                                            <label>
+                                                                                <input type="checkbox" name="residence_fam" id="residence_fam" value="Family home">Family home
+                                                                            </label>
+                                                                            &nbsp;
+                                                                            <label>
+                                                                                <input type="checkbox" name="residence_relatives" id="residence_relatives" value="">Relatives house
+                                                                            </label>
+                                                                            &nbsp;
+                                                                            <label>
+                                                                                <input type="checkbox" name="residence_bedspacer" id="residence_bedspacer" value="">Bedspacer
+                                                                            </label>
+                                                                            &nbsp;
+                                                                            <label>
+                                                                                <input type="checkbox" name="residence_rent" id="residence_rent" value="Rented Apartment">Rented Apartment
+                                                                            </label>
+                                                                            &nbsp;
+                                                                            <label>
+                                                                                <input type="checkbox" name="residence_sibling" id="residence_sibling" value="">House of married brother/sister
+                                                                            </label>
+                                                                            &nbsp;
+                                                                            <label>
+                                                                                <input type="checkbox" name="residence_dorm" id="residence_dorm" value="Dorm (including board & lodging)">Dorm (including board & lodging)
+                                                                            </label>
+                                                                            &nbsp;
+                                                                            <label>
+                                                                                <input type="checkbox" name="residence_friends" id="residence_friends" value="Shares apartments with  friends/relatives">Shares apartments with  friends/relatives
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <br></br>
+                                                                <br></br>
+                                                                <br></br>
+
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-success" type="submit" name="submit">Save</button>
+                                                                </div>
+
+                                                            </div>
+                                                        </form>
+                                                    <!--LAMAN NG HOME AND FAMILY BACKGROUND END-->
+                                                </div>
+                                            <!--END NG LAMAN NG ADD/UPDATE-->
+                                        </div>
+                                    <!--END NG HOME AND FAMILY BACKGROUND-->
+
+                                    <!----------B      R        E       A       K-------->
+
+                                    <!--START NG HEALTH-->
+                                        <div class="panel panel-default" style=" padding-top:5px;">
                                             <div class="panel-heading" style="background-color:#07847d">
                                               <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" style="color:#FFF">
-                                                Health Background</a>
+                                                <a style="color:#FFF">
+                                                Health</a>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <!--Button-->
+                                                    <button type="submit" class="btn btn-success" value="" data-toggle="collapse" data-parent="#accordion" href="#collapse7" ><i class="fa fa-plus"></button></i>
+
+                                                    &nbsp;&nbsp;
+
+                                                    <button type="" class="btn btn-primary" data-toggle="collapse" data-parent="#accordion" href="#collapse8" ><i class="fa fa-eye"></button></i>
+                                                <!--Button-->
                                               </h4>
                                             </div>
-                                            <div id="collapse2" class="panel-collapse collapse">
-                                              <div class="panel-body">
-                                                <h4 class="text-info">Physical Health:</h4>
-                                                <h4 class="text-info">Psychological Health:</h4>
-                                              </div>
+                                            <!--START NG LAMAN NG ADD/UPDATE-->
+                                                <div id="collapse7" class="panel-collapse collapse">
+                                                    <!--LAMAN NG HEALTH START-->
+                                                        <form name="health_bg"  action="health_background.php"  onsubmit="return  validateForm()"  method="post">
+                                                            <div class="panel-body">
+
+                                                                <!--START NG PHYSICAL-->
+                                                                    <div class="panel panel-default" style=" padding-top:5px;">
+                                                                        <div class="panel-heading" style="background-color:#07847d">
+                                                                          <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" href="#physical" style="color:#FFF">
+                                                                            Physical</a>
+                                                                          </h4>
+                                                                        </div>
+                                                                        <div id="physical" class="panel-collapse collapse">
+                                                                            <!--LAMAN START-->
+                                                                                <div class="panel-body">
+
+                                                                                    <!--vision-->
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-3 control-label col-lg-5" for="inputSuccess">Do you have problems with your vision</label>
+                                                                                        <div class="col-lg-7">
+                                                                                            <select class="form-control m-bot15" name="vision" id="vision" onchange="enableothers()">
+                                                                                                <option value="No">No</option>     
+                                                                                                <option value="yes2">Yes</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <script language="javascript" type="text/javascript">
+                                                                                        $(document).ready(function () {
+                                                                                            $("#vision").change(function () {
+                                                                                                if ($(this).find("option:selected").val() == "yes2") {
+                                                                                                    $("#yep2").removeAttr("disabled")
+                                                                                                } else {
+                                                                                                    $("#yep2").attr("disabled","disabled")
+                                                                                                }
+                                                                                            });
+                                                                                        });
+                                                                                    </script>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Please Specify:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" disabled="" id="yep2" name="vision_specify">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!--vision-->
+
+                                                                                    <br></br>
+
+                                                                                    <!--hearing-->
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-3 control-label col-lg-5" for="inputSuccess">Do you have problems with your hearing?</label>
+                                                                                        <div class="col-lg-7">
+                                                                                            <select class="form-control m-bot15" name="hearing" id="hearing" onchange="enableothers()">
+                                                                                                <option value="No">No</option>   
+                                                                                                <option value="yes3">Yes</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <script language="javascript" type="text/javascript">
+                                                                                        $(document).ready(function () {
+                                                                                            $("#hearing").change(function () {
+                                                                                                if ($(this).find("option:selected").val() == "yes3") {
+                                                                                                    $("#yep3").removeAttr("disabled")
+                                                                                                } else {
+                                                                                                    $("#yep3").attr("disabled","disabled")
+                                                                                                }
+                                                                                            });
+                                                                                        });
+                                                                                    </script>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Please Specify:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" disabled="" id="yep3" name="hearing_specify">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!--hearing-->
+
+                                                                                    <br></br>
+
+                                                                                    <!--speech-->
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-3 control-label col-lg-5" for="inputSuccess">Do you have problems with your speech?</label>
+                                                                                        <div class="col-lg-7">
+                                                                                            <select class="form-control m-bot15" name="speech" id="speech" onchange="enableothers()">
+                                                                                                <option value="No">No</option>   
+                                                                                                <option value="yes4">Yes</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <script language="javascript" type="text/javascript">
+                                                                                        $(document).ready(function () {
+                                                                                            $("#speech").change(function () {
+                                                                                                if ($(this).find("option:selected").val() == "yes4") {
+                                                                                                    $("#yep4").removeAttr("disabled")
+                                                                                                } else {
+                                                                                                    $("#yep4").attr("disabled","disabled")
+                                                                                                }
+                                                                                            });
+                                                                                        });
+                                                                                    </script>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Please Specify:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" disabled="" id="yep4" name="speech_specify">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!--speech-->
+
+                                                                                    <br></br>
+
+                                                                                    <!--genhealth-->
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-3 control-label col-lg-5" for="inputSuccess">Do you have problems with your general health?</label>
+                                                                                        <div class="col-lg-7">
+                                                                                            <select class="form-control m-bot15" name="generalhealth" id="generalhealth" onchange="enableothers()">
+                                                                                                <option value="No">No</option>   
+                                                                                                <option value="yes5">Yes</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <script language="javascript" type="text/javascript">
+                                                                                        $(document).ready(function () {
+                                                                                            $("#generalhealth").change(function () {
+                                                                                                if ($(this).find("option:selected").val() == "yes5") {
+                                                                                                    $("#yep5").removeAttr("disabled")
+                                                                                                } else {
+                                                                                                    $("#yep5").attr("disabled","disabled")
+                                                                                                }
+                                                                                            });
+                                                                                        });
+                                                                                    </script>
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Please Specify:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" disabled="" id="yep5" name="generalhealth_specify">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!--genhealth-->
+                                                                                    
+                                                                                </div>
+                                                                            <!--LAMAN END-->
+                                                                        </div>
+                                                                    </div>
+                                                                <!--END NG PHYSICAL-->
+
+                                                                <!--START NG PSYCHOLOGICAL-->
+                                                                    <div class="panel panel-default" style=" padding-top:5px;">
+                                                                        <div class="panel-heading" style="background-color:#07847d">
+                                                                          <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" href="#psychological" style="color:#FFF">
+                                                                            Psychological</a>
+                                                                          </h4>
+                                                                        </div>
+                                                                        <div id="psychological" class="panel-collapse collapse">
+                                                                            <!--LAMAN START-->
+                                                                                <div class="panel-body">
+
+                                                                                    <!--START NG PSYCHIATRIST-->
+                                                                                        <div class="panel panel-default" style=" padding-top:5px;">
+                                                                                            <div class="panel-heading" style="background-color:#07847d">
+                                                                                              <h4 class="panel-title">
+                                                                                                <a data-toggle="collapse" href="#psychiatrist" style="color:#FFF">
+                                                                                                Has been consulted to  a Psychiatrist</a>
+                                                                                              </h4>
+                                                                                            </div>
+                                                                                            <div id="psychiatrist" class="panel-collapse collapse">
+                                                                                                <!--LAMAN START-->
+                                                                                                    <div class="panel-body">
+
+                                                                                                        <br></br>
+
+                                                                                                        <!--psychiatrist-->
+                                                                                                        <div class="form-group">
+                                                                                                            <div class="col-lg-12">
+                                                                                                                <select class="form-control m-bot15" name="psychiatrist" id="psychiatrist" onchange="enableothers()">
+                                                                                                                    <option value="No">No</option>   
+                                                                                                                    <option value="yes6">Yes</option>
+                                                                                                                </select>
+                                                                                                            </div>
+                                                                                                        </div>
+
+                                                                                                        <script language="javascript" type="text/javascript">
+                                                                                                            $(document).ready(function () {
+                                                                                                                $("#psychiatrist").change(function () {
+                                                                                                                    if ($(this).find("option:selected").val() == "yes6") {
+                                                                                                                        $("#yep6").removeAttr("disabled") && $("#yepyep6").removeAttr("disabled")
+                                                                                                                    } else {
+                                                                                                                        $("#yep6").attr("disabled","disabled") && $("#yepyep6").attr("disabled","disabled")
+                                                                                                                    }
+                                                                                                                });
+                                                                                                            });
+                                                                                                        </script>
+
+                                                                                                        <br></br>
+
+                                                                                                        <div class="form-group">
+                                                                                                            <label class="col-sm-2 control-label">When?</label>
+                                                                                                            <div class="col-sm-10">
+                                                                                                                <input type="text" class="form-control" disabled="" id="yep6" name="psychiatrist_when">
+                                                                                                            </div>
+                                                                                                        </div>
+
+                                                                                                        <br></br>
+
+                                                                                                        <div class="form-group">
+                                                                                                            <label class="col-sm-2 control-label">For what?</label>
+                                                                                                            <div class="col-sm-10">
+                                                                                                                <input type="text" class="form-control" disabled="" id="yepyep6" name="psychiatrist_forwhat">
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <!--psychiatrist-->
+                                                                                                        
+                                                                                                    </div>
+                                                                                                <!--LAMAN END-->
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    <!--END NG PSYCHIATRIST-->
+
+                                                                                    <!--START NG PSYCHOLOGIST-->
+                                                                                        <div class="panel panel-default" style=" padding-top:5px;">
+                                                                                            <div class="panel-heading" style="background-color:#07847d">
+                                                                                              <h4 class="panel-title">
+                                                                                                <a data-toggle="collapse" href="#psychologist" style="color:#FFF">
+                                                                                                Has been consulted to  a Psychologist</a>
+                                                                                              </h4>
+                                                                                            </div>
+                                                                                            <div id="psychologist" class="panel-collapse collapse">
+                                                                                                <!--LAMAN START-->
+                                                                                                    <div class="panel-body">
+
+                                                                                                        <br></br>
+
+                                                                                                        <!--psychologist-->
+                                                                                                        <div class="form-group">
+                                                                                                            <div class="col-lg-12">
+                                                                                                                <select class="form-control m-bot15" name="psychologist" id="psychologist" onchange="enableothers()">
+                                                                                                                    <option value="No">No</option>   
+                                                                                                                    <option value="yes7">Yes</option>
+                                                                                                                </select>
+                                                                                                            </div>
+                                                                                                        </div>
+
+                                                                                                        <script language="javascript" type="text/javascript">
+                                                                                                            $(document).ready(function () {
+                                                                                                                $("#psychologist").change(function () {
+                                                                                                                    if ($(this).find("option:selected").val() == "yes7") {
+                                                                                                                        $("#yep7").removeAttr("disabled") && $("#yepyep7").removeAttr("disabled")
+                                                                                                                    } else {
+                                                                                                                        $("#yep7").attr("disabled","disabled") && $("#yepyep7").attr("disabled","disabled")
+                                                                                                                    }
+                                                                                                                });
+                                                                                                            });
+                                                                                                        </script>
+
+                                                                                                        <br></br>
+
+                                                                                                        <div class="form-group">
+                                                                                                            <label class="col-sm-2 control-label">When?</label>
+                                                                                                            <div class="col-sm-10">
+                                                                                                                <input type="text" class="form-control" disabled="" id="yep7" name="psychologist_when">
+                                                                                                            </div>
+                                                                                                        </div>
+
+                                                                                                        <br></br>
+
+                                                                                                        <div class="form-group">
+                                                                                                            <label class="col-sm-2 control-label">For what?</label>
+                                                                                                            <div class="col-sm-10">
+                                                                                                                <input type="text" class="form-control" disabled="" id="yepyep7" name="psychologist_forwhat">
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <!--psychologist-->
+                                                                                                        
+                                                                                                    </div>
+                                                                                                <!--LAMAN END-->
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    <!--END NG PSYCHOLOGIST-->
+
+                                                                                    <!--START NG COUNSELOR-->
+                                                                                        <div class="panel panel-default" style=" padding-top:5px;">
+                                                                                            <div class="panel-heading" style="background-color:#07847d">
+                                                                                              <h4 class="panel-title">
+                                                                                                <a data-toggle="collapse" href="#counselor" style="color:#FFF">
+                                                                                                Has been consulted to  a Counselor</a>
+                                                                                              </h4>
+                                                                                            </div>
+                                                                                            <div id="counselor" class="panel-collapse collapse">
+                                                                                                <!--LAMAN START-->
+                                                                                                    <div class="panel-body">
+
+                                                                                                        <br></br>
+
+                                                                                                        <!--counselor-->
+                                                                                                        <div class="form-group">
+                                                                                                            <div class="col-lg-12">
+                                                                                                                <select class="form-control m-bot15" name="counselor" id="counselor" onchange="enableothers()">
+                                                                                                                    <option value="No">No</option>   
+                                                                                                                    <option value="yes8">Yes</option>
+                                                                                                                </select>
+                                                                                                            </div>
+                                                                                                        </div>
+
+                                                                                                        <script language="javascript" type="text/javascript">
+                                                                                                            $(document).ready(function () {
+                                                                                                                $("#counselor").change(function () {
+                                                                                                                    if ($(this).find("option:selected").val() == "yes8") {
+                                                                                                                        $("#yep8").removeAttr("disabled") && $("#yepyep8").removeAttr("disabled")
+                                                                                                                    } else {
+                                                                                                                        $("#yep8").attr("disabled","disabled") && $("#yepyep8").attr("disabled","disabled")
+                                                                                                                    }
+                                                                                                                });
+                                                                                                            });
+                                                                                                        </script>
+
+                                                                                                        <br></br>
+
+                                                                                                        <div class="form-group">
+                                                                                                            <label class="col-sm-2 control-label">When?</label>
+                                                                                                            <div class="col-sm-10">
+                                                                                                                <input type="text" class="form-control" disabled="" id="yep8" name="counselor_when">
+                                                                                                            </div>
+                                                                                                        </div>
+
+                                                                                                        <br></br>
+
+                                                                                                        <div class="form-group">
+                                                                                                            <label class="col-sm-2 control-label">For what?</label>
+                                                                                                            <div class="col-sm-10">
+                                                                                                                <input type="text" class="form-control" disabled="" id="yepyep8" name="counselor_forwhat">
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <!--counselor-->
+                                                                                                        
+                                                                                                    </div>
+                                                                                                <!--LAMAN END-->
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    <!--END NG COUNSELOR-->
+                                                                                    
+                                                                                </div>
+                                                                            <!--LAMAN END-->
+                                                                        </div>
+                                                                    </div>
+                                                                <!--END NG PSYCHOLOGICAL-->
+
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-success" type="submit" name="submit">Save</button>
+                                                                </div>
+
+                                                            </div>
+                                                        </form>
+                                                    <!--LAMAN NG HEALTH END-->
+                                                </div>
+                                            <!--END NG LAMAN NG ADD/UPDATE-->
+                                        </div>
+                                    <!--END NG HEALTH-->
+
+                                    <!----------B      R        E       A       K-------->
+
+                                    <!--START NG INTERESTS AND HOBBIES-->
+                                        <div class="panel panel-default" style=" padding-top:5px;">
+                                            <div class="panel-heading" style="background-color:#07847d">
+                                              <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse9" style="color:#FFF">
+                                                Interests and Hobbies</a>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <!--Button-->
+                                                    <button type="submit" class="btn btn-success" value="" data-toggle="collapse" data-parent="#accordion" href="#collapse9" ><i class="fa fa-plus"></button></i>
+
+                                                    &nbsp;&nbsp;
+
+                                                    <button type="" class="btn btn-primary" data-toggle="collapse" data-parent="#accordion" href="#collapse10" ><i class="fa fa-eye"></button></i>
+                                                <!--Button-->
+                                              </h4>
                                             </div>
-                                          </div>
+                                            <!--START NG LAMAN NG ADD/UPDATE-->
+                                                <div id="collapse9" class="panel-collapse collapse">
+                                                    <!--LAMAN NG INTERESTS AND HOBBIES START-->
+                                                        <form name="int_hobbies"  action="inthobbies_background.php"  onsubmit="return  validateForm()"  method="post">
+                                                            <div class="panel-body">
+                                                                
+                                                                <!--START NG ACADEMIC-->
+                                                                    <div class="panel panel-default" style=" padding-top:5px;">
+                                                                        <div class="panel-heading" style="background-color:#07847d">
+                                                                          <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" href="#academic" style="color:#FFF">
+                                                                            Academic</a>
+                                                                          </h4>
+                                                                        </div>
+                                                                        <div id="academic" class="panel-collapse collapse">
+                                                                            <!--LAMAN START-->
+                                                                                <div class="panel-body">
+
+                                                                                    <!--CLUBCHENES-->
+                                                                                    <div class="form-group">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="checkbox">
+                                                                                                <label>
+                                                                                                    <input type="checkbox" name="math_club" id="math_club" value="Math Club">Math Club
+                                                                                                </label>
+                                                                                            </div>
+
+                                                                                            <div class="checkbox">
+                                                                                                <label>
+                                                                                                    <input type="checkbox" name="debating_club" id="debating_club" value="Debating Club">Debating Club
+                                                                                                </label>
+                                                                                            </div>
+
+                                                                                            <div class="checkbox">
+                                                                                                <label>
+                                                                                                    <input type="checkbox" name="science_club" id="science_club" value="Science Club">Science Club
+                                                                                                </label>
+                                                                                            </div>
+
+                                                                                            <div class="checkbox">
+                                                                                                <label>
+                                                                                                    <input type="checkbox" name="quizzer_club" id="quizzer_club" value="Quizzer's Club">Quizzer's Club
+                                                                                                </label>
+                                                                                            </div>
+
+                                                                                            <div class="checkbox">
+                                                                                                <label>
+                                                                                                    <input type="checkbox" name="other_club" id="other_club" value="vision_specify" onclick="ibapa()">Others
+                                                                                                </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <script language="javascript" type="text/javascript">
+                                                                                        function ibapa(){
+                                                                                            document.getElementById('iba').disabled = false;
+                                                                                        }
+                                                                                        function ibapa2(){
+                                                                                            document.getElementById('iba').disabled =  true;
+                                                                                        }
+                                                                                    </script>
+
+                                                                                    <br></br>
+                                                                                    &nbsp;
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Please Specify:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" disabled="" id="iba" name="club_specify">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!--CLUBCHENES-->
+
+                                                                                    <br></br>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-4 control-label">What is/are your favorite subject/s?</label>
+                                                                                        <div class="col-sm-8">
+                                                                                            <textarea class="form-control" rows="3" name="fave_subj" id="fave_subj"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+                                                                                    &nbsp;
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-4 control-label">What is/are the subject/s you like least?</label>
+                                                                                        <div class="col-sm-8">
+                                                                                            <textarea class="form-control" rows="3" name="least_subj" id="least_subj"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                            <!--LAMAN END-->
+                                                                        </div>
+                                                                    </div>
+                                                                <!--END NG ACADEMIC-->
+
+                                                                <!--START NG EXTRA-CURRICULAR-->
+                                                                    <div class="panel panel-default" style=" padding-top:5px;">
+                                                                        <div class="panel-heading" style="background-color:#07847d">
+                                                                          <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" href="#extra" style="color:#FFF">
+                                                                            Extra-Curricular</a>
+                                                                          </h4>
+                                                                        </div>
+                                                                        <div id="extra" class="panel-collapse collapse">
+                                                                            <!--LAMAN START-->
+                                                                                <div class="panel-body">
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-12 control-label">What are your hobbies? Write them in oder of  your preferences.</label>
+                                                                                        <div class="col-sm-12">
+                                                                                            <input placeholder="1" type="text" class="form-control" name="pref_one" id="pref_one">
+                                                                                        </div>
+                                                                                        <br></br>
+                                                                                        &nbsp;
+                                                                                        <div class="col-sm-12">
+                                                                                            <input placeholder="2" type="text" class="form-control" name="pref_two" id="pref_two">
+                                                                                        </div>
+                                                                                        <br></br>
+                                                                                        &nbsp;
+                                                                                        <div class="col-sm-12">
+                                                                                            <input placeholder="3" type="text" class="form-control" name="pref_three" id="pref_three">
+                                                                                        </div>
+                                                                                        <br></br>
+                                                                                        &nbsp;
+                                                                                        <div class="col-sm-12">
+                                                                                            <input placeholder="4" type="text" class="form-control" name="pref_four" id="pref_four">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <br></br>
+
+                                                                                    <!--CLUBCHENES-->
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-3 control-label col-lg-5" for="inputSuccess">Which of the following organizaitons have you participated in and which interest you most?</label>
+                                                                                        <div class="col-lg-7">
+                                                                                            <div class="checkbox">
+                                                                                                <label>
+                                                                                                    <input type="checkbox" name="athletics" id="athletics" value="Athletics">Athletics
+                                                                                                </label>
+                                                                                            </div>
+
+                                                                                            <div class="checkbox">
+                                                                                                <label>
+                                                                                                    <input type="checkbox" name="dramatics" id="dramatics" value="Dramatics">Dramatics
+                                                                                                </label>
+                                                                                            </div>
+
+                                                                                            <div class="checkbox">
+                                                                                                <label>
+                                                                                                    <input type="checkbox" name="reli_org" id="reli_org" value="Religious Organization">Religious Organization
+                                                                                                </label>
+                                                                                            </div>
+
+                                                                                            <div class="checkbox">
+                                                                                                <label>
+                                                                                                    <input type="checkbox" name="chess_club" id="chess_club" value="Chess Club">Chess Club
+                                                                                                </label>
+                                                                                            </div>
+
+                                                                                            <div class="checkbox">
+                                                                                                <label>
+                                                                                                    <input type="checkbox" name="glee_club" id="glee_club" value="Glee Club">Glee Club
+                                                                                                </label>
+                                                                                            </div>
+
+                                                                                            <div class="checkbox">
+                                                                                                <label>
+                                                                                                    <input type="checkbox" name="scouting" id="scouting" value="Scouting">Scouting
+                                                                                                </label>
+                                                                                            </div>
+
+                                                                                            <div class="checkbox">
+                                                                                                <label>
+                                                                                                    <input type="checkbox" name="other_acts" id="other_acts" value="other_acts" onclick="ibapa2()">Others
+                                                                                                </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <script language="javascript" type="text/javascript">
+                                                                                        function ibapa2(){
+                                                                                            document.getElementById('iba2').disabled = false;
+                                                                                        }
+                                                                                        function ibapa3(){
+                                                                                            document.getElementById('iba2').disabled =  true;
+                                                                                        }
+                                                                                    </script>
+
+                                                                                    <br></br>
+                                                                                    &nbsp;
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Please Specify:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" disabled="" id="iba2" name="acts_specify">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!--CLUBCHENES-->
+
+                                                                                    <br></br>
+                                                                                    &nbsp;
+
+                                                                                    <!--ORGNAMAN-->
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-3 control-label col-lg-5" for="inputSuccess">Occupational position in the organization:</label>
+                                                                                        <div class="col-lg-7">
+                                                                                            <div class="checkbox">
+                                                                                                <label>
+                                                                                                    <input type="checkbox" name="officer" id="officer" value="Officer">Officer
+                                                                                                </label>
+                                                                                            </div>
+
+                                                                                            <div class="checkbox">
+                                                                                                <label>
+                                                                                                    <input type="checkbox" name="member" id="member" value="Member">Member
+                                                                                                </label>
+                                                                                            </div>
+
+                                                                                            <div class="checkbox">
+                                                                                                <label>
+                                                                                                    <input type="checkbox" name="other_pos" id="other_pos" value="" onclick="ibapaasin()">Others
+                                                                                                </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <script language="javascript" type="text/javascript">
+                                                                                        function ibapaasin(){
+                                                                                            document.getElementById('ibaiba').disabled = false;
+                                                                                        }
+                                                                                        function ibapa3(){
+                                                                                            document.getElementById('ibaiba').disabled =  true;
+                                                                                        }
+                                                                                    </script>
+
+                                                                                    <br></br>
+                                                                                    &nbsp;
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-sm-2 control-label">Please Specify:</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control" disabled="" id="ibaiba" name="pos_specify">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!--ORGNAMAN-->
+                                                                                    
+                                                                                </div>
+                                                                            <!--LAMAN END-->
+                                                                        </div>
+                                                                    </div>
+                                                                <!--END NG EXTRA-CURRICULAR-->
+
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-success" type="submit" name="submit">Save</button>
+                                                                </div>
+
+                                                            </div>
+                                                        </form>
+                                                    <!--LAMAN NG INTERESTS AND HOBBIES END-->
+                                                </div>
+                                            <!--END NG LAMAN NG ADD/UPDATE-->
+                                        </div>
+                                    <!--END NG INTERESTS AND HOBBIES-->
+
+                                    <!----------B      R        E       A       K-------->
+
                                         </div>
                                         <div class="modal-footer">
                                             <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                                            <button class="btn btn-success" type="button">Save changes</button>
                                         </div>
                                     </div>
                                 </div>
@@ -312,54 +1902,60 @@ if (!$query) {
                     <form action="add_student.php" method="POST" >
                     <div class="row">
                         <div class="col-md-4 form-group">
-                            *Student Number <input name="Stud_no" type="text" class="form-control" placeholder="ex. 2015-00001-CM-0" required/>
+                            *Student Number <input name="Stud_NO" type="text" class="form-control" placeholder="ex. 2015-00001-CM-0" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Email Address<input name="Stud_email" type="text" class="form-control" placeholder="ex. email@email.com" required/>
+                            *Email Address<input name="Stud_EMAIL" type="text" class="form-control" placeholder="ex. email@email.com" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Contact Number<input name="Stud_contact" type="text" class="form-control" placeholder="ex. 099999999" required/>
+                            *Contact Number<input name="Stud_MOBILE_NO" type="text" class="form-control" placeholder="ex. 099999999" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            *First Name <input name="Stud_fname" type="text" class="form-control" placeholder="First Name" required/>
+                            *Telephone Number<input name="Stud_TELEPHONE_NO" type="text" class="form-control" placeholder="ex. 099999999" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            Middle Name<input name="Stud_mname" type="text" class="form-control" placeholder="Middle Name">
+                            *First Name <input name="Stud_FNAME" type="text" class="form-control" placeholder="First Name" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Last Name<input name="Stud_lname" type="text" class="form-control" placeholder="Last Number" required/>
+                            Middle Name<input name="Stud_MNAME" type="text" class="form-control" placeholder="Middle Name">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            *Last Name<input name="Stud_LNAME" type="text" class="form-control" placeholder="Last Number" required/>
                         </div>
                         <div class="col-md-4 form-group">
                             *Course
-                            <select name="Stud_course" type="text" class="form-control m-bot15" required>
+                            <select name="Stud_COURSE" type="text" class="form-control m-bot15" required>
                               <?php
-                            $db = mysqli_connect("localhost", "root", "", "g&csms_db");
-                            $sql= mysqli_query($db, "SELECT `course` FROM `sys_con_drp` WHERE `course` != ' '");?>
+                            $db = mysqli_connect("localhost", "root", "", "pupqcdb");
+                            $sql= mysqli_query($db, "SELECT `Course_CODE` FROM `r_courses` WHERE `Course_CODE` != ' '");?>
                             <?php
                             while ($row = mysqli_fetch_array($sql))
                             {
-                            $course= $row['course'];
+                            $course= $row['Course_CODE'];
                             echo"<option value ='$course'>$course</option>";
                              }?>
                             </select>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Year<input name="Stud_year" type="number" class="form-control" placeholder="Section" required/>
+                            *Year<input name="Stud_YEAR_LEVEL" type="number" class="form-control" placeholder="Section" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Section<input name="Stud_section" type="number" class="form-control" placeholder="Section" required/>
+                            *Section<input name="Stud_SECTION" type="number" class="form-control" placeholder="Section" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Gender<select name="Stud_gender" type="text" class="form-control m-bot15">
+                            *Gender<select name="Stud_GENDER" type="text" class="form-control m-bot15">
                             <option value="Male">Male</option>    
                             <option value="Female">Female</option>    
                             </select>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Birth Date<input name="Stud_bdate" type="Date" class="form-control" required/>
+                            *Birth Date<input name="Stud_BIRTH_DATE" type="Date" class="form-control" required/>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            *Birth Place<input name="Stud_BIRTH_PLACE" type="text" class="form-control" placeholder="enter your birth place">
                         </div>
                         <div class="col-md-4 form-group">
-                            *Student Status<select name="Stud_status" class="form-control" required>
+                            *Student Status<select name="Stud_DISPLAY_STATUS" class="form-control" required>
                                 <option value="Regular">Regular Student</option>
                                 <option value="Irregular">Irregular Student</option>
                                 <option value="Disqualified">Disqualified Student</option>
@@ -368,7 +1964,10 @@ if (!$query) {
                                 </select>
                         </div>
                         <div class="col-md-12 form-group">
-                            *Address<input name="Stud_address" type="text" class="form-control" placeholder="enter your home/ permanent address">
+                            *City Address<input name="Stud_CITY_ADDRESS" type="text" class="form-control" placeholder="enter your city address">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            *Provincial Address<input name="Stud_PROVINCIAL_ADDRESS" type="text" class="form-control" placeholder="enter your provincial address">
                         </div>
                     </div>
                     <div class="modal-footer">
