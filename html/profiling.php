@@ -1904,6 +1904,8 @@ if (!$query) {
                         <div class="col-md-4 form-group">
                             *Student Number <input name="Stud_NO" type="text" class="form-control" placeholder="ex. 2015-00001-CM-0" required/>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-4 form-group">
                             *Email Address<input name="Stud_EMAIL" type="text" class="form-control" placeholder="ex. email@email.com" required/>
                         </div>
@@ -1911,20 +1913,20 @@ if (!$query) {
                             *Contact Number<input name="Stud_MOBILE_NO" type="text" class="form-control" placeholder="ex. 099999999" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Telephone Number<input name="Stud_TELEPHONE_NO" type="text" class="form-control" placeholder="ex. 099999999" required/>
+                            *Telephone Number<input name="Stud_TELEPHONE_NO" type="text" class="form-control" placeholder="ex. 999-9999" required/>
                         </div>
                         <div class="col-md-4 form-group">
                             *First Name <input name="Stud_FNAME" type="text" class="form-control" placeholder="First Name" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            Middle Name<input name="Stud_MNAME" type="text" class="form-control" placeholder="Middle Name">
+                            *Middle Name<input name="Stud_MNAME" type="text" class="form-control" placeholder="Middle Name">
                         </div>
                         <div class="col-md-4 form-group">
-                            *Last Name<input name="Stud_LNAME" type="text" class="form-control" placeholder="Last Number" required/>
+                            *Last Name<input name="Stud_LNAME" type="text" class="form-control" placeholder="Last Name" required/>
                         </div>
                         <div class="col-md-4 form-group">
                             *Course
-                            <select name="Stud_COURSE" type="text" class="form-control m-bot15" required>
+                            <select name="Stud_COURSE" type="text" class="form-control" required>
                               <?php
                             $db = mysqli_connect("localhost", "root", "", "pupqcdb");
                             $sql= mysqli_query($db, "SELECT `Course_CODE` FROM `r_courses` WHERE `Course_CODE` != ' '");?>
@@ -1937,22 +1939,16 @@ if (!$query) {
                             </select>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Year<input name="Stud_YEAR_LEVEL" type="number" class="form-control" placeholder="Section" required/>
+                            *Year<input name="Stud_YEAR_LEVEL" type="number" class="form-control" placeholder="Year" required/>
                         </div>
                         <div class="col-md-4 form-group">
                             *Section<input name="Stud_SECTION" type="number" class="form-control" placeholder="Section" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Gender<select name="Stud_GENDER" type="text" class="form-control m-bot15">
+                            *Gender<select name="Stud_GENDER" type="text" class="form-control">
                             <option value="Male">Male</option>    
                             <option value="Female">Female</option>    
                             </select>
-                        </div>
-                        <div class="col-md-4 form-group">
-                            *Birth Date<input name="Stud_BIRTH_DATE" type="Date" class="form-control" required/>
-                        </div>
-                        <div class="col-md-12 form-group">
-                            *Birth Place<input name="Stud_BIRTH_PLACE" type="text" class="form-control" placeholder="enter your birth place">
                         </div>
                         <div class="col-md-4 form-group">
                             *Student Status<select name="Stud_DISPLAY_STATUS" class="form-control" required>
@@ -1962,6 +1958,12 @@ if (!$query) {
                                 <option value="LOA">Leave of Absence</option>
                                 <option value="Transferee">Transferee Student</option>
                                 </select>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            *Birth Date<input name="Stud_BIRTH_DATE" type="Date" class="form-control" required/>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            *Birth Place<input name="Stud_BIRTH_PLACE" type="text" class="form-control" placeholder="enter your birth place">
                         </div>
                         <div class="col-md-12 form-group">
                             *City Address<input name="Stud_CITY_ADDRESS" type="text" class="form-control" placeholder="enter your city address">
