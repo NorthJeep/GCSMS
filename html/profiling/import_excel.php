@@ -62,8 +62,7 @@ if(!empty($_FILES['excelfile']['name']))
                     $stud_status = $row[15];
 
                     //Here, You can insert data into database.
-                    $qry = "call stud_profile_add('$stud_no','$stud_firstname','$stud_mname', '$stud_lname','$stud_gender','$stud_course','$stud_yr_lvl','$stud_section','$stud_bday', '$stud_address', '$stud_prov_add','$stud_tel_no', '$stud_cp_no', '$stud_email', '$stud_birthplace', 
-                        '$stud_status')";
+                    $qry = "call stud_profile_add('$stud_no','$stud_firstname','$stud_mname', '$stud_lname','$stud_gender','$stud_course','$stud_yr_lvl','$stud_section','$stud_bday', '$stud_address', '$stud_prov_add','$stud_tel_no', '$stud_cp_no', '$stud_email', '$stud_birthplace', '$stud_status')";
                     $res = mysqli_query($db,$qry);
 
                 }

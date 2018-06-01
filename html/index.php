@@ -213,7 +213,7 @@ include('sidebarnav.php');
                     exit();
                 }
 
-                if ($result = mysqli_query($db, "select * from t_stud_visit where Visit_PURPOSE = 'Clearance'")) {
+                if ($result = mysqli_query($db, "SELECT * FROM t_stud_visit where Visit_PURPOSE = 'Signing of Clearance'")) {
 
                     /* determine number of rows result set */
                     $row_cnt = mysqli_num_rows($result);
@@ -249,7 +249,7 @@ include('sidebarnav.php');
                     exit();
                 }
 
-                if ($result = mysqli_query($db, "select * from t_stud_visit where Visit_PURPOSE = 'Clearance'")) {
+                if ($result = mysqli_query($db, "SELECT * FROM t_stud_visit where Visit_PURPOSE = 'Excuse Letter'")) {
 
                     /* determine number of rows result set */
                     $row_cnt = mysqli_num_rows($result);
@@ -285,21 +285,21 @@ include('sidebarnav.php');
                     exit();
                 }
 
-                if ($result = mysqli_query($db, "select * from t_stud_visit where Visit_PURPOSE = 'Clearance'")) {
+                if ($result = mysqli_query($db, "select ActiveSemester_SEMESTRAL_NAME from active_semester where ActiveSemester_IS_ACTIVE = 1 limit 1")) {
 
                     /* determine number of rows result set */
-                    $row_cnt = mysqli_num_rows($result);
-
+                    $row = mysqli_fetch_assoc($result);
+                    $row_result = $row["ActiveSemester_SEMESTRAL_NAME"];
+                    
                     printf("
                     <section class='panel'> 
                     <div class='panel-body' >
                             <span class='mini-stat-icon orange'><i class='fa fa-calendar'></i></span>
                             <div class='mini-stat-info'>
-                                <span>%d</span>
-                                Semestral
+                                <span>%s</span>
                             </div>
                         </section>
-                ", $row_cnt); 
+                ", $row_result); 
                     /* close result set */
                     mysqli_free_result($result);
                 }
@@ -318,21 +318,22 @@ include('sidebarnav.php');
                     exit();
                 }
 
-                if ($result = mysqli_query($db, "select * from t_stud_visit where Visit_PURPOSE = 'Clearance'")) {
+                if ($result = mysqli_query($db, "select ActiveAcadYear_Batch_YEAR from active_academic_year where ActiveAcadYear_IS_ACTIVE = 1 limit 1")) {
 
                     /* determine number of rows result set */
-                    $row_cnt = mysqli_num_rows($result);
+                    $row = mysqli_fetch_assoc($result);
+                    $row_result = $row["ActiveAcadYear_Batch_YEAR"];
 
                     printf("
                     <section class='panel'> 
                     <div class='panel-body' >
                             <span class='mini-stat-icon orange'><i class='fa fa-calendar'></i></span>
                             <div class='mini-stat-info'>
-                                <span>%d</span>
+                                <span>%s</span>
                                 School Year
                             </div>
                         </section>
-                ", $row_cnt); 
+                ", $row_result); 
                     /* close result set */
                     mysqli_free_result($result);
                 }
