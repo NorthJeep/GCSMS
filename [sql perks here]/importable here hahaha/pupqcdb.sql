@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2018 at 11:32 AM
+-- Generation Time: Jun 01, 2018 at 09:53 AM
 -- Server version: 10.1.8-MariaDB
 -- PHP Version: 5.6.14
 
@@ -30,41 +30,12 @@ insert into r_couns_type (Couns_TYPE) values (type)$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `login_check` (IN `username` VARCHAR(50), IN `userpass` VARCHAR(100))  NO SQL
 select * from r_users where Users_USERNAME = username and AES_DECRYPT(Users_PASSWORD,password('GC&SMS')) = userpass$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `stud_profile_add` (IN `studNo` VARCHAR(15), IN `fname` VARCHAR(100), IN `mname` VARCHAR(100), IN `lname` VARCHAR(100), IN `gender` VARCHAR(10), IN `course` VARCHAR(15), IN `yearLevel` INT(11), IN `section` VARCHAR(5), IN `bdate` DATE, IN `cityAddress` VARCHAR(500), IN `provAddress` VARCHAR(500), IN `telNo` VARCHAR(20), IN `mobNo` VARCHAR(20), IN `email` VARCHAR(100), IN `birthplace` VARCHAR(500), IN `stat` VARCHAR(20))  NO SQL
-insert into r_stud_profile (
-    Stud_NO,
-    Stud_FNAME,
-    Stud_MNAME,
-    Stud_LNAME,
-    Stud_GENDER,
-    Stud_COURSE,
-    Stud_YEAR_LEVEL,
-    Stud_SECTION,
-    Stud_BIRTH_DATE,
-	Stud_CITY_ADDRESS,
-	Stud_PROVINCIAL_ADDRESS,
-	Stud_TELEPHONE_NO,
-	Stud_MOBILE_NO,
-	Stud_EMAIL,
-	Stud_BIRTH_PLACE,
-	Stud_STATUS)
-values (
-    studNo,
-    fname,
-    mname,
-    lname,
-    gender,
-    course,
-    yearLevel,
-    section,
-    bdate,
-	cityAddress,
-	provAddress,
-	tellNo,
-	mobNo,
-	email,
-	birthplace,
-	stat)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `stud_visit_add` (IN `studNo` VARCHAR(15), IN `purpose` VARCHAR(50), IN `details` TEXT)  NO SQL
+begin
+set @visitCode = (select concat('VS',(select date_format(CURRENT_TIMESTAMP,'%y-%c%d')),convert((select count(*) from t_stud_visit where date(Visit_DATE) = CURRENT_DATE),int)+1) as VisitCode);
+insert into t_stud_visit (Visit_CODE,Stud_NO,Visit_PURPOSE,Visit_DETAILS)
+values (@visitCode,studNo,purpose,details);
+end$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `stud_counseling_add` (IN `visitRef` INT, IN `counsType` VARCHAR(50), IN `appmtType` VARCHAR(25), IN `studNo` VARCHAR(15), IN `bg` TEXT, IN `goal` TEXT, IN `commnt` TEXT, IN `recommendation` TEXT, IN `remarks` VARCHAR(50))  NO SQL
 begin
@@ -90,12 +61,50 @@ values (
 insert into t_couns_details (Couns_ID_REFERENCE,Stud_NO,Couns_REMARKS) values (LAST_INSERT_ID(),studNo,if (remarks = '',null,remarks));
 end$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `stud_visit_add` (IN `studNo` VARCHAR(15), IN `purpose` VARCHAR(50), IN `details` TEXT)  NO SQL
-begin
-set @visitCode = (select concat('VS',(select date_format(CURRENT_TIMESTAMP,'%y-%c%d')),convert((select count(*) from t_stud_visit where date(Visit_DATE) = CURRENT_DATE),int)+1) as VisitCode);
-insert into t_stud_visit (Visit_CODE,Stud_NO,Visit_PURPOSE,Visit_DETAILS)
-values (@visitCode,studNo,purpose,details);
-end$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `stud_profile_add` (IN `studNo` VARCHAR(15), IN `fname` VARCHAR(100), IN `mname` VARCHAR(100), IN `lname` VARCHAR(100), IN `gender` VARCHAR(10), IN `course` VARCHAR(15), IN `yearLevel` INT(11), IN `section` VARCHAR(5), IN `bdate` DATE, IN `cityAddress` VARCHAR(500), IN `provAddress` VARCHAR(500), IN `telNo` VARCHAR(20), IN `mobNo` VARCHAR(20), IN `email` VARCHAR(100), IN `birthplace` VARCHAR(500), IN `stat` VARCHAR(20))  NO SQL
+BEGIN
+insert into r_stud_profile (
+    Stud_NO,
+    Stud_FNAME,
+    Stud_MNAME,
+    Stud_LNAME,
+    Stud_GENDER,
+    Stud_COURSE,
+    Stud_YEAR_LEVEL,
+    Stud_SECTION,
+    Stud_BIRTH_DATE,
+	Stud_CITY_ADDRESS,
+	Stud_PROVINCIAL_ADDRESS,
+	Stud_TELEPHONE_NO,
+	Stud_MOBILE_NO,
+	Stud_EMAIL,
+	Stud_BIRTH_PLACE)
+values (
+    studNo,
+    fname,
+    mname,
+    lname,
+    gender,
+    course,
+    yearLevel,
+    section,
+    bdate,
+	cityAddress,
+	provAddress,
+	telNo,
+	mobNo,
+	email,
+	birthplace);
+    
+insert into r_stud_batch (
+    Stud_NO,
+    Batch_YEAR,
+    Stud_STATUS)
+values (
+    studNo,
+    (select ActiveAcadYear_Batch_YEAR from active_academic_year where ActiveAcadYear_IS_ACTIVE = 1 order by ActiveAcadYear_ID desc limit 1),
+	stat);
+END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `upload_category_add` (IN `category` VARCHAR(100))  NO SQL
 insert into r_upload_category (Upload_FILE_CATEGORY) values (category)$$
@@ -126,6 +135,27 @@ CREATE TABLE `active_academic_year` (
 
 INSERT INTO `active_academic_year` (`ActiveAcadYear_ID`, `ActiveAcadYear_Batch_YEAR`, `ActiveAcadYear_IS_ACTIVE`, `ActiveAcadYear_DATE_ADD`, `ActiveAcadYear_DATE_MOD`) VALUES
 (5, '2017-2018', '1', '2018-05-21 00:38:41', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `active_semester`
+--
+
+CREATE TABLE `active_semester` (
+  `ActiveSemester_ID` int(11) NOT NULL,
+  `ActiveSemester_SEMESTRAL_NAME` varchar(50) NOT NULL,
+  `ActiveSemester_IS_ACTIVE` enum('1','0') NOT NULL DEFAULT '1',
+  `ActiveSemester_DATE_ADD` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ActiveSemester_DATE_MOD` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+--
+-- Dumping data for table `active_semester`
+--
+
+INSERT INTO `active_semester` (`ActiveSemester_ID`, `ActiveSemester_SEMESTRAL_NAME`, `ActiveSemester_IS_ACTIVE`, `ActiveSemester_DATE_ADD`, `ActiveSemester_DATE_MOD`) VALUES
+(4, 'Summer Semester', '1', '2018-05-21 00:38:44', NULL);
 
 -- --------------------------------------------------------
 
@@ -376,7 +406,12 @@ CREATE TABLE `r_stud_batch` (
 --
 
 INSERT INTO `r_stud_batch` (`Stud_BATCH_ID`, `Stud_NO`, `Batch_YEAR`, `Stud_STATUS`) VALUES
-(1, '2015-00138-CM-0', '2017-2018', 'Regular');
+(1, '2015-00138-CM-0', '2017-2018', 'Regular'),
+(6, '2015-00075-CM-0', '2017-2018', 'Regular'),
+(7, '2015-00410-CM-0', '2017-2018', 'Regular'),
+(8, '2015-00046-CM-0', '2017-2018', 'Regular'),
+(9, '2015-00007-CM-0', '2017-2018', 'Regular'),
+(10, '2012-00156-CM-0', '2017-2018', 'Regular');
 
 -- --------------------------------------------------------
 
@@ -551,7 +586,12 @@ CREATE TABLE `r_stud_profile` (
 --
 
 INSERT INTO `r_stud_profile` (`Stud_ID`, `Stud_NO`, `Stud_FNAME`, `Stud_MNAME`, `Stud_LNAME`, `Stud_GENDER`, `Stud_COURSE`, `Stud_YEAR_LEVEL`, `Stud_SECTION`, `Stud_BIRTH_DATE`, `Stud_CITY_ADDRESS`, `Stud_PROVINCIAL_ADDRESS`, `Stud_TELEPHONE_NO`, `Stud_MOBILE_NO`, `Stud_EMAIL`, `Stud_BIRTH_PLACE`, `Stud_DATE_MOD`, `Stud_DATE_ADD`, `Stud_DATE_DEACTIVATE`, `Stud_DISPLAY_STATUS`) VALUES
-(1, '2015-00138-CM-0', 'Oliver', NULL, 'Gabriel', 'Male', 'BSIT', 3, '1', '1998-11-16', '24-D4 Oliveros Drive Apolonio Samson Quezon City', 'Not Specify', 'Not Specify', 'Not Specify', 'Not Specify', 'Not Specify', '2018-05-21 14:11:00', '2018-05-21 14:11:00', NULL, 'Active');
+(1, '2015-00138-CM-0', 'Oliver', NULL, 'Gabriel', 'Male', 'BSIT', 3, '1', '1998-11-16', '24-D4 Oliveros Drive Apolonio Samson Quezon City', 'Not Specify', 'Not Specify', 'Not Specify', 'Not Specify', 'Not Specify', '2018-05-21 14:11:00', '2018-05-21 14:11:00', NULL, 'Active'),
+(7, '2015-00075-CM-0', 'Lowell Dave', 'Elba', 'Agnir', 'Male', 'BSIT', 3, '1', '1999-04-21', 'Blk. 17 Lot 11 Lamar Village GB II San Mateo Rizal', 'Not Specified', 'None', '9293767107', 'lowell.agnir@yahoo.com', 'Not Specified', '2018-06-01 00:08:03', '2018-06-01 00:08:03', NULL, 'Active'),
+(8, '2015-00410-CM-0', 'Ma. Michaela', 'Cruz', 'Alejandria', 'Female', 'BSIT', 3, '1', '1998-06-17', '1 St. Joseph St., Lamesa Heights Subd., Brgy. Greater Lagro, Quezon City', 'Not Specified', 'None', '9089598580', 'mikaalej@gmail.com', 'Not Specified', '2018-06-01 00:08:04', '2018-06-01 00:08:04', NULL, 'Active'),
+(9, '2015-00046-CM-0', 'Keith Eyvan', 'Nobong', 'Alvior', 'Male', 'BSIT', 3, '1', '1999-03-26', 'Blk. 4 Lot3 DoÃ±a Nicassa Puyat Subd. Commonwealth Quezon City', 'Not Specified', 'None', '9108580918', 'thenewarkhamjoker@outlook.com', 'Not Specified', '2018-06-01 00:08:04', '2018-06-01 00:08:04', NULL, 'Active'),
+(10, '2015-00007-CM-0', 'Alyana Mae', 'L', 'Apo', 'Female', 'BSIT', 3, '1', '1999-09-22', '418 TandangSora Avenue, Quezon City', 'Not Specified', 'None', '9392362781', 'yana-apo@yahoo.com', 'Not Specified', '2018-06-01 00:08:04', '2018-06-01 00:08:04', NULL, 'Active'),
+(11, '2012-00156-CM-0', 'Mary Joy', 'A', 'Asusula', 'Female', 'BSIT', 3, '1', '1994-04-18', 'blk 11 lot 11 kalap subdivision , Novaliches, Quezon City', 'Not Specified', 'None', '9129876707', 'mcz_joy@yahoo.com', 'Not Specified', '2018-06-01 00:08:04', '2018-06-01 00:08:04', NULL, 'Active');
 
 -- --------------------------------------------------------
 
@@ -855,6 +895,13 @@ ALTER TABLE `active_academic_year`
   ADD KEY `FK_ActiveAcadYear_Batch_YEAR` (`ActiveAcadYear_Batch_YEAR`) USING BTREE;
 
 --
+-- Indexes for table `active_semester`
+--
+ALTER TABLE `active_semester`
+  ADD PRIMARY KEY (`ActiveSemester_ID`) USING BTREE,
+  ADD KEY `FK_ActiveSemester_SEMESTRAL_NAME` (`ActiveSemester_SEMESTRAL_NAME`) USING BTREE;
+
+--
 -- Indexes for table `r_batch_details`
 --
 ALTER TABLE `r_batch_details`
@@ -1091,6 +1138,11 @@ ALTER TABLE `t_upload`
 ALTER TABLE `active_academic_year`
   MODIFY `ActiveAcadYear_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT for table `active_semester`
+--
+ALTER TABLE `active_semester`
+  MODIFY `ActiveSemester_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT for table `r_batch_details`
 --
 ALTER TABLE `r_batch_details`
@@ -1149,7 +1201,7 @@ ALTER TABLE `r_semester`
 -- AUTO_INCREMENT for table `r_stud_batch`
 --
 ALTER TABLE `r_stud_batch`
-  MODIFY `Stud_BATCH_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Stud_BATCH_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `r_stud_educ_background`
 --
@@ -1159,7 +1211,7 @@ ALTER TABLE `r_stud_educ_background`
 -- AUTO_INCREMENT for table `r_stud_profile`
 --
 ALTER TABLE `r_stud_profile`
-  MODIFY `Stud_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Stud_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `r_upload_category`
 --
@@ -1204,6 +1256,12 @@ ALTER TABLE `t_upload`
 --
 ALTER TABLE `active_academic_year`
   ADD CONSTRAINT `FK_ActiveAcadYear_Batch_YEAR` FOREIGN KEY (`ActiveAcadYear_Batch_YEAR`) REFERENCES `r_batch_details` (`Batch_YEAR`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `active_semester`
+--
+ALTER TABLE `active_semester`
+  ADD CONSTRAINT `FK_ActiveSemester_SEMESTRAL_NAME` FOREIGN KEY (`ActiveSemester_SEMESTRAL_NAME`) REFERENCES `r_semester` (`Semestral_NAME`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `r_courses`
