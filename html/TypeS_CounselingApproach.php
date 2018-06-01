@@ -122,7 +122,7 @@ include('TypeS_Sidebar.php');
                         </header>
                         <div class="panel-body">
                             <div class="position-center">
-                                <form action="GCSMS_CounselingApproach.php" method="POST">
+                                <form action="TypeS_CounselingApproach.php" method="POST">
                                     <div class="form-group">
                                         <br>
                                         <label for="approachName">Approach Name</label>

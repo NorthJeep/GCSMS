@@ -124,7 +124,7 @@ include('TypeS_Sidebar.php');
                     </header>
                     <div class="panel-body">
                         <div class="position-center">
-                            <form action="GCSMS_VisitType.php" method="POST">
+                            <form action="TypeS_VisitType.php" method="POST">
                                 <div class="form-group">
                                     <br>
                                     <label>Visit Type</label>

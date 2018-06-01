@@ -115,7 +115,7 @@ include('TypeS_Sidebar.php');
                         </header>
                         <div class="panel-body">
                             <div class="position-center">
-                                <form action="GCSMS_CivilStatus.php" method="POST">
+                                <form action="TypeS_CivilStatus.php" method="POST">
                                     <div class="form-group">
                                         <br>
                                         <label for="civil">Civil Status</label>
