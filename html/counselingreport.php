@@ -138,7 +138,7 @@ include('sidebarnav.php');
                                                     <!-- page start-->
                                                     <?php
 
-$conn = mysqli_connect("localhost","root","","pupqcdb");
+include ("config.php");
 
 // Check connection
 if (mysqli_connect_errno())
@@ -146,7 +146,7 @@ if (mysqli_connect_errno())
 printf("Connect failed: %s\n", mysqli_connect_error());
 exit();
 }
-$sql =  mysqli_query ($conn," SELECT
+$sql =  mysqli_query ($db," SELECT
 `c`.`Couns_CODE` AS `COUNSELING_CODE`,
 CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
 `s`.`Stud_NO` AS `STUD_NO`,
@@ -264,7 +264,7 @@ JOIN `r_stud_profile` `s` ON
                                                     <!-- page start-->
                                                     <?php
 
-$conn = mysqli_connect("localhost","root","","pupqcdb");
+include ("config.php");
 
 // Check connection
 if (mysqli_connect_errno())
@@ -272,7 +272,7 @@ if (mysqli_connect_errno())
 printf("Connect failed: %s\n", mysqli_connect_error());
 exit();
 }
-$sql =  mysqli_query ($conn," SELECT
+$sql =  mysqli_query ($db," SELECT
 `c`.`Couns_CODE` AS `COUNSELING_CODE`,
 CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
 `s`.`Stud_NO` AS `STUD_NO`,
