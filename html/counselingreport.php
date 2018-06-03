@@ -9,6 +9,153 @@
     }
     include ("config.php");
 
+if (mysqli_connect_errno())
+{
+printf("Connect failed: %s\n", mysqli_connect_error());
+exit();
+}
+
+if(isset($_POST["IndivFilter"]))
+{
+    $acadOpt = $_POST["acadOpt"];
+    $semOpt = $_POST["semOpt"];
+    $monthOpt = $_POST["monthOpt"];
+    $dayOpt = $_POST["dayOpt"];
+    $courseOpt = $_POST["courseOpt"];
+
+        $actualQuery = "SELECT
+        `c`.`Couns_CODE` AS `COUNSELING_CODE`,
+        CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
+        `s`.`Stud_NO` AS `STUD_NO`,
+        DATE_FORMAT(`c`.`Couns_DATE`, '%W %M %d %Y') AS `COUNSELING_DATE`,
+        `c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
+        `c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,
+        CONCAT(
+        `s`.`Stud_COURSE`,
+        ' ',
+        `s`.`Stud_YEAR_LEVEL`,
+        ' - ',
+        `s`.`Stud_SECTION`
+        ) AS `COURSE`,
+        (
+        SELECT
+        GROUP_CONCAT(`a`.`Couns_APPROACH` SEPARATOR ', ')
+        FROM
+        `t_couns_approach` `a`
+        WHERE
+        (
+          `a`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`
+        )
+        ) AS `COUNSELING_APPROACH`,
+        `c`.`Couns_BACKGROUND` AS `COUNSELING_BG`,
+        `c`.`Couns_GOALS` AS `GOALS`,
+        `c`.`Couns_COMMENT` AS `COUNS_COMMENT`,
+        `c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION`
+        FROM
+        (
+        (
+          `t_counseling` `c`
+        JOIN `t_couns_details` `cd` ON
+          (
+              (
+                  `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
+              )
+          )
+        )
+        JOIN `r_stud_profile` `s` ON
+        ((`s`.`Stud_NO` = `cd`.`Stud_NO`))
+        ) ";
+
+        $conditions = array();
+
+        if(!empty($acadOpt)){
+            $conditions[] = "";
+        }
+        if(!empty($semOpt)){
+            $conditions[] = ""; 
+        }
+        if(!empty($monthOpt)){
+            $conditions[] = "";
+        }
+        if(!empty(dayOpt)){
+            $conditions[] = "";
+        }
+        if(!empty($courseOpt)){
+            $conditions[] = "";
+        }
+
+        $query = $actualQuery;
+        if(count($conditions)>0){
+            $query .= " WHERE ". implode(' AND ', $conditions);
+        }
+
+        $result = mysqli_query($db,$query);
+        return $result;
+}
+
+$sql =  mysqli_query ($db," SELECT
+`c`.`Couns_CODE` AS `COUNSELING_CODE`,
+CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
+`s`.`Stud_NO` AS `STUD_NO`,
+DATE_FORMAT(`c`.`Couns_DATE`, '%W %M %d %Y') AS `COUNSELING_DATE`,
+`c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
+`c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,
+CONCAT(
+`s`.`Stud_COURSE`,
+' ',
+`s`.`Stud_YEAR_LEVEL`,
+' - ',
+`s`.`Stud_SECTION`
+) AS `COURSE`,
+(
+SELECT
+GROUP_CONCAT(`a`.`Couns_APPROACH` SEPARATOR ', ')
+FROM
+`t_couns_approach` `a`
+WHERE
+(
+  `a`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`
+)
+) AS `COUNSELING_APPROACH`,
+`c`.`Couns_BACKGROUND` AS `COUNSELING_BG`,
+`c`.`Couns_GOALS` AS `GOALS`,
+`c`.`Couns_COMMENT` AS `COUNS_COMMENT`,
+`c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION`
+FROM
+(
+(
+  `t_counseling` `c`
+JOIN `t_couns_details` `cd` ON
+  (
+      (
+          `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
+      )
+  )
+)
+JOIN `r_stud_profile` `s` ON
+((`s`.`Stud_NO` = `cd`.`Stud_NO`))
+) ");
+//Academic year
+$sqlAY = mysqli_query($db, "SELECT Batch_ID,Batch_YEAR FROM `pupqcdb`.`r_batch_details` ");
+$optionAY = '';
+while ($row = mysqli_fetch_assoc($sqlAY))
+{
+    $optionAY .='<option value = "'.$row['Batch_ID'].'">'.$row['Batch_YEAR'].'</option>';
+}
+
+$sqlSem = mysqli_query($db, "SELECT Semestral_ID, Semestral_NAME FROM `r_semester`  ");
+$optionSem = '';
+while ($row = mysqli_fetch_assoc($sqlSem))
+{
+    $optionSem .='<option value = "'.$row['Semestral_ID'].'">'.$row['Semestral_NAME'].'</option>';
+}
+
+$sqlCourse = mysqli_query($db, "SELECT Course_ID, Course_CODE FROM `r_courses`  ");
+$optionCourse = '';
+while ($row = mysqli_fetch_assoc($sqlCourse))
+{
+    $optionCourse .='<option value = "'.$row['Course_ID'].'">'.$row['Course_CODE'].'</option>';
+}
 ?>
     <html lang="en">
 
@@ -67,7 +214,7 @@ include('sidebarnav.php');
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="col-lg-12">
                             <section class="panel">
                                 <header class="panel-heading tab-bg-dark-navy-blue ">
                                     <ul class="nav nav-tabs">
@@ -85,45 +232,63 @@ include('sidebarnav.php');
                                 <div class="panel-body">
                                     <div class="tab-content">
                                         <div id="Indiv" class="tab-pane active">
-                                            <div class="col-md-12" style="padding-left:0px">
+                                            <div class="col-lg-12" style="padding-left:0px">
                                                 <form action="counselingreport.php" method="POST">
                                                     <div class="row">
                                                         <div class="col-md-3">
-                                                            <select name="AOption" class="form-control input-sm m-bot4" placeholder="Academic Year">
+                                                            <select name="acadOpt" class="form-control input-sm m-bot4" placeholder="Academic Year">
                                                                 <option value="">--Select Academic Year--</option>
+                                                                <?php echo $optionAY; ?>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-2">
-                                                            <select name="SemOption" class="form-control input-sm m-bot4" placeholder="Semester">
+                                                            <select name="semOpt" class="form-control input-sm m-bot4" placeholder="Semester">
                                                                 <option value="">--Select Semester--</option>
+                                                                <?php echo $optionSem; ?>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-2">
-                                                            <select name="MonthOpt" class="form-control input-sm m-bot4" placeholder="Month">
+                                                            <select name="monthOpt" class="form-control input-sm m-bot4" placeholder="Month">
                                                                 <option value="">--Select Month--</option>
+                                                                <?php for( $m=1; $m<=12; ++$m ) { 
+          $month_label = date('F', mktime(0, 0, 0, $m, 1));
+        ?>
+                                                                <option value="<?php echo $m; ?>">
+                                                                    <?php echo $month_label; ?>
+                                                                </option>
+                                                                <?php } ?>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-2">
-                                                            <select name="DayOpt" class="form-control input-sm m-bot4" placeholder="Day">
+                                                            <select name="dayOpt" class="form-control input-sm m-bot4" placeholder="Day">
                                                                 <option value="">--Select Date--</option>
+                                                                <?php 
+          $start_date = 1;
+          $end_date   = 31;
+          for( $j=$start_date; $j<=$end_date; $j++ ) {
+            echo '<option value='.$j.'>'.$j.'</option>';
+          }
+        ?>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <select name="CourseOption" class="form-control input-sm m-bot4" placeholder="Programme/Course">
+                                                            <select name="courseOpt" class="form-control input-sm m-bot4" placeholder="Programme/Course">
                                                                 <option value="">--Select Programme/Course--</option>
+                                                                <?php echo $optionCourse; ?>
                                                             </select>
                                                         </div>
-
                                                     </div>
                                             </div>
                                             <br>
-                                            <br>
-                                            <button class="btn btn-info btn-sm" name="reportSearch">
-                                                <i class="fa fa-search"> Search</i>
+                                            </br>
+                                            <button class="btn btn-info btn-sm" name="IndivFilter">
+                                                <i class="fa fa-search"></i>
+                                                <span> Search</span>
                                             </button>
                                             </form>
-
-                                            <a href="print_record_all.php" type="button" class="btn btn-success">Print</a>
+                                            &nbsp
+                                            <a href="print_record_all.php" type="button" class="btn btn-success">
+                                                <i class="fa fa-print"></i> Print</a>
                                             <section id="unseen">
                                                 <table class=" display table table-bordered table-striped table-condensed" id="dynamic-table">
                                                     <thead>
@@ -136,120 +301,87 @@ include('sidebarnav.php');
                                                         </tr>
                                                     </thead>
                                                     <!-- page start-->
-                                                    <?php
 
-include ("config.php");
+                                                    <?php while ($row = mysqli_fetch_array($sql)) { ?>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td hidden>
+                                                                <?php echo $row['COUNSELING_CODE']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $row['STUD_NO']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $row['STUD_NAME']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $row['COUNSELING_DATE']; ?>
+                                                            </td>
 
-// Check connection
-if (mysqli_connect_errno())
-{
-printf("Connect failed: %s\n", mysqli_connect_error());
-exit();
-}
-$sql =  mysqli_query ($db," SELECT
-`c`.`Couns_CODE` AS `COUNSELING_CODE`,
-CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
-`s`.`Stud_NO` AS `STUD_NO`,
-DATE_FORMAT(`c`.`Couns_DATE`, '%W %M %d %Y') AS `COUNSELING_DATE`,
-`c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
-`c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,
-CONCAT(
-`s`.`Stud_COURSE`,
-' ',
-`s`.`Stud_YEAR_LEVEL`,
-' - ',
-`s`.`Stud_SECTION`
-) AS `COURSE`,
-(
-SELECT
-GROUP_CONCAT(`a`.`Couns_APPROACH` SEPARATOR ', ')
-FROM
-`t_couns_approach` `a`
-WHERE
-(
-  `a`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`
-)
-) AS `COUNSELING_APPROACH`,
-`c`.`Couns_BACKGROUND` AS `COUNSELING_BG`,
-`c`.`Couns_GOALS` AS `GOALS`,
-`c`.`Couns_COMMENT` AS `COUNS_COMMENT`,
-`c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION`
-FROM
-(
-(
-  `t_counseling` `c`
-JOIN `t_couns_details` `cd` ON
-  (
-      (
-          `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
-      )
-  )
-)
-JOIN `r_stud_profile` `s` ON
-((`s`.`Stud_NO` = `cd`.`Stud_NO`))
-) ");?>
-
-                                                        <?php while ($row = mysqli_fetch_array($sql)) { ?>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td hidden>
-                                                                    <?php echo $row['COUNSELING_CODE']; ?>
-                                                                </td>
-                                                                <td>
-                                                                    <?php echo $row['STUD_NO']; ?>
-                                                                </td>
-                                                                <td>
-                                                                    <?php echo $row['STUD_NAME']; ?>
-                                                                </td>
-                                                                <td>
-                                                                    <?php echo $row['COUNSELING_DATE']; ?>
-                                                                </td>
-
-                                                                <td>
-                                                                    <a href="counseling_report_review.php?view=<?php echo $row['COUNSELING_CODE']; ?>" id="viewbutton" type="button" class="btn btn-success">View</a>
-                                                                </td>
-                                                            </tr>
-                                                            <?php }?>
-                                                        </tbody>
+                                                            <td>
+                                                                <a href="counseling_report_review.php?view=<?php echo $row['COUNSELING_CODE']; ?>" id="viewbutton" type="button" class="btn btn-success">
+                                                                    <i class="fa fa-eye"></i> View</a>
+                                                            </td>
+                                                        </tr>
+                                                        <?php }?>
+                                                    </tbody>
                                                 </table>
                                                 <!-- page end-->
                                             </section>
                                         </div>
                                         <div id="Grouped" class="tab-pane">
-                                            <div class="col-md-12" style="padding-left:0px">
+                                            <div class="col-lg-12" style="padding-left:0px">
                                                 <form action="counselingreport.php" method="POST">
                                                     <div class="row">
                                                         <div class="col-md-3">
                                                             <select name="AOption" class="form-control input-sm m-bot4" placeholder="Academic Year">
                                                                 <option value="">--Select Academic Year--</option>
+                                                                <?php echo $optionAY; ?>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-2">
                                                             <select name="SemOption" class="form-control input-sm m-bot4" placeholder="Semester">
                                                                 <option value="">--Select Semester--</option>
+                                                                <?php echo $optionSem; ?>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-2">
                                                             <select name="MonthOpt" class="form-control input-sm m-bot4" placeholder="Month">
                                                                 <option value="">--Select Month--</option>
+                                                                <?php for( $m=1; $m<=12; ++$m ) { 
+          $month_label = date('F', mktime(0, 0, 0, $m, 1));
+        ?>
+                                                                <option value="<?php echo $m; ?>">
+                                                                    <?php echo $month_label; ?>
+                                                                </option>
+                                                                <?php } ?>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-2">
                                                             <select name="DayOpt" class="form-control input-sm m-bot4" placeholder="Day">
                                                                 <option value="">--Select Date--</option>
+                                                                <?php 
+          $start_date = 1;
+          $end_date   = 31;
+          for( $j=$start_date; $j<=$end_date; $j++ ) {
+            echo '<option value='.$j.'>'.$j.'</option>';
+          }
+        ?>
                                                             </select>
                                                         </div>
 
                                                     </div>
                                             </div>
-                                            <br>
-                                            <br>
+                                            </br>
+                                            </br>
                                             <button class="btn btn-info btn-sm" name="reportSearch">
-                                                <i class="fa fa-search"> Search</i>
-                                            </button>
+                                                <i class="fa fa-search"></i> Search</button>
                                             </form>
-
-                                            <a href="print_record_all.php" type="button" class="btn btn-success">Print</a>
+                                            &nbsp
+                                            <a href="print_record_all.php" type="button" class="btn btn-success">
+                                                <i class="fa fa-print"></i> Print</a>
+                                            </br>
+                                            </br>
                                             <section id="unseen">
                                                 <table class=" display table table-bordered table-striped table-condensed" id="dynamic-table">
                                                     <thead>
@@ -262,81 +394,30 @@ JOIN `r_stud_profile` `s` ON
                                                         </tr>
                                                     </thead>
                                                     <!-- page start-->
-                                                    <?php
 
-include ("config.php");
+                                                    <?php while ($row = mysqli_fetch_array($sql)) { ?>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td hidden>
+                                                                <?php echo $row['COUNSELING_CODE']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $row['STUD_NO']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $row['STUD_NAME']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $row['COUNSELING_DATE']; ?>
+                                                            </td>
 
-// Check connection
-if (mysqli_connect_errno())
-{
-printf("Connect failed: %s\n", mysqli_connect_error());
-exit();
-}
-$sql =  mysqli_query ($db," SELECT
-`c`.`Couns_CODE` AS `COUNSELING_CODE`,
-CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
-`s`.`Stud_NO` AS `STUD_NO`,
-DATE_FORMAT(`c`.`Couns_DATE`, '%W %M %d %Y') AS `COUNSELING_DATE`,
-`c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
-`c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,
-CONCAT(
-`s`.`Stud_COURSE`,
-' ',
-`s`.`Stud_YEAR_LEVEL`,
-' - ',
-`s`.`Stud_SECTION`
-) AS `COURSE`,
-(
-SELECT
-GROUP_CONCAT(`a`.`Couns_APPROACH` SEPARATOR ', ')
-FROM
-`t_couns_approach` `a`
-WHERE
-(
-  `a`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`
-)
-) AS `COUNSELING_APPROACH`,
-`c`.`Couns_BACKGROUND` AS `COUNSELING_BG`,
-`c`.`Couns_GOALS` AS `GOALS`,
-`c`.`Couns_COMMENT` AS `COUNS_COMMENT`,
-`c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION`
-FROM
-(
-(
-  `t_counseling` `c`
-JOIN `t_couns_details` `cd` ON
-  (
-      (
-          `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
-      )
-  )
-)
-JOIN `r_stud_profile` `s` ON
-((`s`.`Stud_NO` = `cd`.`Stud_NO`))
-) ");?>
-
-                                                        <?php while ($row = mysqli_fetch_array($sql)) { ?>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td hidden>
-                                                                    <?php echo $row['COUNSELING_CODE']; ?>
-                                                                </td>
-                                                                <td>
-                                                                    <?php echo $row['STUD_NO']; ?>
-                                                                </td>
-                                                                <td>
-                                                                    <?php echo $row['STUD_NAME']; ?>
-                                                                </td>
-                                                                <td>
-                                                                    <?php echo $row['COUNSELING_DATE']; ?>
-                                                                </td>
-
-                                                                <td>
-                                                                    <a href="counseling_report_review.php?view=<?php echo $row['COUNSELING_CODE']; ?>" id="viewbutton" type="button" class="btn btn-success">View</a>
-                                                                </td>
-                                                            </tr>
-                                                            <?php }?>
-                                                        </tbody>
+                                                            <td>
+                                                                <a href="counseling_report_review.php?view=<?php echo $row['COUNSELING_CODE']; ?>" id="viewbutton" type="button" class="btn btn-success">
+                                                                    <i class="fa fa-eye"></i> View</a>
+                                                            </td>
+                                                        </tr>
+                                                        <?php }?>
+                                                    </tbody>
                                                 </table>
                                                 <!-- page end-->
                                             </section>
