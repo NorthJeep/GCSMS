@@ -15,13 +15,13 @@ printf("Connect failed: %s\n", mysqli_connect_error());
 exit();
 }
 
-if(isset($_POST["IndivFilter"]))
+if(isset($_POST['IndivFilter']))
 {
-    $acadOpt = $_POST["acadOpt"];
-    $semOpt = $_POST["semOpt"];
-    $monthOpt = $_POST["monthOpt"];
-    $dayOpt = $_POST["dayOpt"];
-    $courseOpt = $_POST["courseOpt"];
+    $acadOpt = $_POST['acadOpt'];
+    $semOpt = $_POST['semOpt'];
+    $monthOpt = $_POST['monthOpt'];
+    $dayOpt = $_POST['dayOpt'];
+    $courseOpt = $_POST['courseOpt'];
 
         $actualQuery = "SELECT
         `c`.`Couns_CODE` AS `COUNSELING_CODE`,
@@ -68,19 +68,23 @@ if(isset($_POST["IndivFilter"]))
 
         $conditions = array();
 
-        if(!empty($acadOpt)){
+        if($acadOpt != 'All'){
             $conditions[] = "";
         }
-        if(!empty($semOpt)){
+
+        if($semOpt != 'All'){
             $conditions[] = ""; 
         }
-        if(!empty($monthOpt)){
+
+        if($monthOpt != 'All'){
             $conditions[] = "";
         }
-        if(!empty(dayOpt)){
+
+        if($dayOpt != 'All'){
             $conditions[] = "";
         }
-        if(!empty($courseOpt)){
+
+        if($courseOpt != 'All'){
             $conditions[] = "";
         }
 
@@ -90,7 +94,51 @@ if(isset($_POST["IndivFilter"]))
         }
 
         $result = mysqli_query($db,$query);
-        return $result;
+} else {
+    $actualQuery = "SELECT
+        `c`.`Couns_CODE` AS `COUNSELING_CODE`,
+        DATE_FORMAT(`c`.`Couns_DATE`, '%W %M %d %Y') AS `COUNSELING_DATE`,
+        `c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
+        `c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,
+        `s`.`Stud_NO` AS `STUD_NO`,
+        CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
+        CONCAT(
+            `s`.`Stud_COURSE`,
+            ' ',
+            `s`.`Stud_YEAR_LEVEL`,
+            ' - ',
+            `s`.`Stud_SECTION`
+        ) AS `COURSE`,
+        (
+        SELECT
+            GROUP_CONCAT(`a`.`Couns_APPROACH` SEPARATOR ', ')
+        FROM
+            `t_couns_approach` `a`
+        WHERE
+            (
+                `a`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`
+            )
+    ) AS `COUNSELING_APPROACH`,
+    `c`.`Couns_BACKGROUND` AS `COUNSELING_BG`,
+    `c`.`Couns_GOALS` AS `GOALS`,
+    `c`.`Couns_COMMENT` AS `COUNS_COMMENT`,
+    `c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION`
+    FROM
+        (
+            (
+                `t_counseling` `c`
+            JOIN `t_couns_details` `cd` ON
+                (
+                    (
+                        `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
+                    )
+                )
+            )
+        JOIN `r_stud_profile` `s` ON
+            ((`s`.`Stud_NO` = `cd`.`Stud_NO`))
+        ) ";
+
+    $result = mysqli_query($db,$actualQuery);
 }
 
 $sql =  mysqli_query ($db," SELECT
@@ -237,19 +285,19 @@ include('sidebarnav.php');
                                                     <div class="row">
                                                         <div class="col-md-3">
                                                             <select name="acadOpt" class="form-control input-sm m-bot4" placeholder="Academic Year">
-                                                                <option value="">--Select Academic Year--</option>
+                                                                <option value="All">--Select Academic Year--</option>
                                                                 <?php echo $optionAY; ?>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-2">
                                                             <select name="semOpt" class="form-control input-sm m-bot4" placeholder="Semester">
-                                                                <option value="">--Select Semester--</option>
+                                                                <option value="All">--Select Semester--</option>
                                                                 <?php echo $optionSem; ?>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-2">
                                                             <select name="monthOpt" class="form-control input-sm m-bot4" placeholder="Month">
-                                                                <option value="">--Select Month--</option>
+                                                                <option value="All">--Select Month--</option>
                                                                 <?php for( $m=1; $m<=12; ++$m ) { 
           $month_label = date('F', mktime(0, 0, 0, $m, 1));
         ?>
@@ -261,7 +309,7 @@ include('sidebarnav.php');
                                                         </div>
                                                         <div class="col-md-2">
                                                             <select name="dayOpt" class="form-control input-sm m-bot4" placeholder="Day">
-                                                                <option value="">--Select Date--</option>
+                                                                <option value="All">--Select Date--</option>
                                                                 <?php 
           $start_date = 1;
           $end_date   = 31;
@@ -273,7 +321,7 @@ include('sidebarnav.php');
                                                         </div>
                                                         <div class="col-md-3">
                                                             <select name="courseOpt" class="form-control input-sm m-bot4" placeholder="Programme/Course">
-                                                                <option value="">--Select Programme/Course--</option>
+                                                                <option value="All">--Select Programme/Course--</option>
                                                                 <?php echo $optionCourse; ?>
                                                             </select>
                                                         </div>
@@ -281,9 +329,9 @@ include('sidebarnav.php');
                                             </div>
                                             <br>
                                             </br>
-                                            <button class="btn btn-info btn-sm" name="IndivFilter">
+                                            <button class="btn btn-info btn-sm" type="submit" name="IndivFilter">
                                                 <i class="fa fa-search"></i>
-                                                <span> Search</span>
+                                                Search
                                             </button>
                                             </form>
                                             &nbsp
@@ -301,8 +349,7 @@ include('sidebarnav.php');
                                                         </tr>
                                                     </thead>
                                                     <!-- page start-->
-
-                                                    <?php while ($row = mysqli_fetch_array($sql)) { ?>
+                                                    <?php while ($row = mysqli_fetch_array($result)) { ?>
                                                     <tbody>
                                                         <tr>
                                                             <td hidden>
@@ -395,7 +442,7 @@ include('sidebarnav.php');
                                                     </thead>
                                                     <!-- page start-->
 
-                                                    <?php while ($row = mysqli_fetch_array($sql)) { ?>
+                                                    <?php while ($row = mysqli_fetch_array($result)) { ?>
                                                     <tbody>
                                                         <tr>
                                                             <td hidden>
