@@ -60,80 +60,79 @@ include('sidebarnav.php');
 <section id="main-content">
 <section class="wrapper">
             
+
+          <div class="col-md-6">
+                    <div class="mini-stat clearfix"> <span class="mini-stat-icon orange"><i class="fa  fa-calendar"></i></span>
+                        <div class="mini-stat-info"> <span> 
+                            
+                             <?php
+
+                /* check connection */
+                if (mysqli_connect_errno()) {
+                    printf("Connect failed: %s\n", mysqli_connect_error());
+                    exit();
+                }
+
+                if ($result = mysqli_query($db, "select ActiveAcadYear_Batch_YEAR from active_academic_year where ActiveAcadYear_IS_ACTIVE = 1 limit 1")) {
+
+                    /* determine number of rows result set */
+                    $row = mysqli_fetch_assoc($result);
+                    $row_result = $row["ActiveAcadYear_Batch_YEAR"];
+
+                    printf("
+                            <span>%s</span>
+                            </div> ", $row_result); 
+                    /* close result set */
+                    mysqli_free_result($result);
+                }
+
+                /* close connection */
+                // mysqli_close($db);
+                ?>   
+                            
+                        </span> Current Academic Year </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="mini-stat clearfix"> <span class="mini-stat-icon tar"><i class="fa  fa-flag"></i></span>
+                        <div class="mini-stat-info"> <span>
+                            
+                                            <?php
+
+                /* check connection */
+                if (mysqli_connect_errno()) {
+                    printf("Connect failed: %s\n", mysqli_connect_error());
+                    exit();
+                }
+
+                if ($result = mysqli_query($db, "select ActiveSemester_SEMESTRAL_NAME from active_semester where ActiveSemester_IS_ACTIVE = 1 limit 1")) {
+
+                    /* determine number of rows result set */
+                    $row = mysqli_fetch_assoc($result);
+                    $row_result = $row["ActiveSemester_SEMESTRAL_NAME"];
+                    printf("
+                            <span>%s</span>
+                            </div> ", $row_result); 
+                    /* close result set */
+                    mysqli_free_result($result);
+                }
+
+                /* close connection */
+                // mysqli_close($db);
+                ?>   
+
+                        </span> Current Semester </div>
+                    </div>
+            </div>
+
+            
         <!--earning graph start-->
         <div class="row">
         <div class="col-md-3">
                 
                 <?php
-
-                /* check connection */
-                if (mysqli_connect_errno()) {
-                    printf("Connect failed: %s\n", mysqli_connect_error());
-                    exit();
-                }
-
-                if ($result = mysqli_query($db, "SELECT * FROM `t_counseling`")) {
-
-                    /* determine number of rows result set */
-                    $row_cnt = mysqli_num_rows($result);
-
-                    printf(" 
-                    <section class='panel'> 
-                    <div class='panel-body' >
-                            <span class='mini-stat-icon orange'><i class='fa fa-gavel'></i></span>
-                            <div class='mini-stat-info'>
-                                <span>%d</span>
-                                Individual Counseling
-                            </div>
-                        </div>
-                    </section>
-                ", $row_cnt); 
-                    /* close result set */
-                    mysqli_free_result($result);
-                }
-
-                /* close connection */
-                // mysqli_close($db);
-
-                ?>
-
-                <?php
-
-                /* check connection */
-                if (mysqli_connect_errno()) {
-                    printf("Connect failed: %s\n", mysqli_connect_error());
-                    exit();
-                }
-
-                if ($result = mysqli_query($db, "SELECT * FROM `t_counseling`")) {
-
-                    /* determine number of rows result set */
-                    $row_cnt = mysqli_num_rows($result);
-
-                    printf(" 
-                    <section class='panel'> 
-                    <div class='panel-body' >
-                            <span class='mini-stat-icon orange'><i class='fa fa-gavel'></i></span>
-                            <div class='mini-stat-info'>
-                                <span>%d</span>
-                                Group Counseling
-                            </div>
-                        </div>
-                    </section>
-                ", $row_cnt); 
-                    /* close result set */
-                    mysqli_free_result($result);
-                }
-
-                /* close connection */
-                // mysqli_close($db);
-
-                ?>
-
-                </div>
-            <div class="col-md-3">
-
-                 <?php
 
                 /* check connection */
                 if (mysqli_connect_errno()) {
@@ -165,9 +164,13 @@ include('sidebarnav.php');
 
 
                 ?>
-            
 
-                 <?php
+               
+
+                </div>
+            <div class="col-md-3">
+
+            <?php
 
                 /* check connection */
                 if (mysqli_connect_errno()) {
@@ -201,8 +204,45 @@ include('sidebarnav.php');
 
                 ?>
 
+                <?php
+
+                /* check connection */
+                if (mysqli_connect_errno()) {
+                    printf("Connect failed: %s\n", mysqli_connect_error());
+                    exit();
+                }
+
+                if ($result = mysqli_query($db, "SELECT * FROM `t_counseling`")) {
+
+                    /* determine number of rows result set */
+                    $row_cnt = mysqli_num_rows($result);
+
+                    printf(" 
+                    <section class='panel'> 
+                    <div class='panel-body' >
+                            <span class='mini-stat-icon orange'><i class='fa fa-user'></i></span>
+                            <div class='mini-stat-info'>
+                                <span>%d</span>
+                                Individual Counseling
+                            </div>
+                        </div>
+                    </section>
+                ", $row_cnt); 
+                    /* close result set */
+                    mysqli_free_result($result);
+                }
+
+                /* close connection */
+                // mysqli_close($db);
+
+                ?>
+
+
+
+
                 </div>
             <div class="col-md-3">
+
 
 
                  <?php
@@ -239,9 +279,44 @@ include('sidebarnav.php');
 
                 ?>
                 
-
-
                  <?php
+
+                /* check connection */
+                if (mysqli_connect_errno()) {
+                    printf("Connect failed: %s\n", mysqli_connect_error());
+                    exit();
+                }
+
+                if ($result = mysqli_query($db, "SELECT * FROM `t_counseling`")) {
+
+                    /* determine number of rows result set */
+                    $row_cnt = mysqli_num_rows($result);
+
+                    printf(" 
+                    <section class='panel'> 
+                    <div class='panel-body' >
+                            <span class='mini-stat-icon orange'><i class='fa fa-users'></i></span>
+                            <div class='mini-stat-info'>
+                                <span>%d</span>
+                                Group Counseling
+                            </div>
+                        </div>
+                    </section>
+                ", $row_cnt); 
+                    /* close result set */
+                    mysqli_free_result($result);
+                }
+
+                /* close connection */
+                // mysqli_close($db);
+
+                ?>
+
+                
+            </div>
+                <div class="col-md-3">
+                
+                     <?php
 
                 /* check connection */
                 if (mysqli_connect_errno()) {
@@ -257,7 +332,7 @@ include('sidebarnav.php');
                     printf("
                     <section class='panel'> 
                     <div class='panel-body' >
-                            <span class='mini-stat-icon orange'><i class='fa fa-folder'></i></span>
+                            <span class='mini-stat-icon tar'><i class='fa fa-folder'></i></span>
                             <div class='mini-stat-info'>
                                 <span>%d</span>
                                 Excuse Letters
@@ -274,87 +349,46 @@ include('sidebarnav.php');
 
                 ?>
 
-
-            </div>
-                <div class="col-md-3">
-                    <?php
-
-                /* check connection */
-                if (mysqli_connect_errno()) {
-                    printf("Connect failed: %s\n", mysqli_connect_error());
-                    exit();
-                }
-
-                if ($result = mysqli_query($db, "select ActiveSemester_SEMESTRAL_NAME from active_semester where ActiveSemester_IS_ACTIVE = 1 limit 1")) {
-
-                    /* determine number of rows result set */
-                    $row = mysqli_fetch_assoc($result);
-                    $row_result = $row["ActiveSemester_SEMESTRAL_NAME"];
-                    
-                    printf("
-                    <section class='panel'> 
-                    <div class='panel-body' >
-                            <span class='mini-stat-icon orange'><i class='fa fa-calendar'></i></span>
-                            <div class='mini-stat-info'>
-                                <span>%s</span>
-                            </div>
-                        </section>
-                ", $row_result); 
-                    /* close result set */
-                    mysqli_free_result($result);
-                }
-
-                /* close connection */
-                // mysqli_close($db);
-
-
-                ?>
-
-                <?php
-
-                /* check connection */
-                if (mysqli_connect_errno()) {
-                    printf("Connect failed: %s\n", mysqli_connect_error());
-                    exit();
-                }
-
-                if ($result = mysqli_query($db, "select ActiveAcadYear_Batch_YEAR from active_academic_year where ActiveAcadYear_IS_ACTIVE = 1 limit 1")) {
-
-                    /* determine number of rows result set */
-                    $row = mysqli_fetch_assoc($result);
-                    $row_result = $row["ActiveAcadYear_Batch_YEAR"];
-
-                    printf("
-                    <section class='panel'> 
-                    <div class='panel-body' >
-                            <span class='mini-stat-icon orange'><i class='fa fa-calendar'></i></span>
-                            <div class='mini-stat-info'>
-                                <span>%s</span>
-                                School Year
-                            </div>
-                        </section>
-                ", $row_result); 
-                    /* close result set */
-                    mysqli_free_result($result);
-                }
-
-                /* close connection */
-                // mysqli_close($db);
-
-
-                ?>
                        
                 </div>
                        
 </div>
 
-            <div class="col-md-9">
+<center>
+          <div class="col-md-12" >
+        <div class="event-calendar clearfix">
+            <div class="col-lg-7 calendar-block">
+                <div class="cal1 ">
+                </div>
+            </div>
+            <div class="col-lg-5 event-list-block">
+                <div class="cal-day">
+                    <span>Today</span>
+                    <?php echo date('D')?>
+                </div>
+                <ul class="event-list">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</center>
+
+
+
+
+</section>
+
+
+
+            <div class="col-md-12">
                 <section class="panel">
                     
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-md-4">
-<div id="case-chart" class="col-md-4">
+                            <div class="col-md-6">
+<div id="case-chart" class="col-md-6">
 <?php
 $qcaseall = "select count(Couns_APPROACH) as Case_all from t_couns_approach;";
 $result = mysqli_query($db, $qcaseall);
@@ -488,8 +522,12 @@ Highcharts.chart('case-chart',{
         </script>
 <!--mini statistics end-->
 
-                            <div class="col-md-4">
-<div id="case-chart" class="col-md-4" style="padding:0px 70px">
+
+
+
+                            
+                            <div class="col-md-6">
+<div id="case-chart" class="col-md-6" style="padding:0px 70px">
 <?php
 
 $qvisitall = "select count(Visit_PURPOSE) as visitall from t_stud_visit";
@@ -611,9 +649,6 @@ Highcharts.chart('visit-chart',{
 </div>
 <!--right sidebar end-->
 </section>
-            <div class="col-lg-7 calendar-block">
-                <div class="cal1 ">
-                </div>
  
 
 
