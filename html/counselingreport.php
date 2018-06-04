@@ -51,25 +51,18 @@ if(isset($_POST['IndivFilter']))
     `c`.`Couns_GOALS` AS `GOALS`,
     `c`.`Couns_COMMENT` AS `COUNS_COMMENT`,
     `c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION`
-    FROM
-        (
-            (
-                `t_counseling` `c`
-            JOIN `t_couns_details` `cd` ON
-                (
-                    (
-                        `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
-                    )
-                )
-            )
-        JOIN `r_stud_profile` `s` ON
-            ((`s`.`Stud_NO` = `cd`.`Stud_NO`))
-        ) ";
+    FROM `t_counseling` `c`
+        JOIN `t_couns_details` `cd`
+             ON `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
+        JOIN `r_stud_profile` `s` 
+            ON `s`.`Stud_NO` = `cd`.`Stud_NO`
+        JOIN `r_courses` `cr`
+            ON `s`.`Stud_COURSE` = `cr`.`Course_CODE`";
 
         $conditions = array();
 
         if($acadOpt != 'All'){
-            $conditions[] = "";
+            $conditions[] = "cr.Course_CURR_YEAR = '$acadOpt'";
         }
 
         if($semOpt != 'All'){
@@ -77,15 +70,15 @@ if(isset($_POST['IndivFilter']))
         }
 
         if($monthOpt != 'All'){
-            $conditions[] = "";
+            $conditions[] = "MONTH(c.Couns_DATE) = '$monthOpt'";
         }
 
         if($dayOpt != 'All'){
-            $conditions[] = "";
+            $conditions[] = "DAY(c.Couns_DATE) = '$dayOpt'";
         }
 
         if($courseOpt != 'All'){
-            $conditions[] = "";
+            $conditions[] = "s.Stud_COURSE = '$courseOpt'";
         }
 
         $query = $actualQuery;
@@ -123,20 +116,11 @@ if(isset($_POST['IndivFilter']))
     `c`.`Couns_GOALS` AS `GOALS`,
     `c`.`Couns_COMMENT` AS `COUNS_COMMENT`,
     `c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION`
-    FROM
-        (
-            (
-                `t_counseling` `c`
-            JOIN `t_couns_details` `cd` ON
-                (
-                    (
-                        `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
-                    )
-                )
-            )
-        JOIN `r_stud_profile` `s` ON
-            ((`s`.`Stud_NO` = `cd`.`Stud_NO`))
-        ) ";
+    FROM `t_counseling` `c`
+        JOIN `t_couns_details` `cd` 
+            ON `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
+        JOIN `r_stud_profile` `s` 
+        ON `s`.`Stud_NO` = `cd`.`Stud_NO` ";
 
     $result = mysqli_query($db,$actualQuery);
 }
@@ -188,7 +172,7 @@ $sqlAY = mysqli_query($db, "SELECT Batch_ID,Batch_YEAR FROM `pupqcdb`.`r_batch_d
 $optionAY = '';
 while ($row = mysqli_fetch_assoc($sqlAY))
 {
-    $optionAY .='<option value = "'.$row['Batch_ID'].'">'.$row['Batch_YEAR'].'</option>';
+    $optionAY .='<option value = "'.$row['Batch_YEAR'].'">'.$row['Batch_YEAR'].'</option>';
 }
 
 $sqlSem = mysqli_query($db, "SELECT Semestral_ID, Semestral_NAME FROM `r_semester`  ");
@@ -202,7 +186,7 @@ $sqlCourse = mysqli_query($db, "SELECT Course_ID, Course_CODE FROM `r_courses`  
 $optionCourse = '';
 while ($row = mysqli_fetch_assoc($sqlCourse))
 {
-    $optionCourse .='<option value = "'.$row['Course_ID'].'">'.$row['Course_CODE'].'</option>';
+    $optionCourse .='<option value = "'.$row['Course_CODE'].'">'.$row['Course_CODE'].'</option>';
 }
 ?>
     <html lang="en">
