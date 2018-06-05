@@ -59,17 +59,19 @@ if (isset($_POST['IndivFilter'])) {
         JOIN `r_stud_profile` `s` 
             ON `s`.`Stud_NO` = `cd`.`Stud_NO`
         JOIN `r_courses` `cr`
-            ON `s`.`Stud_COURSE` = `cr`.`Course_CODE`";
+            ON `s`.`Stud_COURSE` = `cr`.`Course_CODE`
+        JOIN `r_semester` sem
+            ON  `c`.`Couns_SEMESTER` = `sem`.`Semestral_NAME`";
 
     $conditions = array();
 
     if ($acadOpt != 'All') {
         $conditions[] = "cr.Course_CURR_YEAR = '$acadOpt'";
     }
-    // Disabled for a while
-    /*   if ($semOpt != 'All') {
-          $conditions[] = "";
-      } */
+
+    if ($semOpt != 'All') {
+          $conditions[] = "c.Couns_SEMESTER =  '$semOpt'";
+      } 
 
     if ($monthOpt != 'All') {
         $conditions[] = "MONTH(c.Couns_DATE) = '$monthOpt'";
@@ -179,7 +181,7 @@ while ($row = mysqli_fetch_assoc($sqlAY)) {
 $sqlSem = mysqli_query($db, "SELECT Semestral_ID, Semestral_NAME FROM `r_semester`  ");
 $optionSem = '';
 while ($row = mysqli_fetch_assoc($sqlSem)) {
-    $optionSem .='<option value = "'.$row['Semestral_ID'].'">'.$row['Semestral_NAME'].'</option>';
+    $optionSem .='<option value = "'.$row['Semestral_NAME'].'">'.$row['Semestral_NAME'].'</option>';
 }
 
 $sqlCourse = mysqli_query($db, "SELECT Course_ID, Course_CODE FROM `r_courses`  ");

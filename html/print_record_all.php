@@ -72,7 +72,7 @@ class PDF extends FPDF
 
         if (isset($_REQUEST['view'])) {
             $acadOpt = $_REQUEST['acadOpt'];
-           // $semOpt = $_REQUEST['semOpt'];
+            $semOpt = $_REQUEST['semOpt'];
             $monthOpt = $_REQUEST['monthOpt'];
             $dayOpt = $_REQUEST['dayOpt'];
             $courseOpt = $_REQUEST['courseOpt'];
@@ -108,9 +108,9 @@ FROM
         $options[] = "cr.Course_CURR_YEAR = '$acadOpt'";
     }
 
-    /* if ($semOpt != 'All') {
-        $options[] = "";
-    } */
+    if (!empty($semOpt) && $semOpt != 'All') {
+        $options[] = "c.Couns_SEMESTER =  '$semOpt'";
+    } 
 
     if (!empty($monthOpt) && $monthOpt != 'All') {
         $options[] = "MONTH(c.Couns_DATE) = '$monthOpt'";
