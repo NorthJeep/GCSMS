@@ -114,8 +114,7 @@ if (!$query) {
                 $COURSE=$row['COURSE'];
                 $STATUS=$row['STUD_STATUS'];
 
-                  ?>
-
+               ?>
                     <tr>
                     <td><?php echo $NO; ?></td>
                     <td><?php echo $FULLNAME; ?></td>
