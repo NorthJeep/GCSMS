@@ -269,7 +269,7 @@ include('sidebarnav.php');
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <select name="acadOpt" class="form-control input-sm m-bot4" placeholder="Academic Year">
-                                                        <option value="All">--Select Academic Year--</option>
+                                                        <option value="All" selected>--Select Academic Year--</option>
                                                         <?php echo $optionAY; ?>
                                                     </select>
                                                 </div>
