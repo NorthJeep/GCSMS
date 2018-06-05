@@ -147,6 +147,7 @@ include('sidebarnav.php');
                             <div class='mini-stat-info'>
                                 <br><br><br><br>
                                 <span class='alignment'>%d</span>
+                                <br>
                                 <p class='alignment'>Students on Record</p>
                             </div>
                         </div>
@@ -216,6 +217,7 @@ include('sidebarnav.php');
                             <div class='mini-stat-info'>
                                 <br><br><br><br>
                                 <span class='alignment'>%d</span>
+                                <br>
                                 <p class='alignment'>Individual Counseling</p>
                             </div>
                         </div>
