@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2018 at 04:39 PM
+-- Generation Time: Jun 05, 2018 at 05:25 PM
 -- Server version: 10.1.8-MariaDB
 -- PHP Version: 5.6.14
 
@@ -34,15 +34,15 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `student_assistant_add` (IN `studNo`
 BEGIN
 set @name = (select concat(Stud_FNAME,' ',Stud_LNAME) from r_stud_profile where stud_NO = studNo);
 insert into r_users (
-	Users_USERNAME,
-	Users_REFERENCED,
-	Users_PASSWORD,
-	Users_ROLES)
+    Users_USERNAME,
+    Users_REFERENCED,
+    Users_PASSWORD,
+    Users_ROLES)
 values (
-	studNo,
-	studNo,
-	AES_ENCRYPT(@name,password('GC&SMS')),
-	'Student Assistant');
+    studNo,
+    studNo,
+    AES_ENCRYPT(LCASE(@name),password('GC&SMS')),
+    'Student Assistant');
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `counselor_admin_add` (IN `fname` VARCHAR(100), IN `mname` VARCHAR(100), IN `lname` VARCHAR(100))  NO SQL
@@ -696,7 +696,7 @@ CREATE TABLE `r_users` (
 INSERT INTO `r_users` (`Users_ID`, `Users_USERNAME`, `Users_REFERENCED`, `Users_PASSWORD`, `Users_ROLES`, `Users_PROFILE_PATH`, `Users_DATE_ADD`, `Users_DATE_MOD`, `Users_DISPLAY_STAT`) VALUES
 (2, 'admin', 'GC-0001', 0xa319451792b4248aeec7fb13966bc133, 'System Administrator', NULL, '2018-05-18 17:37:08', '2018-05-18 17:37:08', 'Active'),
 (3, 'counselor', 'GC-0001', 0x99f1a2f749673d62b4a7a431be68097e, 'Guidance Counselor', NULL, '2018-05-19 00:29:09', '2018-05-19 00:29:09', 'Active'),
-(6, '2015-00138-CM-0', '2015-00138-CM-0', 0x396ee126f1fe24827e190e89908fd15b, 'Student Assistant', NULL, '2018-06-05 21:34:55', '2018-06-05 21:34:55', 'Active');
+(8, '2015-00075-CM-0', '2015-00075-CM-0', 0x122e342127a8553de70467e2eb832f90aa39246afb12e1a1bb18389ec4e34a89, 'Student Assistant', NULL, '2018-06-05 23:24:38', '2018-06-05 23:24:38', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1299,7 +1299,7 @@ ALTER TABLE `r_upload_category`
 -- AUTO_INCREMENT for table `r_users`
 --
 ALTER TABLE `r_users`
-  MODIFY `Users_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Users_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `r_user_roles`
 --
