@@ -7,6 +7,7 @@
         exit;
     }
     include("config.php");
+// Filter function
 $acadOpt = '';
 $semOpt = '';
 $monthOpt = '';
@@ -66,10 +67,10 @@ if (isset($_POST['IndivFilter']))
     if ($acadOpt != 'All') {
         $conditions[] = "cr.Course_CURR_YEAR = '$acadOpt'";
     }
-
-    if ($semOpt != 'All') {
+// Disabled for a while
+  /*   if ($semOpt != 'All') {
         $conditions[] = "";
-    }
+    } */
 
     if ($monthOpt != 'All') {
         $conditions[] = "MONTH(c.Couns_DATE) = '$monthOpt'";
@@ -168,7 +169,8 @@ JOIN `t_couns_details` `cd` ON
 JOIN `r_stud_profile` `s` ON
 ((`s`.`Stud_NO` = `cd`.`Stud_NO`))
 ) ");
-//Academic year
+
+//Data for select input
 $sqlAY = mysqli_query($db, "SELECT Batch_ID,Batch_YEAR FROM `pupqcdb`.`r_batch_details` ");
 $optionAY = '';
 while ($row = mysqli_fetch_assoc($sqlAY)) {
