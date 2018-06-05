@@ -3,8 +3,7 @@ require('fpdf.php');
 
 class PDF extends FPDF
 {
-
-// Colored table
+    // Colored table
     public function Header()
     {
     
@@ -90,47 +89,47 @@ if (isset($_REQUEST['view'])) {
     $db = mysqli_connect("localhost", "root", "", "pupqcdb");
     $id = $_REQUEST['view'];
     $sql= mysqli_query($db, "SELECT
-  `c`.`Couns_CODE` AS `COUNSELING_CODE`,
-  DATE_FORMAT(`c`.`Couns_DATE`, '%W %M %d %Y') AS `COUNSELING_DATE`,
-  `c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
-  `c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,
-  `s`.`Stud_NO` AS `STUD_NO`,
-  CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
-  CONCAT(
+`c`.`Couns_CODE` AS `COUNSELING_CODE`,
+DATE_FORMAT(`c`.`Couns_DATE`, '%W %M %d %Y') AS `COUNSELING_DATE`,
+`c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
+`c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,
+`s`.`Stud_NO` AS `STUD_NO`,
+CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
+CONCAT(
     `s`.`Stud_COURSE`,
     ' ',
     `s`.`Stud_YEAR_LEVEL`,
     ' - ',
     `s`.`Stud_SECTION`
-  ) AS `COURSE`,
-  (
-    SELECT
-      GROUP_CONCAT(`a`.`Couns_APPROACH` SEPARATOR ', ')
-    FROM
-      `t_couns_approach` `a`
-    WHERE
-      (
-        `a`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`
-      )
-  ) AS `COUNSELING_APPROACH`,
-  `c`.`Couns_BACKGROUND` AS `COUNSELING_BG`,
-  `c`.`Couns_GOALS` AS `GOALS`,
-  `c`.`Couns_COMMENT` AS `COUNS_COMMENT`,
-  `c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION`
+) AS `COURSE`,
+(
+SELECT
+    GROUP_CONCAT(`a`.`Couns_APPROACH` SEPARATOR ', ')
 FROM
-  (
+    `t_couns_approach` `a`
+WHERE
     (
-      `t_counseling` `c`
-      JOIN `t_couns_details` `cd` ON (
-        (
-          `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
-        )
-      )
+        `a`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`
     )
-    JOIN `r_stud_profile` `s` ON ((`s`.`Stud_NO` = `cd`.`Stud_NO`))
-  )
-where
-  `c`.`Couns_CODE` = '$id' ");
+) AS `COUNSELING_APPROACH`,
+`c`.`Couns_BACKGROUND` AS `COUNSELING_BG`,
+`c`.`Couns_GOALS` AS `GOALS`,
+`c`.`Couns_COMMENT` AS `COUNS_COMMENT`,
+`c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION`
+FROM
+(
+    (
+        `t_counseling` `c`
+    JOIN `t_couns_details` `cd` ON
+        (
+            (
+                `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
+            )
+        )
+    )
+JOIN `r_stud_profile` `s` ON
+    ((`s`.`Stud_NO` = `cd`.`Stud_NO`))
+)  where `c`.`Couns_CODE` ='$id' ");
  
     while ($row = mysqli_fetch_array($sql)) {
         $name = $row['STUD_NAME'];

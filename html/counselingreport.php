@@ -7,13 +7,18 @@
         exit;
     }
     include("config.php");
-
+$acadOpt = '';
+$semOpt = '';
+$monthOpt = '';
+$dayOpt = '';
+$courseOpt = '';
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
 
-if (isset($_POST['IndivFilter'])) {
+if (isset($_POST['IndivFilter'])) 
+{
     $acadOpt = $_POST['acadOpt'];
     $semOpt = $_POST['semOpt'];
     $monthOpt = $_POST['monthOpt'];
@@ -121,7 +126,6 @@ if (isset($_POST['IndivFilter'])) {
 
     $result = mysqli_query($db, $actualQuery);
 }
-
 $sql =  mysqli_query($db, " SELECT
 `c`.`Couns_CODE` AS `COUNSELING_CODE`,
 CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
@@ -313,7 +317,7 @@ include('sidebarnav.php');
                                     </button>
                                     </form>
                                     &nbsp
-                                    <a href="print_record_all.php" type="button" class="btn btn-success">
+                                    <a href="print_record_all.php?view=set&acadOpt=<?php echo $acadOpt; ?>&semOpt=<?php echo $semOpt; ?>&monthOpt=<?php echo $monthOpt; ?>&dayOpt=<?php echo $dayOpt; ?>&courseOpt=<?php echo $courseOpt;?>" type="button" class="btn btn-success">
                                         <i class="fa fa-print"></i> Print</a>
                                         <br></br>
                                     <section id="unseen">
