@@ -3,7 +3,7 @@
 <?php
     session_start();
     if (!$_SESSION['Logged_In']) {
-        header('Location:LogIn.php');
+        header('Location:login.php');
         exit;
     }
     include("config.php");
@@ -18,8 +18,7 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
-if (isset($_POST['IndivFilter'])) 
-{
+if (isset($_POST['IndivFilter'])) {
     $acadOpt = $_POST['acadOpt'];
     $semOpt = $_POST['semOpt'];
     $monthOpt = $_POST['monthOpt'];
@@ -67,10 +66,10 @@ if (isset($_POST['IndivFilter']))
     if ($acadOpt != 'All') {
         $conditions[] = "cr.Course_CURR_YEAR = '$acadOpt'";
     }
-// Disabled for a while
-  /*   if ($semOpt != 'All') {
-        $conditions[] = "";
-    } */
+    // Disabled for a while
+    /*   if ($semOpt != 'All') {
+          $conditions[] = "";
+      } */
 
     if ($monthOpt != 'All') {
         $conditions[] = "MONTH(c.Couns_DATE) = '$monthOpt'";
@@ -319,9 +318,9 @@ include('sidebarnav.php');
                                     </button>
                                     </form>
                                     &nbsp
-                                    <a href="print_record_all.php?view=set&acadOpt=<?php echo $acadOpt; ?>&semOpt=<?php echo $semOpt; ?>&monthOpt=<?php echo $monthOpt; ?>&dayOpt=<?php echo $dayOpt; ?>&courseOpt=<?php echo $courseOpt;?>" type="button" class="btn btn-success">
-                                        <i class="fa fa-print"></i> Print</a>
-                                        <br></br>
+                                    <button class="btn btn-sm btn-success" onclick="location.href='print_record_all.php?view=set&acadOpt=<?php echo $acadOpt; ?>&semOpt=<?php echo $semOpt; ?>&monthOpt=<?php echo $monthOpt; ?>&dayOpt=<?php echo $dayOpt; ?>&courseOpt=<?php echo $courseOpt;?>'">
+                                        <i class="fa fa-print"></i> Print</button>
+                                    <br></br>
                                     <section id="unseen">
                                         <table class=" display table table-bordered table-striped table-condensed" id="dynamic-table">
                                             <thead>

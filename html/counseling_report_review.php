@@ -1,13 +1,15 @@
 <?php
 require('fpdf.php');
-
+session_start();
+if (!$_SESSION['Logged_In']) {
+    header('Location:login.php');
+    exit;
+}
 class PDF extends FPDF
 {
     // Colored table
     public function Header()
     {
-    
-
     // Select Arial bold 15
         $this->SetFont('Times', '', 11);
         // Move to the right
@@ -15,15 +17,16 @@ class PDF extends FPDF
         // Framed title
     
         $this->Image('images/PUPLogo.png', 15, 5, 30, 30);
+        $this->Ln(3);
         $this->Cell(130, 10, 'Republic of the Philippines', 0, 0, 'C');
         $this->SetFont('Times', 'B', 11);
-        $this->Ln(1);
+        $this->Ln(2);
         $this->Cell(183, 15, 'POLYTECHNIC UNIVERSITY OF THE PHILIPPINES', 0, 0, 'C');
-        $this->Ln(3);
+        $this->Ln(4);
         $this->Cell(133, 15, 'QUEZON CITY BRANCH', 0, 0, 'C');// Line break
-        $this->Ln(25);
-        $this->SetDrawColor(255,0,255);
-        $this->Line(10,10,10,10);
+        $this->SetDrawColor(0,0,0);
+        $this->SetLineWidth(1); 
+        $this->Line(15,40,195,40);
 
         $this->Ln(20);
     }
@@ -31,7 +34,7 @@ class PDF extends FPDF
     public function body()
     {
         $this->Cell(90);
-        $this->Cell(18, 10, 'Student Information', 0, 0, 'C');
+        $this->Cell(18, 15, 'Student Information', 0, 0, 'C');
         $this->Ln(30);
     
    
