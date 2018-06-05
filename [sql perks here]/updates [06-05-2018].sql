@@ -83,7 +83,7 @@ insert into r_users (
 values (
     studNo,
     studNo,
-    AES_ENCRYPT(@name,password('GC&SMS')),
+    AES_ENCRYPT(LCASE(@name),password('GC&SMS')),
     'Student Assistant');
 END
 
