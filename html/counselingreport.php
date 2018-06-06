@@ -17,7 +17,9 @@ if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-
+$indivTab = '';
+$groupTab = '';
+$visitTab = '';
 if (isset($_POST['IndivFilter'])) {
     $acadOpt = $_POST['acadOpt'];
     $semOpt = $_POST['semOpt'];
@@ -91,6 +93,7 @@ if (isset($_POST['IndivFilter'])) {
     }
 
     $result = mysqli_query($db, $query);
+    $indivTab = 'class = "active"';
 } else {
     $actualQuery = "SELECT
         `c`.`Couns_CODE` AS `COUNSELING_CODE`,
@@ -127,6 +130,11 @@ if (isset($_POST['IndivFilter'])) {
         ON `s`.`Stud_NO` = `cd`.`Stud_NO` ";
 
     $result = mysqli_query($db, $actualQuery);
+}
+if(isset($_POST['groupFilter'])){
+    $groupTab = 'class="active"';
+} else {
+
 }
 $sql =  mysqli_query($db, " SELECT
 `c`.`Couns_CODE` AS `COUNSELING_CODE`,
@@ -251,13 +259,13 @@ include('sidebarnav.php');
                     <section class="panel">
                         <header class="panel-heading tab-bg-dark-navy-blue ">
                             <ul class="nav nav-tabs">
-                                <li class="active">
+                                <li <?php echo $indivTab;?>>
                                     <a data-toggle="tab" href="#Indiv">Individual Counsel</a>
                                 </li>
-                                <li class="">
+                                <li <?php echo $groupTab; ?>>
                                     <a data-toggle="tab" href="#Grouped">Group Counsel</a>
                                 </li>
-                                <li class="">
+                                <li <?php echo $visitTab; ?>>
                                     <a data-toggle="tab" href="#Visits">Visit Reports</a>
                                 </li>
                             </ul>
@@ -410,7 +418,7 @@ include('sidebarnav.php');
                                     </div>
                                     </br>
                                     </br>
-                                    <button class="btn btn-info btn-sm" name="reportSearch">
+                                    <button class="btn btn-info btn-sm" name="groupFilter">
                                         <i class="fa fa-search"></i> Search</button>
                                     </form>
                                     &nbsp

@@ -10,7 +10,7 @@ class PDF extends FPDF
     // Colored table
     public function Header()
     {
-    // Select Arial bold 15
+        // Select Arial bold 15
         $this->SetFont('Times', '', 11);
         // Move to the right
     
@@ -24,9 +24,9 @@ class PDF extends FPDF
         $this->Cell(183, 15, 'POLYTECHNIC UNIVERSITY OF THE PHILIPPINES', 0, 0, 'C');
         $this->Ln(4);
         $this->Cell(133, 15, 'QUEZON CITY BRANCH', 0, 0, 'C');// Line break
-        $this->SetDrawColor(0,0,0);
-        $this->SetLineWidth(1); 
-        $this->Line(15,40,195,40);
+        $this->SetDrawColor(0, 0, 0);
+        $this->SetLineWidth(1);
+        $this->Line(15, 40, 195, 40);
 
         $this->Ln(20);
     }
@@ -47,6 +47,7 @@ class PDF extends FPDF
   `s`.`Stud_NO` AS `STUD_NO`,
   CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
   `c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
+  `c`.`Nature_Of_Case` AS `CASE_NATURE`,
   (
     SELECT
       GROUP_CONCAT(`a`.`Couns_APPROACH` SEPARATOR ', ')
@@ -101,6 +102,7 @@ if (isset($_REQUEST['view'])) {
 `c`.`Couns_CODE` AS `COUNSELING_CODE`,
 DATE_FORMAT(`c`.`Couns_DATE`, '%W %M %d %Y') AS `COUNSELING_DATE`,
 `c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
+`c`.`Nature_Of_Case` AS `CASE_NATURE`,
 `c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,
 `s`.`Stud_NO` AS `STUD_NO`,
 CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
