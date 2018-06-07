@@ -489,14 +489,6 @@ include('sidebarnav.php');
     <script src="js/jquery.nicescroll.js"></script>
 
     <script src="js/jquery-steps/jquery.steps.js"></script>
-    <!--Easy Pie Chart-->
-    <script src="js/easypiechart/jquery.easypiechart.js"></script>
-    <!--Sparkline Chart-->
-    <script src="js/sparkline/jquery.sparkline.js"></script>
-    <!--jQuery Flot Chart-->
-    <!-- <script src="js/flot-chart/jquery.flot.js"></script>
-    <script src="js/iCheck/jquery.icheck.js"></script>
-    <script type="text/javascript" src="js/ckeditor/ckeditor.js"></script>
     <!--common script init for all pages-->
     <script src="js/scripts.js"></script>
 
