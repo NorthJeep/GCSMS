@@ -1,6 +1,7 @@
 <?php
 require('fpdf.php');
 session_start();
+include ('config.php');
 if (!$_SESSION['Logged_In']) {
     header('Location:login.php');
     exit;
@@ -39,7 +40,8 @@ class PDF extends FPDF
     
    
         $fill = false;
-        $db = mysqli_connect("localhost", "root", "", "pupqcdb");
+        // $db = mysqli_connect("localhost", "root", "", "pupqcdb");
+        include ('config.php');
 
         if (isset($_REQUEST['view'])) {
             $id = $_REQUEST['view'];
@@ -96,7 +98,7 @@ where
 }
 
 if (isset($_REQUEST['view'])) {
-    $db = mysqli_connect("localhost", "root", "", "pupqcdb");
+    // $db = mysqli_connect("localhost", "root", "", "pupqcdb");
     $id = $_REQUEST['view'];
     $sql= mysqli_query($db, "SELECT
 `c`.`Couns_CODE` AS `COUNSELING_CODE`,
