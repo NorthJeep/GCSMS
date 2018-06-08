@@ -135,7 +135,7 @@ include('sidebarnav.php');
                     ?>
 
                     <!--REMARKS PARA SA MODAL BACKGROUND CHENES-->
-
+                    
                     <div class="adv-table">
                     <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="dynamic-table">
                     <thead>
@@ -167,7 +167,8 @@ if (!$query) {
                 $COURSE=$row['COURSE'];
                 $STATUS=$row['STUD_STATUS'];
 
-               ?>
+                  ?>
+
                     <tr>
                     <td><?php echo $NO; ?></td>
                     <td><?php echo $FULLNAME; ?></td>
@@ -1329,54 +1330,60 @@ if (!$query) {
                     <form action="add_student.php" method="POST" >
                     <div class="row">
                         <div class="col-md-4 form-group">
-                            *Student Number <input name="Stud_no" type="text" class="form-control" placeholder="ex. 2015-00001-CM-0" required/>
+                            *Student Number <input name="Stud_NO" type="text" class="form-control" placeholder="ex. 2015-00001-CM-0" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Email Address<input name="Stud_email" type="text" class="form-control" placeholder="ex. email@email.com" required/>
+                            *Email Address<input name="Stud_EMAIL" type="text" class="form-control" placeholder="ex. email@email.com" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Contact Number<input name="Stud_contact" type="text" class="form-control" placeholder="ex. 099999999" required/>
+                            *Contact Number<input name="Stud_MOBILE_NO" type="text" class="form-control" placeholder="ex. 099999999" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            *First Name <input name="Stud_fname" type="text" class="form-control" placeholder="First Name" required/>
+                            *Telephone Number<input name="Stud_TELEPHONE_NO" type="text" class="form-control" placeholder="ex. 099999999" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            Middle Name<input name="Stud_mname" type="text" class="form-control" placeholder="Middle Name">
+                            *First Name <input name="Stud_FNAME" type="text" class="form-control" placeholder="First Name" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Last Name<input name="Stud_lname" type="text" class="form-control" placeholder="Last Number" required/>
+                            Middle Name<input name="Stud_MNAME" type="text" class="form-control" placeholder="Middle Name">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            *Last Name<input name="Stud_LNAME" type="text" class="form-control" placeholder="Last Number" required/>
                         </div>
                         <div class="col-md-4 form-group">
                             *Course
-                            <select name="Stud_course" type="text" class="form-control m-bot15" required>
+                            <select name="Stud_COURSE" type="text" class="form-control m-bot15" required>
                               <?php
-                            $db = mysqli_connect("localhost", "root", "", "g&csms_db");
-                            $sql= mysqli_query($db, "SELECT `course` FROM `sys_con_drp` WHERE `course` != ' '");?>
+                            $db = mysqli_connect("localhost", "root", "", "pupqcdb");
+                            $sql= mysqli_query($db, "SELECT `Course_CODE` FROM `r_courses` WHERE `Course_CODE` != ' '");?>
                             <?php
                             while ($row = mysqli_fetch_array($sql))
                             {
-                            $course= $row['course'];
+                            $course= $row['Course_CODE'];
                             echo"<option value ='$course'>$course</option>";
                              }?>
                             </select>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Year<input name="Stud_year" type="number" class="form-control" placeholder="Section" required/>
+                            *Year<input name="Stud_YEAR_LEVEL" type="number" class="form-control" placeholder="Section" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Section<input name="Stud_section" type="number" class="form-control" placeholder="Section" required/>
+                            *Section<input name="Stud_SECTION" type="number" class="form-control" placeholder="Section" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Gender<select name="Stud_gender" type="text" class="form-control m-bot15">
+                            *Gender<select name="Stud_GENDER" type="text" class="form-control m-bot15">
                             <option value="Male">Male</option>    
                             <option value="Female">Female</option>    
                             </select>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Birth Date<input name="Stud_bdate" type="Date" class="form-control" required/>
+                            *Birth Date<input name="Stud_BIRTH_DATE" type="Date" class="form-control" required/>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            *Birth Place<input name="Stud_BIRTH_PLACE" type="text" class="form-control" placeholder="enter your birth place">
                         </div>
                         <div class="col-md-4 form-group">
-                            *Student Status<select name="Stud_status" class="form-control" required>
+                            *Student Status<select name="Stud_DISPLAY_STATUS" class="form-control" required>
                                 <option value="Regular">Regular Student</option>
                                 <option value="Irregular">Irregular Student</option>
                                 <option value="Disqualified">Disqualified Student</option>
@@ -1385,7 +1392,10 @@ if (!$query) {
                                 </select>
                         </div>
                         <div class="col-md-12 form-group">
-                            *Address<input name="Stud_address" type="text" class="form-control" placeholder="enter your home/ permanent address">
+                            *City Address<input name="Stud_CITY_ADDRESS" type="text" class="form-control" placeholder="enter your city address">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            *Provincial Address<input name="Stud_PROVINCIAL_ADDRESS" type="text" class="form-control" placeholder="enter your provincial address">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -1453,47 +1463,7 @@ if (!$query) {
 
 <!--Core js-->
 <script src="js/jquery.js"></script>
-
-
-<script>
-    $(document).ready(function(){
-
-        function load_unseen_notification(view = '')
-        {
-            $.ajax({
-                url:"NotifLoad.php",
-                method:"POST",
-                data:{view:view},
-                dataType:"json",
-                success:function(data)
-                {
-                    $('.dropdown-menu').html(data.Notification);
-
-                    if(data.NotificationCount > 0)
-                    {
-                        $('.count').html(data.NotificationCount);
-                    }
-                }
-            });
-        }
-
-        load_unseen_notification();
-
-        $(document).on('click','.dropdown-toggle', function(){
-        $('.count').html('');
-        load_unseen_notification('read');
-        });
-
-        setInterval(function(){
-            load_unseen_notification();  
-        }, 5000);
-        
-    });
-
-</script>
-
-
-<!-- <script src="bs3/js/bootstrap.min.js"></script> -->
+<script src="bs3/js/bootstrap.min.js"></script>
 <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
 <script src="js/jquery.scrollTo.min.js"></script>
 <script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
