@@ -46,7 +46,40 @@
     <!--search & user info start-->
     <ul class="nav pull-right top-menu">
     <a href="Logout.php"><i class="fa fa-sign-out"></i> Log Out</a>
+
+    <li id="header_inbox_bar" class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                    <i class="fa fa-plus"></i>
+                    <i class="fa fa-comment-o"></i><!-- 
+                    <span class="badge bg-important">4</span> -->
+                </a>
+                <ul class="dropdown-menu extended inbox">
+                    <li>
+                        <p class="red">Write Message</p>
+                    </li>
+                    <li>
+                        <form id="NotifSend" Method="POST">
+                        <a href="#">
+                            <span class="subject">
+                                <div class="input-group m-bot15">
+                                    <input id="NotifDetail" type="text" name="NotifDetail" placeholder="Your message here." class="form-control">
+                                        <span class="input-group-btn">
+                                            <button id="NotifPost" class="btn btn-success" type="submit"><i class="fa fa-reply"></i></button>
+                                        </span>
+                                </div>
+                                <span class="from">Message the Counselor</span>
+                            </span>
+                            <span class="message">
+                                Max 100 char.
+                            </span>
+                        </a>
+                        </form>
+                    </li>
+                </ul>
+        </li>
     </ul>
     <!--search & user info end-->
+
 </div>
+  
 </header>

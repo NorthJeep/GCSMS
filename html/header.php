@@ -42,17 +42,41 @@
 <!--logo end-->
 
 <div class="top-nav clearfix">
-    <!--search & user info start-->
+    
+    <!-- 
+    -->
+
+    
+
+
+
+    <!--
+     -->
+    
     <ul class="nav pull-right top-menu">
-    <a href="Logout.php"><i class="fa fa-sign-out"></i> Log Out</a>
-        <!-- user login dropdown start-->
-       <!--  <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <span class="username"></span>
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu extended logout">
-            <li><a href="Logout.php"><i class="fa fa-key"></i> Log Out</a></li> -->
+        <a href="Logout.php">
+            <i class="fa fa-sign-out"></i> Log Out
+        </a>
+            <!-- user login dropdown start-->
+        
+        <li id="header_inbox_bar" class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-important count"></span>
+                </a>
+                <ul class="dropdown-menu extended inbox">
+                    <li>
+                        <p class="red">Messages</p>
+                    </li>
+                </ul>
+        </li>
+            <!-- <ul class="dropdown-menu extended logout">
+                <li>
+                    <a href="Logout.php">
+                        <i class="fa fa-key"></i>Log Out
+                    </a>
+                </li>
+            </ul> -->
                 <!-- <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
                 <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li> -->
            <!--  </ul>
@@ -62,4 +86,5 @@
     </ul>
     <!--search & user info end-->
 </div>
+
 </header>

@@ -555,7 +555,7 @@ $(document).ready(function(){
     });
     </script> -->
 
-    <script src="jquery.multifield.min.js"></script>
+    <script type="text/javascript" src="jquery.multifield.min.js"></script>
     <script>
 
         $('.form-content').multifield({

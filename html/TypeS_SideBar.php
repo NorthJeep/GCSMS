@@ -22,6 +22,7 @@
                     <li><a href="TypeS_Remarks.php">Remarks</a></li>
                     <li><a href="TypeS_CivilStatus.php">Civil Status</a></li>
                     <li><a href="TypeS_UploadCategory.php">Upload Category</a></li>
+                    <li><a href="TypeS_UserRoles.php">User Roles</a></li>
                     </ul>
                 </li>
                 
