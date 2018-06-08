@@ -28,7 +28,8 @@
                     </a>
                 </li>
                 
-            </ul>            </div>
+            </ul>            
+        </div>
         <!-- sidebar menu end-->
     </div>
 </aside>

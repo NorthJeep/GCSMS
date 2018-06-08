@@ -151,24 +151,51 @@ if(isset($_POST['search']) && $_POST['filter'] != 'All')
     <!--main content end-->
 
 <!-- Placed js at the end of the document so the pages load faster -->
-
+<?php include('footer.php'); ?>
 <!--Core js-->
 <script src="js/jquery.js"></script>
-<script src="bs3/js/bootstrap.min.js"></script>
+<!-- <script src="js/jquery-1.8.3.min.js"></script> -->
+<!-- <script src="bs3/js/bootstrap.min.js"></script> -->
 <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
 <script src="js/jquery.scrollTo.min.js"></script>
 <script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
 <script src="js/jquery.nicescroll.js"></script>
+<script type="text/javascript" src="js/gritter/js/jquery.gritter.js"></script>
 <!--dynamic table-->
 <script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
 <!--common script init for all pages-->
-<script src="js/scripts.js"></script>
+<!-- <script src="js/scripts.js"></script> -->
 
 <!--dynamic table initialization -->
 <script src="js/dynamic_table_init.js"></script>
 
+<script>
+    $(document).ready(function(){
 
+        $('#NotifSend').on('submit', function(event){
+            
+            event.preventDefault();
+            var form_data = $(this).serialize();
+
+            $.ajax({
+                url:'NotifPost.php',
+                method:'POST',
+                data:form_data,
+                error:function(data)
+                {
+                    console.log("wewewew");
+                },
+                success:function(data)
+                {   
+                    console.log(data);
+                    $('#NotifSend')[0].reset();
+                    console.log("wewewewewe");
+                }
+            });
+        });
+    });
+</script> 
 
 </body>
 </html>

@@ -2039,7 +2039,47 @@ if (!$query) {
 
 <!--Core js-->
 <script src="js/jquery.js"></script>
-<script src="bs3/js/bootstrap.min.js"></script>
+
+
+<script>
+    $(document).ready(function(){
+
+        function load_unseen_notification(view = '')
+        {
+            $.ajax({
+                url:"NotifLoad.php",
+                method:"POST",
+                data:{view:view},
+                dataType:"json",
+                success:function(data)
+                {
+                    $('.dropdown-menu').html(data.Notification);
+
+                    if(data.NotificationCount > 0)
+                    {
+                        $('.count').html(data.NotificationCount);
+                    }
+                }
+            });
+        }
+
+        load_unseen_notification();
+
+        $(document).on('click','.dropdown-toggle', function(){
+        $('.count').html('');
+        load_unseen_notification('read');
+        });
+
+        setInterval(function(){
+            load_unseen_notification();  
+        }, 5000);
+        
+    });
+
+</script>
+
+
+<!-- <script src="bs3/js/bootstrap.min.js"></script> -->
 <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
 <script src="js/jquery.scrollTo.min.js"></script>
 <script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
