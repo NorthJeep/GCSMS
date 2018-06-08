@@ -1,29 +1,33 @@
 <?php
 require('fpdf.php');
-
+session_start();
+include ('config.php');
+if (!$_SESSION['Logged_In']) {
+    header('Location:login.php');
+    exit;
+}
 class PDF extends FPDF
 {
     // Colored table
     public function Header()
     {
-    
-
-    // Select Arial bold 15
+        // Select Arial bold 15
         $this->SetFont('Times', '', 11);
         // Move to the right
     
         // Framed title
     
         $this->Image('images/PUPLogo.png', 15, 5, 30, 30);
+        $this->Ln(3);
         $this->Cell(130, 10, 'Republic of the Philippines', 0, 0, 'C');
         $this->SetFont('Times', 'B', 11);
-        $this->Ln(1);
+        $this->Ln(2);
         $this->Cell(183, 15, 'POLYTECHNIC UNIVERSITY OF THE PHILIPPINES', 0, 0, 'C');
-        $this->Ln(3);
+        $this->Ln(4);
         $this->Cell(133, 15, 'QUEZON CITY BRANCH', 0, 0, 'C');// Line break
-        $this->Ln(25);
-        $this->SetDrawColor(255,0,255);
-        $this->Line(10,10,10,10);
+        $this->SetDrawColor(0, 0, 0);
+        $this->SetLineWidth(1);
+        $this->Line(15, 40, 195, 40);
 
         $this->Ln(20);
     }
@@ -31,12 +35,13 @@ class PDF extends FPDF
     public function body()
     {
         $this->Cell(90);
-        $this->Cell(18, 10, 'Student Information', 0, 0, 'C');
+        $this->Cell(18, 15, 'Student Information', 0, 0, 'C');
         $this->Ln(30);
     
    
         $fill = false;
-        $db = mysqli_connect("localhost", "root", "", "pupqcdb");
+        // $db = mysqli_connect("localhost", "root", "", "pupqcdb");
+        include ('config.php');
 
         if (isset($_REQUEST['view'])) {
             $id = $_REQUEST['view'];
@@ -44,6 +49,7 @@ class PDF extends FPDF
   `s`.`Stud_NO` AS `STUD_NO`,
   CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
   `c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
+  `c`.`Nature_Of_Case` AS `CASE_NATURE`,
   (
     SELECT
       GROUP_CONCAT(`a`.`Couns_APPROACH` SEPARATOR ', ')
@@ -92,12 +98,13 @@ where
 }
 
 if (isset($_REQUEST['view'])) {
-    $db = mysqli_connect("localhost", "root", "", "pupqcdb");
+    // $db = mysqli_connect("localhost", "root", "", "pupqcdb");
     $id = $_REQUEST['view'];
     $sql= mysqli_query($db, "SELECT
 `c`.`Couns_CODE` AS `COUNSELING_CODE`,
 DATE_FORMAT(`c`.`Couns_DATE`, '%W %M %d %Y') AS `COUNSELING_DATE`,
 `c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
+`c`.`Nature_Of_Case` AS `CASE_NATURE`,
 `c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,
 `s`.`Stud_NO` AS `STUD_NO`,
 CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,

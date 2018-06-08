@@ -1,5 +1,10 @@
 <?php
 require('fpdf.php');
+session_start();
+if (!$_SESSION['Logged_In']) {
+    header('Location:login.php');
+    exit;
+}
 $acadOpt = '';
 $semOpt = '';
 $monthOpt = '';
@@ -14,17 +19,25 @@ class PDF extends FPDF
     {
     
 
-    // Select Arial bold 15
-        $this->SetFont('Arial', 'B', 15);
+        $this->SetFont('Times', '', 11);
         // Move to the right
     
         // Framed title
     
-        $this->Image('images/PUPLogo.png', 98, 10, 20);
-        $this->Ln(30);
-        $this->Cell(80);
-        $this->Cell(40, 10, 'Polytechnic University of the Philippines', 0, 0, 'C');
-        // Line break
+        $this->Image('images/PUPLogo.png', 15, 5, 30, 30);
+        $this->Ln(3);
+        $this->Cell(130, 10, 'Republic of the Philippines', 0, 0, 'C');
+        $this->SetFont('Times', 'B', 11);
+        $this->Ln(2);
+        $this->Cell(183, 15, 'POLYTECHNIC UNIVERSITY OF THE PHILIPPINES', 0, 0, 'C');
+        $this->Ln(4);
+        $this->Cell(133, 15, 'QUEZON CITY BRANCH', 0, 0, 'C');// Line break
+        $this->SetDrawColor(0,0,0);
+        $this->SetLineWidth(1); 
+        $this->Line(15,40,195,40);
+        $this->Ln(20);
+        $this->SetFont('Arial', '', 11);
+        $this->Cell(0, 15, 'All Records', 0, 0, 'C');
         $this->Ln(20);
     }
     // Colored table
@@ -59,7 +72,7 @@ class PDF extends FPDF
 
         if (isset($_REQUEST['view'])) {
             $acadOpt = $_REQUEST['acadOpt'];
-           // $semOpt = $_REQUEST['semOpt'];
+            $semOpt = $_REQUEST['semOpt'];
             $monthOpt = $_REQUEST['monthOpt'];
             $dayOpt = $_REQUEST['dayOpt'];
             $courseOpt = $_REQUEST['courseOpt'];
@@ -91,23 +104,23 @@ FROM
     
     $options = array();
     
-    if ($acadOpt != 'All') {
+    if (!empty($acadOpt) && $acadOpt != 'All') {
         $options[] = "cr.Course_CURR_YEAR = '$acadOpt'";
     }
 
-    /* if ($semOpt != 'All') {
-        $options[] = "";
-    } */
+    if (!empty($semOpt) && $semOpt != 'All') {
+        $options[] = "c.Couns_SEMESTER =  '$semOpt'";
+    } 
 
-    if ($monthOpt != 'All') {
+    if (!empty($monthOpt) && $monthOpt != 'All') {
         $options[] = "MONTH(c.Couns_DATE) = '$monthOpt'";
     }
 
-    if ($dayOpt != 'All') {
+    if (!empty($dayOpt) && $dayOpt != 'All') {
         $options[] = "DAY(c.Couns_DATE) = '$dayOpt'";
     }
 
-    if ($courseOpt != 'All') {
+    if (!empty($courseOpt) && $courseOpt != 'All') {
         $options[] = "s.Stud_COURSE = '$courseOpt'";
     }
 

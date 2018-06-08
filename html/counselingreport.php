@@ -3,7 +3,7 @@
 <?php
     session_start();
     if (!$_SESSION['Logged_In']) {
-        header('Location:LogIn.php');
+        header('Location:login.php');
         exit;
     }
     include("config.php");
@@ -17,9 +17,10 @@ if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-
-if (isset($_POST['IndivFilter'])) 
-{
+$indivTab = '';
+$groupTab = '';
+$visitTab = '';
+if (isset($_POST['IndivFilter'])) {
     $acadOpt = $_POST['acadOpt'];
     $semOpt = $_POST['semOpt'];
     $monthOpt = $_POST['monthOpt'];
@@ -60,17 +61,19 @@ if (isset($_POST['IndivFilter']))
         JOIN `r_stud_profile` `s` 
             ON `s`.`Stud_NO` = `cd`.`Stud_NO`
         JOIN `r_courses` `cr`
-            ON `s`.`Stud_COURSE` = `cr`.`Course_CODE`";
+            ON `s`.`Stud_COURSE` = `cr`.`Course_CODE`
+        JOIN `r_semester` sem
+            ON  `c`.`Couns_SEMESTER` = `sem`.`Semestral_NAME`";
 
     $conditions = array();
 
     if ($acadOpt != 'All') {
         $conditions[] = "cr.Course_CURR_YEAR = '$acadOpt'";
     }
-// Disabled for a while
-  /*   if ($semOpt != 'All') {
-        $conditions[] = "";
-    } */
+
+    if ($semOpt != 'All') {
+          $conditions[] = "c.Couns_SEMESTER =  '$semOpt'";
+      } 
 
     if ($monthOpt != 'All') {
         $conditions[] = "MONTH(c.Couns_DATE) = '$monthOpt'";
@@ -90,6 +93,7 @@ if (isset($_POST['IndivFilter']))
     }
 
     $result = mysqli_query($db, $query);
+    $indivTab = 'class = "active"';
 } else {
     $actualQuery = "SELECT
         `c`.`Couns_CODE` AS `COUNSELING_CODE`,
@@ -126,6 +130,11 @@ if (isset($_POST['IndivFilter']))
         ON `s`.`Stud_NO` = `cd`.`Stud_NO` ";
 
     $result = mysqli_query($db, $actualQuery);
+}
+if(isset($_POST['groupFilter'])){
+    $groupTab = 'class="active"';
+} else {
+
 }
 $sql =  mysqli_query($db, " SELECT
 `c`.`Couns_CODE` AS `COUNSELING_CODE`,
@@ -180,7 +189,7 @@ while ($row = mysqli_fetch_assoc($sqlAY)) {
 $sqlSem = mysqli_query($db, "SELECT Semestral_ID, Semestral_NAME FROM `r_semester`  ");
 $optionSem = '';
 while ($row = mysqli_fetch_assoc($sqlSem)) {
-    $optionSem .='<option value = "'.$row['Semestral_ID'].'">'.$row['Semestral_NAME'].'</option>';
+    $optionSem .='<option value = "'.$row['Semestral_NAME'].'">'.$row['Semestral_NAME'].'</option>';
 }
 
 $sqlCourse = mysqli_query($db, "SELECT Course_ID, Course_CODE FROM `r_courses`  ");
@@ -250,13 +259,13 @@ include('sidebarnav.php');
                     <section class="panel">
                         <header class="panel-heading tab-bg-dark-navy-blue ">
                             <ul class="nav nav-tabs">
-                                <li class="active">
+                                <li <?php echo $indivTab;?>>
                                     <a data-toggle="tab" href="#Indiv">Individual Counsel</a>
                                 </li>
-                                <li class="">
+                                <li <?php echo $groupTab; ?>>
                                     <a data-toggle="tab" href="#Grouped">Group Counsel</a>
                                 </li>
-                                <li class="">
+                                <li <?php echo $visitTab; ?>>
                                     <a data-toggle="tab" href="#Visits">Visit Reports</a>
                                 </li>
                             </ul>
@@ -319,9 +328,9 @@ include('sidebarnav.php');
                                     </button>
                                     </form>
                                     &nbsp
-                                    <a href="print_record_all.php?view=set&acadOpt=<?php echo $acadOpt; ?>&semOpt=<?php echo $semOpt; ?>&monthOpt=<?php echo $monthOpt; ?>&dayOpt=<?php echo $dayOpt; ?>&courseOpt=<?php echo $courseOpt;?>" type="button" class="btn btn-success">
-                                        <i class="fa fa-print"></i> Print</a>
-                                        <br></br>
+                                    <button class="btn btn-sm btn-success" onclick="location.href='print_record_all.php?view=set&acadOpt=<?php echo $acadOpt; ?>&semOpt=<?php echo $semOpt; ?>&monthOpt=<?php echo $monthOpt; ?>&dayOpt=<?php echo $dayOpt; ?>&courseOpt=<?php echo $courseOpt;?>'">
+                                        <i class="fa fa-print"></i> Print</button>
+                                    <br></br>
                                     <section id="unseen">
                                         <table class=" display table table-bordered table-striped table-condensed" id="dynamic-table">
                                             <thead>
@@ -409,7 +418,7 @@ include('sidebarnav.php');
                                     </div>
                                     </br>
                                     </br>
-                                    <button class="btn btn-info btn-sm" name="reportSearch">
+                                    <button class="btn btn-info btn-sm" name="groupFilter">
                                         <i class="fa fa-search"></i> Search</button>
                                     </form>
                                     &nbsp
@@ -518,14 +527,6 @@ include('sidebarnav.php');
     <script src="js/jquery.nicescroll.js"></script>
 
     <script src="js/jquery-steps/jquery.steps.js"></script>
-    <!--Easy Pie Chart-->
-    <script src="js/easypiechart/jquery.easypiechart.js"></script>
-    <!--Sparkline Chart-->
-    <script src="js/sparkline/jquery.sparkline.js"></script>
-    <!--jQuery Flot Chart-->
-    <!-- <script src="js/flot-chart/jquery.flot.js"></script>
-    <script src="js/iCheck/jquery.icheck.js"></script>
-    <script type="text/javascript" src="js/ckeditor/ckeditor.js"></script>
     <!--common script init for all pages-->
     <script src="js/scripts.js"></script>
 
