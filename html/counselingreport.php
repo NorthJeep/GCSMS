@@ -139,7 +139,7 @@ if (isset($_POST['groupFilter'])) {
 } else {
 }
 
-if (isset($_POST['visitFilter'])){
+if (isset($_POST['visitFilter'])) {
     $visitOpt = $_POST['visitOpt'];
     $acadOpt = $_POST['acadOpt'];
     $semOpt = $_POST['semOpt'];
@@ -147,54 +147,56 @@ if (isset($_POST['visitFilter'])){
     $dayOpt = $_POST['dayOpt'];
     $courseOpt = $_POST['courseOpt'];
 
-    $actualQuery = "";
-    $conditions = array();
-
-    $visitTab = 'active';
-    $indivTab = '';
-} else {
-
-}
-
-$sql =  mysqli_query($db, "SELECT
-  `c`.`Couns_CODE` AS `COUNSELING_CODE`,
-  CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
-  `s`.`Stud_NO` AS `STUD_NO`,
-  DATE_FORMAT(`c`.`Couns_DATE`, '%W %M %d %Y') AS `COUNSELING_DATE`,
-  `c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
-  `c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,
+    $actualQuery = "SELECT
+  `v`.`Visit_CODE` AS `Visit_CODE`,
+  `v`.`Visit_DATE` AS `Visit_DATE`,
+  `s`.`Stud_NO` AS `Stud_NO`,
+  CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUDENT`,
   CONCAT(
     `s`.`Stud_COURSE`,
     ' ',
     `s`.`Stud_YEAR_LEVEL`,
     ' - ',
-    `s`.`Stud_SECTION`
+    `s`.`Stud_YEAR_LEVEL`
   ) AS `COURSE`,
-  (
-    SELECT
-      GROUP_CONCAT(`a`.`Couns_APPROACH` SEPARATOR ', ')
-    FROM
-      `t_couns_approach` `a`
-    WHERE
-      (`a`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`)
-  ) AS `COUNSELING_APPROACH`,
-  `c`.`Couns_BACKGROUND` AS `COUNSELING_BG`,
-  `c`.`Couns_GOALS` AS `GOALS`,
-  `c`.`Couns_COMMENT` AS `COUNS_COMMENT`,
-  `c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION`
+  `v`.`Visit_PURPOSE` AS `Visit_PURPOSE`,
+  `v`.`Visit_DETAILS` AS `Visit_DETAILS`
 FROM
   (
-    (
-      `t_counseling` `c`
-      JOIN `t_couns_details` `cd` ON (
-        (
-          `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
-        )
-      )
-    )
-    JOIN `r_stud_profile` `s` ON ((`s`.`Stud_NO` = `cd`.`Stud_NO`))
-  )");
+    `t_stud_visit` `v`
+    JOIN `r_stud_profile` `s` ON ((`s`.`Stud_NO` = `v`.`Stud_NO`))
+  )
+ORDER BY
+  `v`.`Visit_DATE` DESC ";
+    $conditions = array();
 
+    $resultVisit = '';
+    $visitTab = 'active';
+    $indivTab = '';
+} else {
+    $actualQuery = "SELECT
+  `v`.`Visit_CODE` AS `Visit_CODE`,
+  `v`.`Visit_DATE` AS `Visit_DATE`,
+  `s`.`Stud_NO` AS `Stud_NO`,
+  CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUDENT`,
+  CONCAT(
+    `s`.`Stud_COURSE`,
+    ' ',
+    `s`.`Stud_YEAR_LEVEL`,
+    ' - ',
+    `s`.`Stud_YEAR_LEVEL`
+  ) AS `COURSE`,
+  `v`.`Visit_PURPOSE` AS `Visit_PURPOSE`,
+  `v`.`Visit_DETAILS` AS `Visit_DETAILS`
+FROM
+  (
+    `t_stud_visit` `v`
+    JOIN `r_stud_profile` `s` ON ((`s`.`Stud_NO` = `v`.`Stud_NO`))
+  )
+ORDER BY
+  `v`.`Visit_DATE` DESC ";
+  $resultVisit = mysqli_query($db, $actualQuery);
+}
 //Data for select input
 $sqlAY = mysqli_query($db, "SELECT Batch_ID,Batch_YEAR FROM `pupqcdb`.`r_batch_details` WHERE Batch_DISPLAY_STAT = 'Active' ");
 $optionAY = '';
@@ -549,9 +551,10 @@ include('sidebarnav.php');
                                             <button class="btn btn-info btn-sm" name="visitFilter">
                                                 <i class="fa fa-search"></i> Search</button>
                                         </form>
-                                        <br>
+                                        </br>
                                         <button class="btn btn-sm btn-success" onclick="location.href='print_record_all.php?view=set&acadOpt=<?php echo $acadOpt; ?>&semOpt=<?php echo $semOpt; ?>&monthOpt=<?php echo $monthOpt; ?>&dayOpt=<?php echo $dayOpt; ?>&courseOpt=<?php echo $courseOpt;?>'">
                                             <i class="fa fa-print"></i> Print</button>
+                                            <br><br>
                                     </div>
                                     <br>
                                     <br>
@@ -570,29 +573,23 @@ include('sidebarnav.php');
                                             </thead>
                                             <tbody>
                                                 <?php
-                                while ($row = mysqli_fetch_assoc($search_result)) {
-                                    $code=$row['Visit_CODE'];
-                                    $purpose=$row['Visit_PURPOSE'];
-                                    $no=$row['Stud_NO'];
-                                    $name=$row['STUDENT'];
-                                    $course=$row['COURSE'];
-                                    $date=$row['Visit_DATE']; ?>
+                                while ($row = mysqli_fetch_assoc($resultVisit)) {?>
                                                 <tr>
                                                     <td>
                                                         <strong>
-                                                            <?php echo $purpose; ?>
+                                                            <?php echo $row['Visit_PURPOSE']; ?>
                                                     </td>
                                                     <td>
-                                                        <?php echo $no; ?>
+                                                        <?php echo $row['Stud_NO']; ?>
                                                     </td>
                                                     <td>
-                                                        <?php echo $name; ?>
+                                                        <?php echo $row['STUDENT']; ?>
                                                     </td>
                                                     <td>
-                                                        <?php echo $course; ?>
+                                                        <?php echo $row['COURSE']; ?>
                                                     </td>
                                                     <td>
-                                                        <?php echo $date; ?>
+                                                        <?php echo $row['Visit_DATE']; ?>
                                                     </td>
                                                 </tr>
                                                 <?php
