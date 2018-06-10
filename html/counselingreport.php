@@ -97,37 +97,39 @@ FROM
     $indivTab = 'active';
 } else {
     $actualQuery = "SELECT
-  `c`.`Couns_CODE` AS `COUNSELING_CODE`,
-  DATE_FORMAT(`c`.`Couns_DATE`, '%W %M %d %Y') AS `COUNSELING_DATE`,
-  `c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
-  `c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,
-  `s`.`Stud_NO` AS `STUD_NO`,
-  CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
-  CONCAT(
-    `s`.`Stud_COURSE`,
-    ' ',
-    `s`.`Stud_YEAR_LEVEL`,
-    ' - ',
-    `s`.`Stud_SECTION`
-  ) AS `COURSE`,
-  (
-    SELECT
-      GROUP_CONCAT(`a`.`Couns_APPROACH` SEPARATOR ', ')
-    FROM
-      `t_couns_approach` `a`
-    WHERE
-      (
-        `a`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`
-      )
-  ) AS `COUNSELING_APPROACH`,
-  `c`.`Couns_BACKGROUND` AS `COUNSELING_BG`,
-  `c`.`Couns_GOALS` AS `GOALS`,
-  `c`.`Couns_COMMENT` AS `COUNS_COMMENT`,
-  `c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION`
-FROM
-  `t_counseling` `c`
-  JOIN `t_couns_details` `cd` ON `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
-  JOIN `r_stud_profile` `s` ON `s`.`Stud_NO` = `cd`.`Stud_NO` ORDER BY `c`.`Couns_DATE` DESC";
+    `c`.`Couns_CODE` AS `COUNSELING_CODE`,
+    DATE_FORMAT(`c`.`Couns_DATE`, '%W %M %d %Y') AS `COUNSELING_DATE`,
+    `c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
+    `c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,
+    `s`.`Stud_NO` AS `STUD_NO`,
+    CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
+    CONCAT(
+      `s`.`Stud_COURSE`,
+      ' ',
+      `s`.`Stud_YEAR_LEVEL`,
+      ' - ',
+      `s`.`Stud_SECTION`
+    ) AS `COURSE`,
+    (
+      SELECT
+        GROUP_CONCAT(`a`.`Couns_APPROACH` SEPARATOR ', ')
+      FROM
+        `t_couns_approach` `a`
+      WHERE
+        (
+          `a`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`
+        )
+    ) AS `COUNSELING_APPROACH`,
+    `c`.`Couns_BACKGROUND` AS `COUNSELING_BG`,
+    `c`.`Couns_GOALS` AS `GOALS`,
+    `c`.`Couns_COMMENT` AS `COUNS_COMMENT`,
+    `c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION`
+  FROM
+    `t_counseling` `c`
+    JOIN `t_couns_details` `cd` ON `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
+    JOIN `r_stud_profile` `s` ON `s`.`Stud_NO` = `cd`.`Stud_NO`
+    JOIN `r_courses` `cr` ON `s`.`Stud_COURSE` = `cr`.`Course_CODE`
+    JOIN `r_semester` sem ON `c`.`Couns_SEMESTER` = `sem`.`Semestral_NAME` ORDER BY `c`.`Couns_DATE` DESC";
 
     $resultIndiv = mysqli_query($db, $actualQuery);
     $indivTab = 'active';
@@ -170,7 +172,36 @@ ORDER BY
   `v`.`Visit_DATE` DESC ";
     $conditions = array();
 
-    $resultVisit = '';
+    if ($visitOpt != 'All'){
+        $conditions[] = "v.Visit_PURPOSE = '$visitOpt'";
+    }
+
+    if ($acadOpt != 'All') {
+        $conditions[] = "cr.Course_CURR_YEAR = '$acadOpt'";
+    }
+
+    if ($semOpt != 'All') {
+        $conditions[] = "c.Couns_SEMESTER =  '$semOpt'";
+    }
+
+    if ($monthOpt != 'All') {
+        $conditions[] = "MONTH(v.Visit_DATE) = '$monthOpt'";
+    }
+
+    if ($dayOpt != 'All') {
+        $conditions[] = "DAY(v.Visit_DATE) = '$dayOpt'";
+    }
+
+    if ($courseOpt != 'All') {
+        $conditions[] = "s.Stud_COURSE = '$courseOpt'";
+    }
+
+    $query = $actualQuery;
+    if (count($conditions)>0) {
+        $query .= " WHERE ". implode(' AND ', $conditions) ." ORDER BY `v`.`Visit_DATE` DESC"  ;
+    }
+
+    $resultVisit = mysqli_query($db,$query);
     $visitTab = 'active';
     $indivTab = '';
 } else {
