@@ -18,6 +18,7 @@
 			{
 				while($row = mysqli_fetch_assoc($result))
 				{
+					$ID = $row['Users_ID'];
 					$userid = $row['Users_REFERENCED'];
 					/*$userfname = $_POST['USER_FNAME'];
 					$userlname = $_POST['USER_LNAME'];*/
@@ -25,6 +26,7 @@
 				}
 				echo 'OK!';
 				session_start();
+				$_SESSION['ID'] = $ID;
 				$_SESSION['Logged_In'] = $username;
 				$_SESSION['User_ID'] = $userid;
 				$user = $_SESSION['User_ID'];

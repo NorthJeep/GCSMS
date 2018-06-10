@@ -508,12 +508,15 @@ Highcharts.chart('visit-chart',{
 <!-- Placed js at the end of the document so the pages load faster -->
 <!--Core js-->
 <?php include('footer.php'); ?>
+
+
+
 <!--script for this page-->
 <!--script for this page-->
 <!--Core js-->
 <script src="js/jquery.js"></script>
-<script src="js/jquery-1.8.3.min.js"></script>
-<script src="bs3/js/bootstrap.min.js"></script>
+<!-- <script src="js/jquery-1.8.3.min.js"></script> -->
+<!-- <script src="bs3/js/bootstrap.min.js"></script> -->
 <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
 <script src="js/jquery.scrollTo.min.js"></script>
 <script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
@@ -530,8 +533,36 @@ Highcharts.chart('visit-chart',{
 <script src="js/flot-chart/jquery.flot.pie.resize.js"></script>
 
 <!--common script init for all pages-->
-<script src="js/scripts.js"></script>
+<!-- <script src="js/scripts.js"></script> -->
 
 <script src="js/gritter.js" type="text/javascript"></script>
+
+<script>
+    $(document).ready(function(){
+
+        $('#NotifSend').on('submit', function(event){
+            
+            event.preventDefault();
+            var form_data = $(this).serialize();
+
+            $.ajax({
+                url:'NotifPost.php',
+                method:'POST',
+                data:form_data,
+                error:function(data)
+                {
+                    console.log("wewewew");
+                },
+                success:function(data)
+                {   
+                    console.log(data);
+                    $('#NotifSend')[0].reset();
+                    console.log("wewewewewe");
+                }
+            });
+        });
+    });
+</script> 
+
 </body>
 </html>

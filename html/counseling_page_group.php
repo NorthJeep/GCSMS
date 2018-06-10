@@ -309,44 +309,67 @@ if (!$query) {
 </div>
 </div>
 <!--right sidebar end-->
-
 </section>
 
+<?php include('footer.php'); ?>
 <!-- Placed js at the end of the document so the pages load faster -->
 
 <!--Core js-->
 <script src="js/jquery.js"></script>
-<script src="bs3/js/bootstrap.min.js"></script>
-<script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+
+<script>
+    $(document).ready(function(){
+
+        function load_unseen_notification(view = '')
+        {
+            $.ajax({
+                url:"NotifLoad.php",
+                method:"POST",
+                data:{view:view},
+                dataType:"json",
+                success:function(data)
+                {
+                    $('.dropdown-menu').html(data.Notification);
+
+                    if(data.NotificationCount > 0)
+                    {
+                        $('.count').html(data.NotificationCount);
+                    }
+                }
+            });
+        }
+
+        load_unseen_notification();
+
+        $(document).on('click','.dropdown-toggle', function(){
+        $('.count').html('');
+        load_unseen_notification('read');
+        });
+
+        setInterval(function(){
+            load_unseen_notification();  
+        }, 5000);
+        
+    });
+
+</script>
+
+<!-- <script src="bs3/js/bootstrap.min.js"></script> -->
+<script src="js/jquery.dcjqaccordion.2.7.js"></script>
 <script src="js/jquery.scrollTo.min.js"></script>
 <script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
 <script src="js/jquery.nicescroll.js"></script>
-
-<script src="js/jquery-steps/jquery.steps.js"></script>
-<!--Easy Pie Chart-->
-<script src="js/easypiechart/jquery.easypiechart.js"></script>
-<!--Sparkline Chart-->
-<script src="js/sparkline/jquery.sparkline.js"></script>
-<!--jQuery Flot Chart-->
-<script src="js/flot-chart/jquery.flot.js"></script>
-<script src="js/flot-chart/jquery.flot.tooltip.min.js"></script>
-<script src="js/flot-chart/jquery.flot.resize.js"></script>
-<script src="js/flot-chart/jquery.flot.pie.resize.js"></script>
 
 <script src="js/iCheck/jquery.icheck.js"></script>
 
 <script type="text/javascript" src="js/ckeditor/ckeditor.js"></script>
 
 <!--common script init for all pages-->
-<script src="js/scripts.js">
-    
-</script>
+<!-- <script src="js/scripts.js"></script> -->
 
 <!--icheck init -->
 <script src="js/icheck-init.js"></script>
 
-<!--common script init for all pages-->
-<script src="js/scripts.js"></script>
 <!--dynamic table-->
 <script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
@@ -368,8 +391,10 @@ if (!$query) {
         document.getElementById("input").style.display="none";
     }
 </script>
-<script>  
+
+<script> 
  $(document).ready(function(){  
+
       $('#student_name').keyup(function(){  
            var query = $(this).val();  
            if(query != '')  

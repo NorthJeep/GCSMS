@@ -83,6 +83,59 @@ include('sidebarnav.php');
                     <button href="#ImportModal" data-toggle="modal" class="btn btn-warning">
                                 <i class="fa fa-plus"></i> Import</button>
                     </div>
+
+                    <br></br>
+
+                    <!--REMARKS PARA SA MODAL BACKGROUND CHENES-->
+                    
+                    <?php 
+                        $remarks  =  isset($_GET['remarks'])  ?  $_GET['remarks']  :  '';
+
+                            if  ($remarks=='failed')
+                                {
+                                    echo    '<div class="alert alert-block alert-danger fade in">
+                                                <button data-dismiss="alert" class="close close-sm" type="button">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                                <h4>
+                                                    <i class="icon-ok-sign"></i>
+                                                    <b>Oh snap!</b>
+                                                </h4>
+                                                <p> MAY GANYANG RECORD NA SIYA SA DATABASE!<p>
+                                            </div>';
+                                }
+
+                            if  ($remarks=='failed2')
+                                {
+                                    echo    '<div class="alert alert-block alert-danger fade in">
+                                                <button data-dismiss="alert" class="close close-sm" type="button">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                                <h4>
+                                                    <i class="icon-ok-sign"></i>
+                                                    <b>Oh snap!</b>
+                                                </h4>
+                                                <p> GAWIN MUNA YUNG NATURE OF SCHOOLING!<p>
+                                            </div>';
+                                }
+
+                            if  ($remarks=='success')
+                                {
+                                    echo    '<div class="alert alert-success alert-block fade in">
+                                                <button data-dismiss="alert" class="close close-sm" type="button">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                                <h4>
+                                                    <i class="icon-ok-sign"></i>
+                                                    <b>Success!</b>
+                                                </h4>
+                                                <p>AYIIIEEE NA SAVE NA!</p>
+                                            </div>';
+                                }
+                    ?>
+
+                    <!--REMARKS PARA SA MODAL BACKGROUND CHENES-->
+                    
                     <div class="adv-table">
                     <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="dynamic-table">
                     <thead>
@@ -114,7 +167,8 @@ if (!$query) {
                 $COURSE=$row['COURSE'];
                 $STATUS=$row['STUD_STATUS'];
 
-               ?>
+                  ?>
+
                     <tr>
                     <td><?php echo $NO; ?></td>
                     <td><?php echo $FULLNAME; ?></td>
@@ -215,14 +269,11 @@ if (!$query) {
                                                   <input type="text" id="V_s_course" name="V_s_course" style="display:none;"value="<?php echo $COURSE; ?>"></p>
                                                     <div class="col-lg-5">
                                                     <select style="width:180px" name="txtcode" id="e9" class="populate" required="">
-                                                        <?php
-                                                            $query = "SELECT Visit_TYPE FROM r_visit WHERE Visit_TYPE_STAT = 'Active'";
-                                                            $category = mysqli_query($db,$query);
-                                                            while ($row = mysqli_fetch_assoc($category)) {
-                                                                echo '<option value="'.$row["Visit_TYPE"].'">'.$row["Visit_TYPE"].'</option>';
-                                                            }
-                                                        ?> 
-                                                    </select>    
+                                    
+                                        <option value="Excuse">Excuse Letter</option>
+                                        <option value="CoC">Cert of Candidacy</option>
+                                        <option value="Clearance">Clearance</option>
+                                    </select>    
                                                     </div>
                                                     <div class="col-lg-5">
                                                         <input type="text" id="txtdetails" name="txtdetails" class="form-control col-lg-2" placeholder="Other Details...">
@@ -259,375 +310,145 @@ if (!$query) {
                                             <!--START NG LAMAN NG ADD/UPDATE-->
                                                 <div id="collapse3" class="panel-collapse collapse">
                                                     <!--LAMAN  NG EDUCATIONAL BACKGROUND START-->
-                                                        <form name="educ_bg"  action="educational_background.php"  onsubmit="return  validateForm()"  method="post">
                                                             <div class="panel-body">
-                                                                <!--START NG PRE-ELEMENTARY-->
-                                                                    <div class="panel panel-default" style=" padding-top:5px;">
-                                                                        <div class="panel-heading" style="background-color:#07847d">
-                                                                          <h4 class="panel-title">
-                                                                            <a data-toggle="collapse" href="#pre-elementary" style="color:#FFF">
-                                                                            Pre-elementary</a>
-                                                                          </h4>
-                                                                        </div>
-                                                                        <div id="pre-elementary" class="panel-collapse collapse">
-                                                                            <!--LAMAN START-->
-                                                                                <div class="panel-body">
-                                                                                    
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">School Graduated:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="preelem_schoolgrad" id="preelem_schoolgrad">
-                                                                                        </div>
-                                                                                    </div>
 
-                                                                                    <br></br>
+                                                                <!--START PART 1-->
+                                                                    <form name="educ_bg"  action="educational_background.php"  onsubmit="return  validateForm()"  method="post">
 
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">School Address:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="preelem_schooladd" id="preelem_schooladd">
-                                                                                        </div>
-                                                                                    </div>
+                                                                    <!--<input name="studno_ref" value="$NO" hidden=""></input>-->
 
-                                                                                    <br></br>
+                                                                    <?php echo '<input name="studno_ref" value="'.$NO.'" hidden=""></input>'?>
 
-                                                                                    <div class="form-group">
-                                                                                        <div class="col-lg-12">
-                                                                                            <select class="form-control m-bot15" name="preelem_schooltype" id="preelem_schooltype">
-                                                                                                <option value="Public">Public</option>
-                                                                                                <option value="Public">Private</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-3 control-label">Dates of Attendance:</label>
-                                                                                        <div class="col-sm-9">
-                                                                                            <textarea class="form-control" rows="2" name="preelem_datesofattendance" id="preelem_datesofattendance"></textarea>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-                                                                                    &nbsp;
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-3 control-label">Honors Received/Special Awards:</label>
-                                                                                        <div class="col-sm-9">
-                                                                                            <textarea class="form-control" rows="3" name="preelem_awards" id="pre-elem_awards"></textarea>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            <!--LAMAN END-->
+                                                                    <!--nature of schooling-->
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label col-lg-5" for="inputSuccess">Nature of Schooling:</label>
+                                                                        <div class="col-lg-7">
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="nature_schooling" id="continous" value="Continous" onclick="disablewhy()" required="">Continous
+                                                                                </label>
+                                                                                &nbsp;&nbsp;
+                                                                                <label>
+                                                                                    <input type="radio" name="nature_schooling" id="interrupted" value="Interrupted" onclick="enablewhy()">Interrupted
+                                                                                </label>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                <!--END NG PRE-ELEMENTARY-->
 
-                                                                <!--START NG ELEMENTARY-->
-                                                                    <div class="panel panel-default" style=" padding-top:5px;">
-                                                                        <div class="panel-heading" style="background-color:#07847d">
-                                                                          <h4 class="panel-title">
-                                                                            <a data-toggle="collapse" href="#elementary" style="color:#FFF">
-                                                                            Elementary</a>
-                                                                          </h4>
-                                                                        </div>
-                                                                        <div id="elementary" class="panel-collapse collapse">
-                                                                            <!--LAMAN START-->
-                                                                                <div class="panel-body">
-                                                                                    
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">School Graduated:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="elem_schoolgrad" id="elem_schoolgrad">
-                                                                                        </div>
-                                                                                    </div>
+                                                                    <script language="javascript" type="text/javascript">
+                                                                        function disablewhy(){
+                                                                            document.getElementById('why').disabled = true;
+                                                                        }
 
-                                                                                    <br></br>
+                                                                        function enablewhy(){
+                                                                            document.getElementById('why').disabled = false;
+                                                                        }
+                                                                    </script>
 
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">School Address:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="elem_schooladd" id="elem_schooladd">
-                                                                                        </div>
-                                                                                    </div>
+                                                                    <br></br>
 
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <div class="col-lg-12">
-                                                                                            <select class="form-control m-bot15" name="elem_schooltype" id="elem_schooltype">
-                                                                                                <option value="Public">Public</option>
-                                                                                                <option value="Private">Private</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-3 control-label">Dates of Attendance:</label>
-                                                                                        <div class="col-sm-9">
-                                                                                            <textarea class="form-control" rows="2" name="elem_datesofattendance" id="elem_datesofattendance"></textarea>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-                                                                                    &nbsp;
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-3 control-label">Honors Received/Special Awards:</label>
-                                                                                        <div class="col-sm-9">
-                                                                                            <textarea class="form-control" rows="3" name="elem_awards" id="elem_awards"></textarea>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            <!--LAMAN END-->
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-2 control-label">Why?:</label>
+                                                                        <div class="col-sm-10">
+                                                                            <textarea class="form-control" rows="3" disabled="" id="why" name="nature_schooling" required=""></textarea>
                                                                         </div>
                                                                     </div>
-                                                                <!--END NG ELEMENTARY-->
+                                                                    <!--nature of schooling-->
 
-                                                                <!--START NG HIGHSCHOOL-->
-                                                                    <div class="panel panel-default" style=" padding-top:5px;">
-                                                                        <div class="panel-heading" style="background-color:#07847d">
-                                                                          <h4 class="panel-title">
-                                                                            <a data-toggle="collapse" href="#highschool" style="color:#FFF">
-                                                                            Highschool</a>
-                                                                          </h4>
-                                                                        </div>
-                                                                        <div id="highschool" class="panel-collapse collapse">
-                                                                            <!--LAMAN START-->
-                                                                                <div class="panel-body">
-                                                                                    
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">School Graduated:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="highschool_schoolgrad" id="highschool_schoolgrad">
-                                                                                        </div>
-                                                                                    </div>
+                                                                    <br></br>
+                                                                    <br></br>
 
-                                                                                    <br></br>
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn btn-success" type="submit" name="submit">Save</button>
+                                                                    </div>
+                                                                    </form>
 
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">School Address:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="highschool_schooladd" id="highschool_schooladd">
-                                                                                        </div>
-                                                                                    </div>
+                                                                <!--END PART 1-->
 
-                                                                                    <br></br>
+                                                                <!--START PART 2-->
+                                                                    <form name="educ_bgdt"  action="educational_backgrounddetails.php"  onsubmit="return  validateForm()"  method="post">
 
-                                                                                    <div class="form-group">
-                                                                                        <div class="col-lg-12">
-                                                                                            <select class="form-control m-bot15" name="highschool_schooltype" id="highschool_schooltype">
-                                                                                                <option value="Public">Public</option>
-                                                                                                <option value="Private">Private</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div>
+                                                                    <?php
+                                                                        $sql_educ_id = "SELECT * FROM r_stud_educ_background WHERE Stud_NO_REFERENCE ='$NO'";
+                                                                        $query_educ_id = mysqli_query($db, $sql_educ_id);
+                                                                        $row_educ_id = mysqli_fetch_assoc($query_educ_id);
+                                                                        $educ_id = $row_educ_id['Educ_BG_ID'];
 
-                                                                                    <br></br>
+                                                                        echo '<input name="educ_id_ref" value="'.$educ_id.'" hidden=""></input>';
+                                                                    ?>
 
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-3 control-label">Dates of Attendance:</label>
-                                                                                        <div class="col-sm-9">
-                                                                                            <textarea class="form-control" rows="2" name="highschool_datesofattendance" id="highschool_datesofattendance"></textarea>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-                                                                                    &nbsp;
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-3 control-label">Honors Received/Special Awards:</label>
-                                                                                        <div class="col-sm-9">
-                                                                                            <textarea class="form-control" rows="3" name="highschool_awards" id="highschool_awards"></textarea>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            <!--LAMAN END-->
+                                                                    <div class="form-group">
+                                                                        <div class="col-lg-12">
+                                                                        <!--SELECTION OF GAGAWAN NG RECORD-->
+                                                                            <select class="form-control m-bot15" name="educ_level" id="educ_level" required="">
+                                                                                <option value="Pre-Elementary">Pre-Elementary</option>
+                                                                                <option value="Elementary">Elementary</option>
+                                                                                <option value="High School">High School</option>
+                                                                                <option value="Vocational">Vocational</option>
+                                                                                <option value="College if any">College if any</option>
+                                                                            </select>
+                                                                        <!--SELECTION OF GAGAWAN NG RECORD-->
                                                                         </div>
                                                                     </div>
-                                                                <!--END NG HIGHSCHOOL-->
 
-                                                                <!--START NG VOCATIONAL-->
-                                                                    <div class="panel panel-default" style=" padding-top:5px;">
-                                                                        <div class="panel-heading" style="background-color:#07847d">
-                                                                          <h4 class="panel-title">
-                                                                            <a data-toggle="collapse" href="#vocational" style="color:#FFF">
-                                                                            Vocational</a>
-                                                                          </h4>
-                                                                        </div>
-                                                                        <div id="vocational" class="panel-collapse collapse">
-                                                                            <!--LAMAN START-->
-                                                                                <div class="panel-body">
-                                                                                    
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">School Graduated:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="voca_schoolgrad" id="voca_schoolgrad">
-                                                                                        </div>
-                                                                                    </div>
+                                                                    <br></br>
 
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">School Address:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="voca_schooladd" id="voca_schooladd">
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <div class="col-lg-12">
-                                                                                            <select class="form-control m-bot15" name="voca_schooltype" id="voca_schooltype">
-                                                                                                <option value="Public">Public</option>
-                                                                                                <option value="Private">Private</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-3 control-label">Dates of Attendance:</label>
-                                                                                        <div class="col-sm-9">
-                                                                                            <textarea class="form-control" rows="2" name="voca_schooltype" id="voca_schooltype"></textarea>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-                                                                                    &nbsp;
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-3 control-label">Honors Received/Special Awards:</label>
-                                                                                        <div class="col-sm-9">
-                                                                                            <textarea class="form-control" rows="3" name="voca_awards" id="voca_awards"></textarea>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            <!--LAMAN END-->
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-2 control-label">School Graduated:</label>
+                                                                        <div class="col-sm-10">
+                                                                            <input type="text" class="form-control" name="schoolgrad" id="schoolgrad" required="">
                                                                         </div>
                                                                     </div>
-                                                                <!--END NG VOCATIONAL-->
 
-                                                                <!--START NG COLLEGE-->
-                                                                    <div class="panel panel-default" style=" padding-top:5px;">
-                                                                        <div class="panel-heading" style="background-color:#07847d">
-                                                                          <h4 class="panel-title">
-                                                                            <a data-toggle="collapse" href="#college" style="color:#FFF">
-                                                                            College (If any)</a>
-                                                                          </h4>
-                                                                        </div>
-                                                                        <div id="college" class="panel-collapse collapse">
-                                                                            <!--LAMAN START-->
-                                                                                <div class="panel-body">
-                                                                                    
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">School Graduated:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="coll_schoolgrad" id="coll_schoolgrad">
-                                                                                        </div>
-                                                                                    </div>
+                                                                    <br></br>
 
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">School Address:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="coll_schooladd" id="coll_schooladd">
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <div class="col-lg-12">
-                                                                                            <select class="form-control m-bot15" name="coll_schooltype">
-                                                                                                <option value="Public">Public</option>
-                                                                                                <option value="Private">Private</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-3 control-label">Dates of Attendance:</label>
-                                                                                        <div class="col-sm-9">
-                                                                                            <textarea class="form-control" rows="2" name="coll_datesofattendance" id="coll_datesofattendance"></textarea>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-                                                                                    &nbsp;
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-3 control-label">Honors Received/Special Awards:</label>
-                                                                                        <div class="col-sm-9">
-                                                                                            <textarea class="form-control" rows="3" name="coll_awards" id="coll_awards"></textarea>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            <!--LAMAN END-->
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-2 control-label">School Address:</label>
+                                                                        <div class="col-sm-10">
+                                                                            <input type="text" class="form-control" name="schooladd" id="schooladd" required="">
                                                                         </div>
                                                                     </div>
-                                                                <!--END NG COLLEGE-->
 
-                                                                <br></br>
+                                                                    <br></br>
 
-                                                                <!--nature of schooling-->
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-3 control-label col-lg-5" for="inputSuccess">Nature of Schooling:</label>
-                                                                    <div class="col-lg-7">
-                                                                        <div class="radio">
-                                                                            <label>
-                                                                                <input type="radio" name="nature_schooling" id="continous" value="Continous" onclick="disablewhy()">Continous
-                                                                            </label>
-                                                                            &nbsp;&nbsp;
-                                                                            <label>
-                                                                                <input type="radio" name="nature_schooling" id="interrupted" value="Interrupted" onclick="enablewhy()">Interrupted
-                                                                            </label>
+                                                                    <div class="form-group">
+                                                                        <div class="col-lg-12">
+                                                                            <select class="form-control m-bot15" name="schooltype" id="schooltype" required="">
+                                                                                <option value="Public">Public</option>
+                                                                                <option value="Public">Private</option>
+                                                                            </select>
                                                                         </div>
                                                                     </div>
-                                                                </div>
 
-                                                                <script language="javascript" type="text/javascript">
-                                                                    function disablewhy(){
-                                                                        document.getElementById('why').disabled = true;
-                                                                    }
+                                                                    <br></br>
 
-                                                                    function enablewhy(){
-                                                                        document.getElementById('why').disabled = false;
-                                                                    }
-                                                                </script>
-
-                                                                <br></br>
-
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-2 control-label">Why?:</label>
-                                                                    <div class="col-sm-10">
-                                                                        <textarea class="form-control" rows="3" disabled="" id="why" name="why"></textarea>
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label">Dates of Attendance:</label>
+                                                                        <div class="col-sm-9">
+                                                                            <textarea class="form-control" rows="2" name="datesofattendance" id="datesofattendance" required=""></textarea>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <!--nature of schooling-->
 
-                                                                <br></br>
-                                                                <br></br>
+                                                                    <br></br>
+                                                                    &nbsp;
 
-                                                                <div class="modal-footer">
-                                                                    <button class="btn btn-success" type="submit" name="submit">Save</button>
-                                                                </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label">Honors Received/Special Awards:</label>
+                                                                        <div class="col-sm-9">
+                                                                            <textarea class="form-control" rows="3" name="awards" id="awards" required=""></textarea>
+                                                                        </div>
+                                                                    </div>
 
+                                                                    <br></br>
+                                                                    <br></br>
+
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn btn-success" type="submit" name="submit">Save</button>
+                                                                    </div>
+
+                                                                    </form>
+                                                                <!--END PART 2-->
                                                             </div>
-                                                        </form>
                                                     <!--LAMAN NG EDUCATIONAL BACKGROUND END-->
                                                 </div>
                                             <!--END NG LAMAN NG ADD/UPDATE-->
@@ -656,529 +477,131 @@ if (!$query) {
                                             <!--START NG LAMAN NG ADD/UPDATE-->
                                                 <div id="collapse5" class="panel-collapse collapse">
                                                     <!--LAMAN NG HOME AND FAMILY BACKGROUND START-->
-                                                        <form name="homefam_bg"  action="homeandfamily_background.php"  onsubmit="return  validateForm()"  method="post">
                                                             <div class="panel-body">
 
-                                                                <!--START NG FATHER-->
-                                                                    <div class="panel panel-default" style=" padding-top:5px;">
-                                                                        <div class="panel-heading" style="background-color:#07847d">
-                                                                          <h4 class="panel-title">
-                                                                            <a data-toggle="collapse" href="#father" style="color:#FFF">
-                                                                            Father</a>
-                                                                          </h4>
-                                                                        </div>
-                                                                        <div id="father" class="panel-collapse collapse">
-                                                                            <!--LAMAN START-->
-                                                                                <div class="panel-body">
+                                                                <!--START PART 1-->
+                                                            
+                                                                <form name="homefam_bg"  action="homeandfamily_background.php"  onsubmit="return  validateForm()"  method="post">
 
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">Name of Father:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="father_name" id="father_name">
-                                                                                        </div>
-                                                                                    </div>
+                                                                    <?php echo '<input name="studno_ref" value="'.$NO.'" hidden=""></input>'?>
 
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">Age:</label>
-                                                                                        <div class="radio">
-                                                                                            <!--AGE TEXT INPUT-->
-                                                                                            <div class="col-sm-6">
-                                                                                                <input type="text" class="form-control" name="father_age" id="father_age">
-                                                                                            </div>
-                                                                                            <!--AGE TEXT INPUT-->
-                                                                                            &nbsp;&nbsp;
-                                                                                            <label>
-                                                                                                <input type="radio" name="father_lifestats" id="father_living" value="Living">Living
-                                                                                            </label>
-                                                                                            &nbsp;&nbsp;
-                                                                                            <label>
-                                                                                                <input type="radio" name="father_lifestats" id="father_deceased" value="Deceased">Deceased
-                                                                                            </label>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">Educational Attainment:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="father_educattain" id="father_educattain">
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">Occupation:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="father_occu" id="father_occu">
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">Name of Employer:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="father_employname" id="father_employname">
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">Address of Employer:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <textarea class="form-control" rows="4" name="father_employadd" id="father_employadd"></textarea>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            <!--LAMAN END-->
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-2 control-label">Name of:</label>
+                                                                        <div class="col-sm-10">    
+                                                                            <select class="form-control m-bot15" name="family_parent" id="family_parent" required="">
+                                                                                <option value="Mother">Mother</option>
+                                                                                <option value="Father">Father</option>
+                                                                                <option value="Guardian">Guardian</option>
+                                                                            </select>
                                                                         </div>
                                                                     </div>
-                                                                <!--END NG FATHER-->
 
-                                                                <!--START NG MOTHER-->
-                                                                    <div class="panel panel-default" style=" padding-top:5px;">
-                                                                        <div class="panel-heading" style="background-color:#07847d">
-                                                                          <h4 class="panel-title">
-                                                                            <a data-toggle="collapse" href="#mother" style="color:#FFF">
-                                                                            Mother</a>
-                                                                          </h4>
+                                                                    <br></br>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-sm-4">
+                                                                            <input type="text" class="form-control" name="fam_fname" id="fam_fname" placeholder="First Name" required="">
                                                                         </div>
-                                                                        <div id="mother" class="panel-collapse collapse">
-                                                                            <!--LAMAN START-->
-                                                                                <div class="panel-body">
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">Name of Mother:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="mother_name" id="mother_name">
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">Age:</label>
-                                                                                        <div class="radio">
-                                                                                            <!--AGE TEXT INPUT-->
-                                                                                            <div class="col-sm-6">
-                                                                                                <input type="text" class="form-control" name="mother_age" id="mother_age">
-                                                                                            </div>
-                                                                                            <!--AGE TEXT INPUT-->
-                                                                                            &nbsp;&nbsp;
-                                                                                            <label>
-                                                                                                <input type="radio" name="mother_lifestats" id="mother_living" value="Living">Living
-                                                                                            </label>
-                                                                                            &nbsp;&nbsp;
-                                                                                            <label>
-                                                                                                <input type="radio" name="mother_lifestats" id="mother_deceased" value="Deceased">Deceased
-                                                                                            </label>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">Educational Attainment:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="mother_educattain" id="mother_educattain">
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">Occupation:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="mother_occu" id="mother_occu">
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">Name of Employer:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="mother_employname" id="mother_employname">
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">Address of Employer:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <textarea class="form-control" rows="4" name="mother_employadd" name="mother_employadd"></textarea>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            <!--LAMAN END-->
+                                                                        <div class="col-sm-4">
+                                                                            <input type="text" class="form-control" name="fam_mname" id="fam_mname" placeholder="Middle Name" required="">
+                                                                        </div>
+                                                                        <div class="col-sm-4">
+                                                                            <input type="text" class="form-control" name="fam_lname" id="fam_lname" placeholder="Last Name" required="">
                                                                         </div>
                                                                     </div>
-                                                                <!--END NG MOTHER-->
 
-                                                                <!--START NG GUARDIAN-->
-                                                                    <div class="panel panel-default" style=" padding-top:5px;">
-                                                                        <div class="panel-heading" style="background-color:#07847d">
-                                                                          <h4 class="panel-title">
-                                                                            <a data-toggle="collapse" href="#guardian" style="color:#FFF">
-                                                                            Guardian</a>
-                                                                          </h4>
-                                                                        </div>
-                                                                        <div id="guardian" class="panel-collapse collapse">
-                                                                            <!--LAMAN START-->
-                                                                                <div class="panel-body">
+                                                                    <br></br>
 
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">Name of Guardian:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="guard_name" id="guard_name">
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">Age:</label>
-                                                                                        <div class="radio">
-                                                                                            <!--AGE TEXT INPUT-->
-                                                                                            <div class="col-sm-6">
-                                                                                                <input type="text" class="form-control" name="guard_age" id="guard_age">
-                                                                                            </div>
-                                                                                            <!--AGE TEXT INPUT-->
-                                                                                            &nbsp;&nbsp;
-                                                                                            <label>
-                                                                                                <input type="radio" name="guard_lifestats" id="guard_living" value="Living">Living
-                                                                                            </label>
-                                                                                            &nbsp;&nbsp;
-                                                                                            <label>
-                                                                                                <input type="radio" name="optionsRadios" id="guard_deceased" value="Deceased">Deceased
-                                                                                            </label>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">Educational Attainment:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="guard_educattain" id="guard_educattain">
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">Occupation:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="guard_occu" id="guard_occu">
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">Name of Employer:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" name="guard_employname" id="guard_employname">
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <br></br>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-2 control-label">Address of Employer:</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <textarea class="form-control" rows="4" name="guard_employadd" id="guard_employadd"></textarea>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            <!--LAMAN END-->
-                                                                        </div>
-                                                                    </div>
-                                                                <!--END NG GUARDIAN-->
-
-                                                                <br></br>
-
-                                                                <!--marital status-->
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-3 control-label col-lg-5" for="inputSuccess">Parents' Marital Relationship</label>
-                                                                    <div class="col-lg-7">
-                                                                        <select class="form-control m-bot15" id="marital" name="marital" onchange="enableothers()">
-                                                                            <option value="Married and staying together">Married and staying together</option>
-                                                                            <option value="Not Married but Living Together">Not Married but Living Together</option>
-                                                                            <option value="Single Parent">Single Parent</option>
-                                                                            <option>Married but Separated</option>
-                                                                            <option value="others">Others</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-                                                                <script language="javascript" type="text/javascript">
-                                                                    $(document).ready(function () {
-                                                                        $("#marital").change(function () {
-                                                                            if ($(this).find("option:selected").val() == "others") {
-                                                                                $("#other").removeAttr("disabled")
-                                                                            } else {
-                                                                                $("#other").attr("disabled","disabled")
-                                                                            }
+                                                                    <script language="javascript" type="text/javascript">
+                                                                        $(document).ready(function () {
+                                                                            $("#family_parent").change(function () {
+                                                                                if ($(this).find("option:selected").val() == "Guardian") {
+                                                                                    $("#relation").removeAttr("disabled")
+                                                                                } else {
+                                                                                    $("#relation").attr("disabled","disabled")
+                                                                                }
+                                                                            });
                                                                         });
-                                                                    });
-                                                                </script>
+                                                                    </script>
 
-                                                                <br></br>
-
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-2 control-label">Please Specify:</label>
-                                                                    <div class="col-sm-10">
-                                                                        <textarea class="form-control" rows="3" disabled="" id="other" name="marital_specify"></textarea>
-                                                                    </div>
-                                                                </div>
-                                                                <!--marital status-->
-
-                                                                <br></br>
-                                                                &nbsp;
-
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-7 control-label">Number of children in the family including yourself:</label>
-                                                                    <div class="col-sm-5">
-                                                                        <input type="text" class="form-control" name="num_children" id="num_children">
-                                                                    </div>
-                                                                </div>
-
-                                                                <br></br>
-
-                                                                <div class="form-group">
-                                                                    <!--Number of brothers-->
-                                                                    <label class="col-sm-4 control-label">Number of Brother/s:</label>
-                                                                    <div class="col-sm-2">
-                                                                        <input type="text" class="form-control" name="num_brother" id="num_brother">
-                                                                    </div>
-                                                                    <!--Number of brothers-->
-
-                                                                    <!--Number of sisters-->
-                                                                    <label class="col-sm-4 control-label">Number of Sister/s:</label>
-                                                                    <div class="col-sm-2">
-                                                                        <input type="text" class="form-control" name="num_sister" id="num_sister">
-                                                                    </div>
-                                                                    <!--Number of sisters-->
-                                                                </div>
-
-                                                                <br></br>
-
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-7 control-label">Number of brother/s or sister/s gainfully employed?:</label>
-                                                                    <div class="col-sm-5">
-                                                                        <input type="text" class="form-control" name="num_employbro" id="num_employbro">
-                                                                    </div>
-                                                                </div>
-
-                                                                <br></br>
-
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-2 control-label">Ordinal Position:</label>
-                                                                    <div class="col-sm-10">
-                                                                        <input type="text" class="form-control" name="ord_pos" id="ord_pos">
-                                                                    </div>
-                                                                </div>
-
-                                                                <br></br>
-
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-3 control-label col-lg-7" for="inputSuccess">Is your bother/sister who is gainfully employed providing support to your:</label>
-                                                                    <div class="col-lg-5">
-                                                                        <div class="checkbox">
-                                                                            <label>
-                                                                                <input type="checkbox" name="supp_fam" id="supp_fam" value="Family">Family
-                                                                            </label>
-                                                                            &nbsp;
-                                                                            <label>
-                                                                                <input type="checkbox" name="supp_studs" id="supp_studs" value="Your Studies">Your Studies
-                                                                            </label>
-                                                                            &nbsp;
-                                                                            <label>
-                                                                                <input type="checkbox" name="supp_ownfam" id="supp_ownfam" value="his/her own family">his/her own family
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <br></br>
-
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-3 control-label col-lg-3" for="inputSuccess">Who finances your schooling?</label>
-                                                                    <div class="col-lg-5">
-                                                                        <div class="checkbox">
-                                                                            <label>
-                                                                                <input type="checkbox" name="fin_parents" id="fin_parents" value="">Parents
-                                                                            </label>
-                                                                            &nbsp;
-                                                                            <label>
-                                                                                <input type="checkbox" name="fin_sibling" id="fin_sibling" value="Brother/Sister">Brother/Sister
-                                                                            </label>
-                                                                            &nbsp;
-                                                                            <label>
-                                                                                <input type="checkbox" name="fin_spouse" id="fin_spouse" value="Spouse">Spouse
-                                                                            </label>
-                                                                            &nbsp;
-                                                                            <label>
-                                                                                <input type="checkbox" name="fin_scholar" id="fin_scholar" value="Scholarship">Scholarship
-                                                                            </label>
-                                                                            &nbsp;
-                                                                            <label>
-                                                                                <input type="checkbox" name="fin_relatives" id="fin_relatives" value="Relatives">Relatives
-                                                                            </label>
-                                                                            &nbsp;
-                                                                            <label>
-                                                                                <input type="checkbox" name="fin_workstud" id="fin_workstud" value="Self-supporting/working student">Self-supporting/working student
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <br></br>
-
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-7 control-label">How much is  your weekly allowance? (Please specify the amount):</label>
-                                                                    <div class="col-sm-5">
-                                                                        <input type="text" class="form-control" name="weekly_allowance" id="weekly_allowance">
-                                                                    </div>
-                                                                </div>
-
-                                                                <br></br>
-                                                                &nbsp;
-
-                                                                <!--parent income-->
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-3 control-label col-lg-5" for="inputSuccess">Parents' Total Monthly Income</label>
-                                                                    <div class="col-lg-7">
-                                                                        <select class="form-control m-bot15" id="amount" name="monthly_income" onchange="enableothers()">
-                                                                            <option value="Below Php 5,000">Below Php 5,000</option>
-                                                                            <option value="Php 5, 001 - Php 10, 000">Php 5, 001 - Php 10, 000</option>
-                                                                            <option value="Php 10, 001 - Php 15, 000">Php 10, 001 - Php 15, 000</option>
-                                                                            <option value="Php 15, 001 - Php 20, 000">Php 15, 001 - Php 20, 000</option>
-                                                                            <option value="Php 25, 001 - Php 30, 000">Php 25, 001 - Php 30, 000</option>
-                                                                            <option value="Php 35, 001 - Php 40, 000">Php 35, 001 - Php 40, 000</option>
-                                                                            <option value="Php 45, 001 - Php 50, 000">Php 45, 001 - Php 50, 000</option>
-                                                                            <option value="Above Php 50, 001">Above Php 50, 001</option>   
-                                                                            <option value="otheramount">Others</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-                                                                <script language="javascript" type="text/javascript">
-                                                                    $(document).ready(function () {
-                                                                        $("#amount").change(function () {
-                                                                            if ($(this).find("option:selected").val() == "otheramount") {
-                                                                                $("#other2").removeAttr("disabled")
-                                                                            } else {
-                                                                                $("#other2").attr("disabled","disabled")
-                                                                            }
+                                                                    <script language="javascript" type="text/javascript">
+                                                                        $(document).ready(function () {
+                                                                            $("#family_parent").change(function () {
+                                                                                if ($(this).find("option:selected").val() == "Guardian") {
+                                                                                    $("#lifestats").attr("disabled","disabled")
+                                                                                    && $("#lifestats2").attr("disabled","disabled")
+                                                                                } else {
+                                                                                    $("#lifestats").removeAttr("disabled") 
+                                                                                    && $("#lifestats2").removeAttr("disabled")
+                                                                                }
+                                                                            });
                                                                         });
-                                                                    });
-                                                                </script>
+                                                                    </script>
 
-                                                                <br></br>
-
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-2 control-label">Please Specify:</label>
-                                                                    <div class="col-sm-10">
-                                                                        <input type="text" class="form-control" disabled="" id="other2" name="income_specify">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-4 control-label">Relation (for Guardian only):</label>
+                                                                        <div class="col-sm-8">
+                                                                            <input type="text" class="form-control" disabled="" id="relation" name="relation" required="">
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <!--parent income-->
 
-                                                                <br></br>
+                                                                    <br></br>
 
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-3 control-label col-lg-5" for="inputSuccess">Do you share your room  with anyone?</label>
-                                                                    <div class="col-lg-7">
-                                                                        <select class="form-control m-bot15" name="share_room" id="share_room">
-                                                                            <option value="No">No</option>
-                                                                            <option value="Yes">Yes</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-                                                                <br></br>
-                                                                &nbsp;
-
-                                                                <!--share-->
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-3 control-label col-lg-5" for="inputSuccess">Do you have a quiet place to study?</label>
-                                                                    <div class="col-lg-7">
-                                                                        <select class="form-control m-bot15" name="shareroom" id="shareroom" onchange="enableothers()">
-                                                                            <option value="No">No</option>   
-                                                                            <option value="yes">Yes</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-                                                                <script language="javascript" type="text/javascript">
-                                                                    $(document).ready(function () {
-                                                                        $("#shareroom").change(function () {
-                                                                            if ($(this).find("option:selected").val() == "yes") {
-                                                                                $("#yep").removeAttr("disabled")
-                                                                            } else {
-                                                                                $("#yep").attr("disabled","disabled")
-                                                                            }
-                                                                        });
-                                                                    });
-                                                                </script>
-
-                                                                <br></br>
-
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-2 control-label">Please Specify:</label>
-                                                                    <div class="col-sm-10">
-                                                                        <input type="text" class="form-control" disabled="" id="yep" name="room_specify" id="room_specify">
-                                                                    </div>
-                                                                </div>
-                                                                <!--share-->
-
-                                                                <br></br>
-
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-3 control-label col-lg-5" for="inputSuccess">Nature of Residence while attending school:</label>
-                                                                    <div class="col-lg-7">
-                                                                        <div class="checkbox">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-2 control-label">Age:</label>
+                                                                        <div class="radio">
+                                                                            <!--AGE TEXT INPUT-->
+                                                                                <div class="col-sm-6">
+                                                                                    <input type="text" class="form-control" name="fam_age" id="fam_age">
+                                                                                </div>
+                                                                            <!--AGE TEXT INPUT-->
+                                                                            &nbsp;&nbsp;
+                                                                            <label class="col-sm-4 control-label">For parents only:</label>
                                                                             <label>
-                                                                                <input type="checkbox" name="residence_fam" id="residence_fam" value="Family home">Family home
+                                                                                <input type="radio" name="fam_lifestats" id="lifestats" value="Living" required="">Living
                                                                             </label>
-                                                                            &nbsp;
+                                                                            &nbsp;&nbsp;
                                                                             <label>
-                                                                                <input type="checkbox" name="residence_relatives" id="residence_relatives" value="">Relatives house
-                                                                            </label>
-                                                                            &nbsp;
-                                                                            <label>
-                                                                                <input type="checkbox" name="residence_bedspacer" id="residence_bedspacer" value="">Bedspacer
-                                                                            </label>
-                                                                            &nbsp;
-                                                                            <label>
-                                                                                <input type="checkbox" name="residence_rent" id="residence_rent" value="Rented Apartment">Rented Apartment
-                                                                            </label>
-                                                                            &nbsp;
-                                                                            <label>
-                                                                                <input type="checkbox" name="residence_sibling" id="residence_sibling" value="">House of married brother/sister
-                                                                            </label>
-                                                                            &nbsp;
-                                                                            <label>
-                                                                                <input type="checkbox" name="residence_dorm" id="residence_dorm" value="Dorm (including board & lodging)">Dorm (including board & lodging)
-                                                                            </label>
-                                                                            &nbsp;
-                                                                            <label>
-                                                                                <input type="checkbox" name="residence_friends" id="residence_friends" value="Shares apartments with  friends/relatives">Shares apartments with  friends/relatives
+                                                                                <input type="radio" name="fam_lifestats" id="lifestats2" value="Deceased">Deceased
                                                                             </label>
                                                                         </div>
                                                                     </div>
-                                                                </div>
+
+                                                                    <br></br>
+
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-2 control-label">Educational Attainment:</label>
+                                                                        <div class="col-sm-10">
+                                                                            <input type="text" class="form-control" name="fam_educattain" id="fam_educattain" required="">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <br></br>
+
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-2 control-label">Occupation:</label>
+                                                                        <div class="col-sm-10">
+                                                                            <input type="text" class="form-control" name="fam_occu" id="fam_occu" required="">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <br></br>
+
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-2 control-label">Name of Employer:</label>
+                                                                        <div class="col-sm-10">
+                                                                            <input type="text" class="form-control" name="fam_employname" id="fam_employname" required="">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <br></br>
+
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-2 control-label">Address of Employer:</label>
+                                                                        <div class="col-sm-10">
+                                                                            <textarea class="form-control" rows="4" name="fam_employadd" id="fam_employadd" required=""></textarea>
+                                                                        </div>
+                                                                    </div>
 
                                                                 <br></br>
                                                                 <br></br>
@@ -1188,8 +611,11 @@ if (!$query) {
                                                                     <button class="btn btn-success" type="submit" name="submit">Save</button>
                                                                 </div>
 
+                                                                </form>
+                                                                
+                                                                <!--END PART 1-->
+
                                                             </div>
-                                                        </form>
                                                     <!--LAMAN NG HOME AND FAMILY BACKGROUND END-->
                                                 </div>
                                             <!--END NG LAMAN NG ADD/UPDATE-->
@@ -1906,8 +1332,6 @@ if (!$query) {
                         <div class="col-md-4 form-group">
                             *Student Number <input name="Stud_NO" type="text" class="form-control" placeholder="ex. 2015-00001-CM-0" required/>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-4 form-group">
                             *Email Address<input name="Stud_EMAIL" type="text" class="form-control" placeholder="ex. email@email.com" required/>
                         </div>
@@ -1915,20 +1339,20 @@ if (!$query) {
                             *Contact Number<input name="Stud_MOBILE_NO" type="text" class="form-control" placeholder="ex. 099999999" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Telephone Number<input name="Stud_TELEPHONE_NO" type="text" class="form-control" placeholder="ex. 999-9999" required/>
+                            *Telephone Number<input name="Stud_TELEPHONE_NO" type="text" class="form-control" placeholder="ex. 099999999" required/>
                         </div>
                         <div class="col-md-4 form-group">
                             *First Name <input name="Stud_FNAME" type="text" class="form-control" placeholder="First Name" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Middle Name<input name="Stud_MNAME" type="text" class="form-control" placeholder="Middle Name">
+                            Middle Name<input name="Stud_MNAME" type="text" class="form-control" placeholder="Middle Name">
                         </div>
                         <div class="col-md-4 form-group">
-                            *Last Name<input name="Stud_LNAME" type="text" class="form-control" placeholder="Last Name" required/>
+                            *Last Name<input name="Stud_LNAME" type="text" class="form-control" placeholder="Last Number" required/>
                         </div>
                         <div class="col-md-4 form-group">
                             *Course
-                            <select name="Stud_COURSE" type="text" class="form-control" required>
+                            <select name="Stud_COURSE" type="text" class="form-control m-bot15" required>
                               <?php
                             $db = mysqli_connect("localhost", "root", "", "pupqcdb");
                             $sql= mysqli_query($db, "SELECT `Course_CODE` FROM `r_courses` WHERE `Course_CODE` != ' '");?>
@@ -1941,16 +1365,22 @@ if (!$query) {
                             </select>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Year<input name="Stud_YEAR_LEVEL" type="number" class="form-control" placeholder="Year" required/>
+                            *Year<input name="Stud_YEAR_LEVEL" type="number" class="form-control" placeholder="Section" required/>
                         </div>
                         <div class="col-md-4 form-group">
                             *Section<input name="Stud_SECTION" type="number" class="form-control" placeholder="Section" required/>
                         </div>
                         <div class="col-md-4 form-group">
-                            *Gender<select name="Stud_GENDER" type="text" class="form-control">
+                            *Gender<select name="Stud_GENDER" type="text" class="form-control m-bot15">
                             <option value="Male">Male</option>    
                             <option value="Female">Female</option>    
                             </select>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            *Birth Date<input name="Stud_BIRTH_DATE" type="Date" class="form-control" required/>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            *Birth Place<input name="Stud_BIRTH_PLACE" type="text" class="form-control" placeholder="enter your birth place">
                         </div>
                         <div class="col-md-4 form-group">
                             *Student Status<select name="Stud_DISPLAY_STATUS" class="form-control" required>
@@ -1960,12 +1390,6 @@ if (!$query) {
                                 <option value="LOA">Leave of Absence</option>
                                 <option value="Transferee">Transferee Student</option>
                                 </select>
-                        </div>
-                        <div class="col-md-4 form-group">
-                            *Birth Date<input name="Stud_BIRTH_DATE" type="Date" class="form-control" required/>
-                        </div>
-                        <div class="col-md-12 form-group">
-                            *Birth Place<input name="Stud_BIRTH_PLACE" type="text" class="form-control" placeholder="enter your birth place">
                         </div>
                         <div class="col-md-12 form-group">
                             *City Address<input name="Stud_CITY_ADDRESS" type="text" class="form-control" placeholder="enter your city address">
@@ -2039,7 +1463,45 @@ if (!$query) {
 
 <!--Core js-->
 <script src="js/jquery.js"></script>
-<script src="bs3/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+
+        function load_unseen_notification(view = '')
+        {
+            $.ajax({
+                url:"NotifLoad.php",
+                method:"POST",
+                data:{view:view},
+                dataType:"json",
+                success:function(data)
+                {
+                    $('.dropdown-menu').html(data.Notification);
+
+                    if(data.NotificationCount > 0)
+                    {
+                        $('.count').html(data.NotificationCount);
+                    }
+                }
+            });
+        }
+
+        load_unseen_notification();
+
+        $(document).on('click','.dropdown-toggle', function(){
+        $('.count').html('');
+        load_unseen_notification('read');
+        });
+
+        setInterval(function(){
+            load_unseen_notification();  
+        }, 5000);
+        
+    });
+
+</script>
+
+<!-- <script src="bs3/js/bootstrap.min.js"></script> -->
 <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
 <script src="js/jquery.scrollTo.min.js"></script>
 <script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
@@ -2055,16 +1517,16 @@ if (!$query) {
 <!--Sparkline Chart-->
 <script src="js/sparkline/jquery.sparkline.js"></script>
 <!--jQuery Flot Chart-->
-<script src="js/flot-chart/jquery.flot.js"></script>
+<!-- <script src="js/flot-chart/jquery.flot.js"></script>
 <script src="js/flot-chart/jquery.flot.tooltip.min.js"></script>
 <script src="js/flot-chart/jquery.flot.resize.js"></script>
-<script src="js/flot-chart/jquery.flot.pie.resize.js"></script>
+<script src="js/flot-chart/jquery.flot.pie.resize.js"></script> -->
 
 <!--dynamic table-->
 <script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
 <!--common script init for all pages-->
-<script src="js/scripts.js"></script>
+<!-- <script src="js/scripts.js"></script> -->
 
 <!--dynamic table initialization -->
 <script src="js/dynamic_table_init.js"></script>
