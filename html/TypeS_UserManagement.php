@@ -59,7 +59,7 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="images/favicon.png">
 
-    <title>G&CSMS-User Roles</title>
+    <title>G&CSMS-User Management</title>
 
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -105,7 +105,7 @@ include('TypeS_Sidebar.php');
                             <a href="#"><i class="fa fa-gears"></i> System Configurations</a>
                         </li>
                         <li>
-                            <a class="current" href="#"> User Roles</a>
+                            <a class="current" href="#"> User Management</a>
                         </li>
                     </ul>
                 </div>
@@ -116,15 +116,30 @@ include('TypeS_Sidebar.php');
             <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            User Roles
+                            User Management
                         </header>
                         <div class="panel-body">
                             <div class="position-center">
                                 <form action="TypeS_UserRoles.php" method="POST">
                                     <div class="form-group">
                                         <br>
-                                        <label for="userRoles">User Roles</label>
-                                        <input type="text" class="form-control" name="userRoles" required>
+                                        <label for="user">User Name</label>
+                                        <input type="text" class="form-control" name="user" required>
+                                        <label for="userRole">User Role</label><br>
+                                        <select class="form-control">
+                                            <?php
+                                            include ('config.php');
+                                            $sql = mysqli_query("SELECT User_ROLE FROM r_user_roles");
+                                            $row = mysqli_num_rows($sql);
+
+                                                echo "<select User_ROLE='user'>";
+                                                while ($row = mysqli_fetch_array($db, $sql)){
+                                                    echo "<option value='". $row['user_ROLE'] ."'>" .$row['user_ROLE'] ."</option>" ;
+                                                }
+                                                echo "</select>" ;
+
+                                            ?>
+                                        </select>
                                     </div>
                                     <button type="submit" class="btn btn-info" name="insert">Save</button>
                                 </form>
