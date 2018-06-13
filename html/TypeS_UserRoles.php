@@ -99,9 +99,6 @@ include('TypeS_Sidebar.php');
                 <div class="col-md-12">
                     <ul class="breadcrumbs-alt">
                         <li>
-                            <a href="index.php"><i class="fa fa-home"></i> Home</a>
-                        </li>
-                        <li>
                             <a href="#"><i class="fa fa-gears"></i> System Configurations</a>
                         </li>
                         <li>
