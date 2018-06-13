@@ -86,7 +86,7 @@
 
 <body>
 <?php 
-$currentPage ='G&CSMS-System Configurations';
+$currentPage ='G&CSMS-UserManagement';
 include('TypeS_Header.php');
 include('TypeS_Sidebar.php');
 ?>
