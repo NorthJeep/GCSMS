@@ -39,9 +39,9 @@
         $updatequery = "";
 
         if ($_POST['stat'] == 'Active') {
-            $updatequery = "UPDATE r_user_roles SET User_ROLE_STAT = 'Inactive' WHERE User_ROLE_ID = $id";
+            $updatequery = "UPDATE r_users SET Users_DISPLAY_STAT = 'Inactive' WHERE Users_ID = $id";
         } else {
-            $updatequery = "UPDATE r_user_roles SET User_ROLE_STAT = 'Active' WHERE User_ROLE_ID = $id";
+            $updatequery = "UPDATE r_users SET Users_DISPLAY_STAT = 'Active' WHERE Users_ID = $id";
         }
                                         
         mysqli_query($db, $updatequery);
@@ -123,21 +123,21 @@ include('TypeS_Sidebar.php');
                                 <form action="TypeS_UserRoles.php" method="POST">
                                     <div class="form-group">
                                         <br>
-                                        <label for="user">User Name</label>
-                                        <input type="text" class="form-control" name="user" required>
-                                        <label for="userRole">User Role</label><br>
-                                        <select class="form-control">
+                                        <label for="userRoles">User Number</label>
+                                        <input type="text" class="form-control" name="userRoles" required>
+                                        <label for="userRoles">Username</label>
+                                        <input type="text" class="form-control" name="userRoles" required>
+                                        <label for="userRoles">User Role</label>
+                                        <select name="Stud_COURSE" type="text" class="form-control m-bot15" required="">
                                             <?php
-                                            include ('config.php');
-                                            $sql = mysqli_query("SELECT User_ROLE FROM r_user_roles");
-                                            $row = mysqli_num_rows($sql);
-
-                                                echo "<select User_ROLE='user'>";
-                                                while ($row = mysqli_fetch_array($db, $sql)){
-                                                    echo "<option value='". $row['user_ROLE'] ."'>" .$row['user_ROLE'] ."</option>" ;
+                                                $sqlQuery = mysqli_query($db, "SELECT User_ROLE FROM r_user_roles");
+                                                while($row = mysqli_fetch_array($sqlQuery))
+                                                {
+                                            ?>
+                                                <option class="hidden">Select Roles</option>
+                                                <option class="form-control"><?php echo $row["User_ROLE"] ?></option>
+                                            <?php
                                                 }
-                                                echo "</select>" ;
-
                                             ?>
                                         </select>
                                     </div>
@@ -161,6 +161,9 @@ include('TypeS_Sidebar.php');
                         <thead>
                             <tr>
                                 <th class="hidden">ID</th>
+                                <th>User Number</th>
+                                <th>Name</th>
+                                <th>Username</th>
                                 <th>User Roles</th>
                                 <th>Status</th>
                                 <th>Action</th>
@@ -170,18 +173,24 @@ include('TypeS_Sidebar.php');
                             <?php
                                 include ('config.php');
 
-                                $sql = "SELECT * FROM `r_user_roles`";
+                                $sql = "SELECT * FROM `r_users`";
                                 $records = mysqli_query($db,$sql);
 
-                                while ($uRoles = mysqli_fetch_assoc($records)) 
+                                while ($users = mysqli_fetch_assoc($records)) 
                                 {
-                                    $Id = $uRoles['User_ROLE_ID'];
-                                    $role = $uRoles['User_ROLE'];
-                                    $urStat = $uRoles['User_ROLE_STAT'];
+                                    $Id = $users['Users_ID'];
+                                    $uNum = $users['Users_REFERENCED'];
+                                    // $name = $users;
+                                    $userN = $users['Users_USERNAME'];    
+                                    $role = $users['Users_ROLES'];
+                                    $urStat = $users['Users_DISPLAY_STAT'];
                             ?>
 
                             <tr>
                                 <td class="hidden"> <?php echo $Id; ?> </td>
+                                <td><?php echo $uNum; ?></td>
+                                <td><?php echo ("Galing to sa ibang db (next time)"); ?></td>
+                                <td><?php echo $userN; ?></td>
                                 <td> <?php echo $role; ?> </td>
                                 <td> <?php echo $urStat; ?> </td>
                                 <td class="center">
