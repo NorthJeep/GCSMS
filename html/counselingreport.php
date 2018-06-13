@@ -170,9 +170,12 @@ if (isset($_POST['groupFilter'])) {
         $query .= " WHERE ". implode(' AND ', $conditions) ." ORDER BY `c`.`Couns_DATE` DESC"  ;
     }
 
+    $resultGroup = mysqli_query($db, $actualQuery);
     $groupTab = 'active';
     $indivTab ='';
 } else {
+    $actualQuery = "";
+    $resultIndiv = mysqli_query($db, $actualQuery);
 }
 
 if (isset($_POST['visitFilter'])) {
