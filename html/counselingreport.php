@@ -136,6 +136,40 @@ FROM
 }
 
 if (isset($_POST['groupFilter'])) {
+    $acadOpt = $_POST['acadOpt'];
+    $semOpt = $_POST['semOpt'];
+    $monthOpt = $_POST['monthOpt'];
+    $dayOpt = $_POST['dayOpt'];
+
+    $actualQuery = "";
+    
+    $conditions = array();
+
+    if ($acadOpt != 'All') {
+        $conditions[] = "cr.Course_CURR_YEAR = '$acadOpt'";
+    }
+
+    if ($semOpt != 'All') {
+        $conditions[] = "c.Couns_SEMESTER =  '$semOpt'";
+    }
+
+    if ($monthOpt != 'All') {
+        $conditions[] = "MONTH(c.Couns_DATE) = '$monthOpt'";
+    }
+
+    if ($dayOpt != 'All') {
+        $conditions[] = "DAY(c.Couns_DATE) = '$dayOpt'";
+    }
+
+    if ($courseOpt != 'All') {
+        $conditions[] = "s.Stud_COURSE = '$courseOpt'";
+    }
+
+    $query = $actualQuery;
+    if (count($conditions)>0) {
+        $query .= " WHERE ". implode(' AND ', $conditions) ." ORDER BY `c`.`Couns_DATE` DESC"  ;
+    }
+
     $groupTab = 'active';
     $indivTab ='';
 } else {
