@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2018 at 08:39 AM
+-- Generation Time: Jun 14, 2018 at 04:15 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -29,8 +29,54 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `counseling_type_add` (IN `type` VARCHAR(50))  NO SQL
 insert into r_couns_type (Couns_TYPE) values (type)$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `counselor_admin_add` (IN `fname` VARCHAR(100), IN `mname` VARCHAR(100), IN `lname` VARCHAR(100))  NO SQL
+BEGIN
+set @code = (SELECT concat('GC',date_format(CURRENT_DATE,'%y-%m%d'),cast(count(*) as int) + 1) FROM r_guidance_counselor);
+
+insert into r_guidance_counselor (
+	Counselor_CODE,
+	Counselor_FNAME,
+	Counselor_MNAME,
+	Counselor_LNAME)
+values (
+	@code,
+	fname,
+	if(mname = '',NULL,mname),
+	lname);
+
+insert into r_users (
+	Users_USERNAME,
+    Users_REFERENCED,
+	Users_PASSWORD,
+	Users_ROLES)
+values (
+	fname,
+	@code,
+	AES_ENCRYPT(fname,password('GC&SMS')),
+	'Guidance Counselor'),
+	(concat(fname,' ',lname),
+	@code,
+	AES_ENCRYPT(fname,password('GC&SMS')),
+	'System Administrator');
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `login_check` (IN `username` VARCHAR(50), IN `userpass` VARCHAR(100))  NO SQL
 select * from r_users where Users_USERNAME = username and AES_DECRYPT(Users_PASSWORD,password('GC&SMS')) = userpass$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `student_assistant_add` (IN `studNo` VARCHAR(15))  NO SQL
+BEGIN
+set @name = (select concat(Stud_FNAME,' ',Stud_LNAME) from r_stud_profile where stud_NO = studNo);
+insert into r_users (
+    Users_USERNAME,
+    Users_REFERENCED,
+    Users_PASSWORD,
+    Users_ROLES)
+values (
+    studNo,
+    studNo,
+    AES_ENCRYPT(LCASE(@name),password('GC&SMS')),
+    'Student Assistant');
+END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `stud_counseling_add` (IN `visitRef` INT, IN `counsType` VARCHAR(50), IN `appmtType` VARCHAR(25), IN `studNo` VARCHAR(15), IN `bg` TEXT, IN `goal` TEXT, IN `commnt` TEXT, IN `recommendation` TEXT, IN `remarks` VARCHAR(50))  NO SQL
 begin
@@ -311,7 +357,7 @@ CREATE TABLE `r_guidance_counselor` (
   `Counselor_ID` int(11) NOT NULL,
   `Counselor_CODE` varchar(15) NOT NULL,
   `Counselor_FNAME` varchar(100) NOT NULL,
-  `Counselor_MNAME` varchar(100) NOT NULL,
+  `Counselor_MNAME` varchar(100) DEFAULT NULL,
   `Counselor_LNAME` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -651,7 +697,28 @@ CREATE TABLE `r_users` (
 
 INSERT INTO `r_users` (`Users_ID`, `Users_USERNAME`, `Users_REFERENCED`, `Users_PASSWORD`, `Users_ROLES`, `Users_PROFILE_PATH`, `Users_DATE_ADD`, `Users_DATE_MOD`, `Users_DISPLAY_STAT`) VALUES
 (2, 'admin', 'GC-0001', 0xa319451792b4248aeec7fb13966bc133, 'System Administrator', NULL, '2018-05-18 17:37:08', '2018-05-18 17:37:08', 'Active'),
-(3, 'counselor', 'GC-0001', 0x99f1a2f749673d62b4a7a431be68097e, 'Guidance Counselor', NULL, '2018-05-19 00:29:09', '2018-05-19 00:29:09', 'Active');
+(3, 'counselor', 'GC-0001', 0x99f1a2f749673d62b4a7a431be68097e, 'Guidance Counselor', NULL, '2018-05-19 00:29:09', '2018-05-19 00:29:09', 'Active'),
+(8, '2015-00075-CM-0', '2015-00075-CM-0', 0x122e342127a8553de70467e2eb832f90aa39246afb12e1a1bb18389ec4e34a89, 'Student Assistant', NULL, '2018-06-05 23:24:38', '2018-06-05 23:24:38', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `r_user_roles`
+--
+
+CREATE TABLE `r_user_roles` (
+  `User_ROLE_ID` int(11) NOT NULL,
+  `User_ROLE` varchar(25) NOT NULL,
+  `User_ROLE_STAT` enum('Active','Inactive') DEFAULT 'Active'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `r_user_roles`
+--
+
+INSERT INTO `r_user_roles` (`User_ROLE_ID`, `User_ROLE`, `User_ROLE_STAT`) VALUES
+(1, 'System Administrator', 'Active'),
+(2, 'Guidance Counselor', 'Active');
 
 -- --------------------------------------------------------
 
@@ -750,6 +817,8 @@ CREATE TABLE `t_counseling` (
   `Couns_CODE` varchar(15) NOT NULL,
   `Visit_ID_REFERENCE` int(11) NOT NULL,
   `Couns_DATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Couns_ACADEMIC_YEAR` varchar(50) NOT NULL,
+  `Couns_SEMESTER` varchar(50) NOT NULL,
   `Couns_COUNSELING_TYPE` varchar(50) NOT NULL,
   `Couns_APPOINTMENT_TYPE` varchar(25) NOT NULL,
   `Nature_Of_Case` varchar(50) DEFAULT NULL,
@@ -763,8 +832,8 @@ CREATE TABLE `t_counseling` (
 -- Dumping data for table `t_counseling`
 --
 
-INSERT INTO `t_counseling` (`Couns_ID`, `Couns_CODE`, `Visit_ID_REFERENCE`, `Couns_DATE`, `Couns_COUNSELING_TYPE`, `Couns_APPOINTMENT_TYPE`, `Nature_Of_Case`, `Couns_BACKGROUND`, `Couns_GOALS`, `Couns_COMMENT`, `Couns_RECOMMENDATION`) VALUES
-(1, 'IC18-5231', 2, '2018-05-22 17:54:41', 'Individual Counseling', 'Referral', NULL, 'null', 'null', 'null', NULL);
+INSERT INTO `t_counseling` (`Couns_ID`, `Couns_CODE`, `Visit_ID_REFERENCE`, `Couns_DATE`, `Couns_ACADEMIC_YEAR`, `Couns_SEMESTER`, `Couns_COUNSELING_TYPE`, `Couns_APPOINTMENT_TYPE`, `Nature_Of_Case`, `Couns_BACKGROUND`, `Couns_GOALS`, `Couns_COMMENT`, `Couns_RECOMMENDATION`) VALUES
+(1, 'IC18-5231', 2, '2018-05-22 17:54:41', '2017-2018', 'Summer Semester', 'Individual Counseling', 'Referral', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -806,8 +875,8 @@ INSERT INTO `t_couns_details` (`Couns_ID_REFERENCE`, `Stud_NO`, `Couns_REMARKS`,
 CREATE TABLE `t_notification` (
   `Notif_ID` int(11) NOT NULL,
   `Notif_User` int(11) DEFAULT NULL,
-  `Notif_Details` varchar(100) DEFAULT NULL,
-  `Notif_Status` bit(1) NOT NULL DEFAULT b'1'
+  `Notif_Details` varchar(200) DEFAULT NULL,
+  `Notif_Status` bit(1) DEFAULT b'1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -815,11 +884,8 @@ CREATE TABLE `t_notification` (
 --
 
 INSERT INTO `t_notification` (`Notif_ID`, `Notif_User`, `Notif_Details`, `Notif_Status`) VALUES
-(1, 2, 'weeeeeeeew', b'0'),
-(2, 3, 'wtwertwertwert', b'0'),
-(3, 2, 'asdfasdfasdfasdfasdfasdf', b'0'),
-(4, 2, 'asdfasdfasdfasdfasdfasdf', b'0'),
-(5, 3, 'HAHAHA anung kalokohan to?', b'0');
+(1, 8, 'HAHAAHAHHAHAHAHA', b'1'),
+(2, 8, 'NOTIF IS WORKING !!!', b'1');
 
 -- --------------------------------------------------------
 
@@ -1100,6 +1166,13 @@ ALTER TABLE `r_users`
   ADD UNIQUE KEY `UNQ_Users_USERNAME` (`Users_USERNAME`);
 
 --
+-- Indexes for table `r_user_roles`
+--
+ALTER TABLE `r_user_roles`
+  ADD PRIMARY KEY (`User_ROLE_ID`),
+  ADD UNIQUE KEY `User_ROLE` (`User_ROLE`);
+
+--
 -- Indexes for table `r_visit`
 --
 ALTER TABLE `r_visit`
@@ -1124,7 +1197,9 @@ ALTER TABLE `t_counseling`
   ADD KEY `FK_cnslngvstidrfrnc` (`Visit_ID_REFERENCE`),
   ADD KEY `FK_C_CT_REFERENCE` (`Couns_COUNSELING_TYPE`),
   ADD KEY `FK_cnslngcnsppntmnttyp` (`Couns_APPOINTMENT_TYPE`),
-  ADD KEY `FK_cnslngntrfcsrfrnc` (`Nature_Of_Case`);
+  ADD KEY `FK_cnslngntrfcsrfrnc` (`Nature_Of_Case`),
+  ADD KEY `FK_cnslngcdmcyrrfrnc` (`Couns_ACADEMIC_YEAR`),
+  ADD KEY `FK_cnslngsmstrrfrnc` (`Couns_SEMESTER`);
 
 --
 -- Indexes for table `t_couns_approach`
@@ -1146,7 +1221,7 @@ ALTER TABLE `t_couns_details`
 --
 ALTER TABLE `t_notification`
   ADD PRIMARY KEY (`Notif_ID`),
-  ADD KEY `FK_Notif_User` (`Notif_User`);
+  ADD KEY `FK_Notif_User_ID` (`Notif_User`);
 
 --
 -- Indexes for table `t_stud_visit`
@@ -1226,7 +1301,7 @@ ALTER TABLE `r_designated_offices_details`
 -- AUTO_INCREMENT for table `r_guidance_counselor`
 --
 ALTER TABLE `r_guidance_counselor`
-  MODIFY `Counselor_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Counselor_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `r_remarks`
@@ -1274,7 +1349,13 @@ ALTER TABLE `r_upload_category`
 -- AUTO_INCREMENT for table `r_users`
 --
 ALTER TABLE `r_users`
-  MODIFY `Users_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Users_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `r_user_roles`
+--
+ALTER TABLE `r_user_roles`
+  MODIFY `User_ROLE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `r_visit`
@@ -1298,7 +1379,7 @@ ALTER TABLE `t_counseling`
 -- AUTO_INCREMENT for table `t_notification`
 --
 ALTER TABLE `t_notification`
-  MODIFY `Notif_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Notif_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `t_stud_visit`
@@ -1415,8 +1496,10 @@ ALTER TABLE `t_assign_stud_saction`
 --
 ALTER TABLE `t_counseling`
   ADD CONSTRAINT `FK_C_CT_REFERENCE` FOREIGN KEY (`Couns_COUNSELING_TYPE`) REFERENCES `r_couns_type` (`Couns_TYPE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_cnslngcdmcyrrfrnc` FOREIGN KEY (`Couns_ACADEMIC_YEAR`) REFERENCES `r_batch_details` (`Batch_YEAR`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_cnslngcnsppntmnttyp` FOREIGN KEY (`Couns_APPOINTMENT_TYPE`) REFERENCES `r_couns_appointment_type` (`Appmnt_TYPE`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_cnslngntrfcsrfrnc` FOREIGN KEY (`Nature_Of_Case`) REFERENCES `r_nature_of_case` (`Case_NAME`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_cnslngsmstrrfrnc` FOREIGN KEY (`Couns_SEMESTER`) REFERENCES `r_semester` (`Semestral_NAME`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_cnslngvstidrfrnc` FOREIGN KEY (`Visit_ID_REFERENCE`) REFERENCES `t_stud_visit` (`Stud_VISIT_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -1438,7 +1521,7 @@ ALTER TABLE `t_couns_details`
 -- Constraints for table `t_notification`
 --
 ALTER TABLE `t_notification`
-  ADD CONSTRAINT `FK_Notif_User` FOREIGN KEY (`Notif_User`) REFERENCES `r_users` (`Users_ID`);
+  ADD CONSTRAINT `FK_Notif_User_ID` FOREIGN KEY (`Notif_User`) REFERENCES `r_users` (`Users_ID`);
 
 --
 -- Constraints for table `t_stud_visit`
