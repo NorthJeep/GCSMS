@@ -175,7 +175,7 @@ if (isset($_POST['groupFilter'])) {
     $indivTab ='';
 } else {
     $actualQuery = "";
-    $resultIndiv = mysqli_query($db, $actualQuery);
+    //$resultIndiv = mysqli_query($db, $actualQuery);
 }
 
 if (isset($_POST['visitFilter'])) {
