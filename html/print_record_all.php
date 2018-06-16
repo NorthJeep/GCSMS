@@ -62,7 +62,8 @@ class PDF extends FPDF
         // Data
     
         $fill = false;
-        $conn = mysqli_connect("localhost", "root", "", "pupqcdb");
+        // $conn = mysqli_connect("localhost", "root", "", "pupqcdb");
+        include ('config.php');
 
         // Check connection
         if (mysqli_connect_errno()) {
@@ -129,9 +130,9 @@ FROM
         $query .= " WHERE ". implode(' AND ', $options);
     }
 
-    $result = mysqli_query($conn, $query);
+    $result = mysqli_query($db, $query);
     } else {
-        $result =  mysqli_query($conn, " SELECT
+        $result =  mysqli_query($db, " SELECT
  `s`.`Stud_NO` AS `STUD_NO`,
  CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
  `c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
