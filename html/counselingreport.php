@@ -134,7 +134,7 @@ if (isset($_POST['IndivFilter'])) {
 if(isset($_POST['groupFilter'])){
     $groupTab = 'class="active"';
 } else {
-
+    $indivTab = 'class = "active"';
 }
 $sql =  mysqli_query($db, " SELECT
 `c`.`Couns_CODE` AS `COUNSELING_CODE`,
