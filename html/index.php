@@ -645,9 +645,9 @@ include('sidebarnav.php');
 <script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
 <script src="js/jquery.nicescroll.js"></script>
 <!-- Easy Pie Chart -->
-<script src="js/easypiechart/jquery.easypiechart.js"></script> 
+<!-- <script src="js/easypiechart/jquery.easypiechart.js"></script>  -->
 <!--Sparkline Chart-->
-<script src="js/sparkline/jquery.sparkline.js"></script>
+<!-- <script src="js/sparkline/jquery.sparkline.js"></script> -->
 <!--jQuery Flot Chart-->
 <!-- <script src="js/flot-chart/jquery.flot.js"></script>
 <script src="js/flot-chart/jquery.flot.tooltip.min.js"></script>
