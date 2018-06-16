@@ -13,14 +13,18 @@ $semOpt = '';
 $monthOpt = '';
 $dayOpt = '';
 $courseOpt = '';
+$visitOpt = '';
+
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
+
 $indivTab = '';
 $groupTab = '';
 $visitTab = '';
-if (isset($_POST['IndivFilter'])) {
+
+if (isset($_POST['indivFilter'])) {
     $acadOpt = $_POST['acadOpt'];
     $semOpt = $_POST['semOpt'];
     $monthOpt = $_POST['monthOpt'];
@@ -28,42 +32,39 @@ if (isset($_POST['IndivFilter'])) {
     $courseOpt = $_POST['courseOpt'];
 
     $actualQuery = "SELECT
-        `c`.`Couns_CODE` AS `COUNSELING_CODE`,
-        DATE_FORMAT(`c`.`Couns_DATE`, '%W %M %d %Y') AS `COUNSELING_DATE`,
-        `c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
-        `c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,
-        `s`.`Stud_NO` AS `STUD_NO`,
-        CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
-        CONCAT(
-            `s`.`Stud_COURSE`,
-            ' ',
-            `s`.`Stud_YEAR_LEVEL`,
-            ' - ',
-            `s`.`Stud_SECTION`
-        ) AS `COURSE`,
-        (
-        SELECT
-            GROUP_CONCAT(`a`.`Couns_APPROACH` SEPARATOR ', ')
-        FROM
-            `t_couns_approach` `a`
-        WHERE
-            (
-                `a`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`
-            )
-    ) AS `COUNSELING_APPROACH`,
-    `c`.`Couns_BACKGROUND` AS `COUNSELING_BG`,
-    `c`.`Couns_GOALS` AS `GOALS`,
-    `c`.`Couns_COMMENT` AS `COUNS_COMMENT`,
-    `c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION`
-    FROM `t_counseling` `c`
-        JOIN `t_couns_details` `cd`
-             ON `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
-        JOIN `r_stud_profile` `s` 
-            ON `s`.`Stud_NO` = `cd`.`Stud_NO`
-        JOIN `r_courses` `cr`
-            ON `s`.`Stud_COURSE` = `cr`.`Course_CODE`
-        JOIN `r_semester` sem
-            ON  `c`.`Couns_SEMESTER` = `sem`.`Semestral_NAME`";
+  `c`.`Couns_CODE` AS `COUNSELING_CODE`,
+  DATE_FORMAT(`c`.`Couns_DATE`, '%W %M %d %Y') AS `COUNSELING_DATE`,
+  `c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
+  `c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,
+  `s`.`Stud_NO` AS `STUD_NO`,
+  CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
+  CONCAT(
+    `s`.`Stud_COURSE`,
+    ' ',
+    `s`.`Stud_YEAR_LEVEL`,
+    ' - ',
+    `s`.`Stud_SECTION`
+  ) AS `COURSE`,
+  (
+    SELECT
+      GROUP_CONCAT(`a`.`Couns_APPROACH` SEPARATOR ', ')
+    FROM
+      `t_couns_approach` `a`
+    WHERE
+      (
+        `a`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`
+      )
+  ) AS `COUNSELING_APPROACH`,
+  `c`.`Couns_BACKGROUND` AS `COUNSELING_BG`,
+  `c`.`Couns_GOALS` AS `GOALS`,
+  `c`.`Couns_COMMENT` AS `COUNS_COMMENT`,
+  `c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION`
+FROM
+  `t_counseling` `c`
+  JOIN `t_couns_details` `cd` ON `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
+  JOIN `r_stud_profile` `s` ON `s`.`Stud_NO` = `cd`.`Stud_NO`
+  JOIN `r_courses` `cr` ON `s`.`Stud_COURSE` = `cr`.`Course_CODE`
+  JOIN `r_semester` sem ON `c`.`Couns_SEMESTER` = `sem`.`Semestral_NAME`";
 
     $conditions = array();
 
@@ -72,8 +73,8 @@ if (isset($_POST['IndivFilter'])) {
     }
 
     if ($semOpt != 'All') {
-          $conditions[] = "c.Couns_SEMESTER =  '$semOpt'";
-      } 
+        $conditions[] = "c.Couns_SEMESTER =  '$semOpt'";
+    }
 
     if ($monthOpt != 'All') {
         $conditions[] = "MONTH(c.Couns_DATE) = '$monthOpt'";
@@ -89,113 +90,211 @@ if (isset($_POST['IndivFilter'])) {
 
     $query = $actualQuery;
     if (count($conditions)>0) {
-        $query .= " WHERE ". implode(' AND ', $conditions);
+        $query .= " WHERE ". implode(' AND ', $conditions) ." ORDER BY `c`.`Couns_DATE` DESC"  ;
     }
 
-    $result = mysqli_query($db, $query);
-    $indivTab = 'class = "active"';
+    $resultIndiv = mysqli_query($db, $query);
+    $indivTab = 'active';
 } else {
     $actualQuery = "SELECT
-        `c`.`Couns_CODE` AS `COUNSELING_CODE`,
-        DATE_FORMAT(`c`.`Couns_DATE`, '%W %M %d %Y') AS `COUNSELING_DATE`,
-        `c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
-        `c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,
-        `s`.`Stud_NO` AS `STUD_NO`,
-        CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
-        CONCAT(
-            `s`.`Stud_COURSE`,
-            ' ',
-            `s`.`Stud_YEAR_LEVEL`,
-            ' - ',
-            `s`.`Stud_SECTION`
-        ) AS `COURSE`,
+    `c`.`Couns_CODE` AS `COUNSELING_CODE`,
+    DATE_FORMAT(`c`.`Couns_DATE`, '%W %M %d %Y') AS `COUNSELING_DATE`,
+    `c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
+    `c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,
+    `s`.`Stud_NO` AS `STUD_NO`,
+    CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
+    CONCAT(
+      `s`.`Stud_COURSE`,
+      ' ',
+      `s`.`Stud_YEAR_LEVEL`,
+      ' - ',
+      `s`.`Stud_SECTION`
+    ) AS `COURSE`,
+    (
+      SELECT
+        GROUP_CONCAT(`a`.`Couns_APPROACH` SEPARATOR ', ')
+      FROM
+        `t_couns_approach` `a`
+      WHERE
         (
-        SELECT
-            GROUP_CONCAT(`a`.`Couns_APPROACH` SEPARATOR ', ')
-        FROM
-            `t_couns_approach` `a`
-        WHERE
-            (
-                `a`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`
-            )
+          `a`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`
+        )
     ) AS `COUNSELING_APPROACH`,
     `c`.`Couns_BACKGROUND` AS `COUNSELING_BG`,
     `c`.`Couns_GOALS` AS `GOALS`,
     `c`.`Couns_COMMENT` AS `COUNS_COMMENT`,
     `c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION`
-    FROM `t_counseling` `c`
-        JOIN `t_couns_details` `cd` 
-            ON `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
-        JOIN `r_stud_profile` `s` 
-        ON `s`.`Stud_NO` = `cd`.`Stud_NO` ";
+  FROM
+    `t_counseling` `c`
+    JOIN `t_couns_details` `cd` ON `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
+    JOIN `r_stud_profile` `s` ON `s`.`Stud_NO` = `cd`.`Stud_NO`
+    JOIN `r_courses` `cr` ON `s`.`Stud_COURSE` = `cr`.`Course_CODE`
+    JOIN `r_semester` sem ON `c`.`Couns_SEMESTER` = `sem`.`Semestral_NAME` ORDER BY `c`.`Couns_DATE` DESC";
 
-    $result = mysqli_query($db, $actualQuery);
+    $resultIndiv = mysqli_query($db, $actualQuery);
+    $indivTab = 'active';
 }
+<<<<<<< HEAD
 if(isset($_POST['groupFilter'])){
     $groupTab = 'class="active"';
 } else {
     $indivTab = 'class = "active"';
-}
-$sql =  mysqli_query($db, " SELECT
-`c`.`Couns_CODE` AS `COUNSELING_CODE`,
-CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUD_NAME`,
-`s`.`Stud_NO` AS `STUD_NO`,
-DATE_FORMAT(`c`.`Couns_DATE`, '%W %M %d %Y') AS `COUNSELING_DATE`,
-`c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,
-`c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,
-CONCAT(
-`s`.`Stud_COURSE`,
-' ',
-`s`.`Stud_YEAR_LEVEL`,
-' - ',
-`s`.`Stud_SECTION`
-) AS `COURSE`,
-(
-SELECT
-GROUP_CONCAT(`a`.`Couns_APPROACH` SEPARATOR ', ')
-FROM
-`t_couns_approach` `a`
-WHERE
-(
-  `a`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`
-)
-) AS `COUNSELING_APPROACH`,
-`c`.`Couns_BACKGROUND` AS `COUNSELING_BG`,
-`c`.`Couns_GOALS` AS `GOALS`,
-`c`.`Couns_COMMENT` AS `COUNS_COMMENT`,
-`c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION`
-FROM
-(
-(
-  `t_counseling` `c`
-JOIN `t_couns_details` `cd` ON
-  (
-      (
-          `c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`
-      )
-  )
-)
-JOIN `r_stud_profile` `s` ON
-((`s`.`Stud_NO` = `cd`.`Stud_NO`))
-) ");
+=======
 
+if (isset($_POST['groupFilter'])) {
+    $acadOpt = $_POST['acadOpt'];
+    $semOpt = $_POST['semOpt'];
+    $monthOpt = $_POST['monthOpt'];
+    $dayOpt = $_POST['dayOpt'];
+
+    $actualQuery = "";
+    
+    $conditions = array();
+
+    if ($acadOpt != 'All') {
+        $conditions[] = "cr.Course_CURR_YEAR = '$acadOpt'";
+    }
+
+    if ($semOpt != 'All') {
+        $conditions[] = "c.Couns_SEMESTER =  '$semOpt'";
+    }
+
+    if ($monthOpt != 'All') {
+        $conditions[] = "MONTH(c.Couns_DATE) = '$monthOpt'";
+    }
+
+    if ($dayOpt != 'All') {
+        $conditions[] = "DAY(c.Couns_DATE) = '$dayOpt'";
+    }
+
+    if ($courseOpt != 'All') {
+        $conditions[] = "s.Stud_COURSE = '$courseOpt'";
+    }
+
+    $query = $actualQuery;
+    if (count($conditions)>0) {
+        $query .= " WHERE ". implode(' AND ', $conditions) ." ORDER BY `c`.`Couns_DATE` DESC"  ;
+    }
+
+    $resultGroup = mysqli_query($db, $actualQuery);
+    $groupTab = 'active';
+    $indivTab ='';
+} else {
+    $actualQuery = "";
+    //$resultIndiv = mysqli_query($db, $actualQuery);
+>>>>>>> e22bd3433f6d996810ecd0ddf4e6ff4f9291a5c8
+}
+
+if (isset($_POST['visitFilter'])) {
+    $visitOpt = $_POST['visitOpt'];
+    $acadOpt = $_POST['acadOpt'];
+    $semOpt = $_POST['semOpt'];
+    $monthOpt = $_POST['monthOpt'];
+    $dayOpt = $_POST['dayOpt'];
+    $courseOpt = $_POST['courseOpt'];
+
+    $actualQuery = "SELECT
+  `v`.`Visit_CODE` AS `Visit_CODE`,
+  `v`.`Visit_DATE` AS `Visit_DATE`,
+  `s`.`Stud_NO` AS `Stud_NO`,
+  CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUDENT`,
+  CONCAT(
+    `s`.`Stud_COURSE`,
+    ' ',
+    `s`.`Stud_YEAR_LEVEL`,
+    ' - ',
+    `s`.`Stud_YEAR_LEVEL`
+  ) AS `COURSE`,
+  `v`.`Visit_PURPOSE` AS `Visit_PURPOSE`,
+  `v`.`Visit_DETAILS` AS `Visit_DETAILS`
+FROM
+  (
+    `t_stud_visit` `v`
+    JOIN `r_stud_profile` `s` ON ((`s`.`Stud_NO` = `v`.`Stud_NO`))
+  )
+ORDER BY
+  `v`.`Visit_DATE` DESC ";
+    $conditions = array();
+
+    if ($visitOpt != 'All'){
+        $conditions[] = "v.Visit_PURPOSE = '$visitOpt'";
+    }
+
+    if ($acadOpt != 'All') {
+        $conditions[] = "cr.Course_CURR_YEAR = '$acadOpt'";
+    }
+
+    if ($semOpt != 'All') {
+        $conditions[] = "c.Couns_SEMESTER =  '$semOpt'";
+    }
+
+    if ($monthOpt != 'All') {
+        $conditions[] = "MONTH(v.Visit_DATE) = '$monthOpt'";
+    }
+
+    if ($dayOpt != 'All') {
+        $conditions[] = "DAY(v.Visit_DATE) = '$dayOpt'";
+    }
+
+    if ($courseOpt != 'All') {
+        $conditions[] = "s.Stud_COURSE = '$courseOpt'";
+    }
+
+    $query = $actualQuery;
+    if (count($conditions)>0) {
+        $query .= " WHERE ". implode(' AND ', $conditions) ." ORDER BY `v`.`Visit_DATE` DESC"  ;
+    }
+
+    $resultVisit = mysqli_query($db,$query);
+    $visitTab = 'active';
+    $indivTab = '';
+} else {
+    $actualQuery = "SELECT
+  `v`.`Visit_CODE` AS `Visit_CODE`,
+  `v`.`Visit_DATE` AS `Visit_DATE`,
+  `s`.`Stud_NO` AS `Stud_NO`,
+  CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUDENT`,
+  CONCAT(
+    `s`.`Stud_COURSE`,
+    ' ',
+    `s`.`Stud_YEAR_LEVEL`,
+    ' - ',
+    `s`.`Stud_YEAR_LEVEL`
+  ) AS `COURSE`,
+  `v`.`Visit_PURPOSE` AS `Visit_PURPOSE`,
+  `v`.`Visit_DETAILS` AS `Visit_DETAILS`
+FROM
+  (
+    `t_stud_visit` `v`
+    JOIN `r_stud_profile` `s` ON ((`s`.`Stud_NO` = `v`.`Stud_NO`))
+  )
+ORDER BY
+  `v`.`Visit_DATE` DESC ";
+  $resultVisit = mysqli_query($db, $actualQuery);
+}
 //Data for select input
-$sqlAY = mysqli_query($db, "SELECT Batch_ID,Batch_YEAR FROM `pupqcdb`.`r_batch_details` ");
+$sqlAY = mysqli_query($db, "SELECT Batch_ID,Batch_YEAR FROM `pupqcdb`.`r_batch_details` WHERE Batch_DISPLAY_STAT = 'Active' ");
 $optionAY = '';
 while ($row = mysqli_fetch_assoc($sqlAY)) {
     $optionAY .='<option value = "'.$row['Batch_YEAR'].'">'.$row['Batch_YEAR'].'</option>';
 }
 
-$sqlSem = mysqli_query($db, "SELECT Semestral_ID, Semestral_NAME FROM `r_semester`  ");
+$sqlSem = mysqli_query($db, "SELECT Semestral_ID, Semestral_NAME FROM `r_semester` WHERE Semestral_DISPLAY_STAT = 'Active' ");
 $optionSem = '';
 while ($row = mysqli_fetch_assoc($sqlSem)) {
     $optionSem .='<option value = "'.$row['Semestral_NAME'].'">'.$row['Semestral_NAME'].'</option>';
 }
 
-$sqlCourse = mysqli_query($db, "SELECT Course_ID, Course_CODE FROM `r_courses`  ");
+$sqlCourse = mysqli_query($db, "SELECT Course_ID, Course_CODE FROM `r_courses` WHERE Course_DISPLAY_STAT = 'Active' ");
 $optionCourse = '';
 while ($row = mysqli_fetch_assoc($sqlCourse)) {
     $optionCourse .='<option value = "'.$row['Course_CODE'].'">'.$row['Course_CODE'].'</option>';
+}
+
+$sqlVisit = mysqli_query($db, "SELECT Visit_TYPE FROM r_visit WHERE Visit_TYPE_STAT = 'Active'");
+$optionVisit = '';
+while ($row = mysqli_fetch_assoc($sqlVisit)) {
+    $optionVisit .='<option value="'.$row['Visit_TYPE'].'">'.$row['Visit_TYPE'].'</option>';
 }
 ?>
 <html lang="en">
@@ -259,20 +358,20 @@ include('sidebarnav.php');
                     <section class="panel">
                         <header class="panel-heading tab-bg-dark-navy-blue ">
                             <ul class="nav nav-tabs">
-                                <li <?php echo $indivTab;?>>
+                                <li class="<?php echo $indivTab;?>">
                                     <a data-toggle="tab" href="#Indiv">Individual Counsel</a>
                                 </li>
-                                <li <?php echo $groupTab; ?>>
+                                <li class="<?php echo $groupTab; ?>">
                                     <a data-toggle="tab" href="#Grouped">Group Counsel</a>
                                 </li>
-                                <li <?php echo $visitTab; ?>>
+                                <li class="<?php echo $visitTab; ?>">
                                     <a data-toggle="tab" href="#Visits">Visit Reports</a>
                                 </li>
                             </ul>
                         </header>
                         <div class="panel-body">
                             <div class="tab-content">
-                                <div id="Indiv" class="tab-pane active">
+                                <div id="Indiv" class="tab-pane <?php echo $indivTab;?>">
                                     <div class="col-lg-12" style="padding-left:0px">
                                         <form action="counselingreport.php" method="POST">
                                             <div class="row">
@@ -322,7 +421,7 @@ include('sidebarnav.php');
                                     </div>
                                     <br>
                                     </br>
-                                    <button class="btn btn-info btn-sm" type="submit" name="IndivFilter">
+                                    <button class="btn btn-info btn-sm" type="submit" name="indivFilter">
                                         <i class="fa fa-search"></i>
                                         Search
                                     </button>
@@ -343,7 +442,7 @@ include('sidebarnav.php');
                                                 </tr>
                                             </thead>
                                             <!-- page start-->
-                                            <?php while ($row = mysqli_fetch_array($result)) {
+                                            <?php while ($row = mysqli_fetch_array($resultIndiv)) {
             ?>
                                             <tbody>
                                                 <tr>
@@ -373,7 +472,7 @@ include('sidebarnav.php');
                                         <!-- page end-->
                                     </section>
                                 </div>
-                                <div id="Grouped" class="tab-pane">
+                                <div id="Grouped" class="tab-pane <?php echo $groupTab;?>">
                                     <div class="col-lg-12" style="padding-left:0px">
                                         <form action="counselingreport.php" method="POST">
                                             <div class="row">
@@ -422,8 +521,8 @@ include('sidebarnav.php');
                                         <i class="fa fa-search"></i> Search</button>
                                     </form>
                                     &nbsp
-                                    <a href="print_record_all.php" type="button" class="btn btn-success">
-                                        <i class="fa fa-print"></i> Print</a>
+                                    <button class="btn btn-sm btn-success" onclick="location.href='print_record_all.php?view=set&acadOpt=<?php echo $acadOpt; ?>&semOpt=<?php echo $semOpt; ?>&monthOpt=<?php echo $monthOpt; ?>&dayOpt=<?php echo $dayOpt; ?>&courseOpt=<?php echo $courseOpt;?>'">
+                                        <i class="fa fa-print"></i> Print</button>
                                     </br>
                                     </br>
                                     <section id="unseen">
@@ -469,58 +568,162 @@ include('sidebarnav.php');
                                         <!-- page end-->
                                     </section>
                                 </div>
-                                <div id="Visits" class="tab-pane">Profile</div>
-                            </div>
-                        </div>
+                                <div id="Visits" class="tab-pane <?php echo $visitTab;?>">
 
+                                    <div class="col-lg-12 " style="padding-left:0px">
+                                        <form action="counselingreport.php" method="POST">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <select name="visitOpt" class="form-control input-sm m-bot4">
+                                                        <option value="All">All Records</option>
+                                                        <?php echo $optionVisit; ?>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <select name="acadOpt" class="form-control input-sm m-bot4" placeholder="Academic Year">
+                                                        <option value="All" selected>All Academic Years</option>
+                                                        <?php echo $optionAY; ?>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <select name="semOpt" class="form-control input-sm m-bot4" placeholder="Semester">
+                                                        <option value="All">All Semesters</option>
+                                                        <?php echo $optionSem; ?>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <select name="monthOpt" class="form-control input-sm m-bot4" placeholder="Month">
+                                                        <option value="All">All Months</option>
+                                                        <?php for ($m=1; $m<=12; ++$m) {
+            $month_label = date('F', mktime(0, 0, 0, $m, 1)); ?>
+                                                        <option value="<?php echo $m; ?>">
+                                                            <?php echo $month_label; ?>
+                                                        </option>
+                                                        <?php
+        } ?>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <select name="dayOpt" class="form-control input-sm m-bot4" placeholder="Day">
+                                                        <option value="All">All Dates</option>
+                                                        <?php 
+          $start_date = 1;
+          $end_date   = 31;
+          for ($j=$start_date; $j<=$end_date; $j++) {
+              echo '<option value='.$j.'>'.$j.'</option>';
+          }
+        ?>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <select name="courseOpt" class="form-control input-sm m-bot4" placeholder="Programme/Course">
+                                                        <option value="All">All Programme/Course</option>
+                                                        <?php echo $optionCourse; ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <button class="btn btn-info btn-sm" name="visitFilter">
+                                                <i class="fa fa-search"></i> Search</button>
+                                        </form>
+                                        </br>
+                                        <button class="btn btn-sm btn-success" onclick="location.href='print_record_all.php?view=set&acadOpt=<?php echo $acadOpt; ?>&semOpt=<?php echo $semOpt; ?>&monthOpt=<?php echo $monthOpt; ?>&dayOpt=<?php echo $dayOpt; ?>&courseOpt=<?php echo $courseOpt;?>'">
+                                            <i class="fa fa-print"></i> Print</button>
+                                            <br><br>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <div class="adv-table">
+                                        <table class="display table table-bordered table-striped" id="dynamic-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <strong>Visit Purpose</th>
+                                                    <th>Student Number</th>
+                                                    <th>Student Name</th>
+                                                    <th>Course/Year/Section</th>
+                                                    <th>Date and Time</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                while ($row = mysqli_fetch_assoc($resultVisit)) {?>
+                                                <tr>
+                                                    <td>
+                                                        <strong>
+                                                            <?php echo $row['Visit_PURPOSE']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $row['Stud_NO']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $row['STUDENT']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $row['COURSE']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $row['Visit_DATE']; ?>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                     </section>
-                    <!-- page start-->
+                    </div>
+                    </div>
+                </div>
+
         </section>
-        <!--main content end-->
+        <!-- page start-->
     </section>
-   <?php include('footer.php'); ?>
-<!-- Placed js at the end of the document so the pages load faster -->
+    <!--main content end-->
+    </section>
+    <?php include('footer.php'); ?>
+    <!-- Placed js at the end of the document so the pages load faster -->
 
-<!--Core js-->
-<script src="js/jquery.js"></script>
+    <!--Core js-->
+    <script src="js/jquery.js"></script>
 
-<script>
-    $(document).ready(function(){
+    <script>
+        $(document).ready(function() {
 
-        function load_unseen_notification(view = '')
-        {
-            $.ajax({
-                url:"NotifLoad.php",
-                method:"POST",
-                data:{view:view},
-                dataType:"json",
-                success:function(data)
-                {
-                    $('.dropdown-menu').html(data.Notification);
+            function load_unseen_notification(view = '') {
+                $.ajax({
+                    url: "NotifLoad.php",
+                    method: "POST",
+                    data: {
+                        view: view
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        $('.dropdown-menu').html(data.Notification);
 
-                    if(data.NotificationCount > 0)
-                    {
-                        $('.count').html(data.NotificationCount);
+                        if (data.NotificationCount > 0) {
+                            $('.count').html(data.NotificationCount);
+                        }
                     }
-                }
+                });
+            }
+
+            load_unseen_notification();
+
+            $(document).on('click', '.dropdown-toggle', function() {
+                $('.count').html('');
+                load_unseen_notification('read');
             });
-        }
 
-        load_unseen_notification();
+            setInterval(function() {
+                load_unseen_notification();
+            }, 5000);
 
-        $(document).on('click','.dropdown-toggle', function(){
-        $('.count').html('');
-        load_unseen_notification('read');
         });
-
-        setInterval(function(){
-            load_unseen_notification();  
-        }, 5000);
-        
-    });
-
-</script>
-<!--     <script src="bs3/js/bootstrap.min.js"></script> -->
+    </script>
+    <!--     <script src="bs3/js/bootstrap.min.js"></script> -->
     <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="js/jquery.scrollTo.min.js"></script>
     <script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>

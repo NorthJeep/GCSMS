@@ -4,7 +4,7 @@
         <div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
                 <li class="sub-menu">
-                    <a <?php if($currentPage=='G&CSMS-UserManagement') { echo 'class="active"';} ?> href="#">
+                    <a <?php if($currentPage=='G&CSMS-UserManagement') { echo 'class="active"';} ?> href="TypeS_UserManagement.php">
                         <i class="fa fa-users"></i>
                         <span>User Management</span>
                     </a>

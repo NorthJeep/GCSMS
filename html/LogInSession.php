@@ -36,7 +36,7 @@
 				$_SESSION['USER_ROLE'] = $userrole;
 				$redirect = '';
 				if ($userrole == 'System Administrator') {
-					$redirect = 'TypeS_VisitType.php?user='.$loginname.'';
+					$redirect = 'TypeS_UserManagement.php?user='.$loginname.'';
 				} else if ($userrole == 'Student Assistant') {
 					$redirect = 'TypeB_Index.php?user='.$loginname.'';
 				} else if ($userrole == 'Guidance Counselor') {

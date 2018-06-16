@@ -59,7 +59,7 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="images/favicon.png">
 
-    <title>G&CSMS-Counseling Approach</title>
+    <title>G&CSMS-User Roles</title>
 
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -98,9 +98,6 @@ include('TypeS_Sidebar.php');
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumbs-alt">
-                        <li>
-                            <a href="index.php"><i class="fa fa-home"></i> Home</a>
-                        </li>
                         <li>
                             <a href="#"><i class="fa fa-gears"></i> System Configurations</a>
                         </li>
