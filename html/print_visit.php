@@ -38,8 +38,8 @@ class PDF extends FPDF
         $this->SetLineWidth(1); 
         $this->Line(15,40,195,40);
         $this->Ln(20);
-        $this->SetFont('Arial', '', 11);
-        $this->Cell(0, 15, 'All Records', 0, 0, 'C');
+        $this->SetFont('Arial', '', 12);
+        $this->Cell(0, 15, 'Visit Reports', 0, 0, 'C');
         $this->Ln(20);
     }
     // Colored table
@@ -132,19 +132,17 @@ class PDF extends FPDF
     $result = mysqli_query($db, $query);
     } else {
         $result =  mysqli_query($db, " SELECT
-        `v`.`Visit_CODE` AS `Visit_CODE`,
-        `v`.`Visit_DATE` AS `Visit_DATE`,
-        `s`.`Stud_NO` AS `Stud_NO`,
-        CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUDENT`,
-        CONCAT(
-          `s`.`Stud_COURSE`,
-          ' ',
-          `s`.`Stud_YEAR_LEVEL`,
-          ' - ',
-          `s`.`Stud_YEAR_LEVEL`
-        ) AS `COURSE`,
         `v`.`Visit_PURPOSE` AS `Visit_PURPOSE`,
-        `v`.`Visit_DETAILS` AS `Visit_DETAILS`
+             `s`.`Stud_NO` AS `Stud_NO`,
+            CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUDENT`,
+            CONCAT(
+              `s`.`Stud_COURSE`,
+              ' ',
+              `s`.`Stud_YEAR_LEVEL`,
+              ' - ',
+              `s`.`Stud_YEAR_LEVEL`
+            ) AS `COURSE`,
+            DATE_FORMAT(`v`.`Visit_DATE`, '%M %e, %Y') AS `Visit_DATE`
       FROM
       `t_stud_visit` `v`
           JOIN `r_stud_profile` `s` ON `s`.`Stud_NO` = `v`.`Stud_NO`
@@ -176,4 +174,4 @@ $body = array('Visit Purpose','Student Number', 'Student name', 'Course', 'Date'
 $pdf->SetFont('Arial', '', 14);
 $pdf->AddPage();
 $pdf->FancyTable($body);
-$pdf->Output('I', 'Counseling Report'); ?>
+$pdf->Output('I', 'Visit Report'); ?>
