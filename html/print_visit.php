@@ -1,3 +1,4 @@
+
 <?php
 require('fpdf.php');
 session_start();
@@ -51,7 +52,7 @@ class PDF extends FPDF
         $this->SetLineWidth(.3);
         $this->SetFont('', 'B');
         // Header
-        $w = array(50, 50, 50, 40);
+        $w = array(50, 42, 35, 27, 34);
         for ($i=0;$i<count($body);$i++) {
             $this->Cell($w[$i], 7, $body[$i], 1, 0, 'C', true);
         }
@@ -81,9 +82,8 @@ class PDF extends FPDF
             $courseOpt = $_REQUEST['courseOpt'];
 
             $actualQuery = " SELECT
-            `v`.`Visit_CODE` AS `Visit_CODE`,
-            `v`.`Visit_DATE` AS `Visit_DATE`,
-            `s`.`Stud_NO` AS `Stud_NO`,
+             `v`.`Visit_PURPOSE` AS `Visit_PURPOSE`,
+             `s`.`Stud_NO` AS `Stud_NO`,
             CONCAT(`s`.`Stud_FNAME`, ' ', `s`.`Stud_LNAME`) AS `STUDENT`,
             CONCAT(
               `s`.`Stud_COURSE`,
@@ -92,8 +92,7 @@ class PDF extends FPDF
               ' - ',
               `s`.`Stud_YEAR_LEVEL`
             ) AS `COURSE`,
-            `v`.`Visit_PURPOSE` AS `Visit_PURPOSE`,
-            `v`.`Visit_DETAILS` AS `Visit_DETAILS`
+            DATE_FORMAT(`v`.`Visit_DATE`, '%M %e, %Y') AS `Visit_DATE`
           FROM
           `t_stud_visit` `v`
               JOIN `r_stud_profile` `s` ON `s`.`Stud_NO` = `v`.`Stud_NO`
@@ -160,6 +159,7 @@ class PDF extends FPDF
         $this->Cell($w[1], 7, $row[1], 'LR', 0, 'L', $fill);
         $this->Cell($w[2], 7, $row[2], 'LR', 0, 'L', $fill);
         $this->Cell($w[3], 7, $row[3], 'LR', 0, 'L', $fill);
+        $this->Cell($w[4], 7, $row[4], 'LR', 0, 'L', $fill);
         $this->Ln();
         $fill = !$fill;
     }
@@ -171,9 +171,9 @@ class PDF extends FPDF
 
 $pdf = new PDF();
 // Column headings
-$body = array('Student Number', 'Student name', 'Type', 'Date');
+$body = array('Visit Purpose','Student Number', 'Student name', 'Course', 'Date');
 // Data loading
 $pdf->SetFont('Arial', '', 14);
 $pdf->AddPage();
 $pdf->FancyTable($body);
-$pdf->Output('I', 'Counseling Report');
+$pdf->Output('I', 'Counseling Report'); ?>
