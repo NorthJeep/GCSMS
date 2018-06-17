@@ -46,13 +46,13 @@ class PDF extends FPDF
     public function FancyTable($body)
     {
         // Colors, line width and bold font
-        $this->SetFillColor(255, 0, 0);
+        $this->SetFillColor(48, 84, 150);
         $this->SetTextColor(255);
-        $this->SetDrawColor(128, 0, 0);
+        //$this->SetDrawColor(100, 0, 0);
         $this->SetLineWidth(.3);
         $this->SetFont('', 'B');
         // Header
-        $w = array(50, 42, 35, 27, 34);
+        $w = array(45, 42, 40, 27, 34);
         for ($i=0;$i<count($body);$i++) {
             $this->Cell($w[$i], 7, $body[$i], 1, 0, 'C', true);
         }
@@ -171,7 +171,7 @@ $pdf = new PDF();
 // Column headings
 $body = array('Visit Purpose','Student Number', 'Student name', 'Course', 'Date');
 // Data loading
-$pdf->SetFont('Arial', '', 14);
+$pdf->SetFont('Arial', '', 12);
 $pdf->AddPage();
 $pdf->FancyTable($body);
 $pdf->Output('I', 'Visit Report'); ?>
