@@ -134,12 +134,6 @@ FROM
     $resultIndiv = mysqli_query($db, $actualQuery);
     $indivTab = 'active';
 }
-<<<<<<< HEAD
-if(isset($_POST['groupFilter'])){
-    $groupTab = 'class="active"';
-} else {
-    $indivTab = 'class = "active"';
-=======
 
 if (isset($_POST['groupFilter'])) {
     $acadOpt = $_POST['acadOpt'];
@@ -182,7 +176,6 @@ if (isset($_POST['groupFilter'])) {
 } else {
     $actualQuery = "";
     //$resultIndiv = mysqli_query($db, $actualQuery);
->>>>>>> e22bd3433f6d996810ecd0ddf4e6ff4f9291a5c8
 }
 
 if (isset($_POST['visitFilter'])) {
