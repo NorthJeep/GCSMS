@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.8.0.1
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2018 at 05:25 PM
--- Server version: 10.1.8-MariaDB
--- PHP Version: 5.6.14
+-- Generation Time: Jun 17, 2018 at 12:46 PM
+-- Server version: 10.1.32-MariaDB
+-- PHP Version: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -16,13 +18,12 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
-DROP DATABASE IF EXISTS pupqcdb;
-CREATE DATABASE pupqcdb;
-USE pupqcdb;
-
 --
 -- Database: `pupqcdb`
 --
+DROP DATABASE IF EXISTS `pupqcdb`;
+CREATE DATABASE `pupqcdb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `pupqcdb`;
 
 DELIMITER $$
 --
@@ -30,24 +31,6 @@ DELIMITER $$
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `counseling_type_add` (IN `type` VARCHAR(50))  NO SQL
 insert into r_couns_type (Couns_TYPE) values (type)$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `login_check` (IN `username` VARCHAR(50), IN `userpass` VARCHAR(100))  NO SQL
-select * from r_users where Users_USERNAME = username and AES_DECRYPT(Users_PASSWORD,password('GC&SMS')) = userpass$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `student_assistant_add` (IN `studNo` VARCHAR(15))  NO SQL
-BEGIN
-set @name = (select concat(Stud_FNAME,' ',Stud_LNAME) from r_stud_profile where stud_NO = studNo);
-insert into r_users (
-    Users_USERNAME,
-    Users_REFERENCED,
-    Users_PASSWORD,
-    Users_ROLES)
-values (
-    studNo,
-    studNo,
-    AES_ENCRYPT(LCASE(@name),password('GC&SMS')),
-    'Student Assistant');
-END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `counselor_admin_add` (IN `fname` VARCHAR(100), IN `mname` VARCHAR(100), IN `lname` VARCHAR(100))  NO SQL
 BEGIN
@@ -78,6 +61,24 @@ values (
 	@code,
 	AES_ENCRYPT(fname,password('GC&SMS')),
 	'System Administrator');
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `login_check` (IN `username` VARCHAR(50), IN `userpass` VARCHAR(100))  NO SQL
+select * from r_users where Users_USERNAME = username and AES_DECRYPT(Users_PASSWORD,password('GC&SMS')) = userpass$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `student_assistant_add` (IN `studNo` VARCHAR(15))  NO SQL
+BEGIN
+set @name = (select concat(Stud_FNAME,' ',Stud_LNAME) from r_stud_profile where stud_NO = studNo);
+insert into r_users (
+    Users_USERNAME,
+    Users_REFERENCED,
+    Users_PASSWORD,
+    Users_ROLES)
+values (
+    studNo,
+    studNo,
+    AES_ENCRYPT(LCASE(@name),password('GC&SMS')),
+    'Student Assistant');
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `stud_counseling_add` (IN `visitRef` INT, IN `counsType` VARCHAR(50), IN `appmtType` VARCHAR(25), IN `studNo` VARCHAR(15), IN `bg` TEXT, IN `goal` TEXT, IN `commnt` TEXT, IN `recommendation` TEXT, IN `remarks` VARCHAR(50))  NO SQL
@@ -501,7 +502,7 @@ CREATE TABLE `r_stud_family_bg_details` (
   `Stud_NO_REFERENCE` varchar(15) NOT NULL,
   `FamilyBG_INFO` enum('Father','Mother') NOT NULL,
   `Info_FNAME` varchar(100) NOT NULL,
-  `Info_MNAME` varchar(100) NOT NULL,
+  `Info_MNAME` varchar(100) DEFAULT NULL,
   `Info_LNAME` varchar(100) NOT NULL,
   `Info_AGE` int(11) NOT NULL,
   `Info_STAT` enum('Living','Deceased') DEFAULT 'Living',
@@ -532,7 +533,7 @@ CREATE TABLE `r_stud_general_info` (
 CREATE TABLE `r_stud_guardian` (
   `Stud_NO` varchar(15) NOT NULL,
   `Guardian_FNAME` varchar(100) NOT NULL,
-  `Guardian_MNAME` varchar(100) NOT NULL,
+  `Guardian_MNAME` varchar(100) DEFAULT NULL,
   `Guardian_LNAME` varchar(100) NOT NULL,
   `Guardian_AGE` int(11) NOT NULL,
   `Stud_GUARDIAN_RELATION` varchar(50) NOT NULL,
@@ -580,6 +581,7 @@ CREATE TABLE `r_stud_personal_info` (
   `Stud_SISTER_NO` int(11) DEFAULT '0',
   `Employed_BS_NO` int(11) DEFAULT '0',
   `Stud_ORDINAL_POSITION` varchar(50) NOT NULL,
+  `Stud_BS_SUPPORT` enum('None','family','your studies','his/her own family') NOT NULL DEFAULT 'None',
   `Stud_SCHOOLING_FINANCE` enum('Parents','Brother/Sister','Spouse','Scholarship','Relatives','Self-supporting/working student') DEFAULT 'Parents',
   `Stud_WEEKLY_ALLOWANCE` double(9,2) NOT NULL,
   `Parents_TOTAL_MONTHLY_INCOME` varchar(100) NOT NULL,
@@ -596,10 +598,8 @@ CREATE TABLE `r_stud_personal_info` (
 
 CREATE TABLE `r_stud_phys_rec` (
   `Stud_NO_REFERENCE` varchar(15) NOT NULL,
-  `PhysicalRec_VISION` text NOT NULL,
-  `PhysicalRec_HEARING` text NOT NULL,
-  `PhysicalRec_SPEECH` text NOT NULL,
-  `PhysicalRec_GEN_HEALTH` text NOT NULL
+  `PhysicalRec_CHECK` enum('Vision','Hearing','Speech','General Health') NOT NULL,
+  `PhysicalRec_RESULT` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -749,16 +749,18 @@ INSERT INTO `r_visit` (`Visit_ID`, `Visit_TYPE`, `Visit_DESC`, `Visit_TYPE_STAT`
 
 --
 -- Stand-in structure for view `student_counseling`
+-- (See below for the actual view)
 --
 CREATE TABLE `student_counseling` (
 `COUNSELING_CODE` varchar(15)
-,`COUNSELING_DATE` varchar(137)
+,`COUNSELING_DATE` varchar(139)
+,`ACADEMIC YEAR` varchar(50)
+,`SEMESTER` varchar(50)
 ,`COUNSELING_TYPE` varchar(50)
 ,`APPOINTMENT_TYPE` varchar(25)
-,`STUD_NO` varchar(15)
-,`STUD_NAME` varchar(201)
-,`COURSE` varchar(35)
-,`COUNSELING_APPROACH` text
+,`STUD_NO` text
+,`STUD_NAME` text
+,`NATURE OF THE CASE` varchar(50)
 ,`COUNSELING_BG` text
 ,`GOALS` text
 ,`COUNS_COMMENT` text
@@ -769,6 +771,7 @@ CREATE TABLE `student_counseling` (
 
 --
 -- Stand-in structure for view `student_profiling`
+-- (See below for the actual view)
 --
 CREATE TABLE `student_profiling` (
 `STUD_NO` varchar(15)
@@ -815,7 +818,6 @@ CREATE TABLE `t_assign_stud_saction` (
 CREATE TABLE `t_counseling` (
   `Couns_ID` int(11) NOT NULL,
   `Couns_CODE` varchar(15) NOT NULL,
-  `Visit_ID_REFERENCE` int(11) NOT NULL,
   `Couns_DATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Couns_ACADEMIC_YEAR` varchar(50) NOT NULL,
   `Couns_SEMESTER` varchar(50) NOT NULL,
@@ -832,8 +834,26 @@ CREATE TABLE `t_counseling` (
 -- Dumping data for table `t_counseling`
 --
 
-INSERT INTO `t_counseling` (`Couns_ID`, `Couns_CODE`, `Visit_ID_REFERENCE`, `Couns_DATE`, `Couns_ACADEMIC_YEAR`, `Couns_SEMESTER`, `Couns_COUNSELING_TYPE`, `Couns_APPOINTMENT_TYPE`, `Nature_Of_Case`, `Couns_BACKGROUND`, `Couns_GOALS`, `Couns_COMMENT`, `Couns_RECOMMENDATION`) VALUES
-(1, 'IC18-5231', 2, '2018-05-22 17:54:41', '2017-2018', 'Summer Semester', 'Individual Counseling', 'Referral', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `t_counseling` (`Couns_ID`, `Couns_CODE`, `Couns_DATE`, `Couns_ACADEMIC_YEAR`, `Couns_SEMESTER`, `Couns_COUNSELING_TYPE`, `Couns_APPOINTMENT_TYPE`, `Nature_Of_Case`, `Couns_BACKGROUND`, `Couns_GOALS`, `Couns_COMMENT`, `Couns_RECOMMENDATION`) VALUES
+(1, 'IC18-5231', '2018-05-22 17:54:41', '2017-2018', 'Summer Semester', 'Individual Counseling', 'Referral', NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t_counseling_visit`
+--
+
+CREATE TABLE `t_counseling_visit` (
+  `Couns_ID_REFERENCE` int(11) NOT NULL,
+  `Visit_ID_REFERENCE` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `t_counseling_visit`
+--
+
+INSERT INTO `t_counseling_visit` (`Couns_ID_REFERENCE`, `Visit_ID_REFERENCE`) VALUES
+(1, 2);
 
 -- --------------------------------------------------------
 
@@ -869,6 +889,27 @@ INSERT INTO `t_couns_details` (`Couns_ID_REFERENCE`, `Stud_NO`, `Couns_REMARKS`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `t_notification`
+--
+
+CREATE TABLE `t_notification` (
+  `Notif_ID` int(11) NOT NULL,
+  `Notif_User` int(11) DEFAULT NULL,
+  `Notif_Details` varchar(200) DEFAULT NULL,
+  `Notif_Status` bit(1) DEFAULT b'1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `t_notification`
+--
+
+INSERT INTO `t_notification` (`Notif_ID`, `Notif_User`, `Notif_Details`, `Notif_Status`) VALUES
+(1, 8, 'HAHAAHAHHAHAHAHA', b'0'),
+(2, 8, 'NOTIF IS WORKING !!!', b'0');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `t_stud_visit`
 --
 
@@ -877,6 +918,8 @@ CREATE TABLE `t_stud_visit` (
   `Visit_CODE` varchar(15) NOT NULL,
   `Visit_DATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Stud_NO` varchar(15) NOT NULL,
+  `Visit_ACADEMIC_YEAR` varchar(50) NOT NULL,
+  `Visit_SEMESTER` varchar(50) NOT NULL,
   `Visit_PURPOSE` varchar(50) NOT NULL,
   `Visit_DETAILS` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -885,10 +928,10 @@ CREATE TABLE `t_stud_visit` (
 -- Dumping data for table `t_stud_visit`
 --
 
-INSERT INTO `t_stud_visit` (`Stud_VISIT_ID`, `Visit_CODE`, `Visit_DATE`, `Stud_NO`, `Visit_PURPOSE`, `Visit_DETAILS`) VALUES
-(1, 'VS18-5231', '2018-05-22 16:10:38', '2015-00138-CM-0', 'Excuse Letter', 'Excuse Letter'),
-(2, 'VS18-5232', '2018-05-22 16:25:05', '2015-00138-CM-0', 'Counseling', 'nahuling natutulog sa klase'),
-(3, 'VS18-5233', '2018-05-22 18:03:58', '2015-00138-CM-0', 'Signing of Clearance', 'null');
+INSERT INTO `t_stud_visit` (`Stud_VISIT_ID`, `Visit_CODE`, `Visit_DATE`, `Stud_NO`, `Visit_ACADEMIC_YEAR`, `Visit_SEMESTER`, `Visit_PURPOSE`, `Visit_DETAILS`) VALUES
+(1, 'VS18-5231', '2018-05-22 16:10:38', '2015-00138-CM-0', '2017-2018', 'Summer Semester', 'Excuse Letter', 'Excuse Letter'),
+(2, 'VS18-5232', '2018-05-22 16:25:05', '2015-00138-CM-0', '2017-2018', 'Summer Semester', 'Counseling', 'nahuling natutulog sa klase'),
+(3, 'VS18-5233', '2018-05-22 18:03:58', '2015-00138-CM-0', '2017-2018', 'Summer Semester', 'Signing of Clearance', 'null');
 
 -- --------------------------------------------------------
 
@@ -918,6 +961,7 @@ INSERT INTO `t_upload` (`Upload_FILE_ID`, `Upload_DATE`, `Upload_USER`, `Upload_
 
 --
 -- Stand-in structure for view `visit_record`
+-- (See below for the actual view)
 --
 CREATE TABLE `visit_record` (
 `Visit_CODE` varchar(15)
@@ -936,7 +980,7 @@ CREATE TABLE `visit_record` (
 --
 DROP TABLE IF EXISTS `student_counseling`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_counseling`  AS  select `c`.`Couns_CODE` AS `COUNSELING_CODE`,date_format(`c`.`Couns_DATE`,'%W %M %d %Y') AS `COUNSELING_DATE`,`c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,`c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,`s`.`Stud_NO` AS `STUD_NO`,concat(`s`.`Stud_FNAME`,' ',`s`.`Stud_LNAME`) AS `STUD_NAME`,concat(`s`.`Stud_COURSE`,' ',`s`.`Stud_YEAR_LEVEL`,' - ',`s`.`Stud_SECTION`) AS `COURSE`,(select group_concat(`a`.`Couns_APPROACH` separator ', ') from `t_couns_approach` `a` where (`a`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`)) AS `COUNSELING_APPROACH`,`c`.`Couns_BACKGROUND` AS `COUNSELING_BG`,`c`.`Couns_GOALS` AS `GOALS`,`c`.`Couns_COMMENT` AS `COUNS_COMMENT`,`c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION` from ((`t_counseling` `c` join `t_couns_details` `cd` on((`c`.`Couns_ID` = `cd`.`Couns_ID_REFERENCE`))) join `r_stud_profile` `s` on((`s`.`Stud_NO` = `cd`.`Stud_NO`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_counseling`  AS  select `c`.`Couns_CODE` AS `COUNSELING_CODE`,date_format(`c`.`Couns_DATE`,'%M %d %Y (%W)') AS `COUNSELING_DATE`,`c`.`Couns_ACADEMIC_YEAR` AS `ACADEMIC YEAR`,`c`.`Couns_SEMESTER` AS `SEMESTER`,`c`.`Couns_COUNSELING_TYPE` AS `COUNSELING_TYPE`,`c`.`Couns_APPOINTMENT_TYPE` AS `APPOINTMENT_TYPE`,(select group_concat(`t_couns_details`.`Stud_NO` separator ', \n') from `t_couns_details` where (`t_couns_details`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`)) AS `STUD_NO`,(select group_concat(concat(if(isnull(`s`.`Stud_MNAME`),concat(`s`.`Stud_FNAME`,' ',`s`.`Stud_LNAME`),concat(`s`.`Stud_FNAME`,' ',`s`.`Stud_MNAME`,' ',`s`.`Stud_LNAME`)),' (',`s`.`Stud_COURSE`,' ',`s`.`Stud_YEAR_LEVEL`,' - ',`s`.`Stud_SECTION`,')') separator ',\n') from (`t_couns_details` `cd` join `r_stud_profile` `s` on((`s`.`Stud_NO` = `cd`.`Stud_NO`))) where (`cd`.`Couns_ID_REFERENCE` = `c`.`Couns_ID`)) AS `STUD_NAME`,`c`.`Nature_Of_Case` AS `NATURE OF THE CASE`,`c`.`Couns_BACKGROUND` AS `COUNSELING_BG`,`c`.`Couns_GOALS` AS `GOALS`,`c`.`Couns_COMMENT` AS `COUNS_COMMENT`,`c`.`Couns_RECOMMENDATION` AS `RECOMMENDATION` from (`t_counseling` `c` join `t_counseling_visit` `cv` on((`c`.`Couns_ID` = `cv`.`Couns_ID_REFERENCE`))) where (`c`.`Couns_ACADEMIC_YEAR` = (select `active_academic_year`.`ActiveAcadYear_Batch_YEAR` from `active_academic_year` limit 1)) ;
 
 -- --------------------------------------------------------
 
@@ -1172,12 +1216,18 @@ ALTER TABLE `t_assign_stud_saction`
 ALTER TABLE `t_counseling`
   ADD PRIMARY KEY (`Couns_ID`),
   ADD UNIQUE KEY `Couns_CODE` (`Couns_CODE`),
-  ADD KEY `FK_cnslngvstidrfrnc` (`Visit_ID_REFERENCE`),
   ADD KEY `FK_C_CT_REFERENCE` (`Couns_COUNSELING_TYPE`),
   ADD KEY `FK_cnslngcnsppntmnttyp` (`Couns_APPOINTMENT_TYPE`),
   ADD KEY `FK_cnslngntrfcsrfrnc` (`Nature_Of_Case`),
   ADD KEY `FK_cnslngcdmcyrrfrnc` (`Couns_ACADEMIC_YEAR`),
   ADD KEY `FK_cnslngsmstrrfrnc` (`Couns_SEMESTER`);
+
+--
+-- Indexes for table `t_counseling_visit`
+--
+ALTER TABLE `t_counseling_visit`
+  ADD KEY `FK_tcnslngvst_cidrfrnc` (`Couns_ID_REFERENCE`),
+  ADD KEY `FK_tcnslngvst_vidrfrnc` (`Visit_ID_REFERENCE`);
 
 --
 -- Indexes for table `t_couns_approach`
@@ -1195,13 +1245,22 @@ ALTER TABLE `t_couns_details`
   ADD KEY `FK_cnsdtlscnsrmrksrfrnc` (`Couns_REMARKS`);
 
 --
+-- Indexes for table `t_notification`
+--
+ALTER TABLE `t_notification`
+  ADD PRIMARY KEY (`Notif_ID`),
+  ADD KEY `FK_Notif_User_ID` (`Notif_User`);
+
+--
 -- Indexes for table `t_stud_visit`
 --
 ALTER TABLE `t_stud_visit`
   ADD PRIMARY KEY (`Stud_VISIT_ID`),
   ADD UNIQUE KEY `Visit_CODE` (`Visit_CODE`),
   ADD KEY `FK_vst_STUD_NO` (`Stud_NO`),
-  ADD KEY `FK_stdvstprps_vstrfrnc` (`Visit_PURPOSE`);
+  ADD KEY `FK_stdvstprps_vstrfrnc` (`Visit_PURPOSE`),
+  ADD KEY `FK_vstcdmcyr_rfrnc` (`Visit_ACADEMIC_YEAR`),
+  ADD KEY `FK_vstsmstr_rfrnc` (`Visit_SEMESTER`);
 
 --
 -- Indexes for table `t_upload`
@@ -1219,121 +1278,151 @@ ALTER TABLE `t_upload`
 --
 ALTER TABLE `active_academic_year`
   MODIFY `ActiveAcadYear_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `active_semester`
 --
 ALTER TABLE `active_semester`
   MODIFY `ActiveSemester_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `r_batch_details`
 --
 ALTER TABLE `r_batch_details`
   MODIFY `Batch_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `r_civil_stat`
 --
 ALTER TABLE `r_civil_stat`
   MODIFY `Stud_CIVIL_STATUS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `r_couns_appointment_type`
 --
 ALTER TABLE `r_couns_appointment_type`
   MODIFY `Appmnt_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `r_couns_approach`
 --
 ALTER TABLE `r_couns_approach`
   MODIFY `Couns_APPROACH_ID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `r_couns_type`
 --
 ALTER TABLE `r_couns_type`
   MODIFY `Couns_TYPE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `r_courses`
 --
 ALTER TABLE `r_courses`
   MODIFY `Course_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `r_designated_offices_details`
 --
 ALTER TABLE `r_designated_offices_details`
   MODIFY `DesOffDetails_ID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `r_guidance_counselor`
 --
 ALTER TABLE `r_guidance_counselor`
-  MODIFY `Counselor_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Counselor_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `r_remarks`
 --
 ALTER TABLE `r_remarks`
   MODIFY `Remarks_ID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `r_sanction_details`
 --
 ALTER TABLE `r_sanction_details`
   MODIFY `SancDetails_ID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `r_semester`
 --
 ALTER TABLE `r_semester`
   MODIFY `Semestral_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT for table `r_stud_batch`
 --
 ALTER TABLE `r_stud_batch`
   MODIFY `Stud_BATCH_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `r_stud_educ_background`
 --
 ALTER TABLE `r_stud_educ_background`
   MODIFY `Educ_BG_ID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `r_stud_profile`
 --
 ALTER TABLE `r_stud_profile`
   MODIFY `Stud_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT for table `r_upload_category`
 --
 ALTER TABLE `r_upload_category`
   MODIFY `Upload_CATEGORY_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `r_users`
 --
 ALTER TABLE `r_users`
   MODIFY `Users_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT for table `r_user_roles`
 --
 ALTER TABLE `r_user_roles`
   MODIFY `User_ROLE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `r_visit`
 --
 ALTER TABLE `r_visit`
   MODIFY `Visit_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `t_assign_stud_saction`
 --
 ALTER TABLE `t_assign_stud_saction`
   MODIFY `AssSancStudStudent_ID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `t_counseling`
 --
 ALTER TABLE `t_counseling`
   MODIFY `Couns_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `t_notification`
+--
+ALTER TABLE `t_notification`
+  MODIFY `Notif_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `t_stud_visit`
 --
 ALTER TABLE `t_stud_visit`
   MODIFY `Stud_VISIT_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `t_upload`
 --
 ALTER TABLE `t_upload`
   MODIFY `Upload_FILE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- Constraints for dumped tables
 --
@@ -1440,8 +1529,14 @@ ALTER TABLE `t_counseling`
   ADD CONSTRAINT `FK_cnslngcdmcyrrfrnc` FOREIGN KEY (`Couns_ACADEMIC_YEAR`) REFERENCES `r_batch_details` (`Batch_YEAR`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_cnslngcnsppntmnttyp` FOREIGN KEY (`Couns_APPOINTMENT_TYPE`) REFERENCES `r_couns_appointment_type` (`Appmnt_TYPE`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_cnslngntrfcsrfrnc` FOREIGN KEY (`Nature_Of_Case`) REFERENCES `r_nature_of_case` (`Case_NAME`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_cnslngsmstrrfrnc` FOREIGN KEY (`Couns_SEMESTER`) REFERENCES `r_semester` (`Semestral_NAME`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_cnslngvstidrfrnc` FOREIGN KEY (`Visit_ID_REFERENCE`) REFERENCES `t_stud_visit` (`Stud_VISIT_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_cnslngsmstrrfrnc` FOREIGN KEY (`Couns_SEMESTER`) REFERENCES `r_semester` (`Semestral_NAME`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `t_counseling_visit`
+--
+ALTER TABLE `t_counseling_visit`
+  ADD CONSTRAINT `FK_tcnslngvst_cidrfrnc` FOREIGN KEY (`Couns_ID_REFERENCE`) REFERENCES `t_counseling` (`Couns_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_tcnslngvst_vidrfrnc` FOREIGN KEY (`Visit_ID_REFERENCE`) REFERENCES `t_stud_visit` (`Stud_VISIT_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `t_couns_approach`
@@ -1459,17 +1554,26 @@ ALTER TABLE `t_couns_details`
   ADD CONSTRAINT `FK_cnslngstdnrfrnc` FOREIGN KEY (`Stud_NO`) REFERENCES `r_stud_profile` (`Stud_NO`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `t_notification`
+--
+ALTER TABLE `t_notification`
+  ADD CONSTRAINT `FK_Notif_User_ID` FOREIGN KEY (`Notif_User`) REFERENCES `r_users` (`Users_ID`);
+
+--
 -- Constraints for table `t_stud_visit`
 --
 ALTER TABLE `t_stud_visit`
   ADD CONSTRAINT `FK_stdvstprps_vstrfrnc` FOREIGN KEY (`Visit_PURPOSE`) REFERENCES `r_visit` (`Visit_TYPE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_vst_STUD_NO` FOREIGN KEY (`Stud_NO`) REFERENCES `r_stud_profile` (`Stud_NO`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_vst_STUD_NO` FOREIGN KEY (`Stud_NO`) REFERENCES `r_stud_profile` (`Stud_NO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_vstcdmcyr_rfrnc` FOREIGN KEY (`Visit_ACADEMIC_YEAR`) REFERENCES `r_batch_details` (`Batch_YEAR`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_vstsmstr_rfrnc` FOREIGN KEY (`Visit_SEMESTER`) REFERENCES `r_semester` (`Semestral_NAME`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `t_upload`
 --
 ALTER TABLE `t_upload`
   ADD CONSTRAINT `FK_pldctgryrfrnc` FOREIGN KEY (`Upload_CATEGORY`) REFERENCES `r_upload_category` (`Upload_FILE_CATEGORY`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

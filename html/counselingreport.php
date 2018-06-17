@@ -201,12 +201,8 @@ if (isset($_POST['visitFilter'])) {
   `v`.`Visit_PURPOSE` AS `Visit_PURPOSE`,
   `v`.`Visit_DETAILS` AS `Visit_DETAILS`
 FROM
-  (
     `t_stud_visit` `v`
-    JOIN `r_stud_profile` `s` ON ((`s`.`Stud_NO` = `v`.`Stud_NO`))
-  )
-ORDER BY
-  `v`.`Visit_DATE` DESC ";
+    JOIN `r_stud_profile` `s` ON `s`.`Stud_NO` = `v`.`Stud_NO` ";
     $conditions = array();
 
     if ($visitOpt != 'All'){
