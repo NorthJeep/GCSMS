@@ -186,7 +186,7 @@ if (isset($_POST['visitFilter'])) {
     $dayOpt = $_POST['dayOpt'];
     $courseOpt = $_POST['courseOpt'];
 
-    $actualQuery = "SELECT
+    $actualQuery = " SELECT
   `v`.`Visit_CODE` AS `Visit_CODE`,
   `v`.`Visit_DATE` AS `Visit_DATE`,
   `s`.`Stud_NO` AS `Stud_NO`,
@@ -201,8 +201,10 @@ if (isset($_POST['visitFilter'])) {
   `v`.`Visit_PURPOSE` AS `Visit_PURPOSE`,
   `v`.`Visit_DETAILS` AS `Visit_DETAILS`
 FROM
-    `t_stud_visit` `v`
-    JOIN `r_stud_profile` `s` ON `s`.`Stud_NO` = `v`.`Stud_NO` ";
+`t_stud_visit` `v`
+    JOIN `r_stud_profile` `s` ON `s`.`Stud_NO` = `v`.`Stud_NO`
+    JOIN `r_semester` `sem` ON `v`.`Visit_SEMESTER` = `sem`.`Semestral_NAME`
+    JOIN `r_batch_details` `btch` ON `v`.`Visit_ACADEMIC_YEAR` = `btch`.`Batch_YEAR`  ";
     $conditions = array();
 
     if ($visitOpt != 'All'){
@@ -210,11 +212,11 @@ FROM
     }
 
     if ($acadOpt != 'All') {
-        $conditions[] = "cr.Course_CURR_YEAR = '$acadOpt'";
+        $conditions[] = "btch.Batch_YEAR = '$acadOpt'";
     }
 
     if ($semOpt != 'All') {
-        $conditions[] = "c.Couns_SEMESTER =  '$semOpt'";
+        $conditions[] = "sem.Semestral_NAME =  '$semOpt'";
     }
 
     if ($monthOpt != 'All') {
@@ -616,7 +618,7 @@ include('sidebarnav.php');
                                                 <i class="fa fa-search"></i> Search</button>
                                         </form>
                                         </br>
-                                        <button class="btn btn-sm btn-success" onclick="location.href='print_record_all.php?view=set&acadOpt=<?php echo $acadOpt; ?>&semOpt=<?php echo $semOpt; ?>&monthOpt=<?php echo $monthOpt; ?>&dayOpt=<?php echo $dayOpt; ?>&courseOpt=<?php echo $courseOpt;?>'">
+                                        <button class="btn btn-sm btn-success" onclick="location.href='print_visit.php?view=set&visitOpt=<?php echo $visitOpt; ?>&acadOpt=<?php echo $acadOpt; ?>&semOpt=<?php echo $semOpt; ?>&monthOpt=<?php echo $monthOpt; ?>&dayOpt=<?php echo $dayOpt; ?>&courseOpt=<?php echo $courseOpt;?>'">
                                             <i class="fa fa-print"></i> Print</button>
                                             <br><br>
                                     </div>
