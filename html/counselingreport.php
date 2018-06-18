@@ -464,6 +464,15 @@ include('sidebarnav.php');
                                     </section>
                                 </div>
                                 <div id="Grouped" class="tab-pane <?php echo $groupTab;?>">
+                                <p class="text-muted">
+                                    Working In Progress, Please be patient for final release.
+                                </p>
+                                <div class="progress progress-striped active progress-sm">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                        <span class="sr-only">53% Complete</span>
+                                    </div>
+                                </div>
+                                <div class="hide">
                                     <div class="col-lg-12" style="padding-left:0px">
                                         <form action="counselingreport.php" method="POST">
                                             <div class="row">
@@ -558,6 +567,7 @@ include('sidebarnav.php');
                                         </table>
                                         <!-- page end-->
                                     </section>
+                                    </div>
                                 </div>
                                 <div id="Visits" class="tab-pane <?php echo $visitTab;?>">
 
